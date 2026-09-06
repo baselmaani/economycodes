@@ -1,26 +1,129 @@
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@plugin "@tailwindcss/typography";
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-sans);
+  --font-arabic: var(--font-arabic);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-accent: var(--brand-accent);
+  --color-whatsapp: var(--whatsapp);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+
+  /* Fluid type scale -- generates text-hero / text-page-h1 / text-section-h2 / text-body utilities. */
+  --text-hero: clamp(2.5rem, 5vw, 4.8rem);
+  --text-hero--line-height: 1.05;
+  --text-hero--letter-spacing: -0.02em;
+  --text-page-h1: clamp(2.25rem, 4vw, 4rem);
+  --text-page-h1--line-height: 1.1;
+  --text-page-h1--letter-spacing: -0.015em;
+  --text-section-h2: clamp(1.8rem, 3vw, 3rem);
+  --text-section-h2--line-height: 1.15;
+  --text-section-h2--letter-spacing: -0.01em;
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.65;
+
+  /* Restrained, navy-tinted elevation (replaces Tailwind's default gray shadow scale). */
+  --shadow-xs: 0 1px 2px rgba(27, 36, 54, 0.05);
+  --shadow-sm: 0 1px 2px rgba(27, 36, 54, 0.06), 0 4px 10px -4px rgba(27, 36, 54, 0.08);
+  --shadow-md: 0 2px 4px rgba(27, 36, 54, 0.06), 0 12px 24px -10px rgba(27, 36, 54, 0.14);
+  --shadow-lg: 0 4px 8px rgba(27, 36, 54, 0.06), 0 20px 40px -16px rgba(27, 36, 54, 0.18);
+
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/*
+ * Brand palette (Economy Codes, derived from the logo):
+ *   primary  #264491 -- main action/trust color
+ *   navy     #282B66 -- deep surfaces, header/footer
+ *   accent   #4B93B6 -- decorative accents only, never as text-on-background
+ *   dark text #1B2436 -- headings
+ *   secondary text #5E6675 -- body copy (~5.5:1 on background/white, passes WCAG AA)
+ *   background #F6F8FC -- page background
+ *   border #E3E8F1 -- hairlines
+ * Single light theme -- this is a business marketing site, not a themed app.
+ */
+:root {
+  --background: #f6f8fc;
+  --foreground: #1b2436;
+  --card: #ffffff;
+  --card-foreground: #1b2436;
+  --popover: #ffffff;
+  --popover-foreground: #1b2436;
+  --primary: #264491;
+  --primary-foreground: #ffffff;
+  --secondary: #eef2fa;
+  --secondary-foreground: #264491;
+  --muted: #f1f2f5;
+  --muted-foreground: #5e6675;
+  --accent: #e7f1f6;
+  --accent-foreground: #17394a;
+  --destructive: #b3261e;
+  --border: #e3e8f1;
+  --input: #e3e8f1;
+  --ring: #4b93b6;
+  --radius: 0.75rem;
+
+  --brand-primary: #264491;
+  --brand-navy: #282b66;
+  --brand-accent: #4b93b6;
+  --brand-dark: #1b2436;
+  --brand-secondary-text: #5e6675;
+  --brand-offwhite: #f6f8fc;
+  --whatsapp: #25d366;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  /* Marketing paragraph copy: ~17px/1.65, the readable floor the brief calls
+     for. Reserve plain text-sm for captions/meta/nav labels only. */
+  .text-body {
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

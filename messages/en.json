@@ -1,0 +1,84 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About Hadi",
+    "contact": "Contact",
+    "insights": "Insights",
+    "menuLabel": "Main menu",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "languageLabel": "Change language"
+  },
+  "common": {
+    "callUs": "Call us",
+    "contactUs": "Contact us",
+    "sendMessage": "Send message",
+    "readMore": "Read more",
+    "learnMore": "Learn more",
+    "getDirections": "Get directions",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "skipToContent": "Skip to content",
+    "whoWeHelp": "Who we help",
+    "ourProcess": "How we work",
+    "faqTitle": "Frequently asked questions",
+    "locationsTitle": "Our offices",
+    "toBeConfirmed": "Details to be confirmed shortly",
+    "lastReviewed": "Last reviewed"
+  },
+  "home": {
+    "heroEyebrow": "Digital accounting for all of Sweden",
+    "heroCtaPrimary": "Book a first consultation",
+    "heroCtaSecondary": "Contact us",
+    "heroCtaServices": "See our services",
+    "trustTitle": "Verified authorization",
+    "servicesTitle": "Accounting services for small and medium-sized businesses",
+    "servicesSubtitle": "From ongoing bookkeeping and payroll to annual accounts, VAT, and advisory — we cover the services most small and medium-sized Swedish businesses need.",
+    "whyAuthorizedTitle": "Why choose an authorized accounting firm?",
+    "authorizationMeaningTitle": "What does the authorization mean for your business?",
+    "nationwideTitle": "Your accounting firm — wherever you are in Sweden",
+    "collaborationTitle": "Digital accounting with a personal touch",
+    "aboutTitle": "About Hadi Al Maani",
+    "languageSupportTitle": "Bookkeeping in Swedish, English, and Arabic",
+    "benefitsTitle": "Why Economy Codes",
+    "industriesTitle": "Industries we know",
+    "finalCtaTitle": "Ready to get started?",
+    "finalCtaSubtitle": "Tell us what you need help with, and we'll get back to you as soon as we can."
+  },
+  "service": {
+    "whoItsForTitle": "Who this service is for",
+    "whatsIncludedTitle": "What's included",
+    "processTitle": "How it works",
+    "prepareTitle": "What to prepare",
+    "ctaQuestion": "Ready to get started?"
+  },
+  "footer": {
+    "navTitle": "Navigation",
+    "contactTitle": "Contact",
+    "legalTitle": "Legal",
+    "followTitle": "Follow us",
+    "rightsReserved": "All rights reserved."
+  },
+  "form": {
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone (optional)",
+    "preferredContactLabel": "Preferred contact method",
+    "serviceLabel": "Which service is this about?",
+    "messageLabel": "Message",
+    "consentLabel": "I agree that Economy Codes may store my details in order to respond to my enquiry.",
+    "submit": "Send",
+    "submitting": "Sending...",
+    "successTitle": "Thank you for your message",
+    "successBody": "We'll get back to you as soon as we can.",
+    "errorTitle": "Something went wrong",
+    "errorBody": "Please try again, or contact us directly by phone or email."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "The page you're looking for no longer exists or has moved.",
+    "cta": "Back to homepage"
+  }
+}

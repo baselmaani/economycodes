@@ -1,7 +1,17 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
+
+import { legacyRedirects } from "./config/legacy-redirects";
+
+const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    formats: ["image/avif", "image/webp"],
+  },
+  async redirects() {
+    return legacyRedirects;
+  },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

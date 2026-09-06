@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Economy Codes — website
 
-## Getting Started
+Next.js (App Router) rebuild of the Economy Codes marketing site. Swedish (default, unprefixed), English (`/en`), and Arabic (`/ar`, RTL).
 
-First, run the development server:
+See [`CLIENT-TODO.md`](./CLIENT-TODO.md) for every fact that still needs client confirmation before launch, and [`public/media/source/MANIFEST.md`](./public/media/source/MANIFEST.md) for legacy-asset licensing notes.
+
+## Commands
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev         # start the dev server at http://localhost:3000
+npm run build        # production build
+npm run start        # run the production build (after `build`)
+npm run lint         # ESLint
+npm run typecheck    # tsc --noEmit
+npm run test         # Vitest unit tests
+npm run test:e2e     # Playwright smoke tests (builds + starts the app itself)
+npm run verify       # lint + typecheck + test, the pre-ship gate
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+English/Arabic content currently exists for every page built so far (homepage, all 7 service pages, About Hadi, Contact, legal pages) — see `content/*.ts` `Localized<T>` fields. Any future page should follow the same pattern.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `content/*.ts` — typed business data (services, FAQs, locations, Hadi's profile, nav). `sv` is always populated; `en`/`ar` fields are added per-locale and fall back to `sv` until translated (see `Localized<T>` in `content/types.ts`).
+- `i18n/routing.ts` — locale + route registry (canonical Swedish slugs, per-locale path translations).
+- `lib/routes.ts` / `lib/service-lookup.ts` — slug resolution and hreflang/canonical URL builders.
+- `lib/structured-data/*.ts` — JSON-LD builders (Organization, Service, Person, Article, Breadcrumb, FAQ).
+- `config/legacy-redirects.ts` — permanent redirects from the old site's URLs.
+- `public/media/source/` — original legacy assets (untouched); `public/media/optimized/` — WebP derivatives actually used on the site.
 
-## Learn More
+## Environment
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Copy `.env.example` to `.env.local` and fill in values once a contact-form email provider is chosen (see `lib/email/index.ts` and CLIENT-TODO item 15). Without it, form submissions are logged server-side and still report success.

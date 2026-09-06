@@ -1,0 +1,84 @@
+{
+  "nav": {
+    "home": "الرئيسية",
+    "services": "الخدمات",
+    "about": "عن هادي",
+    "contact": "اتصل بنا",
+    "insights": "مقالات",
+    "menuLabel": "القائمة الرئيسية",
+    "openMenu": "افتح القائمة",
+    "closeMenu": "أغلق القائمة",
+    "languageLabel": "تغيير اللغة"
+  },
+  "common": {
+    "callUs": "اتصل بنا",
+    "contactUs": "تواصل معنا",
+    "sendMessage": "إرسال الرسالة",
+    "readMore": "اقرأ المزيد",
+    "learnMore": "اعرف المزيد",
+    "getDirections": "الحصول على الاتجاهات",
+    "email": "البريد الإلكتروني",
+    "phone": "الهاتف",
+    "address": "العنوان",
+    "skipToContent": "تخطَّ إلى المحتوى",
+    "whoWeHelp": "من نساعد",
+    "ourProcess": "كيف نعمل",
+    "faqTitle": "الأسئلة الشائعة",
+    "locationsTitle": "مكاتبنا",
+    "toBeConfirmed": "التفاصيل قيد التأكيد",
+    "lastReviewed": "آخر مراجعة"
+  },
+  "home": {
+    "heroEyebrow": "محاسبة رقمية لكل أنحاء السويد",
+    "heroCtaPrimary": "احجز استشارة أولى",
+    "heroCtaSecondary": "تواصل معنا",
+    "heroCtaServices": "شاهد خدماتنا",
+    "trustTitle": "اعتماد موثّق",
+    "servicesTitle": "خدمات محاسبية للشركات الصغيرة والمتوسطة",
+    "servicesSubtitle": "من المحاسبة المستمرة والرواتب إلى الإغلاق السنوي وضريبة القيمة المضافة والاستشارات — نغطي الخدمات التي تحتاجها معظم الشركات الصغيرة والمتوسطة في السويد.",
+    "whyAuthorizedTitle": "لماذا تختار مكتب محاسبة معتمدًا؟",
+    "authorizationMeaningTitle": "ماذا يعني هذا الاعتماد لشركتك؟",
+    "nationwideTitle": "مكتب محاسبتك – أينما كنت في السويد",
+    "collaborationTitle": "محاسبة رقمية بخدمة شخصية",
+    "aboutTitle": "عن هادي المعاني",
+    "languageSupportTitle": "المحاسبة بالسويدية والإنجليزية والعربية",
+    "benefitsTitle": "لماذا Economy Codes",
+    "industriesTitle": "قطاعات نعرفها جيدًا",
+    "finalCtaTitle": "هل أنت مستعد للبدء؟",
+    "finalCtaSubtitle": "أخبرنا بما تحتاج مساعدة فيه، وسنعاود التواصل معك في أقرب وقت ممكن."
+  },
+  "service": {
+    "whoItsForTitle": "لمن هذه الخدمة",
+    "whatsIncludedTitle": "ما الذي يشمله",
+    "processTitle": "كيف تسير العملية",
+    "prepareTitle": "ما الذي ينبغي تجهيزه",
+    "ctaQuestion": "هل تريد البدء؟"
+  },
+  "footer": {
+    "navTitle": "التصفح",
+    "contactTitle": "التواصل",
+    "legalTitle": "قانوني",
+    "followTitle": "تابعنا",
+    "rightsReserved": "جميع الحقوق محفوظة."
+  },
+  "form": {
+    "nameLabel": "الاسم",
+    "emailLabel": "البريد الإلكتروني",
+    "phoneLabel": "الهاتف (اختياري)",
+    "preferredContactLabel": "طريقة التواصل المفضلة",
+    "serviceLabel": "ما الخدمة التي يتعلق بها الأمر؟",
+    "messageLabel": "الرسالة",
+    "consentLabel": "أوافق على أن تحتفظ Economy Codes ببياناتي للرد على استفساري.",
+    "submit": "إرسال",
+    "submitting": "جارٍ الإرسال...",
+    "successTitle": "شكرًا لرسالتك",
+    "successBody": "سنعاود التواصل معك في أقرب وقت ممكن.",
+    "errorTitle": "حدث خطأ ما",
+    "errorBody": "يرجى المحاولة مرة أخرى، أو التواصل معنا مباشرة عبر الهاتف أو البريد الإلكتروني."
+  },
+  "notFound": {
+    "title": "الصفحة غير موجودة",
+    "body": "الصفحة التي تبحث عنها لم تعد موجودة أو تم نقلها.",
+    "cta": "العودة إلى الصفحة الرئيسية"
+  }
+}

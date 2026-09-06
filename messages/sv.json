@@ -1,0 +1,84 @@
+{
+  "nav": {
+    "home": "Hem",
+    "services": "Tjänster",
+    "about": "Om Hadi",
+    "contact": "Kontakt",
+    "insights": "Artiklar",
+    "menuLabel": "Huvudmeny",
+    "openMenu": "Öppna meny",
+    "closeMenu": "Stäng meny",
+    "languageLabel": "Byt språk"
+  },
+  "common": {
+    "callUs": "Ring oss",
+    "contactUs": "Kontakta oss",
+    "sendMessage": "Skicka meddelande",
+    "readMore": "Läs mer",
+    "learnMore": "Läs mer",
+    "getDirections": "Vägbeskrivning",
+    "email": "E-post",
+    "phone": "Telefon",
+    "address": "Adress",
+    "skipToContent": "Hoppa till innehåll",
+    "whoWeHelp": "Vem vi hjälper",
+    "ourProcess": "Så arbetar vi",
+    "faqTitle": "Vanliga frågor",
+    "locationsTitle": "Våra kontor",
+    "toBeConfirmed": "Uppgift bekräftas inom kort",
+    "lastReviewed": "Senast granskad"
+  },
+  "home": {
+    "heroEyebrow": "Digital redovisning för hela Sverige",
+    "heroCtaPrimary": "Boka ett första samtal",
+    "heroCtaSecondary": "Kontakta oss",
+    "heroCtaServices": "Se våra tjänster",
+    "trustTitle": "Verifierad auktorisation",
+    "servicesTitle": "Redovisningstjänster för små och medelstora företag",
+    "servicesSubtitle": "Från löpande bokföring och lön till bokslut, moms och rådgivning — vi täcker de tjänster som de flesta små och medelstora företag i Sverige behöver.",
+    "whyAuthorizedTitle": "Varför välja en auktoriserad redovisningsbyrå?",
+    "authorizationMeaningTitle": "Vad innebär auktorisationen för ditt företag?",
+    "nationwideTitle": "Din redovisningsbyrå – oavsett var i Sverige du finns",
+    "collaborationTitle": "Digital redovisning med personlig service",
+    "aboutTitle": "Om Hadi Al Maani",
+    "languageSupportTitle": "Bokföring på svenska, engelska och arabiska",
+    "benefitsTitle": "Varför Economy Codes",
+    "industriesTitle": "Branscher vi känner till",
+    "finalCtaTitle": "Redo att komma igång?",
+    "finalCtaSubtitle": "Berätta vad du behöver hjälp med, så återkommer vi så snart vi kan."
+  },
+  "service": {
+    "whoItsForTitle": "Vem tjänsten passar",
+    "whatsIncludedTitle": "Det här ingår",
+    "processTitle": "Så går det till",
+    "prepareTitle": "Förbered gärna",
+    "ctaQuestion": "Vill du komma igång?"
+  },
+  "footer": {
+    "navTitle": "Navigering",
+    "contactTitle": "Kontakt",
+    "legalTitle": "Juridiskt",
+    "followTitle": "Följ oss",
+    "rightsReserved": "Alla rättigheter förbehållna."
+  },
+  "form": {
+    "nameLabel": "Namn",
+    "emailLabel": "E-post",
+    "phoneLabel": "Telefon (valfritt)",
+    "preferredContactLabel": "Föredraget kontaktsätt",
+    "serviceLabel": "Vilken tjänst gäller det?",
+    "messageLabel": "Meddelande",
+    "consentLabel": "Jag godkänner att Economy Codes lagrar mina uppgifter för att kunna besvara min förfrågan.",
+    "submit": "Skicka",
+    "submitting": "Skickar...",
+    "successTitle": "Tack för ditt meddelande",
+    "successBody": "Vi återkommer till dig så snart vi kan.",
+    "errorTitle": "Något gick fel",
+    "errorBody": "Försök igen, eller kontakta oss direkt via telefon eller e-post."
+  },
+  "notFound": {
+    "title": "Sidan kunde inte hittas",
+    "body": "Sidan du letar efter finns inte längre eller har flyttats.",
+    "cta": "Till startsidan"
+  }
+}
