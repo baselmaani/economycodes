@@ -4,7 +4,11 @@ const LAST_UPDATED = "2026-09-06";
 
 export const privacyPolicy = {
   lastUpdated: LAST_UPDATED,
-  title: { sv: "Integritetspolicy", en: "Privacy policy", ar: "سياسة الخصوصية" } satisfies Localized<string>,
+  title: {
+    sv: "Integritetspolicy",
+    en: "Privacy policy",
+    ar: "سياسة الخصوصية",
+  } satisfies Localized<string>,
   controllerHeading: {
     sv: "Personuppgiftsansvarig",
     en: "Data controller",
@@ -69,7 +73,11 @@ export const privacyPolicy = {
 
 export const cookiePolicy = {
   lastUpdated: LAST_UPDATED,
-  title: { sv: "Cookies", en: "Cookies", ar: "ملفات تعريف الارتباط" } satisfies Localized<string>,
+  title: {
+    sv: "Cookies",
+    en: "Cookies",
+    ar: "ملفات تعريف الارتباط",
+  } satisfies Localized<string>,
   intro: {
     sv: "En cookie är en liten textfil som sparas i din webbläsare. Den här sidan beskriver vilka cookies som används på economycodes.com och varför.",
     en: "A cookie is a small text file saved in your browser. This page describes which cookies are used on economycodes.com and why.",
@@ -109,7 +117,11 @@ export const cookiePolicy = {
 
 export const termsPage = {
   lastUpdated: LAST_UPDATED,
-  title: { sv: "Villkor", en: "Terms", ar: "الشروط" } satisfies Localized<string>,
+  title: {
+    sv: "Villkor",
+    en: "Terms",
+    ar: "الشروط",
+  } satisfies Localized<string>,
   intro: {
     sv: "Den här sidan ger en allmän översikt av hur uppdrag hos Economy Codes går till. Den ersätter inte ett skriftligt uppdragsavtal, som alltid upprättas separat med varje kund innan ett uppdrag påbörjas.",
     en: "This page gives a general overview of how engagements with Economy Codes work. It does not replace a written engagement agreement, which is always drawn up separately with each client before an engagement begins.",

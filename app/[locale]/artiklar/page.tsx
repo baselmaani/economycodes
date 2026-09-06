@@ -6,6 +6,7 @@ import { getAlternateLinks } from "@/lib/routes";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { getLocalized } from "@/lib/i18n-content";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
+import { Container } from "@/components/layout/Container";
 import { Link } from "@/i18n/navigation";
 import { articles } from "@/content/articles/meta";
 
@@ -46,14 +47,19 @@ export default async function ArticlesIndexPage({
   const nav = await getTranslations({ locale, namespace: "nav" });
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+    <Container size="content" className="py-12 sm:py-16">
       <Breadcrumbs
-        items={[{ label: nav("home"), routeKey: "/" }, { label: nav("insights") }]}
+        items={[
+          { label: nav("home"), routeKey: "/" },
+          { label: nav("insights") },
+        ]}
       />
-      <h1 className="mt-4 text-4xl font-semibold">{nav("insights")}</h1>
+      <h1 className="text-page-h1 mt-4 font-semibold text-balance">
+        {nav("insights")}
+      </h1>
 
       {articles.length === 0 ? (
-        <p className="text-muted-foreground mt-6">
+        <p className="text-muted-foreground text-body mt-6">
           {getLocalized(comingSoon, locale)}
         </p>
       ) : (
@@ -71,13 +77,13 @@ export default async function ArticlesIndexPage({
               >
                 {getLocalized(article.title, locale)}
               </Link>
-              <p className="text-muted-foreground mt-2 text-sm">
+              <p className="text-muted-foreground text-body mt-2">
                 {getLocalized(article.excerpt, locale)}
               </p>
             </li>
           ))}
         </ul>
       )}
-    </div>
+    </Container>
   );
 }

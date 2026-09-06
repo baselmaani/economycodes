@@ -75,7 +75,10 @@ test.describe("contact form", () => {
     await page.goto("/kontakt");
     await page.fill("#name", "Test Testsson");
     await page.fill("#email", "test@example.com");
-    await page.fill("#message", "Detta ar ett testmeddelande som ar langre an tio tecken.");
+    await page.fill(
+      "#message",
+      "Detta ar ett testmeddelande som ar langre an tio tecken.",
+    );
     await page.check("#consent");
     await page.click('button[type="submit"]');
     await expect(page.getByRole("status")).toBeVisible({ timeout: 10_000 });

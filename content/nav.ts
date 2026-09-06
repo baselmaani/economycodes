@@ -53,6 +53,9 @@ export const footerLegalNav: NavLink[] = [
       ar: "سياسة الخصوصية",
     },
   },
-  { routeKey: "/cookies", label: { sv: "Cookies", en: "Cookies", ar: "ملفات تعريف الارتباط" } },
+  {
+    routeKey: "/cookies",
+    label: { sv: "Cookies", en: "Cookies", ar: "ملفات تعريف الارتباط" },
+  },
   { routeKey: "/villkor", label: { sv: "Villkor", en: "Terms", ar: "الشروط" } },
 ];

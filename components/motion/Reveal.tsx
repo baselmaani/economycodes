@@ -1,15 +1,15 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 
 /**
  * Progressive-enhancement scroll reveal. Renders children visible by
  * default -- if IntersectionObserver is unavailable or JS never runs, the
- * content simply stays visible. Only when both the API exists AND the
- * visitor hasn't asked for reduced motion do we arm a hidden -> visible
- * transition on intersect, so nothing is ever stuck invisible.
+ * content simply stays visible. Class toggling happens directly on the DOM
+ * node via the ref (not React state), so arming the transition or revealing
+ * on intersect never triggers a render, only a style change.
  */
 export function Reveal({
   children,
@@ -21,21 +21,26 @@ export function Reveal({
   delay?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [armed, setArmed] = useState(false);
-  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
     if (typeof IntersectionObserver === "undefined") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    setArmed(true);
-    const node = ref.current;
-    if (!node) return;
+    node.style.transitionDelay = `${delay}ms`;
+    node.classList.add(
+      "transition-all",
+      "duration-500",
+      "ease-(--ease-standard)",
+      "translate-y-3",
+      "opacity-0",
+    );
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setVisible(true);
+          node.classList.remove("translate-y-3", "opacity-0");
           observer.disconnect();
         }
       },
@@ -43,20 +48,10 @@ export function Reveal({
     );
     observer.observe(node);
     return () => observer.disconnect();
-  }, []);
+  }, [delay]);
 
   return (
-    <div
-      ref={ref}
-      style={armed ? { transitionDelay: `${delay}ms` } : undefined}
-      className={cn(
-        armed &&
-          "transition-all duration-500 ease-(--ease-standard)",
-        armed && !visible && "translate-y-3 opacity-0",
-        armed && visible && "translate-y-0 opacity-100",
-        className,
-      )}
-    >
+    <div ref={ref} className={cn(className)}>
       {children}
     </div>
   );

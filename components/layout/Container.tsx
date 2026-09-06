@@ -1,4 +1,4 @@
-import type { ComponentProps } from "react";
+import type { ComponentProps, ElementType } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -12,12 +12,13 @@ const sizes = {
 } as const;
 
 export function Container({
+  as: Tag = "div",
   size = "wide",
   className,
   ...props
-}: ComponentProps<"div"> & { size?: keyof typeof sizes }) {
+}: ComponentProps<"div"> & { as?: ElementType; size?: keyof typeof sizes }) {
   return (
-    <div
+    <Tag
       className={cn("mx-auto px-4 sm:px-6 lg:px-8", sizes[size], className)}
       {...props}
     />

@@ -39,7 +39,7 @@ export function Hero({
   return (
     <section className="relative overflow-hidden">
       <GridPattern className="inset-0 hidden size-full sm:block" />
-      <RadialGlow className="top-1/2 -end-40 size-[36rem] -translate-y-1/2" />
+      <RadialGlow className="-end-40 top-1/2 size-[36rem] -translate-y-1/2" />
 
       <Container>
         <div className="relative grid items-center gap-12 py-16 sm:py-20 md:grid-cols-2 lg:py-28">
@@ -56,11 +56,23 @@ export function Hero({
               {subtitle}
             </p>
             <div className="flex flex-wrap items-center gap-3 pt-1">
-              <Button render={<Link href="/kontakt" />} size="lg" className="gap-2">
+              <Button
+                render={<Link href="/kontakt" />}
+                size="lg"
+                className="gap-2"
+              >
                 {primaryCtaLabel}
-                <ArrowRight size={18} aria-hidden="true" className="rtl:rotate-180" />
+                <ArrowRight
+                  size={18}
+                  aria-hidden="true"
+                  className="rtl:rotate-180"
+                />
               </Button>
-              <Button render={<Link href="/tjanster" />} size="lg" variant="outline">
+              <Button
+                render={<Link href="/tjanster" />}
+                size="lg"
+                variant="outline"
+              >
                 {servicesCtaLabel}
               </Button>
               <a
@@ -74,17 +86,24 @@ export function Hero({
 
             <div className="border-border/80 mt-2 flex flex-wrap items-center gap-x-6 gap-y-2 border-t pt-5">
               <span className="text-muted-foreground inline-flex items-center gap-2 text-sm font-medium">
-                <ShieldCheck size={16} className="text-primary shrink-0" aria-hidden="true" />
+                <ShieldCheck
+                  size={16}
+                  className="text-primary shrink-0"
+                  aria-hidden="true"
+                />
                 <span dir="ltr">{authorizationContent.firm.credential}</span>
               </span>
-              <span dir="ltr" className="text-muted-foreground text-sm font-medium">
+              <span
+                dir="ltr"
+                className="text-muted-foreground text-sm font-medium"
+              >
                 Svenska · English · العربية
               </span>
             </div>
           </div>
 
           <div className="relative order-first md:order-last">
-            <div className="border-border bg-card shadow-lg relative overflow-hidden rounded-2xl border">
+            <div className="border-border bg-card relative overflow-hidden rounded-2xl border shadow-lg">
               <Image
                 src={image.src}
                 alt={getLocalized(image.alt, locale)}
@@ -98,14 +117,18 @@ export function Hero({
 
             <div
               dir="ltr"
-              className="bg-card border-border shadow-md absolute -top-4 start-4 hidden items-center gap-2 rounded-xl border px-3 py-2 sm:flex"
+              className="bg-card border-border absolute start-4 -top-4 hidden items-center gap-2 rounded-xl border px-3 py-2 shadow-md sm:flex"
             >
-              <ShieldCheck size={16} className="text-primary shrink-0" aria-hidden="true" />
+              <ShieldCheck
+                size={16}
+                className="text-primary shrink-0"
+                aria-hidden="true"
+              />
               <span className="text-xs font-semibold whitespace-nowrap">
                 {authorizationContent.firm.credential}
               </span>
             </div>
-            <div className="bg-card border-border shadow-md absolute -bottom-4 end-4 hidden items-center gap-2 rounded-xl border px-3 py-2 sm:flex">
+            <div className="bg-card border-border absolute end-4 -bottom-4 hidden items-center gap-2 rounded-xl border px-3 py-2 shadow-md sm:flex">
               <span className="text-xs font-semibold whitespace-nowrap">
                 {quickServicesLabel[locale]}
               </span>

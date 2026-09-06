@@ -10,7 +10,10 @@ export function GridPattern({ className }: { className?: string }) {
   return (
     <svg
       aria-hidden="true"
-      className={cn("pointer-events-none absolute text-brand-navy/[0.06]", className)}
+      className={cn(
+        "text-brand-navy/[0.06] pointer-events-none absolute",
+        className,
+      )}
     >
       <defs>
         <pattern id={id} width="28" height="28" patternUnits="userSpaceOnUse">

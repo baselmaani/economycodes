@@ -1,5 +1,10 @@
 import type { LucideIcon } from "lucide-react";
-import { CheckCircle2, Globe2, MessagesSquare, ShieldCheck } from "lucide-react";
+import {
+  CheckCircle2,
+  Globe2,
+  MessagesSquare,
+  ShieldCheck,
+} from "lucide-react";
 
 import type { Localized } from "./types";
 
@@ -59,7 +64,10 @@ export const authorizationContent = {
   },
   person: {
     /** Proper-noun designations, kept consistent across locales. */
-    credentials: ["Auktoriserad Redovisningskonsult", "Auktoriserad Lönekonsult"],
+    credentials: [
+      "Auktoriserad Redovisningskonsult",
+      "Auktoriserad Lönekonsult",
+    ],
     body: {
       sv: "Hadi är personligen auktoriserad redovisningskonsult och auktoriserad lönekonsult, vilket innebär att han uppfyller Srf:s krav på utbildning, erfarenhet och yrkesetik inom både redovisning och lönehantering.",
       en: "Hadi is personally authorized as both an accounting consultant and a payroll consultant, meeting Srf's requirements for education, experience, and professional ethics in both accounting and payroll.",

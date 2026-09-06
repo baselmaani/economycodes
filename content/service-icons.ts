@@ -24,8 +24,15 @@ import {
  */
 export type ServiceGroup = "core" | "advisory" | "specialist";
 
-export const serviceGroups: Record<ServiceGroup, { sv: string; en: string; ar: string }> = {
-  core: { sv: "Löpande redovisning", en: "Core accounting", ar: "المحاسبة الأساسية" },
+export const serviceGroups: Record<
+  ServiceGroup,
+  { sv: string; en: string; ar: string }
+> = {
+  core: {
+    sv: "Löpande redovisning",
+    en: "Core accounting",
+    ar: "المحاسبة الأساسية",
+  },
   advisory: {
     sv: "Rådgivning & företagsstart",
     en: "Advisory & company formation",
@@ -38,7 +45,10 @@ export const serviceGroups: Record<ServiceGroup, { sv: string; en: string; ar: s
   },
 };
 
-export const serviceIcons: Record<string, { icon: LucideIcon; group: ServiceGroup }> = {
+export const serviceIcons: Record<
+  string,
+  { icon: LucideIcon; group: ServiceGroup }
+> = {
   bookkeeping: { icon: Calculator, group: "core" },
   payroll: { icon: Wallet, group: "core" },
   "annual-closing": { icon: ClipboardCheck, group: "core" },

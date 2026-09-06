@@ -26,7 +26,7 @@ Items below are not yet confirmed and are shown on the live site using clearly n
 
 12. **Whether both the Mellerud and Trollhättan addresses are active offices open to customers**, and whether meetings require an appointment.
 13. **Office opening hours** -- currently omitted from both Location cards (shows a neutral "uppgift bekräftas" note) and from structured data.
-14. **Whether +46 73 479 82 10 is also an approved WhatsApp number.** Until confirmed, no WhatsApp link/button appears anywhere on the site (mobile sticky action bar currently shows Call + Contact only).
+14. ~~Whether +46 73 479 82 10 is also an approved WhatsApp number.~~ **Resolved:** confirmed as the WhatsApp number; `whatsappHref` is now set in `content/business.ts` and the button appears in the mobile sticky action bar and the desktop floating buttons.
 15. **Booking method** -- contact form, a booking link (e.g. Calendly), phone, WhatsApp, or a combination. The contact page/form is built in phase 2; confirm before launch.
 16. **Approved social links, Google Business Profile link, testimonials, client logos, accounting-software certifications, and partner logos**, if any exist and are approved for display. None are currently shown beyond the two verified Facebook links (business page and Hadi's personal profile).
 17. **Privacy-controller details, cookie/analytics tools in use, and the email address for privacy requests** -- needed to finalize the privacy policy and cookie policy pages (phase 2).

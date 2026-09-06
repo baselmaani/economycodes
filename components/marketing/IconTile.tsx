@@ -28,7 +28,11 @@ export function IconTile({
         className,
       )}
     >
-      <Icon size={size === "sm" ? 18 : 22} aria-hidden="true" strokeWidth={1.75} />
+      <Icon
+        size={size === "sm" ? 18 : 22}
+        aria-hidden="true"
+        strokeWidth={1.75}
+      />
     </span>
   );
 }

@@ -33,7 +33,11 @@ export function IndustriesSection({
         />
 
         <div className="border-border bg-card mt-10 flex flex-col gap-6 rounded-2xl border p-6 sm:flex-row sm:items-center sm:p-8">
-          <IconTile icon={Car} size="default" className="size-14 shrink-0 rounded-2xl" />
+          <IconTile
+            icon={Car}
+            size="default"
+            className="size-14 shrink-0 rounded-2xl"
+          />
           <div className="flex flex-1 flex-col gap-2">
             <h3 className="text-lg font-semibold">
               {getLocalized(carDealership.name, locale)}
@@ -49,14 +53,21 @@ export function IndustriesSection({
               className="text-primary mt-1 inline-flex items-center gap-1.5 text-sm font-medium hover:underline"
             >
               {readMoreLabel}
-              <ArrowRight size={16} aria-hidden="true" className="rtl:rotate-180" />
+              <ArrowRight
+                size={16}
+                aria-hidden="true"
+                className="rtl:rotate-180"
+              />
             </Link>
           </div>
         </div>
 
         <p className="text-muted-foreground text-body mt-6">
           {getLocalized(industriesContent.otherTrades, locale)}{" "}
-          <Link href="/kontakt" className="text-primary font-medium hover:underline">
+          <Link
+            href="/kontakt"
+            className="text-primary font-medium hover:underline"
+          >
             {contactLabel}
           </Link>
         </p>

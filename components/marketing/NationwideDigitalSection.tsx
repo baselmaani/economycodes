@@ -26,7 +26,7 @@ export function NationwideDigitalSection({
         />
         <ul className="mt-8 grid gap-3 sm:grid-cols-2">
           {getLocalized(digitalNationwideContent.points, locale).map((item) => (
-            <li key={item} className="flex items-start gap-2 text-body">
+            <li key={item} className="text-body flex items-start gap-2">
               <CheckCircle2
                 className="text-primary mt-0.5 shrink-0"
                 size={18}

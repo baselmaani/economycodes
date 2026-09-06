@@ -5,7 +5,12 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Link } from "@/i18n/navigation";
 import { routing, type AppLocale } from "@/i18n/routing";
-import { getServiceAlternateLinks, getServiceSlug, resolveServiceBySlug, servicesList } from "@/lib/routes";
+import {
+  getServiceAlternateLinks,
+  getServiceSlug,
+  resolveServiceBySlug,
+  servicesList,
+} from "@/lib/routes";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { buildServiceJsonLd } from "@/lib/structured-data/service";
 import { buildBreadcrumbJsonLd } from "@/lib/structured-data/breadcrumb";
@@ -15,8 +20,18 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { FaqAccordion } from "@/components/faq/FaqAccordion";
 import { Button } from "@/components/ui/button";
+import { Container } from "@/components/layout/Container";
+import { Section } from "@/components/layout/Section";
+import { ServiceCard } from "@/components/marketing/ServiceCard";
+import { PersonProfileCard } from "@/components/marketing/PersonProfileCard";
+import {
+  getServiceGroup,
+  getServiceIcon,
+  serviceGroups,
+} from "@/content/service-icons";
 import { business } from "@/content/business";
 import { faqs } from "@/content/faqs";
+import { hadi } from "@/content/people";
 
 interface ServicePageParams {
   locale: AppLocale;
@@ -69,9 +84,23 @@ export default async function ServicePage({
   const alternates = getServiceAlternateLinks(service);
   const canonicalUrl = alternates[locale];
 
+  // getServiceIcon looks up a stable, module-level icon component by key --
+  // its identity never changes across renders, so this isn't dynamic
+  // component creation despite the lint heuristic where it's used below.
+  const Icon = getServiceIcon(service.key);
+  const group = getServiceGroup(service.key);
+  const relatedServices = servicesList
+    .filter(
+      (other) =>
+        other.key !== service.key && getServiceGroup(other.key) === group,
+    )
+    .slice(0, 3);
+
   return (
-    <article className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
-      <JsonLd data={buildServiceJsonLd(service, locale, business, canonicalUrl)} />
+    <article>
+      <JsonLd
+        data={buildServiceJsonLd(service, locale, business, canonicalUrl)}
+      />
       <JsonLd
         data={buildBreadcrumbJsonLd([
           { name: "Economy Codes", url: alternates["x-default"] },
@@ -82,133 +111,196 @@ export default async function ServicePage({
         <JsonLd data={buildFaqJsonLd(serviceFaqs, locale)} />
       )}
 
-      <Breadcrumbs
-        items={[
-          { label: nav("home"), routeKey: "/" },
-          { label: nav("services"), routeKey: "/tjanster" },
-          { label: getLocalized(service.name, locale) },
-        ]}
-      />
-
-      <h1 className="mt-4 text-4xl font-semibold">
-        {getLocalized(service.name, locale)}
-      </h1>
-      <p className="text-muted-foreground mt-4 text-lg">
-        {getLocalized(service.summary, locale)}
-      </p>
-
-      {service.heroImage && (
-        <div className="border-border bg-card mt-8 overflow-hidden rounded-2xl border shadow-sm">
-          <Image
-            src={service.heroImage.src}
-            alt={getLocalized(service.heroImage.alt, locale)}
-            width={service.heroImage.width}
-            height={service.heroImage.height}
-            sizes="(min-width: 768px) 720px, 100vw"
-            className="h-auto w-full object-cover"
+      {/* Service hero */}
+      <div className="pt-10 pb-6 sm:pt-14">
+        <Container size={service.heroImage ? "wide" : "content"}>
+          <Breadcrumbs
+            items={[
+              { label: nav("home"), routeKey: "/" },
+              { label: nav("services"), routeKey: "/tjanster" },
+              { label: getLocalized(service.name, locale) },
+            ]}
           />
-        </div>
-      )}
 
-      <section className="mt-10 grid gap-8 sm:grid-cols-2">
-        <div>
-          <h2 className="text-lg font-semibold">{s("whoItsForTitle")}</h2>
-          <ul className="text-muted-foreground mt-3 flex flex-col gap-2 text-sm">
-            {getLocalized(service.whoItsFor, locale).map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h2 className="text-lg font-semibold">{s("whatsIncludedTitle")}</h2>
-          <ul className="text-muted-foreground mt-3 flex flex-col gap-2 text-sm">
-            {getLocalized(service.whatsIncluded, locale).map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section className="mt-10">
-        <h2 className="text-lg font-semibold">{s("processTitle")}</h2>
-        <ol className="mt-3 flex flex-col gap-3">
-          {getLocalized(service.process, locale).map((step, index) => (
-            <li key={step} className="flex gap-3 text-sm">
-              <span dir="ltr" className="text-primary font-semibold">
-                {index + 1}.
+          <div
+            className={
+              service.heroImage
+                ? "mt-6 grid items-center gap-10 md:grid-cols-2"
+                : "mt-6"
+            }
+          >
+            <div>
+              <span className="text-primary inline-flex items-center gap-2 text-sm font-semibold tracking-wide uppercase">
+                {/* eslint-disable-next-line react-hooks/static-components -- stable, module-level icon lookup, not a dynamically-created component */}
+                <Icon size={16} aria-hidden="true" />
+                {serviceGroups[group][locale]}
               </span>
-              <span className="text-muted-foreground">{step}</span>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      <section className="mt-10">
-        <h2 className="text-lg font-semibold">{s("prepareTitle")}</h2>
-        <ul className="text-muted-foreground mt-3 flex flex-col gap-2 text-sm">
-          {getLocalized(service.whatToPrepare, locale).map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="prose prose-neutral mt-10 max-w-none">
-        {getLocalized(service.body, locale).map((block, index) => {
-          if (block.type === "heading") {
-            const Tag = block.level === 2 ? "h2" : "h3";
-            return (
-              <Tag key={index} className="mt-8 text-xl font-semibold">
-                {block.text}
-              </Tag>
-            );
-          }
-          if (block.type === "paragraph") {
-            return (
-              <p key={index} className="text-muted-foreground mt-3">
-                {block.text}
+              <h1 className="text-page-h1 mt-3 font-semibold text-balance">
+                {getLocalized(service.name, locale)}
+              </h1>
+              <p className="text-muted-foreground text-body mt-4">
+                {getLocalized(service.summary, locale)}
               </p>
-            );
-          }
-          if (block.type === "list") {
-            return (
-              <ul key={index} className="text-muted-foreground mt-3">
-                {block.items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            );
-          }
-          if (block.type === "disclaimer") {
-            return (
-              <p
-                key={index}
-                className="border-border bg-muted text-muted-foreground mt-6 rounded-lg border p-4 text-sm"
-              >
-                {block.text}
-              </p>
-            );
-          }
-          return null;
-        })}
-      </section>
+            </div>
 
-      {serviceFaqs.length > 0 && (
-        <section className="mt-12">
-          <h2 className="text-lg font-semibold">{t("faqTitle")}</h2>
-          <div className="mt-4">
-            <FaqAccordion faqs={serviceFaqs} locale={locale} />
+            {service.heroImage && (
+              <div className="border-border bg-card overflow-hidden rounded-2xl border shadow-md">
+                <Image
+                  src={service.heroImage.src}
+                  alt={getLocalized(service.heroImage.alt, locale)}
+                  width={service.heroImage.width}
+                  height={service.heroImage.height}
+                  sizes="(min-width: 768px) 560px, 100vw"
+                  className="h-auto w-full object-cover"
+                />
+              </div>
+            )}
           </div>
-        </section>
-      )}
-
-      <div className="border-border mt-12 flex flex-col items-start gap-4 rounded-2xl border p-6 sm:flex-row sm:items-center sm:justify-between">
-        <p className="font-medium">{s("ctaQuestion")}</p>
-        <Button render={<Link href="/kontakt" />}>{t("contactUs")}</Button>
+        </Container>
       </div>
 
-      <p className="text-muted-foreground mt-8 text-xs">
-        {t("lastReviewed")}: {service.lastReviewed}
-      </p>
+      <Container size="content">
+        <section className="mt-4 grid gap-8 sm:grid-cols-2">
+          <div>
+            <h2 className="text-lg font-semibold">{s("whoItsForTitle")}</h2>
+            <ul className="text-muted-foreground text-body mt-3 flex flex-col gap-2">
+              {getLocalized(service.whoItsFor, locale).map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h2 className="text-lg font-semibold">{s("whatsIncludedTitle")}</h2>
+            <ul className="text-muted-foreground text-body mt-3 flex flex-col gap-2">
+              {getLocalized(service.whatsIncluded, locale).map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      </Container>
+
+      <Section tone="tint" className="mt-12">
+        <Container size="content">
+          <section>
+            <h2 className="text-lg font-semibold">{s("processTitle")}</h2>
+            <ol className="mt-3 flex flex-col gap-3">
+              {getLocalized(service.process, locale).map((step, index) => (
+                <li key={step} className="text-body flex gap-3">
+                  <span dir="ltr" className="text-primary font-semibold">
+                    {index + 1}.
+                  </span>
+                  <span className="text-muted-foreground">{step}</span>
+                </li>
+              ))}
+            </ol>
+          </section>
+
+          <section className="mt-10">
+            <h2 className="text-lg font-semibold">{s("prepareTitle")}</h2>
+            <ul className="text-muted-foreground text-body mt-3 flex flex-col gap-2">
+              {getLocalized(service.whatToPrepare, locale).map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </section>
+        </Container>
+      </Section>
+
+      <Container size="content">
+        <section className="prose prose-neutral mt-12 max-w-none">
+          {getLocalized(service.body, locale).map((block, index) => {
+            if (block.type === "heading") {
+              const Tag = block.level === 2 ? "h2" : "h3";
+              return (
+                <Tag key={index} className="mt-8 text-xl font-semibold">
+                  {block.text}
+                </Tag>
+              );
+            }
+            if (block.type === "paragraph") {
+              return (
+                <p key={index} className="text-muted-foreground text-body mt-3">
+                  {block.text}
+                </p>
+              );
+            }
+            if (block.type === "list") {
+              return (
+                <ul
+                  key={index}
+                  className="text-muted-foreground text-body mt-3"
+                >
+                  {block.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              );
+            }
+            if (block.type === "disclaimer") {
+              return (
+                <p
+                  key={index}
+                  className="border-border bg-muted text-muted-foreground mt-6 rounded-lg border p-4 text-sm"
+                >
+                  {block.text}
+                </p>
+              );
+            }
+            return null;
+          })}
+        </section>
+      </Container>
+
+      {serviceFaqs.length > 0 && (
+        <Section tone="tint" className="mt-12">
+          <Container size="content">
+            <h2 className="text-lg font-semibold">{t("faqTitle")}</h2>
+            <div className="mt-4">
+              <FaqAccordion faqs={serviceFaqs} locale={locale} />
+            </div>
+          </Container>
+        </Section>
+      )}
+
+      <Container size="content">
+        <section className="mt-12">
+          <h2 className="text-lg font-semibold">{nav("about")}</h2>
+          <div className="border-border bg-card mt-4 rounded-2xl border p-6">
+            <PersonProfileCard
+              person={hadi}
+              locale={locale}
+              learnMoreLabel={t("learnMore")}
+              compact
+            />
+          </div>
+        </section>
+
+        {relatedServices.length > 0 && (
+          <section className="mt-12">
+            <h2 className="text-lg font-semibold">{nav("services")}</h2>
+            <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {relatedServices.map((related) => (
+                <ServiceCard
+                  key={related.key}
+                  service={related}
+                  locale={locale}
+                  readMoreLabel={t("readMore")}
+                />
+              ))}
+            </div>
+          </section>
+        )}
+
+        <div className="border-border mt-12 mb-16 flex flex-col items-start gap-4 rounded-2xl border p-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="font-medium">{s("ctaQuestion")}</p>
+          <Button render={<Link href="/kontakt" />}>{t("contactUs")}</Button>
+        </div>
+
+        <p className="text-muted-foreground -mt-8 mb-16 text-xs">
+          {t("lastReviewed")}: {service.lastReviewed}
+        </p>
+      </Container>
     </article>
   );
 }

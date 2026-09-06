@@ -9,6 +9,7 @@ import { buildArticleJsonLd } from "@/lib/structured-data/article";
 import { getLocalized } from "@/lib/i18n-content";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
+import { Container } from "@/components/layout/Container";
 import { articles } from "@/content/articles/meta";
 import { hadi } from "@/content/people";
 
@@ -77,7 +78,11 @@ export default async function ArticlePage({
   const body: { type: string; text?: string }[] = [];
 
   return (
-    <article className="prose prose-neutral mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+    <Container
+      as="article"
+      size="content"
+      className="prose prose-neutral py-12 sm:py-16"
+    >
       <JsonLd
         data={buildArticleJsonLd(article, hadi, locale, alternates[locale])}
       />
@@ -95,6 +100,6 @@ export default async function ArticlePage({
       {body.map((block, index) =>
         block.type === "paragraph" ? <p key={index}>{block.text}</p> : null,
       )}
-    </article>
+    </Container>
   );
 }

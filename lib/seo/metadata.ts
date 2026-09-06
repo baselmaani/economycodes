@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import type { AppLocale } from "@/i18n/routing";
+import { getDefaultOgImageUrl, size as ogImageSize } from "@/lib/seo/og-image";
 import { siteUrl } from "@/lib/site";
 
 const ogLocaleMap: Record<AppLocale, string> = {
@@ -27,6 +28,15 @@ export function buildMetadata({
   ogImage,
 }: BuildMetadataOptions): Metadata {
   const canonical = alternates[locale];
+  const images = ogImage
+    ? [{ url: ogImage }]
+    : [
+        {
+          url: getDefaultOgImageUrl(locale),
+          width: ogImageSize.width,
+          height: ogImageSize.height,
+        },
+      ];
 
   return {
     title,
@@ -42,16 +52,13 @@ export function buildMetadata({
       siteName: "Economy Codes",
       locale: ogLocaleMap[locale],
       type: "website",
-      // Omitting `images` entirely (rather than setting it to `undefined`)
-      // lets Next.js fall back to the file-based opengraph-image route --
-      // an explicit `images` key, even undefined, suppresses that fallback.
-      ...(ogImage ? { images: [{ url: ogImage }] } : {}),
+      images,
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      ...(ogImage ? { images: [ogImage] } : {}),
+      images: [images[0].url],
     },
   };
 }

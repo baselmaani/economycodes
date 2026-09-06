@@ -6,6 +6,7 @@ import { getAlternateLinks } from "@/lib/routes";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { getLocalized } from "@/lib/i18n-content";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
+import { Container } from "@/components/layout/Container";
 import { Placeholder } from "@/components/common/Placeholder";
 import { cookiePolicy } from "@/content/legal";
 
@@ -32,10 +33,15 @@ export default async function CookiePolicyPage({
   setRequestLocale(locale);
   const nav = await getTranslations({ locale, namespace: "nav" });
   const common = await getTranslations({ locale, namespace: "common" });
-  const t = (v: { sv: string; en?: string; ar?: string }) => getLocalized(v, locale);
+  const t = (v: { sv: string; en?: string; ar?: string }) =>
+    getLocalized(v, locale);
 
   return (
-    <article className="prose prose-neutral mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+    <Container
+      as="article"
+      size="content"
+      className="prose prose-neutral py-12 sm:py-16"
+    >
       <Breadcrumbs
         items={[
           { label: nav("home"), routeKey: "/" },
@@ -59,6 +65,6 @@ export default async function CookiePolicyPage({
 
       <h2>{t(cookiePolicy.manageHeading)}</h2>
       <p>{t(cookiePolicy.manageBody)}</p>
-    </article>
+    </Container>
   );
 }

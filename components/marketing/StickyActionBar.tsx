@@ -10,10 +10,10 @@ export function StickyActionBar() {
   const t = useTranslations("common");
 
   return (
-    <div className="border-border bg-background/95 fixed inset-x-0 bottom-0 z-40 flex border-t backdrop-blur-sm lg:hidden">
+    <div className="border-border bg-background/95 fixed inset-x-0 bottom-0 z-40 flex border-t pb-[env(safe-area-inset-bottom)] backdrop-blur-sm lg:hidden">
       <a
         href={business.phoneHref}
-        className="text-foreground flex flex-1 flex-col items-center gap-0.5 py-2.5 text-xs font-medium"
+        className="text-foreground active:bg-muted flex flex-1 flex-col items-center gap-0.5 py-2.5 text-xs font-medium"
       >
         <Phone size={18} aria-hidden="true" />
         {t("callUs")}
@@ -23,7 +23,7 @@ export function StickyActionBar() {
           href={business.whatsappHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="border-border text-foreground flex flex-1 flex-col items-center gap-0.5 border-s py-2.5 text-xs font-medium"
+          className="border-border text-whatsapp active:bg-muted flex flex-1 flex-col items-center gap-0.5 border-s py-2.5 text-xs font-medium"
         >
           <MessageCircle size={18} aria-hidden="true" />
           WhatsApp
@@ -31,7 +31,7 @@ export function StickyActionBar() {
       ) : null}
       <Link
         href="/kontakt"
-        className="border-border bg-primary text-primary-foreground flex flex-1 flex-col items-center gap-0.5 border-s py-2.5 text-xs font-medium"
+        className="border-border bg-primary text-primary-foreground active:bg-primary/90 flex flex-1 flex-col items-center gap-0.5 border-s py-2.5 text-xs font-medium"
       >
         <Send size={18} aria-hidden="true" />
         {t("contactUs")}

@@ -20,13 +20,13 @@ export function FaqAccordion({
   if (faqs.length === 0) return null;
 
   return (
-    <Accordion className="w-full">
+    <Accordion className="border-border w-full divide-y rounded-2xl border">
       {faqs.map((faq) => (
-        <AccordionItem key={faq.id} value={faq.id}>
-          <AccordionTrigger className="text-start text-base font-medium">
+        <AccordionItem key={faq.id} value={faq.id} className="border-none px-5">
+          <AccordionTrigger className="py-4 text-start text-base font-medium">
             {getLocalized(faq.question, locale)}
           </AccordionTrigger>
-          <AccordionContent className="text-muted-foreground">
+          <AccordionContent className="text-muted-foreground text-body">
             {getLocalized(faq.answer, locale)}
           </AccordionContent>
         </AccordionItem>

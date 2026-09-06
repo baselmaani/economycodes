@@ -1,7 +1,11 @@
 import type { MetadataRoute } from "next";
 
 import { routing, type StaticAppPathname } from "@/i18n/routing";
-import { getAlternateLinks, getServiceAlternateLinks, servicesList } from "@/lib/routes";
+import {
+  getAlternateLinks,
+  getServiceAlternateLinks,
+  servicesList,
+} from "@/lib/routes";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticEntries: StaticAppPathname[] = [

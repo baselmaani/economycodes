@@ -36,7 +36,10 @@ export default async function LocaleLayout({
       <DirectionProvider direction={direction}>
         <SkipLink />
         <Header locale={locale as AppLocale} />
-        <main id="main-content" className="flex-1 pb-14 lg:pb-0">
+        <main
+          id="main-content"
+          className="flex-1 pb-[calc(3.5rem+env(safe-area-inset-bottom))] lg:pb-0"
+        >
           {children}
         </main>
         <Footer locale={locale as AppLocale} />

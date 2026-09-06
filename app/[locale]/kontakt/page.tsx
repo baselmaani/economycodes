@@ -7,6 +7,7 @@ import { getAlternateLinks } from "@/lib/routes";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { getLocalized } from "@/lib/i18n-content";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
+import { Container } from "@/components/layout/Container";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { LocationCard } from "@/components/marketing/LocationCard";
 import { business } from "@/content/business";
@@ -45,28 +46,33 @@ export default async function ContactPage({
   const home = await getTranslations({ locale, namespace: "home" });
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+    <Container className="py-12 sm:py-16">
       <Breadcrumbs
-        items={[{ label: nav("home"), routeKey: "/" }, { label: nav("contact") }]}
+        items={[
+          { label: nav("home"), routeKey: "/" },
+          { label: nav("contact") },
+        ]}
       />
-      <h1 className="mt-4 text-4xl font-semibold">{nav("contact")}</h1>
-      <p className="text-muted-foreground mt-3 max-w-2xl">
+      <h1 className="text-page-h1 mt-4 font-semibold text-balance">
+        {nav("contact")}
+      </h1>
+      <p className="text-muted-foreground text-body mt-3 max-w-2xl">
         {home("finalCtaSubtitle")}
       </p>
 
       <div className="mt-10 grid gap-12 lg:grid-cols-2">
         <div>
-          <div className="mb-8 flex flex-col gap-3">
+          <div className="border-border bg-card mb-8 flex flex-col gap-3 rounded-2xl border p-5">
             <a
               href={business.phoneHref}
-              className="text-foreground flex items-center gap-2 font-medium"
+              className="text-foreground hover:text-primary flex items-center gap-2 font-medium transition-colors"
             >
               <Phone size={18} aria-hidden="true" className="text-primary" />
               <span dir="ltr">{business.phone}</span>
             </a>
             <a
               href={`mailto:${business.email}`}
-              className="text-foreground flex items-center gap-2 font-medium"
+              className="text-foreground hover:text-primary flex items-center gap-2 font-medium transition-colors"
             >
               <Mail size={18} aria-hidden="true" className="text-primary" />
               {business.email}
@@ -99,6 +105,6 @@ export default async function ContactPage({
           ))}
         </div>
       </div>
-    </div>
+    </Container>
   );
 }

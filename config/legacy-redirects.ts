@@ -16,7 +16,11 @@ export const legacyRedirects: LegacyRedirect[] = [
   { source: "/about", destination: "/om-hadi", permanent: true },
   { source: "/about.html", destination: "/om-hadi", permanent: true },
   { source: "/privacy", destination: "/integritetspolicy", permanent: true },
-  { source: "/privacy.html", destination: "/integritetspolicy", permanent: true },
+  {
+    source: "/privacy.html",
+    destination: "/integritetspolicy",
+    permanent: true,
+  },
   {
     source: "/service/accounting",
     destination: "/tjanster/bokforing",

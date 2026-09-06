@@ -7,12 +7,7 @@ import { getServiceSlug } from "@/lib/routes";
 import { getServiceIcon } from "@/content/service-icons";
 import type { Service } from "@/content/types";
 import { IconTile } from "@/components/marketing/IconTile";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export function ServiceCard({
   service,
@@ -56,7 +51,7 @@ export function ServiceCard({
             <ArrowRight
               size={16}
               aria-hidden="true"
-              className="rtl:rotate-180 transition-transform duration-200 group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5"
+              className="transition-transform duration-200 group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5"
             />
           </span>
         </CardContent>

@@ -4,7 +4,10 @@ import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 
 import type { AppLocale } from "@/i18n/routing";
-import { submitContactForm, type ContactFormState } from "@/app/[locale]/kontakt/actions";
+import {
+  submitContactForm,
+  type ContactFormState,
+} from "@/app/[locale]/kontakt/actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";

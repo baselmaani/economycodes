@@ -25,7 +25,9 @@ export function LanguageSupportSection({
     <Section tone="navy">
       <Container size="narrow" className="text-center">
         <IconTile icon={Languages} tone="white" className="mx-auto" />
-        <h2 className="text-section-h2 mt-5 font-semibold text-balance">{heading}</h2>
+        <h2 className="text-section-h2 mt-5 font-semibold text-balance">
+          {heading}
+        </h2>
         <p className="text-body mx-auto mt-4 max-w-2xl text-white/80">
           {getLocalized(languageSupportContent.body, locale)}
         </p>

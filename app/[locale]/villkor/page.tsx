@@ -7,6 +7,7 @@ import { buildMetadata } from "@/lib/seo/metadata";
 import { getLocalized } from "@/lib/i18n-content";
 import { Link } from "@/i18n/navigation";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
+import { Container } from "@/components/layout/Container";
 import { Placeholder } from "@/components/common/Placeholder";
 import { business } from "@/content/business";
 import { termsPage } from "@/content/legal";
@@ -34,10 +35,15 @@ export default async function TermsPage({
   setRequestLocale(locale);
   const nav = await getTranslations({ locale, namespace: "nav" });
   const common = await getTranslations({ locale, namespace: "common" });
-  const t = (v: { sv: string; en?: string; ar?: string }) => getLocalized(v, locale);
+  const t = (v: { sv: string; en?: string; ar?: string }) =>
+    getLocalized(v, locale);
 
   return (
-    <article className="prose prose-neutral mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+    <Container
+      as="article"
+      size="content"
+      className="prose prose-neutral py-12 sm:py-16"
+    >
       <Breadcrumbs
         items={[
           { label: nav("home"), routeKey: "/" },
@@ -58,7 +64,9 @@ export default async function TermsPage({
       <p>
         {t(termsPage.privacyBodyPrefix)}{" "}
         <Link href="/integritetspolicy">{t(termsPage.privacyLinkLabel)}</Link>
-        {t(termsPage.privacyBodySuffix) ? ` ${t(termsPage.privacyBodySuffix)}` : "."}
+        {t(termsPage.privacyBodySuffix)
+          ? ` ${t(termsPage.privacyBodySuffix)}`
+          : "."}
       </p>
 
       <h2>{t(termsPage.liabilityHeading)}</h2>
@@ -71,6 +79,6 @@ export default async function TermsPage({
         {t(termsPage.contactBodyPrefix)}{" "}
         <a href={`mailto:${business.email}`}>{business.email}</a>.
       </p>
-    </article>
+    </Container>
   );
 }

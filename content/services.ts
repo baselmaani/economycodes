@@ -107,7 +107,11 @@ export const services: Record<string, Service> = {
     },
     body: {
       sv: [
-        { type: "heading", level: 2, text: "Varför löpande bokföring är viktigt" },
+        {
+          type: "heading",
+          level: 2,
+          text: "Varför löpande bokföring är viktigt",
+        },
         {
           type: "paragraph",
           text: "Alla som driver näringsverksamhet i Sverige är enligt bokföringslagen skyldiga att bokföra sina affärshändelser. En löpande, korrekt bokföring gör det enklare att följa upp lönsamhet, planera skatt och moms, och ha rätt underlag redo inför bokslut eller om Skatteverket efterfrågar det.",
@@ -124,14 +128,22 @@ export const services: Record<string, Service> = {
           type: "paragraph",
           text: "Everyone running a business in Sweden is required under the Bookkeeping Act to record their transactions. Accurate, ongoing bookkeeping makes it easier to track profitability, plan for tax and VAT, and have the right documentation ready for your annual accounts or if Skatteverket asks for it.",
         },
-        { type: "heading", level: 2, text: "How we work with your bookkeeping" },
+        {
+          type: "heading",
+          level: 2,
+          text: "How we work with your bookkeeping",
+        },
         {
           type: "paragraph",
           text: "We adapt our way of working to how your company already handles its documentation today, rather than requiring you to switch systems or routines unnecessarily. The goal is for your bookkeeping to feel understandable to you, not just a technical formality.",
         },
       ],
       ar: [
-        { type: "heading", level: 2, text: "لماذا تُعد المحاسبة المستمرة مهمة" },
+        {
+          type: "heading",
+          level: 2,
+          text: "لماذا تُعد المحاسبة المستمرة مهمة",
+        },
         {
           type: "paragraph",
           text: "يلتزم كل من يمارس نشاطًا تجاريًا في السويد بموجب قانون المحاسبة بتسجيل معاملاته التجارية. تجعل المحاسبة الدقيقة والمستمرة من السهل متابعة الربحية والتخطيط للضرائب وضريبة القيمة المضافة، وتوفر المستندات الصحيحة الجاهزة عند إعداد الحسابات الختامية أو إذا طلبتها هيئة الضرائب (Skatteverket).",
@@ -243,7 +255,11 @@ export const services: Record<string, Service> = {
     },
     body: {
       sv: [
-        { type: "heading", level: 2, text: "Vilka deklarationer kan bli aktuella" },
+        {
+          type: "heading",
+          level: 2,
+          text: "Vilka deklarationer kan bli aktuella",
+        },
         {
           type: "paragraph",
           text: "Beroende på bolagsform och verksamhet kan det bland annat handla om momsdeklaration, arbetsgivardeklaration och inkomstdeklaration. Vi hjälper dig att förstå vad som gäller specifikt för ditt företag, snarare än att utgå från en generell mall.",
@@ -655,21 +671,33 @@ export const services: Record<string, Service> = {
     },
     body: {
       sv: [
-        { type: "heading", level: 2, text: "Varför en budget innan du startar" },
+        {
+          type: "heading",
+          level: 2,
+          text: "Varför en budget innan du startar",
+        },
         {
           type: "paragraph",
           text: "En budget och en genomförbarhetsstudie hjälper dig att se om siffrorna går ihop innan du binder upp tid, pengar och andra resurser. Det gör det också enklare att förklara din idé för till exempel en bank eller annan finansiär.",
         },
       ],
       en: [
-        { type: "heading", level: 2, text: "Why you need a budget before you start" },
+        {
+          type: "heading",
+          level: 2,
+          text: "Why you need a budget before you start",
+        },
         {
           type: "paragraph",
           text: "A budget and a feasibility study help you see whether the numbers add up before you commit time, money, and other resources. It also makes it easier to explain your idea to, for example, a bank or other financier.",
         },
       ],
       ar: [
-        { type: "heading", level: 2, text: "لماذا تحتاج إلى ميزانية قبل البدء" },
+        {
+          type: "heading",
+          level: 2,
+          text: "لماذا تحتاج إلى ميزانية قبل البدء",
+        },
         {
           type: "paragraph",
           text: "تساعدك الميزانية ودراسة الجدوى على معرفة ما إذا كانت الأرقام متوازنة قبل الالتزام بالوقت والمال والموارد الأخرى. كما تسهّل شرح فكرتك لجهة مثل بنك أو ممول آخر.",
@@ -784,7 +812,11 @@ export const services: Record<string, Service> = {
     },
     body: {
       sv: [
-        { type: "heading", level: 2, text: "Administrativt stöd, inte juridisk representation" },
+        {
+          type: "heading",
+          level: 2,
+          text: "Administrativt stöd, inte juridisk representation",
+        },
         {
           type: "paragraph",
           text: "Vi hjälper dig att strukturera och förbereda avtal och kontrakt på ett praktiskt plan. I ärenden som kräver kvalificerad juridisk bedömning eller representation hänvisar vi dig vidare till en jurist eller advokat.",
@@ -792,7 +824,11 @@ export const services: Record<string, Service> = {
         { type: "disclaimer", text: CONTRACT_DISCLAIMER.sv },
       ],
       en: [
-        { type: "heading", level: 2, text: "Administrative support, not legal representation" },
+        {
+          type: "heading",
+          level: 2,
+          text: "Administrative support, not legal representation",
+        },
         {
           type: "paragraph",
           text: "We help you structure and prepare agreements and contracts on a practical level. For matters requiring qualified legal assessment or representation, we'll refer you on to a lawyer or solicitor.",
@@ -916,7 +952,11 @@ export const services: Record<string, Service> = {
     },
     body: {
       sv: [
-        { type: "heading", level: 2, text: "En separat process från migrationsärenden" },
+        {
+          type: "heading",
+          level: 2,
+          text: "En separat process från migrationsärenden",
+        },
         {
           type: "paragraph",
           text: "Att bilda eller etablera företag i Sverige regleras av Bolagsverket och Skatteverket och är inte samma process som ansökan om uppehållstillstånd, som i stället hanteras av Migrationsverket. Vi rekommenderar att du tar reda på vad som gäller för din specifika situation innan du fattar beslut som rör din vistelse i Sverige.",
@@ -924,7 +964,11 @@ export const services: Record<string, Service> = {
         { type: "disclaimer", text: INVESTMENT_DISCLAIMER.sv },
       ],
       en: [
-        { type: "heading", level: 2, text: "A separate process from immigration matters" },
+        {
+          type: "heading",
+          level: 2,
+          text: "A separate process from immigration matters",
+        },
         {
           type: "paragraph",
           text: "Forming or establishing a business in Sweden is regulated by Bolagsverket and Skatteverket and is not the same process as applying for a residence permit, which is instead handled by Migrationsverket. We recommend finding out what applies to your specific situation before making decisions related to your stay in Sweden.",
@@ -1040,19 +1084,31 @@ export const services: Record<string, Service> = {
     },
     body: {
       sv: [
-        { type: "heading", level: 2, text: "Arbetsgivarens ansvar för lön och arbetsgivaravgifter" },
+        {
+          type: "heading",
+          level: 2,
+          text: "Arbetsgivarens ansvar för lön och arbetsgivaravgifter",
+        },
         {
           type: "paragraph",
           text: "Som arbetsgivare i Sverige ansvarar du för att lön beräknas rätt, att skatteavdrag och arbetsgivaravgifter hanteras korrekt och att arbetsgivardeklaration lämnas till Skatteverket varje månad. Fel i löneadministrationen kan påverka både dina anställda och din relation till Skatteverket.",
         },
-        { type: "heading", level: 2, text: "Så arbetar vi med din löneadministration" },
+        {
+          type: "heading",
+          level: 2,
+          text: "Så arbetar vi med din löneadministration",
+        },
         {
           type: "paragraph",
           text: "Vi anpassar lönerutinen efter ditt företags storlek och behov, oavsett om du har en eller flera anställda. Målet är att lönehanteringen ska fungera smidigt varje månad, utan överraskningar för dig eller dina anställda.",
         },
       ],
       en: [
-        { type: "heading", level: 2, text: "The employer's responsibility for pay and employer contributions" },
+        {
+          type: "heading",
+          level: 2,
+          text: "The employer's responsibility for pay and employer contributions",
+        },
         {
           type: "paragraph",
           text: "As an employer in Sweden, you're responsible for calculating pay correctly, handling tax deductions and employer contributions properly, and filing an employer tax return with Skatteverket every month. Payroll errors can affect both your employees and your relationship with Skatteverket.",
@@ -1064,7 +1120,11 @@ export const services: Record<string, Service> = {
         },
       ],
       ar: [
-        { type: "heading", level: 2, text: "مسؤولية صاحب العمل عن الرواتب واشتراكات صاحب العمل" },
+        {
+          type: "heading",
+          level: 2,
+          text: "مسؤولية صاحب العمل عن الرواتب واشتراكات صاحب العمل",
+        },
         {
           type: "paragraph",
           text: "بصفتك صاحب عمل في السويد، تقع على عاتقك مسؤولية احتساب الرواتب بشكل صحيح والتعامل مع الاستقطاعات الضريبية واشتراكات صاحب العمل بدقة وتقديم إقرار صاحب العمل إلى هيئة الضرائب كل شهر. يمكن أن تؤثر الأخطاء في إدارة الرواتب على موظفيك وعلى علاقتك بهيئة الضرائب.",
@@ -1083,8 +1143,16 @@ export const services: Record<string, Service> = {
   "annual-closing": {
     key: "annual-closing",
     order: 9,
-    slug: { sv: "bokslut-och-arsredovisning", en: "annual-accounts", ar: "الإغلاق-السنوي" },
-    name: { sv: "Bokslut och årsredovisning", en: "Annual accounts", ar: "الإغلاق السنوي" },
+    slug: {
+      sv: "bokslut-och-arsredovisning",
+      en: "annual-accounts",
+      ar: "الإغلاق-السنوي",
+    },
+    name: {
+      sv: "Bokslut och årsredovisning",
+      en: "Annual accounts",
+      ar: "الإغلاق السنوي",
+    },
     summary: {
       sv: "Hjälp med bokslut och årsredovisning för aktiebolag och andra företag i Sverige. Vi sammanställer räkenskapsåret, säkerställer att underlaget stämmer och hjälper dig att färdigställa och, där det krävs, lämna in årsredovisningen till Bolagsverket i tid.",
       en: "Help with annual accounts and annual reports for limited companies and other businesses in Sweden. We compile the financial year, make sure the figures add up, and help you finalize and, where required, submit the annual report to Bolagsverket on time.",
@@ -1166,7 +1234,11 @@ export const services: Record<string, Service> = {
     },
     body: {
       sv: [
-        { type: "heading", level: 2, text: "Bokslut och årsredovisning – vad är skillnaden?" },
+        {
+          type: "heading",
+          level: 2,
+          text: "Bokslut och årsredovisning – vad är skillnaden?",
+        },
         {
           type: "paragraph",
           text: "Ett bokslut är sammanställningen av räkenskapsårets bokföring och ligger till grund för både den interna uppföljningen och deklarationen. En årsredovisning är den formella handling som aktiebolag i de flesta fall ska upprätta enligt årsredovisningslagen och lämna in till Bolagsverket.",
@@ -1178,7 +1250,11 @@ export const services: Record<string, Service> = {
         },
       ],
       en: [
-        { type: "heading", level: 2, text: "Annual accounts and annual reports – what's the difference?" },
+        {
+          type: "heading",
+          level: 2,
+          text: "Annual accounts and annual reports – what's the difference?",
+        },
         {
           type: "paragraph",
           text: "Annual accounts are the compilation of the financial year's bookkeeping, forming the basis for both internal follow-up and your tax return. An annual report is the formal document that limited companies in Sweden are, in most cases, required to prepare under the Annual Accounts Act and submit to Bolagsverket.",
@@ -1190,7 +1266,11 @@ export const services: Record<string, Service> = {
         },
       ],
       ar: [
-        { type: "heading", level: 2, text: "الحسابات الختامية والقوائم المالية السنوية – ما الفرق؟" },
+        {
+          type: "heading",
+          level: 2,
+          text: "الحسابات الختامية والقوائم المالية السنوية – ما الفرق؟",
+        },
         {
           type: "paragraph",
           text: "الحسابات الختامية هي تجميع لمحاسبة السنة المالية، وتشكّل الأساس للمتابعة الداخلية والإقرار الضريبي. أما القوائم المالية السنوية فهي المستند الرسمي الذي يجب على الشركات المحدودة في معظم الحالات إعداده وفق قانون القوائم المالية السنوية وتقديمه إلى مكتب تسجيل الشركات.",
@@ -1209,8 +1289,16 @@ export const services: Record<string, Service> = {
   advisory: {
     key: "advisory",
     order: 10,
-    slug: { sv: "ekonomisk-radgivning", en: "business-advisory", ar: "الاستشارات-المالية" },
-    name: { sv: "Ekonomisk rådgivning", en: "Business advisory", ar: "الاستشارات المالية" },
+    slug: {
+      sv: "ekonomisk-radgivning",
+      en: "business-advisory",
+      ar: "الاستشارات-المالية",
+    },
+    name: {
+      sv: "Ekonomisk rådgivning",
+      en: "Business advisory",
+      ar: "الاستشارات المالية",
+    },
     summary: {
       sv: "Ekonomisk rådgivning för företag som redan är igång och vill få bättre koll på lönsamhet, likviditet och ekonomisk utveckling. Vi går igenom din situation tillsammans med dig och ger konkreta, praktiska råd utifrån ditt företags faktiska siffror.",
       en: "Business advisory for companies that are already up and running and want a clearer picture of profitability, cash flow, and financial development. We go through your situation together with you and give concrete, practical advice based on your company's actual numbers.",
@@ -1292,31 +1380,51 @@ export const services: Record<string, Service> = {
     },
     body: {
       sv: [
-        { type: "heading", level: 2, text: "Löpande rådgivning, inte en engångsinsats" },
+        {
+          type: "heading",
+          level: 2,
+          text: "Löpande rådgivning, inte en engångsinsats",
+        },
         {
           type: "paragraph",
           text: "Till skillnad från en affärsplan eller budget inför en start eller enskild investering, är ekonomisk rådgivning ett löpande stöd för dig som redan driver verksamhet och vill fatta bättre beslut utifrån aktuella siffror.",
         },
-        { type: "heading", level: 2, text: "Rådgivning kopplad till din bokföring" },
+        {
+          type: "heading",
+          level: 2,
+          text: "Rådgivning kopplad till din bokföring",
+        },
         {
           type: "paragraph",
           text: "Vi utgår från din faktiska bokföring, inte generella branschsiffror, vilket gör rådgivningen konkret och relevant för just ditt företag.",
         },
       ],
       en: [
-        { type: "heading", level: 2, text: "Ongoing advisory, not a one-off effort" },
+        {
+          type: "heading",
+          level: 2,
+          text: "Ongoing advisory, not a one-off effort",
+        },
         {
           type: "paragraph",
           text: "Unlike a business plan or budget for a launch or a single investment, business advisory is ongoing support for a company that's already running and wants to make better decisions based on current numbers.",
         },
-        { type: "heading", level: 2, text: "Advisory grounded in your bookkeeping" },
+        {
+          type: "heading",
+          level: 2,
+          text: "Advisory grounded in your bookkeeping",
+        },
         {
           type: "paragraph",
           text: "We work from your actual bookkeeping, not generic industry figures, which makes the advice concrete and relevant to your specific company.",
         },
       ],
       ar: [
-        { type: "heading", level: 2, text: "استشارة مستمرة، وليست جهدًا لمرة واحدة" },
+        {
+          type: "heading",
+          level: 2,
+          text: "استشارة مستمرة، وليست جهدًا لمرة واحدة",
+        },
         {
           type: "paragraph",
           text: "على عكس خطة العمل أو الميزانية اللازمتين قبل الانطلاق أو لاستثمار واحد، تُعد الاستشارات المالية دعمًا مستمرًا لمن يدير عملاً قائمًا بالفعل ويريد اتخاذ قرارات أفضل بناءً على الأرقام الحالية.",
@@ -1335,8 +1443,16 @@ export const services: Record<string, Service> = {
   "bookkeeping-correction": {
     key: "bookkeeping-correction",
     order: 11,
-    slug: { sv: "ratta-fel-i-bokforingen", en: "correcting-bookkeeping-errors", ar: "تصحيح-اخطاء-المحاسبة" },
-    name: { sv: "Rätta fel i bokföringen", en: "Correcting bookkeeping errors", ar: "تصحيح أخطاء المحاسبة" },
+    slug: {
+      sv: "ratta-fel-i-bokforingen",
+      en: "correcting-bookkeeping-errors",
+      ar: "تصحيح-اخطاء-المحاسبة",
+    },
+    name: {
+      sv: "Rätta fel i bokföringen",
+      en: "Correcting bookkeeping errors",
+      ar: "تصحيح أخطاء المحاسبة",
+    },
     summary: {
       sv: "Hjälp att rätta fel i bokföringen för dig som upptäckt felaktiga poster, saknade verifikationer eller bokföring som inte stämmer mot bank och kvitton. Vi går igenom vad som behöver korrigeras och ser till att bokföringen blir korrekt igen.",
       en: "Help correcting bookkeeping errors for businesses that have found incorrect entries, missing vouchers, or bookkeeping that doesn't match the bank and receipts. We review what needs correcting and make sure your bookkeeping is accurate again.",
@@ -1418,24 +1534,40 @@ export const services: Record<string, Service> = {
     },
     body: {
       sv: [
-        { type: "heading", level: 2, text: "Vanliga orsaker till fel i bokföringen" },
+        {
+          type: "heading",
+          level: 2,
+          text: "Vanliga orsaker till fel i bokföringen",
+        },
         {
           type: "paragraph",
           text: "Fel uppstår ofta vid systembyten, personalbyten eller när underlag hanterats manuellt under en period. Oavsett orsak är det viktigt att felen rättas så att bokföringen speglar verkligheten.",
         },
-        { type: "heading", level: 2, text: "Så rättar vi bokföringen tillsammans" },
+        {
+          type: "heading",
+          level: 2,
+          text: "Så rättar vi bokföringen tillsammans",
+        },
         {
           type: "paragraph",
           text: "Vi går systematiskt igenom perioden det gäller, jämför med bank och kvitton, och korrigerar de poster som behöver ändras — med tydlig dokumentation av vad som justerats och varför.",
         },
       ],
       en: [
-        { type: "heading", level: 2, text: "Common causes of bookkeeping errors" },
+        {
+          type: "heading",
+          level: 2,
+          text: "Common causes of bookkeeping errors",
+        },
         {
           type: "paragraph",
           text: "Errors often arise when switching systems, changing staff, or when documentation has been handled manually for a period. Whatever the cause, it's important the errors are corrected so your bookkeeping reflects reality.",
         },
-        { type: "heading", level: 2, text: "How we correct your bookkeeping together" },
+        {
+          type: "heading",
+          level: 2,
+          text: "How we correct your bookkeeping together",
+        },
         {
           type: "paragraph",
           text: "We systematically go through the relevant period, compare it against your bank and receipts, and correct the entries that need changing — with clear documentation of what was adjusted and why.",
@@ -1544,24 +1676,40 @@ export const services: Record<string, Service> = {
     },
     body: {
       sv: [
-        { type: "heading", level: 2, text: "Fortnox som verktyg för din bokföring" },
+        {
+          type: "heading",
+          level: 2,
+          text: "Fortnox som verktyg för din bokföring",
+        },
         {
           type: "paragraph",
           text: "Fortnox är ett molnbaserat system som många svenska företag använder för bokföring, fakturering och lön. Rätt inställningar och rutiner från början gör det enklare att hålla ordning löpande.",
         },
-        { type: "heading", level: 2, text: "Stöd oavsett var du är i processen" },
+        {
+          type: "heading",
+          level: 2,
+          text: "Stöd oavsett var du är i processen",
+        },
         {
           type: "paragraph",
           text: "Oavsett om du precis ska börja använda Fortnox eller redan arbetar i systemet sedan tidigare, hjälper vi dig med det som är relevant för din situation.",
         },
       ],
       en: [
-        { type: "heading", level: 2, text: "Fortnox as a tool for your bookkeeping" },
+        {
+          type: "heading",
+          level: 2,
+          text: "Fortnox as a tool for your bookkeeping",
+        },
         {
           type: "paragraph",
           text: "Fortnox is a cloud-based system many Swedish businesses use for bookkeeping, invoicing, and payroll. Getting the settings and routines right from the start makes it easier to stay organized going forward.",
         },
-        { type: "heading", level: 2, text: "Support wherever you are in the process" },
+        {
+          type: "heading",
+          level: 2,
+          text: "Support wherever you are in the process",
+        },
         {
           type: "paragraph",
           text: "Whether you're just about to start using Fortnox or have already been working in the system for a while, we help you with whatever's relevant to your situation.",
@@ -1587,8 +1735,16 @@ export const services: Record<string, Service> = {
   "car-dealership-accounting": {
     key: "car-dealership-accounting",
     order: 13,
-    slug: { sv: "bokforing-bilhandel-vmb", en: "car-dealership-accounting", ar: "محاسبة-تجار-السيارات" },
-    name: { sv: "Bokföring för bilhandel och VMB", en: "Accounting for car dealerships", ar: "محاسبة تجار السيارات" },
+    slug: {
+      sv: "bokforing-bilhandel-vmb",
+      en: "car-dealership-accounting",
+      ar: "محاسبة-تجار-السيارات",
+    },
+    name: {
+      sv: "Bokföring för bilhandel och VMB",
+      en: "Accounting for car dealerships",
+      ar: "محاسبة تجار السيارات",
+    },
     summary: {
       sv: "Bokföring och VMB för bilhandel och andra som köper och säljer begagnade fordon i Sverige. Vi hjälper dig att hantera vinstmarginalbeskattning korrekt och hålla ordning på bokföringen kring varje fordonsaffär.",
       en: "Accounting and VMB (profit margin taxation) support for car dealerships and others buying and selling used vehicles in Sweden. We help you handle profit margin VAT correctly and keep the bookkeeping for each vehicle transaction in order.",
@@ -1675,19 +1831,31 @@ export const services: Record<string, Service> = {
           type: "paragraph",
           text: "Vinstmarginalbeskattning (VMB) är en särskild momsmetod som bland annat kan tillämpas vid handel med begagnade bilar, där moms beräknas på skillnaden mellan inköps- och försäljningspris i stället för hela försäljningsbeloppet. Reglerna ställer särskilda krav på hur varje affär dokumenteras och bokförs.",
         },
-        { type: "heading", level: 2, text: "Branschanpassad bokföring för bilhandlare" },
+        {
+          type: "heading",
+          level: 2,
+          text: "Branschanpassad bokföring för bilhandlare",
+        },
         {
           type: "paragraph",
           text: "Vi hjälper dig att sätta upp rutiner som gör det enklare att hålla koll på VMB-affärer och vanlig momsredovisning parallellt, så att bokföringen speglar din verksamhet korrekt.",
         },
       ],
       en: [
-        { type: "heading", level: 2, text: "What is VMB, and when does it apply?" },
+        {
+          type: "heading",
+          level: 2,
+          text: "What is VMB, and when does it apply?",
+        },
         {
           type: "paragraph",
           text: "Profit margin taxation (VMB) is a special VAT method that can apply to, among other things, trade in used cars, where VAT is calculated on the difference between the purchase and sale price rather than the full sale amount. The rules place particular demands on how each deal is documented and recorded.",
         },
-        { type: "heading", level: 2, text: "Industry-adapted bookkeeping for car dealers" },
+        {
+          type: "heading",
+          level: 2,
+          text: "Industry-adapted bookkeeping for car dealers",
+        },
         {
           type: "paragraph",
           text: "We help you set up routines that make it easier to keep track of VMB deals alongside regular VAT reporting, so your bookkeeping accurately reflects your business.",
@@ -1713,7 +1881,11 @@ export const services: Record<string, Service> = {
   "arabic-speaking-accounting": {
     key: "arabic-speaking-accounting",
     order: 14,
-    slug: { sv: "arabisk-redovisningskonsult", en: "arabic-speaking-accountant-sweden", ar: "محاسب-عربي-في-السويد" },
+    slug: {
+      sv: "arabisk-redovisningskonsult",
+      en: "arabic-speaking-accountant-sweden",
+      ar: "محاسب-عربي-في-السويد",
+    },
     name: {
       sv: "Arabisk redovisningskonsult i Sverige",
       en: "Arabic-speaking accountant in Sweden",
@@ -1800,24 +1972,40 @@ export const services: Record<string, Service> = {
     },
     body: {
       sv: [
-        { type: "heading", level: 2, text: "Samma tjänster, på ditt eget språk" },
+        {
+          type: "heading",
+          level: 2,
+          text: "Samma tjänster, på ditt eget språk",
+        },
         {
           type: "paragraph",
           text: "Economy Codes AB erbjuder inte en separat tjänst för arabisktalande kunder, utan samma fullständiga redovisningstjänster som för alla våra kunder — med möjligheten att kommunicera på arabiska genom hela processen, från första kontakt till löpande samarbete.",
         },
-        { type: "heading", level: 2, text: "Praktisk kunskap om det svenska systemet" },
+        {
+          type: "heading",
+          level: 2,
+          text: "Praktisk kunskap om det svenska systemet",
+        },
         {
           type: "paragraph",
           text: "Många arabisktalande företagare är nya i det svenska systemet med myndigheter som Skatteverket och Bolagsverket. Vi hjälper dig att förstå vad som gäller, steg för steg och på det språk som känns tydligast för dig.",
         },
       ],
       en: [
-        { type: "heading", level: 2, text: "The same services, in your own language" },
+        {
+          type: "heading",
+          level: 2,
+          text: "The same services, in your own language",
+        },
         {
           type: "paragraph",
           text: "Economy Codes AB doesn't offer a separate service for Arabic-speaking clients — you get the same full range of accounting services as all our clients, with the ability to communicate in Arabic throughout the process, from first contact to ongoing collaboration.",
         },
-        { type: "heading", level: 2, text: "Practical knowledge of the Swedish system" },
+        {
+          type: "heading",
+          level: 2,
+          text: "Practical knowledge of the Swedish system",
+        },
         {
           type: "paragraph",
           text: "Many Arabic-speaking business owners are new to the Swedish system of authorities such as Skatteverket and Bolagsverket. We help you understand what applies, step by step, in whichever language is clearest for you.",

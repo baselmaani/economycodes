@@ -1,5 +1,9 @@
 import { getPathname } from "@/i18n/navigation";
-import { routing, type AppLocale, type StaticAppPathname } from "@/i18n/routing";
+import {
+  routing,
+  type AppLocale,
+  type StaticAppPathname,
+} from "@/i18n/routing";
 import { siteUrl } from "@/lib/site";
 import { getServiceSlug, resolveServiceBySlug } from "@/lib/service-lookup";
 import { services, servicesList } from "@/content/services";
@@ -62,7 +66,10 @@ export function getServiceAlternateLinks(
   );
 }
 
-export function getArticleSlug(locale: AppLocale, article: ArticleMeta): string {
+export function getArticleSlug(
+  locale: AppLocale,
+  article: ArticleMeta,
+): string {
   return article.slug[locale] ?? article.slug.sv;
 }
 

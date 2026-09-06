@@ -50,7 +50,7 @@ export default async function RootLayout({
       className={`${manrope.variable} ${notoSansArabic.variable} h-full antialiased`}
     >
       <body
-        className={`min-h-full flex flex-col ${isArabic ? "font-arabic" : "font-sans"}`}
+        className={`flex min-h-full flex-col ${isArabic ? "font-arabic" : "font-sans"}`}
       >
         {children}
       </body>

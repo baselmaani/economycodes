@@ -15,7 +15,15 @@ export function FloatingContactButtons() {
   const t = useTranslations("common");
 
   return (
-    <div className="fixed bottom-6 end-6 z-40 hidden flex-col gap-3 lg:flex">
+    <div className="fixed end-6 bottom-6 z-40 hidden flex-col gap-3 lg:flex">
+      <a
+        href={business.phoneHref}
+        title={t("callUs")}
+        aria-label={t("callUs")}
+        className="bg-primary text-primary-foreground hover:bg-primary/90 flex size-14 items-center justify-center rounded-full shadow-lg transition-transform duration-200 ease-(--ease-standard) hover:-translate-y-0.5"
+      >
+        <Phone size={26} aria-hidden="true" />
+      </a>
       {business.whatsappHref ? (
         <a
           href={business.whatsappHref}
@@ -23,19 +31,11 @@ export function FloatingContactButtons() {
           rel="noopener noreferrer"
           title="WhatsApp"
           aria-label="WhatsApp"
-          className="flex size-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform hover:scale-105 hover:bg-[#20bd5a]"
+          className="bg-whatsapp flex size-14 items-center justify-center rounded-full text-white shadow-lg transition-transform duration-200 ease-(--ease-standard) hover:-translate-y-0.5 hover:brightness-95"
         >
           <WhatsAppIcon size={28} />
         </a>
       ) : null}
-      <a
-        href={business.phoneHref}
-        title={t("callUs")}
-        aria-label={t("callUs")}
-        className="bg-primary text-primary-foreground flex size-14 items-center justify-center rounded-full shadow-lg transition-transform hover:scale-105 hover:bg-primary/90"
-      >
-        <Phone size={26} aria-hidden="true" />
-      </a>
     </div>
   );
 }

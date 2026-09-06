@@ -23,7 +23,7 @@ export function PersonProfileCard({
     <div className="flex flex-col items-start gap-6 sm:flex-row">
       <div className="relative shrink-0">
         <div
-          className={`border-border bg-card shadow-md relative overflow-hidden rounded-2xl border ${
+          className={`border-border bg-card relative overflow-hidden rounded-2xl border shadow-md ${
             compact ? "w-28" : "w-40"
           }`}
         >
@@ -43,7 +43,11 @@ export function PersonProfileCard({
       </div>
       <div className="flex flex-col gap-3">
         <div>
-          <h3 className={compact ? "text-lg font-semibold" : "text-xl font-semibold"}>
+          <h3
+            className={
+              compact ? "text-lg font-semibold" : "text-xl font-semibold"
+            }
+          >
             {person.name}
           </h3>
           <p className="text-primary text-sm font-medium">

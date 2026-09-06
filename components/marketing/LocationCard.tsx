@@ -29,7 +29,10 @@ export function LocationCard({
         </CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-3 p-0">
-        <address dir="ltr" className="text-muted-foreground text-body text-start not-italic">
+        <address
+          dir="ltr"
+          className="text-muted-foreground text-body text-start not-italic"
+        >
           {location.streetAddress}
           <br />
           {location.postalCode} {location.city}

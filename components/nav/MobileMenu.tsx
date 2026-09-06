@@ -9,7 +9,11 @@ import type { AppLocale, StaticAppPathname } from "@/i18n/routing";
 import { getLocalized } from "@/lib/i18n-content";
 import { getServiceSlug } from "@/lib/routes";
 import { servicesList } from "@/content/services";
-import { getServiceGroup, serviceGroups, type ServiceGroup } from "@/content/service-icons";
+import {
+  getServiceGroup,
+  serviceGroups,
+  type ServiceGroup,
+} from "@/content/service-icons";
 import { business } from "@/content/business";
 import { primaryNav } from "@/content/nav";
 import { Button } from "@/components/ui/button";
