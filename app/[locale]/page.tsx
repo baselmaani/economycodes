@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Handshake, MessageCircle, MessagesSquare, Search } from "lucide-react";
 
 import { Link } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
@@ -24,12 +26,22 @@ import { SectionHeading } from "@/components/marketing/SectionHeading";
 import { IconTile } from "@/components/marketing/IconTile";
 import { FaqAccordion } from "@/components/faq/FaqAccordion";
 import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/motion/Reveal";
+import { RevealGroup } from "@/components/motion/RevealGroup";
+import { RevealLine } from "@/components/motion/RevealLine";
+import { cn } from "@/lib/utils";
 import { business } from "@/content/business";
 import { locations } from "@/content/locations";
 import { hadi } from "@/content/people";
 import { servicesList } from "@/content/services";
 import { faqs } from "@/content/faqs";
-import { benefits, heroContent, homeMeta, processSteps } from "@/content/home";
+import {
+  authorizationContent,
+  benefits,
+  heroContent,
+  homeMeta,
+  processSteps,
+} from "@/content/home";
 import {
   serviceGroups,
   getServiceGroup,
@@ -37,6 +49,7 @@ import {
 } from "@/content/service-icons";
 
 const GROUP_ORDER: ServiceGroup[] = ["core", "advisory", "specialist"];
+const PROCESS_STEP_ICONS = [MessagesSquare, Search, Handshake, MessageCircle];
 
 export async function generateMetadata({
   params,
@@ -93,12 +106,6 @@ export default async function HomePage({
         subtitle={getLocalized(heroContent.subtitle, locale)}
         primaryCtaLabel={t("heroCtaPrimary")}
         servicesCtaLabel={t("heroCtaServices")}
-        image={{
-          src: "/media/optimized/hero.webp",
-          width: 1600,
-          height: 1068,
-          alt: heroContent.imageAlt,
-        }}
       />
 
       {/* 2. Verified authorization and trust */}
@@ -114,29 +121,43 @@ export default async function HomePage({
       {/* 4. Accounting services overview, grouped */}
       <Section tone="tint">
         <Container>
-          <SectionHeading
-            title={t("servicesTitle")}
-            lead={t("servicesSubtitle")}
-          />
+          <Reveal>
+            <SectionHeading
+              title={t("servicesTitle")}
+              lead={t("servicesSubtitle")}
+            />
+          </Reveal>
           <div className="mt-12 flex flex-col gap-12">
-            {groupedServices.map(({ group, label, services }) => (
-              <div key={group}>
-                <h3 className="text-muted-foreground mb-5 text-sm font-semibold tracking-wide uppercase">
-                  {label}
-                </h3>
-                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  {services.map((service) => (
-                    <ServiceCard
-                      key={service.key}
-                      service={service}
-                      locale={locale}
-                      readMoreLabel={common("readMore")}
-                      featured={group === "core"}
-                    />
-                  ))}
+            {groupedServices.map(({ group, label, services }) => {
+              const isCore = group === "core";
+              return (
+                <div key={group}>
+                  <h3 className="text-muted-foreground mb-5 text-sm font-semibold tracking-wide uppercase">
+                    {label}
+                  </h3>
+                  <RevealGroup
+                    step={60}
+                    className={cn(
+                      "grid gap-6",
+                      isCore
+                        ? "sm:grid-cols-2"
+                        : "sm:grid-cols-2 lg:grid-cols-3",
+                    )}
+                  >
+                    {services.map((service) => (
+                      <ServiceCard
+                        key={service.key}
+                        service={service}
+                        locale={locale}
+                        readMoreLabel={common("readMore")}
+                        featured={isCore}
+                        size={isCore ? "lg" : "default"}
+                      />
+                    ))}
+                  </RevealGroup>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </Container>
       </Section>
@@ -151,40 +172,88 @@ export default async function HomePage({
       {/* 6. How the digital collaboration works */}
       <Section tone="tint">
         <Container size="wide">
-          <SectionHeading title={t("collaborationTitle")} />
-          <ol className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {processSteps.map((step, index) => (
-              <li key={index} className="relative flex flex-col gap-2">
-                <span
-                  dir="ltr"
-                  aria-hidden="true"
-                  className="text-primary/15 -mb-2 text-5xl font-bold"
-                >
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <h3 className="font-semibold">
-                  {getLocalized(step.title, locale)}
-                </h3>
-                <p className="text-muted-foreground text-body">
-                  {getLocalized(step.body, locale)}
-                </p>
-              </li>
-            ))}
-          </ol>
+          <Reveal>
+            <SectionHeading title={t("collaborationTitle")} />
+          </Reveal>
+          <div className="relative mt-14">
+            <RevealLine
+              axis="x"
+              className="absolute inset-x-[12%] top-6 hidden h-px lg:block"
+            >
+              <div className="bg-border h-full w-full" />
+            </RevealLine>
+            <RevealLine
+              axis="y"
+              className="absolute start-6 top-0 bottom-0 w-px lg:hidden"
+            >
+              <div className="bg-border h-full w-full" />
+            </RevealLine>
+            <Reveal delay={120}>
+              <ol className="relative grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+                {processSteps.map((step, index) => {
+                  const StepIcon = PROCESS_STEP_ICONS[index] ?? MessageCircle;
+                  return (
+                    <li
+                      key={index}
+                      className="relative flex flex-col gap-3 ps-12 lg:ps-0"
+                    >
+                      <div className="bg-background border-border lg:bg-primary/10 absolute start-0 top-0 flex size-9 items-center justify-center rounded-full border lg:static lg:mb-1 lg:size-11 lg:border-0">
+                        <StepIcon
+                          size={18}
+                          className="text-primary"
+                          aria-hidden="true"
+                        />
+                      </div>
+                      <span
+                        dir="ltr"
+                        aria-hidden="true"
+                        className="text-primary/15 -mb-2 text-5xl font-bold"
+                      >
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <h3 className="font-semibold">
+                        {getLocalized(step.title, locale)}
+                      </h3>
+                      <p className="text-muted-foreground text-body">
+                        {getLocalized(step.body, locale)}
+                      </p>
+                    </li>
+                  );
+                })}
+              </ol>
+            </Reveal>
+          </div>
         </Container>
       </Section>
 
       {/* 7. About Hadi Al Maani */}
-      <Section tone="base">
+      <Section tone="tint">
         <Container size="narrow">
-          <h2 className="text-section-h2 mb-8 font-semibold text-balance">
-            {t("aboutTitle")}
-          </h2>
-          <PersonProfileCard
-            person={hadi}
-            locale={locale}
-            learnMoreLabel={common("learnMore")}
-          />
+          <Reveal>
+            <h2 className="text-section-h2 mb-8 font-semibold text-balance">
+              {t("aboutTitle")}
+            </h2>
+          </Reveal>
+          <Reveal delay={100}>
+            <div className="border-border bg-card rounded-3xl border p-8 shadow-md sm:p-10">
+              <PersonProfileCard
+                person={hadi}
+                locale={locale}
+                learnMoreLabel={common("learnMore")}
+              />
+              <div className="border-border mt-6 flex flex-wrap gap-2 border-t pt-6">
+                {authorizationContent.person.credentials.map((credential) => (
+                  <span
+                    key={credential}
+                    dir="ltr"
+                    className="border-border bg-secondary/40 text-secondary-foreground rounded-full border px-3 py-1 text-sm font-medium"
+                  >
+                    {credential}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </Reveal>
         </Container>
       </Section>
 
@@ -206,10 +275,19 @@ export default async function HomePage({
       {/* 10. Benefits */}
       <Section tone="tint">
         <Container>
-          <SectionHeading title={t("benefitsTitle")} />
-          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <Reveal>
+            <SectionHeading title={t("benefitsTitle")} />
+          </Reveal>
+          <RevealGroup step={100} className="mt-12 grid gap-6 sm:grid-cols-2">
             {benefits.map(({ icon, title, body }, index) => (
-              <div key={index} className="flex flex-col gap-3">
+              <div
+                key={index}
+                className={cn(
+                  "flex flex-col gap-3 rounded-2xl p-6",
+                  index % 2 === 0 && "bg-card border-border border shadow-sm",
+                  index % 2 === 1 && "lg:mt-8",
+                )}
+              >
                 <IconTile icon={icon} />
                 <h3 className="font-semibold">{getLocalized(title, locale)}</h3>
                 <p className="text-muted-foreground text-body">
@@ -217,29 +295,42 @@ export default async function HomePage({
                 </p>
               </div>
             ))}
-          </div>
+          </RevealGroup>
         </Container>
       </Section>
 
       {/* 11. Frequently asked questions */}
       <Section tone="base">
-        <Container size="narrow">
-          <h2 className="text-section-h2 text-center font-semibold text-balance">
-            {common("faqTitle")}
-          </h2>
-          <div className="mt-8">
-            <FaqAccordion faqs={globalFaqs} locale={locale} />
-          </div>
+        <Container size="wide">
+          <Reveal>
+            <h2 className="text-section-h2 text-center font-semibold text-balance">
+              {common("faqTitle")}
+            </h2>
+          </Reveal>
+          <Reveal delay={100}>
+            <div className="mx-auto mt-10 grid max-w-5xl gap-6 lg:grid-cols-2">
+              <FaqAccordion
+                faqs={globalFaqs.slice(0, Math.ceil(globalFaqs.length / 2))}
+                locale={locale}
+              />
+              <FaqAccordion
+                faqs={globalFaqs.slice(Math.ceil(globalFaqs.length / 2))}
+                locale={locale}
+              />
+            </div>
+          </Reveal>
         </Container>
       </Section>
 
       {/* 12. Locations */}
       <Section tone="tint">
         <Container>
-          <h2 className="text-section-h2 text-center font-semibold text-balance">
-            {common("locationsTitle")}
-          </h2>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2">
+          <Reveal>
+            <h2 className="text-section-h2 text-center font-semibold text-balance">
+              {common("locationsTitle")}
+            </h2>
+          </Reveal>
+          <RevealGroup step={100} className="mt-10 grid gap-6 sm:grid-cols-2">
             {locations.map((location) => (
               <LocationCard
                 key={location.id}
@@ -248,41 +339,68 @@ export default async function HomePage({
                 directionsLabel={common("getDirections")}
               />
             ))}
-          </div>
+          </RevealGroup>
         </Container>
       </Section>
 
       {/* 13. Contact and consultation CTA */}
-      <section className="bg-primary text-primary-foreground py-16 sm:py-20 lg:py-24">
+      <Section tone="gradient" bleed>
+        <Image
+          src="/media/optimized/logo-stacked.webp"
+          alt=""
+          aria-hidden="true"
+          width={280}
+          height={280}
+          className="pointer-events-none absolute top-1/2 left-1/2 size-64 -translate-x-1/2 -translate-y-1/2 object-contain opacity-[0.06]"
+        />
+        <div
+          aria-hidden="true"
+          className="bg-radial-glow pointer-events-none absolute top-0 left-1/2 size-[32rem] -translate-x-1/2 rounded-full opacity-20 blur-3xl"
+        />
         <Container
           size="narrow"
-          className="flex flex-col items-center gap-6 text-center"
+          className="relative flex flex-col items-center gap-6 text-center"
         >
-          <h2 className="text-section-h2 font-semibold text-balance">
-            {t("finalCtaTitle")}
-          </h2>
-          <p className="text-primary-foreground/85 text-body max-w-prose">
-            {t("finalCtaSubtitle")}
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <Button
-              render={<Link href="/kontakt" />}
-              size="lg"
-              variant="secondary"
-            >
-              {t("heroCtaPrimary")}
-            </Button>
-            <Button
-              render={<a href={business.phoneHref} />}
-              size="lg"
-              variant="outline"
-              className="border-primary-foreground/40 text-primary-foreground hover:bg-primary-foreground/10"
-            >
-              {t("heroCtaSecondary")}
-            </Button>
-          </div>
+          <Reveal>
+            <h2 className="text-section-h2 font-semibold text-balance">
+              {t("finalCtaTitle")}
+            </h2>
+          </Reveal>
+          <Reveal delay={80}>
+            <p className="text-body max-w-prose text-white/85">
+              {t("finalCtaSubtitle")}
+            </p>
+          </Reveal>
+          <Reveal delay={160}>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <Button
+                render={<Link href="/kontakt" />}
+                size="xl"
+                variant="secondary"
+              >
+                {t("heroCtaPrimary")}
+              </Button>
+              <Button
+                render={<a href={business.phoneHref} />}
+                size="xl"
+                variant="outline"
+                className="border-white/30 bg-white/5 text-white hover:bg-white/10 hover:text-white"
+              >
+                {t("heroCtaSecondary")}
+              </Button>
+              <Button
+                render={<a href={business.whatsappHref} />}
+                size="xl"
+                variant="whatsapp"
+                className="gap-2"
+              >
+                <MessageCircle size={18} aria-hidden="true" />
+                WhatsApp
+              </Button>
+            </div>
+          </Reveal>
         </Container>
-      </section>
+      </Section>
     </>
   );
 }

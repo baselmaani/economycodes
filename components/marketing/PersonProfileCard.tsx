@@ -23,17 +23,16 @@ export function PersonProfileCard({
     <div className="flex flex-col items-start gap-6 sm:flex-row">
       <div className="relative shrink-0">
         <div
-          className={`border-border bg-card relative overflow-hidden rounded-2xl border shadow-md ${
+          className={`border-border bg-card relative aspect-square overflow-hidden rounded-2xl border shadow-md ${
             compact ? "w-28" : "w-40"
           }`}
         >
           <Image
             src={person.photo.src}
             alt={getLocalized(person.photo.alt, locale)}
-            width={person.photo.width}
-            height={person.photo.height}
+            fill
             sizes={compact ? "112px" : "160px"}
-            className="h-auto w-full object-cover"
+            style={{ objectFit: "cover", objectPosition: "50% 88%" }}
           />
         </div>
         <span

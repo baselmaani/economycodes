@@ -19,11 +19,6 @@ export const privacyPolicy = {
     en: "The data controller for personal data collected via this website is",
     ar: "الجهة المسؤولة عن معالجة البيانات الشخصية التي تُجمع عبر هذا الموقع هي",
   } satisfies Localized<string>,
-  orgNumberLabel: {
-    sv: "organisationsnummer",
-    en: "organisation number",
-    ar: "الرقم التنظيمي",
-  } satisfies Localized<string>,
   dataCollectedHeading: {
     sv: "Vilka uppgifter vi samlar in",
     en: "What data we collect",
@@ -65,9 +60,9 @@ export const privacyPolicy = {
     ar: "أدوات التحليل والتواصل",
   } satisfies Localized<string>,
   analyticsBody: {
-    sv: "Vilka eventuella analys- eller kommunikationsverktyg (till exempel webbstatistik) som används på webbplatsen anges här så snart det är bekräftat:",
-    en: "Any analytics or communication tools (such as web statistics) used on this website will be listed here as soon as they are confirmed:",
-    ar: "سيُذكر هنا أي أدوات تحليل أو تواصل (مثل إحصاءات الموقع) تُستخدم على هذا الموقع، فور تأكيدها:",
+    sv: "Webbplatsen använder för närvarande inga tredjepartsverktyg för analys, statistik eller spårning. Om det ändras uppdateras den här sidan i förväg.",
+    en: "This website does not currently use any third-party analytics, statistics, or tracking tools. If that changes, this page will be updated in advance.",
+    ar: "لا يستخدم الموقع حاليًا أي أدوات تحليل أو إحصاءات أو تتبع من جهات خارجية. وفي حال تغيّر ذلك، سيتم تحديث هذه الصفحة مسبقًا.",
   } satisfies Localized<string>,
 };
 
@@ -99,9 +94,9 @@ export const cookiePolicy = {
     ar: "التحليلات والإحصاءات",
   } satisfies Localized<string>,
   analyticsBody: {
-    sv: "Vilka eventuella verktyg för webbanalys eller statistik som används, och hur du kan välja bort dem, anges här så snart det är bekräftat:",
-    en: "Any web analytics or statistics tools used, and how you can opt out of them, will be listed here as soon as they are confirmed:",
-    ar: "سيُذكر هنا أي أدوات لتحليلات الموقع أو الإحصاءات تُستخدم، وكيفية إلغاء الاشتراك فيها، فور تأكيدها:",
+    sv: "Webbplatsen använder för närvarande inga verktyg för webbanalys eller statistik. Om det ändras uppdateras den här sidan i förväg.",
+    en: "This website does not currently use any web analytics or statistics tools. If that changes, this page will be updated in advance.",
+    ar: "لا يستخدم الموقع حاليًا أي أدوات لتحليلات الموقع أو الإحصاءات. وفي حال تغيّر ذلك، سيتم تحديث هذه الصفحة مسبقًا.",
   } satisfies Localized<string>,
   manageHeading: {
     sv: "Hantera cookies i din webbläsare",
@@ -163,9 +158,9 @@ export const termsPage = {
     ar: "تحديد المسؤولية",
   } satisfies Localized<string>,
   liabilityBody: {
-    sv: "Informationen på den här webbplatsen är allmän och ersätter inte individuell rådgivning anpassad till din specifika situation. Exakta villkor, ansvarsbegränsningar och betalningsvillkor för ett specifikt uppdrag anges i det skriftliga uppdragsavtalet:",
-    en: "The information on this website is general and does not replace individual advice tailored to your specific situation. The exact terms, limitations of liability, and payment terms for a specific engagement are set out in the written engagement agreement:",
-    ar: "المعلومات الواردة في هذا الموقع عامة ولا تغني عن استشارة فردية مصممة لوضعك الخاص. تُحدَّد الشروط الدقيقة وحدود المسؤولية وشروط الدفع لتكليف معين في اتفاقية التكليف المكتوبة:",
+    sv: "Informationen på den här webbplatsen är allmän och ersätter inte individuell rådgivning anpassad till din specifika situation. Exakta villkor, ansvarsbegränsningar och betalningsvillkor för ett specifikt uppdrag anges i det skriftliga uppdragsavtalet som upprättas med varje kund.",
+    en: "The information on this website is general and does not replace individual advice tailored to your specific situation. The exact terms, limitations of liability, and payment terms for a specific engagement are set out in the written engagement agreement drawn up with each client.",
+    ar: "المعلومات الواردة في هذا الموقع عامة ولا تغني عن استشارة فردية مصممة لوضعك الخاص. تُحدَّد الشروط الدقيقة وحدود المسؤولية وشروط الدفع لتكليف معين في اتفاقية التكليف المكتوبة التي تُعَدّ مع كل عميل.",
   } satisfies Localized<string>,
   contactHeading: {
     sv: "Kontakt",

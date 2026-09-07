@@ -4,7 +4,6 @@ import type { AppLocale } from "@/i18n/routing";
 import { getLocalized } from "@/lib/i18n-content";
 import type { Location } from "@/content/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Placeholder } from "@/components/common/Placeholder";
 import { Button } from "@/components/ui/button";
 
 export function LocationCard({
@@ -17,7 +16,7 @@ export function LocationCard({
   directionsLabel: string;
 }) {
   return (
-    <Card className="p-6">
+    <Card className="p-7">
       <CardHeader className="flex flex-row items-start gap-3 space-y-0 p-0">
         <MapPin
           className="text-primary mt-0.5 shrink-0"
@@ -39,12 +38,10 @@ export function LocationCard({
           <br />
           {location.country}
         </address>
-        {location.openingHours ? (
+        {location.openingHours && (
           <p className="text-muted-foreground text-body">
             {getLocalized(location.openingHours, locale)}
           </p>
-        ) : (
-          <Placeholder />
         )}
         <Button
           render={

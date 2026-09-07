@@ -7,7 +7,6 @@ import { buildMetadata } from "@/lib/seo/metadata";
 import { getLocalized } from "@/lib/i18n-content";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { Container } from "@/components/layout/Container";
-import { Placeholder } from "@/components/common/Placeholder";
 import { business } from "@/content/business";
 import { privacyPolicy } from "@/content/legal";
 
@@ -59,8 +58,7 @@ export default async function PrivacyPolicyPage({
 
       <h2>{t(privacyPolicy.controllerHeading)}</h2>
       <p>
-        {t(privacyPolicy.controllerIntro)} <Placeholder /> (
-        {t(privacyPolicy.orgNumberLabel)}: <Placeholder />)
+        {t(privacyPolicy.controllerIntro)} {business.legalName}.
       </p>
 
       <h2>{t(privacyPolicy.dataCollectedHeading)}</h2>
@@ -77,9 +75,7 @@ export default async function PrivacyPolicyPage({
       </p>
 
       <h2>{t(privacyPolicy.analyticsHeading)}</h2>
-      <p>
-        {t(privacyPolicy.analyticsBody)} <Placeholder />.
-      </p>
+      <p>{t(privacyPolicy.analyticsBody)}</p>
     </Container>
   );
 }

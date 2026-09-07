@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Link } from "@/i18n/navigation";
 import { routing, type AppLocale } from "@/i18n/routing";
 import {
+  getAbsoluteUrl,
   getServiceAlternateLinks,
   getServiceSlug,
   resolveServiceBySlug,
@@ -24,6 +24,9 @@ import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { ServiceCard } from "@/components/marketing/ServiceCard";
 import { PersonProfileCard } from "@/components/marketing/PersonProfileCard";
+import { AbstractDocumentPanel } from "@/components/marketing/decor/AbstractDocumentPanel";
+import { Reveal } from "@/components/motion/Reveal";
+import { RevealGroup } from "@/components/motion/RevealGroup";
 import {
   getServiceGroup,
   getServiceIcon,
@@ -103,7 +106,8 @@ export default async function ServicePage({
       />
       <JsonLd
         data={buildBreadcrumbJsonLd([
-          { name: "Economy Codes", url: alternates["x-default"] },
+          { name: nav("home"), url: getAbsoluteUrl("/", locale) },
+          { name: nav("services"), url: getAbsoluteUrl("/tjanster", locale) },
           { name: getLocalized(service.name, locale), url: canonicalUrl },
         ])}
       />
@@ -113,7 +117,7 @@ export default async function ServicePage({
 
       {/* Service hero */}
       <div className="pt-10 pb-6 sm:pt-14">
-        <Container size={service.heroImage ? "wide" : "content"}>
+        <Container size="wide">
           <Breadcrumbs
             items={[
               { label: nav("home"), routeKey: "/" },
@@ -122,88 +126,81 @@ export default async function ServicePage({
             ]}
           />
 
-          <div
-            className={
-              service.heroImage
-                ? "mt-6 grid items-center gap-10 md:grid-cols-2"
-                : "mt-6"
-            }
-          >
-            <div>
-              <span className="text-primary inline-flex items-center gap-2 text-sm font-semibold tracking-wide uppercase">
-                {/* eslint-disable-next-line react-hooks/static-components -- stable, module-level icon lookup, not a dynamically-created component */}
-                <Icon size={16} aria-hidden="true" />
-                {serviceGroups[group][locale]}
-              </span>
-              <h1 className="text-page-h1 mt-3 font-semibold text-balance">
-                {getLocalized(service.name, locale)}
-              </h1>
-              <p className="text-muted-foreground text-body mt-4">
-                {getLocalized(service.summary, locale)}
-              </p>
-            </div>
-
-            {service.heroImage && (
-              <div className="border-border bg-card overflow-hidden rounded-2xl border shadow-md">
-                <Image
-                  src={service.heroImage.src}
-                  alt={getLocalized(service.heroImage.alt, locale)}
-                  width={service.heroImage.width}
-                  height={service.heroImage.height}
-                  sizes="(min-width: 768px) 560px, 100vw"
-                  className="h-auto w-full object-cover"
-                />
+          <div className="mt-6 grid items-center gap-10 md:grid-cols-2">
+            <Reveal>
+              <div>
+                <span className="text-primary inline-flex items-center gap-2 text-sm font-semibold tracking-wide uppercase">
+                  {/* eslint-disable-next-line react-hooks/static-components -- stable, module-level icon lookup, not a dynamically-created component */}
+                  <Icon size={16} aria-hidden="true" />
+                  {serviceGroups[group][locale]}
+                </span>
+                <h1 className="text-page-h1 mt-3 font-semibold text-balance">
+                  {getLocalized(service.name, locale)}
+                </h1>
+                <p className="text-muted-foreground text-body mt-4">
+                  {getLocalized(service.summary, locale)}
+                </p>
               </div>
-            )}
+            </Reveal>
+
+            <Reveal delay={120} className="order-first md:order-last">
+              <AbstractDocumentPanel icon={Icon} tone="light" />
+            </Reveal>
           </div>
         </Container>
       </div>
 
       <Container size="content">
-        <section className="mt-4 grid gap-8 sm:grid-cols-2">
-          <div>
-            <h2 className="text-lg font-semibold">{s("whoItsForTitle")}</h2>
-            <ul className="text-muted-foreground text-body mt-3 flex flex-col gap-2">
-              {getLocalized(service.whoItsFor, locale).map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h2 className="text-lg font-semibold">{s("whatsIncludedTitle")}</h2>
-            <ul className="text-muted-foreground text-body mt-3 flex flex-col gap-2">
-              {getLocalized(service.whatsIncluded, locale).map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
-        </section>
+        <Reveal>
+          <section className="mt-4 grid gap-8 sm:grid-cols-2">
+            <div>
+              <h2 className="text-lg font-semibold">{s("whoItsForTitle")}</h2>
+              <ul className="text-muted-foreground text-body mt-3 flex flex-col gap-2">
+                {getLocalized(service.whoItsFor, locale).map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h2 className="text-lg font-semibold">
+                {s("whatsIncludedTitle")}
+              </h2>
+              <ul className="text-muted-foreground text-body mt-3 flex flex-col gap-2">
+                {getLocalized(service.whatsIncluded, locale).map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        </Reveal>
       </Container>
 
       <Section tone="tint" className="mt-12">
         <Container size="content">
-          <section>
-            <h2 className="text-lg font-semibold">{s("processTitle")}</h2>
-            <ol className="mt-3 flex flex-col gap-3">
-              {getLocalized(service.process, locale).map((step, index) => (
-                <li key={step} className="text-body flex gap-3">
-                  <span dir="ltr" className="text-primary font-semibold">
-                    {index + 1}.
-                  </span>
-                  <span className="text-muted-foreground">{step}</span>
-                </li>
-              ))}
-            </ol>
-          </section>
+          <Reveal>
+            <section>
+              <h2 className="text-lg font-semibold">{s("processTitle")}</h2>
+              <ol className="mt-3 flex flex-col gap-3">
+                {getLocalized(service.process, locale).map((step, index) => (
+                  <li key={step} className="text-body flex gap-3">
+                    <span dir="ltr" className="text-primary font-semibold">
+                      {index + 1}.
+                    </span>
+                    <span className="text-muted-foreground">{step}</span>
+                  </li>
+                ))}
+              </ol>
+            </section>
 
-          <section className="mt-10">
-            <h2 className="text-lg font-semibold">{s("prepareTitle")}</h2>
-            <ul className="text-muted-foreground text-body mt-3 flex flex-col gap-2">
-              {getLocalized(service.whatToPrepare, locale).map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </section>
+            <section className="mt-10">
+              <h2 className="text-lg font-semibold">{s("prepareTitle")}</h2>
+              <ul className="text-muted-foreground text-body mt-3 flex flex-col gap-2">
+                {getLocalized(service.whatToPrepare, locale).map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </section>
+          </Reveal>
         </Container>
       </Section>
 
@@ -255,31 +252,38 @@ export default async function ServicePage({
       {serviceFaqs.length > 0 && (
         <Section tone="tint" className="mt-12">
           <Container size="content">
-            <h2 className="text-lg font-semibold">{t("faqTitle")}</h2>
-            <div className="mt-4">
-              <FaqAccordion faqs={serviceFaqs} locale={locale} />
-            </div>
+            <Reveal>
+              <h2 className="text-lg font-semibold">{t("faqTitle")}</h2>
+              <div className="mt-4">
+                <FaqAccordion faqs={serviceFaqs} locale={locale} />
+              </div>
+            </Reveal>
           </Container>
         </Section>
       )}
 
       <Container size="content">
-        <section className="mt-12">
-          <h2 className="text-lg font-semibold">{nav("about")}</h2>
-          <div className="border-border bg-card mt-4 rounded-2xl border p-6">
-            <PersonProfileCard
-              person={hadi}
-              locale={locale}
-              learnMoreLabel={t("learnMore")}
-              compact
-            />
-          </div>
-        </section>
+        <Reveal>
+          <section className="mt-12">
+            <h2 className="text-lg font-semibold">{nav("about")}</h2>
+            <div className="border-border bg-card mt-4 rounded-2xl border p-6">
+              <PersonProfileCard
+                person={hadi}
+                locale={locale}
+                learnMoreLabel={t("learnMore")}
+                compact
+              />
+            </div>
+          </section>
+        </Reveal>
 
         {relatedServices.length > 0 && (
           <section className="mt-12">
             <h2 className="text-lg font-semibold">{nav("services")}</h2>
-            <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <RevealGroup
+              step={80}
+              className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+            >
               {relatedServices.map((related) => (
                 <ServiceCard
                   key={related.key}
@@ -288,14 +292,16 @@ export default async function ServicePage({
                   readMoreLabel={t("readMore")}
                 />
               ))}
-            </div>
+            </RevealGroup>
           </section>
         )}
 
-        <div className="border-border mt-12 mb-16 flex flex-col items-start gap-4 rounded-2xl border p-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="font-medium">{s("ctaQuestion")}</p>
-          <Button render={<Link href="/kontakt" />}>{t("contactUs")}</Button>
-        </div>
+        <Reveal>
+          <div className="border-border mt-12 mb-16 flex flex-col items-start gap-4 rounded-2xl border p-6 sm:flex-row sm:items-center sm:justify-between">
+            <p className="font-medium">{s("ctaQuestion")}</p>
+            <Button render={<Link href="/kontakt" />}>{t("contactUs")}</Button>
+          </div>
+        </Reveal>
 
         <p className="text-muted-foreground -mt-8 mb-16 text-xs">
           {t("lastReviewed")}: {service.lastReviewed}

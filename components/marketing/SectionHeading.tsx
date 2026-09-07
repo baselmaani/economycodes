@@ -9,6 +9,7 @@ export function SectionHeading({
   align = "center",
   tone = "default",
   className,
+  titleClassName,
 }: {
   eyebrow?: ReactNode;
   title: ReactNode;
@@ -16,6 +17,7 @@ export function SectionHeading({
   align?: "center" | "start";
   tone?: "default" | "inverted";
   className?: string;
+  titleClassName?: string;
 }) {
   const isCenter = align === "center";
 
@@ -37,7 +39,14 @@ export function SectionHeading({
           {eyebrow}
         </span>
       )}
-      <h2 className="text-section-h2 font-semibold text-balance">{title}</h2>
+      <h2
+        className={cn(
+          "text-section-h2 font-semibold text-balance",
+          titleClassName,
+        )}
+      >
+        {title}
+      </h2>
       {lead && (
         <p
           className={cn(

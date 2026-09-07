@@ -7,6 +7,9 @@ import { buildMetadata } from "@/lib/seo/metadata";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { Container } from "@/components/layout/Container";
 import { ServiceCard } from "@/components/marketing/ServiceCard";
+import { Reveal } from "@/components/motion/Reveal";
+import { RevealGroup } from "@/components/motion/RevealGroup";
+import { cn } from "@/lib/utils";
 import { servicesList } from "@/content/services";
 import {
   getServiceGroup,
@@ -57,32 +60,44 @@ export default async function ServicesPage({
           { label: nav("services") },
         ]}
       />
-      <h1 className="text-page-h1 mt-4 font-semibold text-balance">
-        {nav("services")}
-      </h1>
-      <p className="text-muted-foreground text-body mt-3 max-w-2xl">
-        {home("servicesSubtitle")}
-      </p>
+      <Reveal>
+        <h1 className="text-page-h1 mt-4 font-semibold text-balance">
+          {nav("services")}
+        </h1>
+        <p className="text-muted-foreground text-body mt-3 max-w-2xl">
+          {home("servicesSubtitle")}
+        </p>
+      </Reveal>
 
       <div className="mt-12 flex flex-col gap-14">
-        {grouped.map(({ group, label, services }) => (
-          <div key={group}>
-            <h2 className="text-muted-foreground mb-5 text-sm font-semibold tracking-wide uppercase">
-              {label}
-            </h2>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {services.map((service) => (
-                <ServiceCard
-                  key={service.key}
-                  service={service}
-                  locale={locale}
-                  readMoreLabel={t("readMore")}
-                  featured={group === "core"}
-                />
-              ))}
+        {grouped.map(({ group, label, services }) => {
+          const isCore = group === "core";
+          return (
+            <div key={group}>
+              <h2 className="text-muted-foreground mb-5 text-sm font-semibold tracking-wide uppercase">
+                {label}
+              </h2>
+              <RevealGroup
+                step={60}
+                className={cn(
+                  "grid gap-6",
+                  isCore ? "sm:grid-cols-2" : "sm:grid-cols-2 lg:grid-cols-3",
+                )}
+              >
+                {services.map((service) => (
+                  <ServiceCard
+                    key={service.key}
+                    service={service}
+                    locale={locale}
+                    readMoreLabel={t("readMore")}
+                    featured={isCore}
+                    size={isCore ? "lg" : "default"}
+                  />
+                ))}
+              </RevealGroup>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </Container>
   );

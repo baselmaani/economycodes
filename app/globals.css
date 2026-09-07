@@ -25,7 +25,10 @@
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
   --color-brand-navy: var(--brand-navy);
+  --color-brand-blue: var(--brand-blue);
   --color-brand-accent: var(--brand-accent);
+  --color-brand-bright: var(--brand-bright);
+  --color-brand-tint: var(--brand-tint);
   --color-whatsapp: var(--whatsapp);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
@@ -34,13 +37,13 @@
   --radius-2xl: calc(var(--radius) * 1.8);
 
   /* Fluid type scale -- generates text-hero / text-page-h1 / text-section-h2 / text-body utilities. */
-  --text-hero: clamp(2.5rem, 5vw, 4.8rem);
+  --text-hero: clamp(2.6rem, 5vw, 5rem);
   --text-hero--line-height: 1.05;
   --text-hero--letter-spacing: -0.02em;
-  --text-page-h1: clamp(2.25rem, 4vw, 4rem);
+  --text-page-h1: clamp(2.3rem, 4vw, 4.25rem);
   --text-page-h1--line-height: 1.1;
   --text-page-h1--letter-spacing: -0.015em;
-  --text-section-h2: clamp(1.8rem, 3vw, 3rem);
+  --text-section-h2: clamp(1.8rem, 3vw, 3.2rem);
   --text-section-h2--line-height: 1.15;
   --text-section-h2--letter-spacing: -0.01em;
   --text-body: 1.0625rem;
@@ -60,42 +63,48 @@
 
 /*
  * Brand palette (Economy Codes, derived from the logo):
- *   primary  #264491 -- main action/trust color
- *   navy     #282B66 -- deep surfaces, header/footer
- *   accent   #4B93B6 -- decorative accents only, never as text-on-background
- *   dark text #1B2436 -- headings
- *   secondary text #5E6675 -- body copy (~5.5:1 on background/white, passes WCAG AA)
- *   background #F6F8FC -- page background
- *   border #E3E8F1 -- hairlines
+ *   primary       #264491 -- main action/trust color
+ *   navy          #20275E -- deep surfaces, header/footer, hero/CTA bands
+ *   brand-blue    #3563B8 -- mid gradient stop between navy and accent
+ *   accent        #4B93B6 -- decorative accents only, never as text-on-background
+ *   bright accent #69B8D4 -- glows/highlights on dark surfaces only
+ *   dark text     #151B2B -- headings
+ *   secondary text #5F6878 -- body copy (~5.5:1 on background/white, passes WCAG AA)
+ *   background    #F4F7FB -- page background
+ *   blue tint     #EDF3FA -- tinted section background
+ *   border        #DCE4EF -- hairlines
  * Single light theme -- this is a business marketing site, not a themed app.
  */
 :root {
-  --background: #f6f8fc;
-  --foreground: #1b2436;
+  --background: #f4f7fb;
+  --foreground: #151b2b;
   --card: #ffffff;
-  --card-foreground: #1b2436;
+  --card-foreground: #151b2b;
   --popover: #ffffff;
-  --popover-foreground: #1b2436;
+  --popover-foreground: #151b2b;
   --primary: #264491;
   --primary-foreground: #ffffff;
-  --secondary: #eef2fa;
+  --secondary: #edf3fa;
   --secondary-foreground: #264491;
   --muted: #f1f2f5;
-  --muted-foreground: #5e6675;
+  --muted-foreground: #5f6878;
   --accent: #e7f1f6;
   --accent-foreground: #17394a;
   --destructive: #b3261e;
-  --border: #e3e8f1;
-  --input: #e3e8f1;
+  --border: #dce4ef;
+  --input: #dce4ef;
   --ring: #4b93b6;
   --radius: 0.75rem;
 
   --brand-primary: #264491;
-  --brand-navy: #282b66;
+  --brand-navy: #20275e;
+  --brand-blue: #3563b8;
   --brand-accent: #4b93b6;
-  --brand-dark: #1b2436;
-  --brand-secondary-text: #5e6675;
-  --brand-offwhite: #f6f8fc;
+  --brand-bright: #69b8d4;
+  --brand-dark: #151b2b;
+  --brand-secondary-text: #5f6878;
+  --brand-offwhite: #f4f7fb;
+  --brand-tint: #edf3fa;
   --whatsapp: #25d366;
 }
 
@@ -117,6 +126,26 @@
   .text-body {
     font-size: var(--text-body);
     line-height: var(--text-body--line-height);
+  }
+
+  /* Deep navy -> blue diagonal wash for hero/final-CTA/language-band
+     full-bleed sections -- the one shared "important section" background. */
+  .bg-brand-gradient {
+    background-image: linear-gradient(
+      135deg,
+      var(--brand-navy) 0%,
+      var(--brand-primary) 55%,
+      var(--brand-blue) 100%
+    );
+  }
+
+  /* Restrained radial highlight for glows on dark surfaces. */
+  .bg-radial-glow {
+    background-image: radial-gradient(
+      closest-side,
+      var(--brand-bright) 0%,
+      transparent 70%
+    );
   }
 }
 

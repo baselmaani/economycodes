@@ -27,6 +27,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { LanguageSwitcher } from "@/components/nav/LanguageSwitcher";
 import { MobileMenu } from "@/components/nav/MobileMenu";
+import { NavLink } from "@/components/nav/NavLink";
 
 const GROUP_ORDER: ServiceGroup[] = ["core", "advisory", "specialist"];
 
@@ -49,7 +50,8 @@ export async function Header({ locale }: { locale: AppLocale }) {
               alt={business.brandName}
               width={180}
               height={75}
-              priority
+              loading="eager"
+              fetchPriority="high"
               className="h-9 w-auto lg:h-10"
             />
           </Link>
@@ -107,9 +109,9 @@ export async function Header({ locale }: { locale: AppLocale }) {
                   <NavigationMenuItem key={link.routeKey}>
                     <NavigationMenuLink
                       render={
-                        <Link
+                        <NavLink
                           href={link.routeKey as StaticAppPathname}
-                          className="px-3 py-2 text-sm font-medium"
+                          className="px-4 py-2.5 text-sm font-medium"
                         />
                       }
                     >
@@ -124,7 +126,7 @@ export async function Header({ locale }: { locale: AppLocale }) {
             <LanguageSwitcher />
             <Button
               render={<Link href="/kontakt" />}
-              size="sm"
+              size="default"
               className="hidden sm:inline-flex"
             >
               {t("contactUs")}

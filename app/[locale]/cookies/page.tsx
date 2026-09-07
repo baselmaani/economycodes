@@ -7,7 +7,6 @@ import { buildMetadata } from "@/lib/seo/metadata";
 import { getLocalized } from "@/lib/i18n-content";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { Container } from "@/components/layout/Container";
-import { Placeholder } from "@/components/common/Placeholder";
 import { cookiePolicy } from "@/content/legal";
 
 export async function generateMetadata({
@@ -59,9 +58,7 @@ export default async function CookiePolicyPage({
       <p>{t(cookiePolicy.necessaryBody)}</p>
 
       <h2>{t(cookiePolicy.analyticsHeading)}</h2>
-      <p>
-        {t(cookiePolicy.analyticsBody)} <Placeholder />.
-      </p>
+      <p>{t(cookiePolicy.analyticsBody)}</p>
 
       <h2>{t(cookiePolicy.manageHeading)}</h2>
       <p>{t(cookiePolicy.manageBody)}</p>

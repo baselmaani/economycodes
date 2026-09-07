@@ -8,7 +8,6 @@ import { getLocalized } from "@/lib/i18n-content";
 import { Link } from "@/i18n/navigation";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { Container } from "@/components/layout/Container";
-import { Placeholder } from "@/components/common/Placeholder";
 import { business } from "@/content/business";
 import { termsPage } from "@/content/legal";
 
@@ -70,9 +69,7 @@ export default async function TermsPage({
       </p>
 
       <h2>{t(termsPage.liabilityHeading)}</h2>
-      <p>
-        {t(termsPage.liabilityBody)} <Placeholder />.
-      </p>
+      <p>{t(termsPage.liabilityBody)}</p>
 
       <h2>{t(termsPage.contactHeading)}</h2>
       <p>

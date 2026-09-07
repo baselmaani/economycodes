@@ -3,14 +3,23 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import type { AppLocale } from "@/i18n/routing";
-import { getArticleAlternateLinks } from "@/lib/routes";
+import { Link } from "@/i18n/navigation";
+import { getAbsoluteUrl, getArticleAlternateLinks } from "@/lib/routes";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { buildArticleJsonLd } from "@/lib/structured-data/article";
+import { buildBreadcrumbJsonLd } from "@/lib/structured-data/breadcrumb";
+import { buildFaqJsonLd } from "@/lib/structured-data/faq";
 import { getLocalized } from "@/lib/i18n-content";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { Container } from "@/components/layout/Container";
+import { ArticleBody } from "@/components/content/ArticleBody";
+import { PersonProfileCard } from "@/components/marketing/PersonProfileCard";
+import { FaqAccordion } from "@/components/faq/FaqAccordion";
+import { Reveal } from "@/components/motion/Reveal";
 import { articles } from "@/content/articles/meta";
+import { articleBodies } from "@/content/articles/body";
+import { faqs } from "@/content/faqs";
 import { hadi } from "@/content/people";
 
 interface ArticlePageParams {
@@ -19,8 +28,6 @@ interface ArticlePageParams {
 }
 
 export function generateStaticParams() {
-  // No articles exist yet (content/articles/meta.ts is empty) -- this
-  // becomes non-empty automatically once entries are added there.
   return articles.flatMap((article) =>
     (["sv", "en", "ar"] as const).map((locale) => ({
       locale,
@@ -71,11 +78,8 @@ export default async function ArticlePage({
   const t = await getTranslations({ locale, namespace: "common" });
   const nav = await getTranslations({ locale, namespace: "nav" });
   const alternates = getArticleAlternateLinks(article);
-
-  // Body content will live at content/articles/body/<locale>/<slug>.ts,
-  // loaded here once real articles are authored (content/articles/meta.ts
-  // is currently empty, so this branch is never reached yet).
-  const body: { type: string; text?: string }[] = [];
+  const body = articleBodies[article.id];
+  const articleFaqs = faqs.filter((faq) => article.faqIds?.includes(faq.id));
 
   return (
     <Container
@@ -86,6 +90,19 @@ export default async function ArticlePage({
       <JsonLd
         data={buildArticleJsonLd(article, hadi, locale, alternates[locale])}
       />
+      <JsonLd
+        data={buildBreadcrumbJsonLd([
+          { name: nav("home"), url: getAbsoluteUrl("/", locale) },
+          { name: nav("insights"), url: getAbsoluteUrl("/artiklar", locale) },
+          {
+            name: getLocalized(article.title, locale),
+            url: alternates[locale],
+          },
+        ])}
+      />
+      {articleFaqs.length > 0 && (
+        <JsonLd data={buildFaqJsonLd(articleFaqs, locale)} />
+      )}
       <Breadcrumbs
         items={[
           { label: nav("home"), routeKey: "/" },
@@ -93,13 +110,35 @@ export default async function ArticlePage({
           { label: getLocalized(article.title, locale) },
         ]}
       />
-      <h1>{getLocalized(article.title, locale)}</h1>
-      <p className="text-muted-foreground text-sm">
-        {t("lastReviewed")}: {article.publishedAt}
-      </p>
-      {body.map((block, index) =>
-        block.type === "paragraph" ? <p key={index}>{block.text}</p> : null,
+      <Reveal>
+        <h1>{getLocalized(article.title, locale)}</h1>
+        <p className="text-muted-foreground not-prose text-sm">
+          <Link href="/om-hadi" className="text-primary hover:underline">
+            {hadi.name}
+          </Link>
+          {" — "}
+          {getLocalized(hadi.title, locale)}
+          {" · "}
+          {t("lastReviewed")}: {article.publishedAt}
+        </p>
+        {body && <ArticleBody blocks={getLocalized(body, locale)} />}
+      </Reveal>
+      {articleFaqs.length > 0 && (
+        <Reveal className="not-prose mt-12">
+          <h2 className="text-lg font-semibold">{t("faqTitle")}</h2>
+          <div className="mt-4">
+            <FaqAccordion faqs={articleFaqs} locale={locale} />
+          </div>
+        </Reveal>
       )}
+      <div className="not-prose border-border mt-12 border-t pt-8">
+        <PersonProfileCard
+          person={hadi}
+          locale={locale}
+          learnMoreLabel={t("learnMore")}
+          compact
+        />
+      </div>
     </Container>
   );
 }

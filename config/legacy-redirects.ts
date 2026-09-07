@@ -56,4 +56,24 @@ export const legacyRedirects: LegacyRedirect[] = [
     destination: "/tjanster/etablera-foretag-i-sverige",
     permanent: true,
   },
+  {
+    source: "/en/services/starting-an-association",
+    destination: "/en/services/start-an-association-in-sweden",
+    permanent: true,
+  },
+  {
+    source: "/ar/الخدمات/تأسيس-جمعية",
+    destination: "/ar/الخدمات/تأسيس-جمعية-في-السويد",
+    permanent: true,
+  },
+  {
+    source: "/en/services/business-advisory",
+    destination: "/en/services/financial-advisory",
+    permanent: true,
+  },
+  {
+    source: "/tjanster/arabisk-redovisningskonsult",
+    destination: "/tjanster/arabisk-redovisningskonsult-i-sverige",
+    permanent: true,
+  },
 ];

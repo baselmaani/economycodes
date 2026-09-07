@@ -8,4 +8,6 @@ export interface ArticleMeta {
   publishedAt: string;
   authorId: "hadi-almaani";
   coverImage: MediaRef;
+  /** FAQ ids (from content/faqs.ts) to surface as a "Related questions" section. */
+  faqIds?: string[];
 }

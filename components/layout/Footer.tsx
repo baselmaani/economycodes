@@ -9,7 +9,6 @@ import { getLocalized } from "@/lib/i18n-content";
 import { business } from "@/content/business";
 import { locations } from "@/content/locations";
 import { footerLegalNav, footerNav } from "@/content/nav";
-import { Placeholder } from "@/components/common/Placeholder";
 import { Container } from "@/components/layout/Container";
 
 export async function Footer({ locale }: { locale: AppLocale }) {
@@ -20,10 +19,10 @@ export async function Footer({ locale }: { locale: AppLocale }) {
     <footer className="bg-brand-navy relative text-white">
       <div
         aria-hidden="true"
-        className="via-brand-accent absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent to-transparent"
+        className="via-brand-bright absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent to-transparent"
       />
       <Container size="wide">
-        <div className="grid gap-10 py-14 sm:py-16 md:grid-cols-4">
+        <div className="grid gap-10 py-14 sm:py-16 md:grid-cols-4 lg:gap-16">
           <div className="flex flex-col gap-4 md:col-span-1">
             <Image
               src="/media/optimized/logo-stacked.webp"
@@ -87,18 +86,18 @@ export async function Footer({ locale }: { locale: AppLocale }) {
                   </a>
                 </li>
               ))}
-              <li className="flex flex-wrap items-center gap-2 pt-1">
-                <span>Org.nr:</span>
-                {business.orgNumber ?? (
-                  <Placeholder className="border-white/30 bg-white/5 text-white/70" />
-                )}
-              </li>
-              <li className="flex flex-wrap items-center gap-2">
-                <span>VAT:</span>
-                {business.vatNumber ?? (
-                  <Placeholder className="border-white/30 bg-white/5 text-white/70" />
-                )}
-              </li>
+              {business.orgNumber && (
+                <li className="flex flex-wrap items-center gap-2 pt-1">
+                  <span>Org.nr:</span>
+                  {business.orgNumber}
+                </li>
+              )}
+              {business.vatNumber && (
+                <li className="flex flex-wrap items-center gap-2">
+                  <span>VAT:</span>
+                  {business.vatNumber}
+                </li>
+              )}
             </ul>
           </div>
 

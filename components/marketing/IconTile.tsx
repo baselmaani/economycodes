@@ -6,6 +6,13 @@ const tones = {
   primary: "bg-primary/10 text-primary",
   accent: "bg-accent text-accent-foreground",
   white: "bg-white/15 text-white",
+  navy: "bg-white text-brand-navy shadow-sm",
+} as const;
+
+const sizes = {
+  sm: { tile: "size-9", icon: 18 },
+  default: { tile: "size-11", icon: 22 },
+  lg: { tile: "size-14", icon: 26 },
 } as const;
 
 export function IconTile({
@@ -16,23 +23,19 @@ export function IconTile({
 }: {
   icon: LucideIcon;
   tone?: keyof typeof tones;
-  size?: "default" | "sm";
+  size?: keyof typeof sizes;
   className?: string;
 }) {
   return (
     <span
       className={cn(
         "inline-flex shrink-0 items-center justify-center rounded-xl",
-        size === "sm" ? "size-9" : "size-11",
+        sizes[size].tile,
         tones[tone],
         className,
       )}
     >
-      <Icon
-        size={size === "sm" ? 18 : 22}
-        aria-hidden="true"
-        strokeWidth={1.75}
-      />
+      <Icon size={sizes[size].icon} aria-hidden="true" strokeWidth={1.75} />
     </span>
   );
 }

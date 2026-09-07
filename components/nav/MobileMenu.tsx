@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Menu, Phone } from "lucide-react";
+import { Menu, MessageCircle, Phone } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
@@ -17,6 +17,8 @@ import {
 import { business } from "@/content/business";
 import { primaryNav } from "@/content/nav";
 import { Button } from "@/components/ui/button";
+import { NavLink } from "@/components/nav/NavLink";
+import { LanguageSwitcher } from "@/components/nav/LanguageSwitcher";
 import {
   Sheet,
   SheetContent,
@@ -103,24 +105,35 @@ export function MobileMenu({ locale }: { locale: AppLocale }) {
           {primaryNav
             .filter((link) => link.routeKey !== "/tjanster")
             .map((link) => (
-              <Link
+              <NavLink
                 key={link.routeKey}
                 href={link.routeKey as StaticAppPathname}
                 onClick={() => setOpen(false)}
                 className="hover:text-primary border-border/60 border-b py-3 text-base font-medium"
               >
                 {getLocalized(link.label, locale)}
-              </Link>
+              </NavLink>
             ))}
         </nav>
-        <div className="border-border mt-auto border-t p-4">
-          <Button
-            render={<a href={business.phoneHref} />}
-            className="w-full gap-2"
-          >
-            <Phone size={16} aria-hidden="true" />
-            {common("callUs")}
-          </Button>
+        <div className="border-border mt-auto flex flex-col gap-3 border-t p-4">
+          <div className="flex gap-2">
+            <Button
+              render={<a href={business.phoneHref} />}
+              className="flex-1 gap-2"
+            >
+              <Phone size={16} aria-hidden="true" />
+              {common("callUs")}
+            </Button>
+            <Button
+              render={<a href={business.whatsappHref} />}
+              variant="whatsapp"
+              className="flex-1 gap-2"
+            >
+              <MessageCircle size={16} aria-hidden="true" />
+              WhatsApp
+            </Button>
+          </div>
+          <LanguageSwitcher />
         </div>
       </SheetContent>
     </Sheet>
