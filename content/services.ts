@@ -534,12 +534,30 @@ export const services: Record<string, Service> = {
           type: "paragraph",
           text: "En ideell förening bildas normalt genom att ett antal personer går samman, antar stadgar och väljer en styrelse vid ett konstituerande möte. Det finns ingen enskild myndighet som registrerar ideella föreningar generellt, men beroende på verksamhet kan registrering hos till exempel Skatteverket bli aktuell.",
         },
+        {
+          type: "heading",
+          level: 2,
+          text: "Löpande administration efter bildandet",
+        },
+        {
+          type: "paragraph",
+          text: "En förening behöver även fungera praktiskt efter att den bildats — bland annat årsmöten, protokoll, medlemsregister och den löpande kontakten med till exempel bank eller Skatteverket. Vi hjälper styrelsen att hålla ordning på rutinerna, så att administrationen inte blir ett hinder för föreningens egentliga verksamhet.",
+        },
       ],
       en: [
         { type: "heading", level: 2, text: "Forming a non-profit association" },
         {
           type: "paragraph",
           text: "A non-profit association is normally formed when a number of people come together, adopt bylaws, and elect a board at a founding meeting. There's no single authority that registers non-profit associations in general, but depending on the activity, registration with, for example, Skatteverket may become relevant.",
+        },
+        {
+          type: "heading",
+          level: 2,
+          text: "Ongoing administration after formation",
+        },
+        {
+          type: "paragraph",
+          text: "An association also needs to function practically once it's formed — for example annual meetings, minutes, membership records, and ongoing contact with, say, a bank or Skatteverket. We help the board keep its routines in order, so administration doesn't get in the way of the association's actual activities.",
         },
       ],
       ar: [
@@ -548,9 +566,18 @@ export const services: Record<string, Service> = {
           type: "paragraph",
           text: "تُؤسَّس الجمعية غير الربحية عادةً عندما يجتمع عدد من الأشخاص ويعتمدون نظامًا أساسيًا وينتخبون مجلس إدارة في اجتماع تأسيسي. لا توجد جهة واحدة مسؤولة عن تسجيل الجمعيات غير الربحية بشكل عام، لكن بحسب طبيعة النشاط قد يصبح التسجيل لدى جهة مثل هيئة الضرائب أمرًا ذا صلة.",
         },
+        {
+          type: "heading",
+          level: 2,
+          text: "الإدارة المستمرة بعد التأسيس",
+        },
+        {
+          type: "paragraph",
+          text: "تحتاج الجمعية أيضًا إلى العمل بشكل عملي بعد تأسيسها — بما في ذلك الاجتماعات السنوية والمحاضر وسجل الأعضاء والتواصل المستمر مع جهات مثل البنك أو هيئة الضرائب. نساعد مجلس الإدارة على تنظيم إجراءاته، حتى لا تصبح الأعمال الإدارية عائقًا أمام نشاط الجمعية الفعلي.",
+        },
       ],
     },
-    faqIds: ["faq-association-difference"],
+    faqIds: ["faq-association-difference", "faq-association-administration"],
     heroImage: {
       src: "/media/optimized/etablering-av-foreningar.webp",
       width: 780,
@@ -561,7 +588,7 @@ export const services: Record<string, Service> = {
         ar: "تأسيس الجمعيات وإدارتها",
       },
     },
-    lastReviewed: LAST_REVIEWED,
+    lastReviewed: "2026-09-16",
   },
 
   "feasibility-budget": {
@@ -667,6 +694,15 @@ export const services: Record<string, Service> = {
           type: "paragraph",
           text: "En budget och en genomförbarhetsstudie hjälper dig att se om siffrorna går ihop innan du binder upp tid, pengar och andra resurser. Det gör det också enklare att förklara din idé för till exempel en bank eller annan finansiär.",
         },
+        {
+          type: "heading",
+          level: 2,
+          text: "Vad en genomförbarhetsstudie brukar innehålla",
+        },
+        {
+          type: "paragraph",
+          text: "En genomförbarhetsstudie väger vanligtvis samman marknad, kostnader, intäkter och risker för att ge en samlad bild av om idén är rimlig att gå vidare med. Vi anpassar omfattningen efter hur långt du kommit i din idé, snarare än att leverera en standardmall som inte speglar din verklighet.",
+        },
       ],
       en: [
         {
@@ -677,6 +713,15 @@ export const services: Record<string, Service> = {
         {
           type: "paragraph",
           text: "A budget and a feasibility study help you see whether the numbers add up before you commit time, money, and other resources. It also makes it easier to explain your idea to, for example, a bank or other financier.",
+        },
+        {
+          type: "heading",
+          level: 2,
+          text: "What a feasibility study usually covers",
+        },
+        {
+          type: "paragraph",
+          text: "A feasibility study typically weighs up market, costs, revenue, and risk to give an overall picture of whether it makes sense to move forward with the idea. We adjust the scope to how far along your idea already is, rather than delivering a standard template that doesn't reflect your reality.",
         },
       ],
       ar: [
@@ -689,9 +734,18 @@ export const services: Record<string, Service> = {
           type: "paragraph",
           text: "تساعدك الميزانية ودراسة الجدوى على معرفة ما إذا كانت الأرقام متوازنة قبل الالتزام بالوقت والمال والموارد الأخرى. كما تسهّل شرح فكرتك لجهة مثل بنك أو ممول آخر.",
         },
+        {
+          type: "heading",
+          level: 2,
+          text: "ما الذي تتضمنه دراسة الجدوى عادةً",
+        },
+        {
+          type: "paragraph",
+          text: "تُقيّم دراسة الجدوى عادةً السوق والتكاليف والإيرادات والمخاطر معًا لإعطاء صورة شاملة عمّا إذا كان من المنطقي المضي في الفكرة. نُكيّف نطاق الدراسة بحسب المرحلة التي وصلت إليها فكرتك، بدلًا من تقديم نموذج قياسي لا يعكس واقعك.",
+        },
       ],
     },
-    faqIds: ["faq-budget-purpose"],
+    faqIds: ["faq-budget-purpose", "faq-budget-bank"],
     heroImage: {
       src: "/media/optimized/genomforbarhet-och-budget-studier.webp",
       width: 540,
@@ -702,7 +756,7 @@ export const services: Record<string, Service> = {
         ar: "خطة العمل والميزانية ودراسة الجدوى",
       },
     },
-    lastReviewed: LAST_REVIEWED,
+    lastReviewed: "2026-09-16",
   },
 
   contracts: {
@@ -808,6 +862,15 @@ export const services: Record<string, Service> = {
           type: "paragraph",
           text: "Vi hjälper dig att strukturera och förbereda avtal och kontrakt på ett praktiskt plan. I ärenden som kräver kvalificerad juridisk bedömning eller representation hänvisar vi dig vidare till en jurist eller advokat.",
         },
+        {
+          type: "heading",
+          level: 2,
+          text: "Vilka typer av avtal vi vanligtvis hjälper till med",
+        },
+        {
+          type: "paragraph",
+          text: "Det kan till exempel handla om samarbetsavtal, leverantörsavtal, hyresavtal för lokal eller andra löpande avtal kopplade till din verksamhet. Vi går igenom avtalet tillsammans med dig, punkt för punkt, så att du förstår vad du skriver under på innan du gör det.",
+        },
         { type: "disclaimer", text: CONTRACT_DISCLAIMER.sv },
       ],
       en: [
@@ -820,6 +883,15 @@ export const services: Record<string, Service> = {
           type: "paragraph",
           text: "We help you structure and prepare agreements and contracts on a practical level. For matters requiring qualified legal assessment or representation, we'll refer you on to a lawyer or solicitor.",
         },
+        {
+          type: "heading",
+          level: 2,
+          text: "The kinds of agreements we typically help with",
+        },
+        {
+          type: "paragraph",
+          text: "This can include, for example, partnership agreements, supplier agreements, premises leases, or other ongoing agreements related to your business. We go through the agreement together with you, point by point, so you understand what you're signing before you do.",
+        },
         { type: "disclaimer", text: CONTRACT_DISCLAIMER.en },
       ],
       ar: [
@@ -828,10 +900,19 @@ export const services: Record<string, Service> = {
           type: "paragraph",
           text: "نساعدك على تنظيم العقود والاتفاقيات وإعدادها على المستوى العملي. أما في المسائل التي تتطلب تقييمًا أو تمثيلًا قانونيًا متخصصًا، فسنحيلك إلى محامٍ مختص.",
         },
+        {
+          type: "heading",
+          level: 2,
+          text: "أنواع الاتفاقيات التي نساعد فيها عادةً",
+        },
+        {
+          type: "paragraph",
+          text: "قد يشمل ذلك على سبيل المثال اتفاقيات الشراكة واتفاقيات الموردين وعقود إيجار المقار أو غيرها من الاتفاقيات المستمرة المرتبطة بنشاطك. نراجع الاتفاقية معك بندًا بندًا، حتى تفهم ما توقّع عليه قبل أن تفعل ذلك.",
+        },
         { type: "disclaimer", text: CONTRACT_DISCLAIMER.ar },
       ],
     },
-    faqIds: ["faq-contracts-legal-advice"],
+    faqIds: ["faq-contracts-legal-advice", "faq-contracts-types"],
     heroImage: {
       src: "/media/optimized/kontrakt-och-avtal.webp",
       width: 1024,
@@ -842,7 +923,7 @@ export const services: Record<string, Service> = {
         ar: "دعم في العقود والاتفاقيات للشركات",
       },
     },
-    lastReviewed: LAST_REVIEWED,
+    lastReviewed: "2026-09-16",
   },
 
   "investment-establishment": {

@@ -12,6 +12,8 @@ import { Reveal } from "@/components/motion/Reveal";
 import { RevealScale } from "@/components/motion/RevealScale";
 import { business } from "@/content/business";
 import { authorizationContent } from "@/content/home";
+import { hadi } from "@/content/people";
+import { getLocalized } from "@/lib/i18n-content";
 import type { AppLocale } from "@/i18n/routing";
 
 export function Hero({
@@ -129,38 +131,29 @@ export function Hero({
           </div>
 
           <RevealScale delay={280} className="relative">
-            <div className="relative mx-auto aspect-[4/5] max-w-[15rem] sm:max-w-sm">
+            <div className="relative mx-auto aspect-[400/439] max-w-xs sm:max-w-sm">
               <div
                 aria-hidden="true"
                 className="absolute inset-4 -rotate-2 rounded-3xl border border-white/15 bg-white/[0.04] backdrop-blur-sm"
               />
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 rotate-1 rounded-3xl border border-white/20 bg-white/[0.06] shadow-2xl"
-              />
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 flex rotate-1 flex-col gap-3 rounded-3xl p-8"
-              >
-                <div className="h-2 w-2/3 rounded-full bg-white/25" />
-                <div className="h-2 w-full rounded-full bg-white/15" />
-                <div className="h-2 w-5/6 rounded-full bg-white/15" />
-                <div className="mt-4 h-24 w-full rounded-xl border border-white/15 bg-white/[0.03]" />
-                <div className="h-2 w-1/2 rounded-full bg-white/15" />
-                <div className="h-2 w-3/4 rounded-full bg-white/15" />
+              <div className="absolute inset-0 overflow-hidden rounded-3xl border border-white/20 shadow-2xl">
+                <Image
+                  src={hadi.heroPhoto.src}
+                  alt={getLocalized(hadi.heroPhoto.alt, locale)}
+                  fill
+                  sizes="(min-width: 640px) 384px, 320px"
+                  priority
+                  className="object-cover"
+                />
+                <div
+                  aria-hidden="true"
+                  className="from-brand-navy/40 absolute inset-0 bg-gradient-to-t via-transparent to-transparent"
+                />
               </div>
-              <Image
-                src="/media/optimized/logo-stacked.webp"
-                alt=""
-                aria-hidden="true"
-                width={200}
-                height={200}
-                className="pointer-events-none absolute inset-0 m-auto size-28 object-contain opacity-10"
-              />
 
               <div
                 dir="ltr"
-                className="absolute start-6 -top-4 flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-3 py-2 shadow-md backdrop-blur-sm"
+                className="absolute start-6 -top-4 flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-3 py-2 shadow-md backdrop-blur-sm animate-[eco-float_5s_ease-in-out_infinite] [animation-delay:-2s]"
               >
                 <ShieldCheck
                   size={16}
@@ -171,18 +164,18 @@ export function Hero({
                   {authorizationContent.firm.credential}
                 </span>
               </div>
-              <div className="absolute -end-4 top-1/4 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md backdrop-blur-sm">
+              <div className="absolute -end-4 top-1/4 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md backdrop-blur-sm animate-[eco-float_4s_ease-in-out_infinite] [animation-delay:-1.3s]">
                 {labelOne}
               </div>
-              <div className="absolute -start-6 bottom-1/3 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md backdrop-blur-sm">
+              <div className="absolute -start-6 bottom-1/3 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md backdrop-blur-sm animate-[eco-float_4.5s_ease-in-out_infinite] [animation-delay:-2.6s]">
                 {labelTwo}
               </div>
-              <div className="absolute end-2 -bottom-4 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md backdrop-blur-sm">
+              <div className="absolute end-2 -bottom-4 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md backdrop-blur-sm animate-[eco-float_3.5s_ease-in-out_infinite] [animation-delay:-0.7s]">
                 {labelThree}
               </div>
               <div
                 dir="ltr"
-                className="absolute -start-4 top-6 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md backdrop-blur-sm"
+                className="absolute -start-4 top-6 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md backdrop-blur-sm animate-[eco-float_5s_ease-in-out_infinite] [animation-delay:-3.5s]"
               >
                 Svenska · English · العربية
               </div>

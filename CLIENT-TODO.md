@@ -35,3 +35,7 @@ Items below are not yet confirmed and are shown on the live site using clearly n
 
 18. **Licensing/ownership of the legacy stock photography** used as provisional service-page images (bookkeeping, business registration, contracts, association formation, feasibility/budget, investment). None of these appear to be custom photography of the business; see `public/media/source/MANIFEST.md` for the full per-file breakdown. Recommend replacing with authentic photography or confirmed-licensed stock over time.
 19. **The legacy tax-reporting image (`skatterapport.jpeg`) has the Skatteverket logo overlaid on it and has been excluded from the rebuilt site entirely** -- it is not used anywhere, since it would incorrectly imply endorsement by or affiliation with Skatteverket. The Skattedeklaration service page currently has no hero image as a result.
+
+## Structured data
+
+20. **LinkedIn, Google Business Profile, and Srf konsulterna member-directory URLs for structured-data `sameAs` fields** -- `lib/structured-data/organization.ts` and `lib/structured-data/person.ts` currently only list the confirmed Facebook URLs in `sameAs`. Additional verified profile links (company LinkedIn page, Google Business Profile listing, and Hadi's entry in the Srf konsulterna member directory, if public) would strengthen entity verification for AI answer engines and search. Do not add placeholder or guessed URLs -- omit until confirmed, per the pattern used throughout this file.

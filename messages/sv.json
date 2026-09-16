@@ -48,6 +48,15 @@
     "finalCtaTitle": "Redo att komma igång?",
     "finalCtaSubtitle": "Berätta vad du behöver hjälp med, så återkommer vi så snart vi kan."
   },
+  "about": {
+    "credentialsTitle": "Personlig auktorisation",
+    "expertiseTitle": "Vad jag hjälper dig med",
+    "expertiseLead": "Från löpande bokföring till bokslut, deklaration och rådgivning — här är områdena jag arbetar inom.",
+    "seeAllServices": "Se alla tjänster",
+    "languagesTitle": "Jag pratar ditt språk",
+    "ctaTitle": "Redo att prata om din ekonomi?",
+    "ctaSubtitle": "Berätta vad du behöver hjälp med, så återkommer jag så snart jag kan."
+  },
   "service": {
     "whoItsForTitle": "Vem tjänsten passar",
     "whatsIncludedTitle": "Det här ingår",

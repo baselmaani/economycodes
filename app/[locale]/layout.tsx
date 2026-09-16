@@ -7,6 +7,7 @@ import { DirectionProvider } from "@base-ui/react/direction-provider";
 
 import { routing, isRtlLocale, type AppLocale } from "@/i18n/routing";
 import { defaultMetadataBase } from "@/lib/seo/metadata";
+import { siteUrl } from "@/lib/site";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { StickyActionBar } from "@/components/marketing/StickyActionBar";
@@ -82,6 +83,7 @@ export default async function RootLayout({
       <body
         className={`flex min-h-full flex-col ${isArabic ? "font-arabic" : "font-sans"}`}
       >
+        <link rel="llms.txt" href={`${siteUrl}/llms.txt`} />
         <NextIntlClientProvider locale={locale as AppLocale}>
           <DirectionProvider direction={direction}>
             <SkipLink />

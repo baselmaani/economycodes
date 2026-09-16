@@ -6,7 +6,7 @@ import type { BusinessIdentity } from "./types";
  * fill these in with a guess.
  */
 export const business: BusinessIdentity = {
-  legalName: "Economy Codes",
+  legalName: "Economy Codes AB",
   brandName: "Economy Codes",
   orgNumber: undefined,
   vatNumber: undefined,
@@ -16,7 +16,7 @@ export const business: BusinessIdentity = {
   email: "info@economycodes.com",
   whatsappHref: "https://wa.me/46734798210",
   socials: {
-    facebook: "https://facebook.com/economycodes",
+    facebook: "https://www.facebook.com/economycodes",
     hadiFacebook: "https://www.facebook.com/hadi.maani",
   },
 };

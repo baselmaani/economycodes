@@ -32,6 +32,20 @@ export const hadi: PersonProfile = {
       ar: "صورة هادي المعاني، مستشار محاسبة معتمد في Economy Codes AB",
     },
   },
+  // Cropped to remove the top ~28% of the source photo (a studio watermark
+  // sits there, see CLIENT-TODO.md item 6 -- unresolved licensing) so it can
+  // be shown larger in the Hero without exposing it. Replace with a proper
+  // high-res, watermark-free portrait once available.
+  heroPhoto: {
+    src: "/media/optimized/hadi-portrait-hero.webp",
+    width: 400,
+    height: 439,
+    alt: {
+      sv: "Porträtt av Hadi Al Maani, auktoriserad redovisningskonsult på Economy Codes AB",
+      en: "Portrait of Hadi Al Maani, authorized accounting consultant at Economy Codes AB",
+      ar: "صورة هادي المعاني، مستشار محاسبة معتمد في Economy Codes AB",
+    },
+  },
   socials: {
     facebook: "https://www.facebook.com/hadi.maani",
   },

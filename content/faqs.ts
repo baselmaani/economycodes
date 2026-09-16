@@ -164,9 +164,9 @@ export const faqs: Faq[] = [
       ar: "هل يجب أن أستخدم برنامج محاسبة معينًا؟",
     },
     answer: {
-      sv: "Vi anpassar oss i första hand efter vad som är praktiskt för dig. Hör av dig så går vi igenom vilka underlag och vilket arbetssätt som passar ditt företag bäst.",
-      en: "We adapt to whatever is practical for you. Get in touch and we'll go through which documentation and working method suits your business best.",
-      ar: "نتكيف في المقام الأول مع ما هو عملي بالنسبة لك. تواصل معنا وسنراجع معًا المستندات وطريقة العمل الأنسب لشركتك.",
+      sv: "Nej. Vi arbetar löpande i Fortnox, men vi kan även hantera underlag från andra molnbaserade bokföringsprogram eller pappersunderlag, beroende på vad som redan finns hos dig. Vid uppstart går vi igenom vilket arbetssätt som passar ditt företag bäst.",
+      en: "No. We work in Fortnox on an ongoing basis, but we can also work from other cloud-based bookkeeping platforms or paper documentation, depending on what you already use. When we get started, we'll go through which working method suits your company best.",
+      ar: "لا. نعمل بشكل أساسي على Fortnox بشكل مستمر، لكن يمكننا أيضًا العمل مع برامج محاسبة سحابية أخرى أو مستندات ورقية، بحسب ما تستخدمه حاليًا. عند بدء التعاون، نراجع معًا طريقة العمل الأنسب لشركتك.",
     },
   },
   {
@@ -192,9 +192,9 @@ export const faqs: Faq[] = [
       ar: "هل تقدمون استشارات ضريبية أم مجرد مساعدة في تقديم الإقرار؟",
     },
     answer: {
-      sv: "Omfattningen skiljer sig från fall till fall. Kontakta oss med din specifika fråga så berättar vi konkret vad vi kan hjälpa dig med i just ditt ärende.",
-      en: "The scope varies case by case. Contact us with your specific question and we'll tell you concretely what we can help with in your situation.",
-      ar: "يختلف نطاق الخدمة من حالة إلى أخرى. تواصل معنا بسؤالك المحدد وسنوضح لك بدقة ما يمكننا مساعدتك به في حالتك.",
+      sv: "Vi hjälper dig i första hand att sammanställa och kvalitetssäkra underlaget till dina deklarationer — till exempel moms-, arbetsgivar- och inkomstdeklaration — snarare än att ge fristående skatterådgivning i enskilda frågor. Behöver du en bedömning som går utöver det, till exempel inför en större affärshändelse, berättar vi om det är något vi kan hjälpa till med eller om vi behöver hänvisa dig vidare.",
+      en: "Our core focus is helping you compile and quality-check the documentation behind your returns — for example VAT, employer, and income tax returns — rather than providing standalone tax advice on individual questions. If you need an assessment that goes beyond that, for instance ahead of a major business decision, we'll tell you whether it's something we can help with or whether we need to refer you onward.",
+      ar: "ينصب تركيزنا الأساسي على مساعدتك في تجميع مستندات إقراراتك والتحقق من جودتها — مثل إقرار ضريبة القيمة المضافة وإقرار صاحب العمل وإقرار ضريبة الدخل — بدلًا من تقديم استشارات ضريبية مستقلة في مسائل فردية. وإذا احتجت إلى تقييم يتجاوز ذلك، على سبيل المثال قبل قرار تجاري كبير، سنوضح لك ما إذا كان بإمكاننا المساعدة أو ما إذا كان يلزم إحالتك إلى جهة أخرى.",
     },
   },
   {
@@ -240,6 +240,20 @@ export const faqs: Faq[] = [
     },
   },
   {
+    id: "faq-association-administration",
+    scope: { serviceKey: "association-formation" },
+    question: {
+      sv: "Kan ni hjälpa till med föreningens löpande administration, inte bara bildandet?",
+      en: "Can you help with the association's ongoing administration, not just the formation?",
+      ar: "هل يمكنكم المساعدة في الإدارة المستمرة للجمعية، وليس فقط في التأسيس؟",
+    },
+    answer: {
+      sv: "Ja. Utöver att hjälpa till vid själva bildandet kan vi stötta styrelsen löpande med sådant som årsmöteshandlingar, protokoll och medlemsregister, så att föreningens administrativa rutiner fungerar även efter uppstarten.",
+      en: "Yes. Beyond helping with the formation itself, we can support the board on an ongoing basis with things like annual meeting documents, minutes, and membership records, so the association's administrative routines keep working after start-up.",
+      ar: "نعم. إضافة إلى المساعدة في التأسيس نفسه، يمكننا دعم مجلس الإدارة بشكل مستمر في أمور مثل مستندات الاجتماع السنوي والمحاضر وسجل الأعضاء، حتى تستمر الإجراءات الإدارية للجمعية في العمل بعد الانطلاق.",
+    },
+  },
+  {
     id: "faq-budget-purpose",
     scope: { serviceKey: "feasibility-budget" },
     question: {
@@ -254,6 +268,20 @@ export const faqs: Faq[] = [
     },
   },
   {
+    id: "faq-budget-bank",
+    scope: { serviceKey: "feasibility-budget" },
+    question: {
+      sv: "Kan jag använda budgeten och genomförbarhetsstudien i kontakt med en bank?",
+      en: "Can I use the budget and feasibility study when talking to a bank?",
+      ar: "هل يمكنني استخدام الميزانية ودراسة الجدوى عند التواصل مع بنك؟",
+    },
+    answer: {
+      sv: "Ja, det är ett vanligt syfte. Vi strukturerar dokumentet så att det går att använda som underlag i kontakt med bank, långivare eller andra externa parter, utöver din egen planering.",
+      en: "Yes, that's a common purpose. We structure the document so it can be used as documentation when talking to a bank, lender, or other external party, in addition to your own planning.",
+      ar: "نعم، هذا غرض شائع. نُنظّم المستند بحيث يمكن استخدامه كوثيقة عند التواصل مع بنك أو جهة تمويل أو طرف خارجي آخر، إضافة إلى استخدامه في تخطيطك الخاص.",
+    },
+  },
+  {
     id: "faq-contracts-legal-advice",
     scope: { serviceKey: "contracts" },
     question: {
@@ -262,9 +290,23 @@ export const faqs: Faq[] = [
       ar: "هل تقدمون استشارات قانونية بخصوص العقود؟",
     },
     answer: {
-      sv: "Omfattningen av vår hjälp med avtal och kontrakt varierar per ärende. Om ditt ärende kräver kvalificerad juridisk rådgivning eller representation hänvisar vi dig vid behov vidare till en jurist eller advokat.",
-      en: "The scope of our help with agreements and contracts varies by case. If your matter requires qualified legal advice or representation, we'll refer you on to a lawyer or solicitor where needed.",
-      ar: "يختلف نطاق مساعدتنا في الاتفاقيات والعقود بحسب الحالة. وإذا تطلبت حالتك استشارة قانونية متخصصة أو تمثيلًا قانونيًا، فسنحيلك عند الحاجة إلى محامٍ مختص.",
+      sv: "Nej, inte kvalificerad juridisk rådgivning i egentlig mening. Vi hjälper dig med det praktiska och administrativa arbetet kring avtal — till exempel att strukturera underlag, gå igenom vad som ska regleras och kvalitetssäkra dokumentationen inför undertecknande. Kräver ärendet en juridisk bedömning eller representation, till exempel vid en tvist, hänvisar vi dig vidare till en jurist eller advokat.",
+      en: "No, not qualified legal advice in the strict sense. We help with the practical and administrative work around contracts — for example structuring documentation, going through what needs to be regulated, and quality-checking the paperwork before signing. If your matter requires a legal assessment or representation, for instance in a dispute, we'll refer you on to a lawyer or solicitor.",
+      ar: "لا، ليس استشارات قانونية متخصصة بالمعنى الدقيق. نساعدك في الجوانب العملية والإدارية المتعلقة بالعقود — مثل تنظيم المستندات ومراجعة ما ينبغي تنظيمه والتحقق من جودة الوثائق قبل التوقيع. وإذا تطلبت حالتك تقييمًا قانونيًا أو تمثيلًا، كما في حال وجود نزاع، فسنحيلك إلى محامٍ مختص.",
+    },
+  },
+  {
+    id: "faq-contracts-types",
+    scope: { serviceKey: "contracts" },
+    question: {
+      sv: "Vilka typer av avtal kan ni hjälpa till med?",
+      en: "What kinds of agreements can you help with?",
+      ar: "ما أنواع الاتفاقيات التي يمكنكم المساعدة فيها؟",
+    },
+    answer: {
+      sv: "Till exempel samarbetsavtal, leverantörsavtal, hyresavtal och andra löpande avtal kopplade till din verksamhet. Kräver ärendet kvalificerad juridisk bedömning hänvisar vi dig vidare till en jurist eller advokat.",
+      en: "For example partnership agreements, supplier agreements, lease agreements, and other ongoing agreements related to your business. If your matter requires a qualified legal assessment, we'll refer you on to a lawyer or solicitor.",
+      ar: "على سبيل المثال اتفاقيات الشراكة واتفاقيات الموردين وعقود الإيجار وغيرها من الاتفاقيات المستمرة المرتبطة بنشاطك. وإذا تطلبت حالتك تقييمًا قانونيًا متخصصًا، فسنحيلك إلى محامٍ مختص.",
     },
   },
   {
@@ -290,9 +332,9 @@ export const faqs: Faq[] = [
       ar: "ما الذي تتضمنه المساعدة في تأسيس شركة في السويد؟",
     },
     answer: {
-      sv: "Det beror på ditt ärende — till exempel val av bolagsform, registrering och praktiska frågor kring uppstart. Kontakta oss så går vi igenom exakt vad som är relevant för dig.",
-      en: "It depends on your situation — for example, choosing a company type, registration, and the practical questions around getting started. Contact us and we'll go through exactly what's relevant to you.",
-      ar: "يعتمد ذلك على وضعك — مثل اختيار نوع الشركة والتسجيل والمسائل العملية المتعلقة ببدء النشاط. تواصل معنا وسنراجع معك بالتحديد ما يناسب حالتك.",
+      sv: "Hjälpen omfattar bland annat val av bolagsform utifrån din situation, praktisk vägledning genom registreringen hos Bolagsverket och Skatteverket samt rådgivning om rimliga nästa steg efter etablering. Exakt vilka delar som blir aktuella för dig beror på din bakgrund och dina mål, vilket vi går igenom vid ett första samtal.",
+      en: "Our help typically covers choosing a company type based on your situation, practical guidance through registration with Bolagsverket and Skatteverket, and advice on reasonable next steps after establishment. Exactly which parts apply to you depends on your background and goals, which we go through in an initial conversation.",
+      ar: "تشمل مساعدتنا عادةً اختيار نوع الشركة بناءً على وضعك، والتوجيه العملي خلال عملية التسجيل لدى مكتب تسجيل الشركات وهيئة الضرائب، والاستشارة حول الخطوات التالية المناسبة بعد التأسيس. أما الأجزاء التي تنطبق على حالتك تحديدًا فتعتمد على خلفيتك وأهدافك، وهو ما نراجعه معك في أول محادثة.",
     },
   },
   {
@@ -318,9 +360,9 @@ export const faqs: Faq[] = [
       ar: "كم مرة يجب أن أرسل مستندات الرواتب؟",
     },
     answer: {
-      sv: "Det beror på hur ofta du betalar ut lön, oftast månadsvis. Vi kommer överens om en rutin som passar ditt företag.",
-      en: "It depends on how often you pay salaries, usually monthly. We'll agree on a routine that suits your company.",
-      ar: "يعتمد ذلك على وتيرة صرف الرواتب لديك، وغالبًا ما تكون شهرية. سنتفق على روتين يناسب شركتك.",
+      sv: "Oftast månadsvis, i takt med löneutbetalningarna, men det kan variera beroende på hur ofta just ditt företag betalar ut lön. Vi kommer överens om en rutin som passar er från start.",
+      en: "Usually monthly, in line with your pay runs, though it can vary depending on how often your company pays salaries. We'll agree on a routine that suits you from the start.",
+      ar: "غالبًا شهريًا، بالتزامن مع صرف الرواتب، لكن قد يختلف ذلك بحسب وتيرة صرف الرواتب في شركتك. سنتفق على روتين يناسبكم منذ البداية.",
     },
   },
   {

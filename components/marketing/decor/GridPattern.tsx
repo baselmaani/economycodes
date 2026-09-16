@@ -11,7 +11,7 @@ export function GridPattern({ className }: { className?: string }) {
     <svg
       aria-hidden="true"
       className={cn(
-        "text-brand-navy/[0.06] pointer-events-none absolute",
+        "text-brand-navy/[0.06] pointer-events-none absolute animate-[eco-grid-drift_20s_ease-in-out_infinite_alternate]",
         className,
       )}
     >

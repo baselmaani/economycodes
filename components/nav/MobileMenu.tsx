@@ -1,7 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { Menu, MessageCircle, Phone } from "lucide-react";
+import Image from "next/image";
+import {
+  Home,
+  Layers,
+  Mail,
+  Menu,
+  MessageCircle,
+  Newspaper,
+  Phone,
+  UserRound,
+  type LucideIcon,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
@@ -11,6 +22,7 @@ import { getServiceSlug } from "@/lib/routes";
 import { servicesList } from "@/content/services";
 import {
   getServiceGroup,
+  getServiceIcon,
   serviceGroups,
   type ServiceGroup,
 } from "@/content/service-icons";
@@ -32,6 +44,21 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+
+const navIcons: Record<string, LucideIcon> = {
+  "/": Home,
+  "/om-hadi": UserRound,
+  "/artiklar": Newspaper,
+  "/kontakt": Mail,
+};
+
+function NavRowIcon({ icon: Icon }: { icon: LucideIcon }) {
+  return (
+    <span className="bg-secondary text-primary group-data-[active]:bg-primary group-data-[active]:text-primary-foreground flex size-8 shrink-0 items-center justify-center rounded-lg transition-colors">
+      <Icon size={16} aria-hidden="true" />
+    </span>
+  );
+}
 
 export function MobileMenu({ locale }: { locale: AppLocale }) {
   const t = useTranslations("nav");
@@ -63,38 +90,71 @@ export function MobileMenu({ locale }: { locale: AppLocale }) {
       </SheetTrigger>
       <SheetContent side="right" className="flex w-[85vw] max-w-sm flex-col">
         <SheetHeader>
-          <SheetTitle>{t("menuLabel")}</SheetTitle>
+          <SheetTitle className="flex items-center gap-2">
+            <Image
+              src="/media/optimized/logo-horizontal.webp"
+              alt={business.brandName}
+              width={180}
+              height={75}
+              className="h-8 w-auto"
+            />
+            <span className="sr-only">{t("menuLabel")}</span>
+          </SheetTitle>
         </SheetHeader>
         <nav className="flex flex-1 flex-col gap-1 overflow-y-auto px-4">
+          {primaryNav
+            .filter((link) => link.routeKey === "/")
+            .map((link) => (
+              <NavLink
+                key={link.routeKey}
+                href={link.routeKey as StaticAppPathname}
+                onClick={() => setOpen(false)}
+                className="group border-border/60 data-[active]:bg-secondary data-[active]:text-secondary-foreground data-[active]:border-transparent hover:bg-muted/60 -mx-2 flex items-center gap-3 border-b px-2 py-2.5 text-base font-medium data-[active]:font-semibold data-[active]:rounded-lg"
+              >
+                <NavRowIcon icon={navIcons[link.routeKey] ?? Home} />
+                {getLocalized(link.label, locale)}
+              </NavLink>
+            ))}
           <Accordion>
             <AccordionItem value="services" className="border-none">
-              <AccordionTrigger className="py-3 text-base font-medium">
-                {t("services")}
+              <AccordionTrigger className="border-border/60 hover:bg-muted/60 hover:no-underline -mx-2 items-center border-b px-2 py-2.5 text-base font-medium">
+                <span className="flex items-center gap-3">
+                  <NavRowIcon icon={Layers} />
+                  {t("services")}
+                </span>
               </AccordionTrigger>
-              <AccordionContent>
+              <AccordionContent className="[&_a]:no-underline">
                 <div className="flex flex-col gap-4 ps-2">
                   {grouped.map(({ group, label, services }) => (
                     <div key={group}>
                       <p className="text-muted-foreground pb-1 text-xs font-semibold tracking-wide uppercase">
                         {label}
                       </p>
-                      <ul className="flex flex-col gap-1">
-                        {services.map((service) => (
-                          <li key={service.key}>
-                            <Link
-                              href={{
-                                pathname: "/tjanster/[slug]",
-                                params: {
-                                  slug: getServiceSlug(locale, service),
-                                },
-                              }}
-                              onClick={() => setOpen(false)}
-                              className="hover:text-primary block py-2 text-sm"
-                            >
-                              {getLocalized(service.name, locale)}
-                            </Link>
-                          </li>
-                        ))}
+                      <ul className="flex flex-col gap-0.5">
+                        {services.map((service) => {
+                          const Icon = getServiceIcon(service.key);
+                          return (
+                            <li key={service.key}>
+                              <Link
+                                href={{
+                                  pathname: "/tjanster/[slug]",
+                                  params: {
+                                    slug: getServiceSlug(locale, service),
+                                  },
+                                }}
+                                onClick={() => setOpen(false)}
+                                className="hover:bg-accent hover:text-accent-foreground -mx-2 flex items-center gap-2.5 rounded-lg px-2 py-2 text-sm transition-colors"
+                              >
+                                <Icon
+                                  size={16}
+                                  aria-hidden="true"
+                                  className="text-primary shrink-0"
+                                />
+                                {getLocalized(service.name, locale)}
+                              </Link>
+                            </li>
+                          );
+                        })}
                       </ul>
                     </div>
                   ))}
@@ -103,14 +163,17 @@ export function MobileMenu({ locale }: { locale: AppLocale }) {
             </AccordionItem>
           </Accordion>
           {primaryNav
-            .filter((link) => link.routeKey !== "/tjanster")
+            .filter(
+              (link) => link.routeKey !== "/" && link.routeKey !== "/tjanster",
+            )
             .map((link) => (
               <NavLink
                 key={link.routeKey}
                 href={link.routeKey as StaticAppPathname}
                 onClick={() => setOpen(false)}
-                className="hover:text-primary border-border/60 border-b py-3 text-base font-medium"
+                className="group border-border/60 data-[active]:bg-secondary data-[active]:text-secondary-foreground data-[active]:border-transparent hover:bg-muted/60 -mx-2 flex items-center gap-3 border-b px-2 py-2.5 text-base font-medium data-[active]:font-semibold data-[active]:rounded-lg"
               >
+                <NavRowIcon icon={navIcons[link.routeKey] ?? Mail} />
                 {getLocalized(link.label, locale)}
               </NavLink>
             ))}

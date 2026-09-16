@@ -7,10 +7,12 @@ import type { StaticAppPathname } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
 /**
- * Top-level nav link with an active-page underline indicator. Shared by the
- * desktop header and the mobile menu so both stay in sync. Forwards all
- * extra props (Base UI's NavigationMenuLink `render` injects its own
- * handlers/data-attributes onto the rendered element).
+ * Top-level nav link that flags the active page via a `data-active`
+ * attribute. Shared by the desktop header and the mobile menu, which each
+ * style the active state differently (pill vs. highlighted row) through
+ * `data-[active]:*` classes in their own className. Forwards all extra props
+ * (Base UI's NavigationMenuLink `render` injects its own handlers/
+ * data-attributes onto the rendered element).
  */
 export function NavLink({
   href,
@@ -24,12 +26,8 @@ export function NavLink({
     <Link
       href={href}
       aria-current={isActive ? "page" : undefined}
-      className={cn(
-        "relative",
-        isActive &&
-          "after:bg-primary after:absolute after:inset-x-0 after:-bottom-1 after:h-0.5 after:rounded-full",
-        className,
-      )}
+      data-active={isActive ? "" : undefined}
+      className={cn("relative transition-colors", className)}
       {...props}
     />
   );

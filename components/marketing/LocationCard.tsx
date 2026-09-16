@@ -16,7 +16,7 @@ export function LocationCard({
   directionsLabel: string;
 }) {
   return (
-    <Card className="p-6">
+    <Card className="p-6 transition-all duration-200 ease-(--ease-standard) hover:-translate-y-1 hover:shadow-md">
       <CardHeader className="flex flex-row items-start gap-3 space-y-0 p-0">
         <MapPin
           className="text-primary mt-0.5 shrink-0"

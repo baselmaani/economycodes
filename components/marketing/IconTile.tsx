@@ -29,7 +29,7 @@ export function IconTile({
   return (
     <span
       className={cn(
-        "inline-flex shrink-0 items-center justify-center rounded-xl",
+        "inline-flex shrink-0 items-center justify-center rounded-xl transition-transform duration-200 ease-(--ease-standard) hover:scale-105",
         sizes[size].tile,
         tones[tone],
         className,

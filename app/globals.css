@@ -147,6 +147,43 @@
       transparent 70%
     );
   }
+
+  /* Ambient float for decorative hero pills -- small amplitude, slow,
+     looping. Neutralized for prefers-reduced-motion by the global media
+     query below (plain CSS animation, no extra guard needed). */
+  @keyframes eco-float {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    50% {
+      translate: 0 -6px;
+    }
+  }
+
+  /* Very slow positional drift for the decorative dot-grid SVG -- safe only
+     because it's always used inside a `bleed` Section (overflow-hidden). */
+  @keyframes eco-grid-drift {
+    from {
+      translate: 0 0;
+    }
+    to {
+      translate: 6px 6px;
+    }
+  }
+
+  /* Slow ambient pulse for the radial glow. Scale-only (not opacity) so it
+     doesn't fight per-instance opacity overrides such as `opacity-10` in
+     AuthorizationSection. */
+  @keyframes eco-pulse-glow {
+    0%,
+    100% {
+      scale: 1;
+    }
+    50% {
+      scale: 1.06;
+    }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

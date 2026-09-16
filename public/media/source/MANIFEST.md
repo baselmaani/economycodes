@@ -4,8 +4,9 @@ Downloaded from the legacy site (https://www.economycodes.com/) on 2026-09-06. O
 
 | File | Dimensions | Used as | Status |
 |---|---|---|---|
-| `ecodes.jpeg` | 360x150 | Horizontal logo | Owned brand asset -- safe to use. |
-| `ecodes-s.png` | 478x478 | Stacked logo | Owned brand asset -- safe to use. |
+| `ecodes.jpeg` | 360x150 | Horizontal logo (original, opaque white bg) | Owned brand asset -- safe to use. Superseded by `ecodes.png` as the source for the optimized derivative. |
+| `ecodes.png` | 360x150 | Horizontal logo, background removed | Owned brand asset -- safe to use. |
+| `ecodes-s.png` | 478x478 | Stacked logo, background removed | Owned brand asset -- safe to use. |
 | `hadi.jpeg` | 320x487 | Hadi Almaani portrait | **Carries a small photo-studio watermark ("Souhail") in the top-right corner.** Confirm the photographer/studio has granted rights to use this photo on the rebuilt commercial website, or obtain a new portrait without a third-party watermark. |
 | `hero.jpg` | 6000x4004 | Homepage hero image | Generic stock photo (people reviewing printed charts). No trademark issue, but stylistically a "finance cliché" the brand brief asks to avoid -- recommend replacing with authentic photography of the business/office/Hadi once available. |
 | `bokforing.jpeg` | 1024x683 | Bookkeeping service hero | Generic stock photo. Licensing/ownership unconfirmed. |

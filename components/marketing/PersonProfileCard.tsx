@@ -23,11 +23,11 @@ export function PersonProfileCard({
   compact?: boolean;
 }) {
   return (
-    <div className="flex flex-col items-start gap-6 sm:flex-row">
+    <div className="group flex flex-col items-start gap-6 sm:flex-row">
       <div className="relative shrink-0">
         <div
           className={cn(
-            "border-border bg-card relative aspect-square overflow-hidden rounded-2xl border shadow-md",
+            "border-border bg-card relative aspect-square overflow-hidden rounded-2xl border shadow-md transition-all duration-200 ease-(--ease-standard) group-hover:-translate-y-1 group-hover:shadow-lg",
             compact ? "w-28" : "w-40",
           )}
         >

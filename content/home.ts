@@ -73,6 +73,30 @@ export const authorizationContent = {
       en: "Hadi is personally authorized as both an accounting consultant and a payroll consultant, meeting Srf's requirements for education, experience, and professional ethics in both accounting and payroll.",
       ar: "هادي معتمد شخصيًا كمستشار محاسبة ومستشار رواتب، ما يعني استيفاءه لمتطلبات منظمة Srf من التعليم والخبرة والأخلاقيات المهنية في كل من المحاسبة والرواتب.",
     } satisfies Localized<string>,
+    /**
+     * Per-credential detail, used on the /om-hadi page. Generic descriptions
+     * of what each Srf authorization covers (industry-standard scope, not a
+     * specific claim about Hadi's individual experience) -- same register as
+     * `consultantVsAuditor` below.
+     */
+    credentialDetails: [
+      {
+        label: "Auktoriserad Redovisningskonsult",
+        body: {
+          sv: "Innebär att Hadi uppfyller Srf:s krav på utbildning, erfarenhet och yrkesetik inom löpande redovisning, bokslut och ekonomisk rådgivning till företag.",
+          en: "Means Hadi meets Srf's requirements for education, experience, and professional ethics in ongoing bookkeeping, annual accounts, and financial advisory for businesses.",
+          ar: "يعني أن هادي يستوفي متطلبات منظمة Srf من التعليم والخبرة والأخلاقيات المهنية في مسك الدفاتر المستمر والحسابات الختامية والاستشارات المالية للشركات.",
+        } satisfies Localized<string>,
+      },
+      {
+        label: "Auktoriserad Lönekonsult",
+        body: {
+          sv: "Innebär att Hadi uppfyller Srf:s krav på utbildning, erfarenhet och yrkesetik inom löneadministration och arbetsgivarfrågor.",
+          en: "Means Hadi meets Srf's requirements for education, experience, and professional ethics in payroll administration and employer-related matters.",
+          ar: "يعني أن هادي يستوفي متطلبات منظمة Srf من التعليم والخبرة والأخلاقيات المهنية في إدارة الرواتب والمسائل المتعلقة بأصحاب العمل.",
+        } satisfies Localized<string>,
+      },
+    ] satisfies { label: string; body: Localized<string> }[],
   },
   issuingBody: {
     /** Proper noun, kept consistent across locales. */

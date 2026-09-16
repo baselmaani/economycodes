@@ -9,7 +9,7 @@ export function RadialGlow({ className }: { className?: string }) {
     <div
       aria-hidden="true"
       className={cn(
-        "pointer-events-none absolute rounded-full blur-3xl",
+        "pointer-events-none absolute rounded-full blur-3xl animate-[eco-pulse-glow_6s_ease-in-out_infinite]",
         "bg-[radial-gradient(closest-side,var(--brand-accent)_0%,transparent_70%)] opacity-20",
         className,
       )}

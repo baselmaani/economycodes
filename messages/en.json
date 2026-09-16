@@ -48,6 +48,15 @@
     "finalCtaTitle": "Ready to get started?",
     "finalCtaSubtitle": "Tell us what you need help with, and we'll get back to you as soon as we can."
   },
+  "about": {
+    "credentialsTitle": "Personal authorization",
+    "expertiseTitle": "What I can help you with",
+    "expertiseLead": "From ongoing bookkeeping to annual accounts, tax returns, and advisory — here are the areas I work in.",
+    "seeAllServices": "See all services",
+    "languagesTitle": "I speak your language",
+    "ctaTitle": "Ready to talk about your finances?",
+    "ctaSubtitle": "Tell me what you need help with, and I'll get back to you as soon as I can."
+  },
   "service": {
     "whoItsForTitle": "Who this service is for",
     "whatsIncludedTitle": "What's included",
