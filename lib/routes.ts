@@ -5,13 +5,17 @@ import {
   type StaticAppPathname,
 } from "@/i18n/routing";
 import { siteUrl } from "@/lib/site";
-import { getServiceSlug, resolveServiceBySlug } from "@/lib/service-lookup";
+import {
+  getServiceSlug,
+  resolveArticleBySlug,
+  resolveServiceBySlug,
+} from "@/lib/service-lookup";
 import { services, servicesList } from "@/content/services";
 import { articles } from "@/content/articles/meta";
 import type { ArticleMeta } from "@/content/articles/types";
 import type { Service } from "@/content/types";
 
-export { resolveServiceBySlug, getServiceSlug };
+export { resolveServiceBySlug, getServiceSlug, resolveArticleBySlug };
 
 /** Absolute, locale-correct URL for a static (non-dynamic) pathname. */
 export function getAbsoluteUrl(

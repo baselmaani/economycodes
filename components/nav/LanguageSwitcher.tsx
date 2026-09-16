@@ -54,7 +54,7 @@ export function LanguageSwitcher() {
         {routing.locales.map((code) => (
           <DropdownMenuItem
             key={code}
-            onSelect={() => onSelect(code)}
+            onClick={() => onSelect(code)}
             aria-current={code === locale ? "true" : undefined}
           >
             {localeNames[code]}

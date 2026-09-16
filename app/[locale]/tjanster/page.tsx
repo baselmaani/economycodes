@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { AppLocale } from "@/i18n/routing";
 import { getAlternateLinks } from "@/lib/routes";
 import { buildMetadata } from "@/lib/seo/metadata";
+import { getServicesListOgImageUrl } from "@/lib/seo/og-image";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { Container } from "@/components/layout/Container";
 import { ServiceCard } from "@/components/marketing/ServiceCard";
@@ -32,6 +33,7 @@ export async function generateMetadata({
     title: nav("services"),
     description: home("servicesSubtitle"),
     alternates: getAlternateLinks("/tjanster"),
+    ogImage: getServicesListOgImageUrl(locale),
   });
 }
 

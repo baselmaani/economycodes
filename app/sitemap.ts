@@ -9,6 +9,9 @@ import {
   servicesList,
 } from "@/lib/routes";
 
+// Bumped whenever a static (non-content-dated) page's copy changes materially.
+const STATIC_LAST_MODIFIED = "2026-09-06";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticEntries: StaticAppPathname[] = [
     "/",
@@ -26,6 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     return {
       url: alternates[routing.defaultLocale],
       alternates: { languages: alternates },
+      lastModified: STATIC_LAST_MODIFIED,
     };
   });
 
@@ -43,7 +47,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     return {
       url: alternates[routing.defaultLocale],
       alternates: { languages: alternates },
-      lastModified: article.publishedAt,
+      lastModified: article.updatedAt ?? article.publishedAt,
     };
   });
 

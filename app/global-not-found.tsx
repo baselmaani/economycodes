@@ -6,6 +6,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Sidan kunde inte hittas | Economy Codes",
   description: "Sidan du letar efter finns inte längre eller har flyttats.",
+  robots: { index: false },
 };
 
 /**

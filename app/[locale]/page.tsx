@@ -21,7 +21,6 @@ import { AuthorizationSection } from "@/components/marketing/AuthorizationSectio
 import { WhyAuthorizedSection } from "@/components/marketing/WhyAuthorizedSection";
 import { NationwideDigitalSection } from "@/components/marketing/NationwideDigitalSection";
 import { LanguageSupportSection } from "@/components/marketing/LanguageSupportSection";
-import { IndustriesSection } from "@/components/marketing/IndustriesSection";
 import { SectionHeading } from "@/components/marketing/SectionHeading";
 import { IconTile } from "@/components/marketing/IconTile";
 import { FaqAccordion } from "@/components/faq/FaqAccordion";
@@ -123,6 +122,7 @@ export default async function HomePage({
         <Container>
           <Reveal>
             <SectionHeading
+              eyebrow={t("servicesEyebrow")}
               title={t("servicesTitle")}
               lead={t("servicesSubtitle")}
             />
@@ -240,6 +240,7 @@ export default async function HomePage({
                 person={hadi}
                 locale={locale}
                 learnMoreLabel={common("learnMore")}
+                facebookLabel={common("facebook")}
               />
               <div className="border-border mt-6 flex flex-wrap gap-2 border-t pt-6">
                 {authorizationContent.person.credentials.map((credential) => (
@@ -264,15 +265,7 @@ export default async function HomePage({
         linkLabel={common("learnMore")}
       />
 
-      {/* 9. Industries Economy Codes knows */}
-      <IndustriesSection
-        locale={locale}
-        heading={t("industriesTitle")}
-        readMoreLabel={common("readMore")}
-        contactLabel={common("contactUs")}
-      />
-
-      {/* 10. Benefits */}
+      {/* 9. Benefits */}
       <Section tone="tint">
         <Container>
           <Reveal>
@@ -299,7 +292,7 @@ export default async function HomePage({
         </Container>
       </Section>
 
-      {/* 11. Frequently asked questions */}
+      {/* 10. Frequently asked questions */}
       <Section tone="base">
         <Container size="wide">
           <Reveal>
@@ -322,7 +315,7 @@ export default async function HomePage({
         </Container>
       </Section>
 
-      {/* 12. Locations */}
+      {/* 11. Locations */}
       <Section tone="tint">
         <Container>
           <Reveal>
@@ -343,7 +336,7 @@ export default async function HomePage({
         </Container>
       </Section>
 
-      {/* 13. Contact and consultation CTA */}
+      {/* 12. Contact and consultation CTA */}
       <Section tone="gradient" bleed>
         <Image
           src="/media/optimized/logo-stacked.webp"

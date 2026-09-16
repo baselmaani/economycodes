@@ -84,10 +84,36 @@ export const authorizationContent = {
     } satisfies Localized<string>,
   },
   consultantVsAuditor: {
-    sv: "En auktoriserad redovisningskonsult arbetar löpande med bokföring, lön, moms och rådgivning åt sina kunder. En revisor har i stället en oberoende, granskande roll och uttalar sig om ett företags årsredovisning i en revisionsberättelse. De flesta små och medelstora aktiebolag i Sverige har inte revisionsplikt, men kan ändå ha nytta av en auktoriserad redovisningskonsult för sin löpande ekonomi. Auktorisationen ger dig som kund en tydlig referenspunkt: du kan alltid kontrollera en konsults auktorisation direkt hos Srf konsulterna.",
-    en: "An authorized accounting consultant works on an ongoing basis with bookkeeping, payroll, VAT, and advisory support for clients. An auditor (revisor), by contrast, holds an independent, reviewing role and issues an opinion on a company's annual accounts in an audit report. Most small and medium-sized Swedish limited companies aren't required to have an auditor, but can still benefit from an authorized accounting consultant for their day-to-day finances. The authorization gives you, as a customer, a clear reference point — you can always verify a consultant's authorization directly with Srf konsulterna.",
-    ar: "يعمل مستشار المحاسبة المعتمد بشكل مستمر على مسك الدفاتر والرواتب وضريبة القيمة المضافة وتقديم الاستشارات للعملاء. أما المدقق (Revisor) فيتولى دورًا رقابيًا مستقلًا، إذ يبدي رأيه في القوائم المالية السنوية للشركة ضمن تقرير تدقيق. ولا تخضع معظم الشركات المحدودة الصغيرة والمتوسطة في السويد لالتزام إلزامي بالتدقيق، لكنها قد تستفيد رغم ذلك من مستشار محاسبة معتمد لإدارة شؤونها المالية اليومية. ويمنحك هذا الاعتماد كعميل نقطة مرجعية واضحة، إذ يمكنك دائمًا التحقق من اعتماد أي مستشار مباشرة لدى منظمة Srf konsulterna.",
-  } satisfies Localized<string>,
+    consultant: {
+      label: {
+        sv: "Auktoriserad redovisningskonsult",
+        en: "Authorized accounting consultant",
+        ar: "مستشار المحاسبة المعتمد",
+      } satisfies Localized<string>,
+      body: {
+        sv: "En auktoriserad redovisningskonsult arbetar löpande med bokföring, lön, moms och rådgivning åt sina kunder.",
+        en: "An authorized accounting consultant works on an ongoing basis with bookkeeping, payroll, VAT, and advisory support for clients.",
+        ar: "يعمل مستشار المحاسبة المعتمد بشكل مستمر على مسك الدفاتر والرواتب وضريبة القيمة المضافة وتقديم الاستشارات للعملاء.",
+      } satisfies Localized<string>,
+    },
+    auditor: {
+      label: {
+        sv: "Revisor",
+        en: "Auditor (revisor)",
+        ar: "المدقق (Revisor)",
+      } satisfies Localized<string>,
+      body: {
+        sv: "En revisor har i stället en oberoende, granskande roll och uttalar sig om ett företags årsredovisning i en revisionsberättelse.",
+        en: "An auditor (revisor), by contrast, holds an independent, reviewing role and issues an opinion on a company's annual accounts in an audit report.",
+        ar: "أما المدقق (Revisor) فيتولى دورًا رقابيًا مستقلًا، إذ يبدي رأيه في القوائم المالية السنوية للشركة ضمن تقرير تدقيق.",
+      } satisfies Localized<string>,
+    },
+    note: {
+      sv: "De flesta små och medelstora aktiebolag i Sverige har inte revisionsplikt, men kan ändå ha nytta av en auktoriserad redovisningskonsult för sin löpande ekonomi. Auktorisationen ger dig som kund en tydlig referenspunkt: du kan alltid kontrollera en konsults auktorisation direkt hos Srf konsulterna.",
+      en: "Most small and medium-sized Swedish limited companies aren't required to have an auditor, but can still benefit from an authorized accounting consultant for their day-to-day finances. The authorization gives you, as a customer, a clear reference point — you can always verify a consultant's authorization directly with Srf konsulterna.",
+      ar: "ولا تخضع معظم الشركات المحدودة الصغيرة والمتوسطة في السويد لالتزام إلزامي بالتدقيق، لكنها قد تستفيد رغم ذلك من مستشار محاسبة معتمد لإدارة شؤونها المالية اليومية. ويمنحك هذا الاعتماد كعميل نقطة مرجعية واضحة، إذ يمكنك دائمًا التحقق من اعتماد أي مستشار مباشرة لدى منظمة Srf konsulterna.",
+    } satisfies Localized<string>,
+  },
 };
 
 export const digitalNationwideContent = {
@@ -205,27 +231,6 @@ export const processSteps: ProcessStep[] = [
     },
   },
 ];
-
-/**
- * "Industries we know" homepage section. The car-dealership/VMB feature
- * links to the one industry with a real, fully-written service page
- * (content/services.ts -> car-dealership-accounting). The "otherTrades"
- * line is a short, general, non-specific mention of additional trades the
- * business also serves -- deliberately no fabricated per-industry claims,
- * pages, or specifics beyond this one sentence.
- */
-export const industriesContent = {
-  lead: {
-    sv: "Vissa branscher har särskilda regler för bokföring och rapportering. Bilhandel och VMB är ett sådant område där vi har djup erfarenhet.",
-    en: "Some industries have specific bookkeeping and reporting rules. Car dealerships and VMB (margin scheme) accounting are one area where we have deep experience.",
-    ar: "لبعض القطاعات قواعد خاصة بالمحاسبة والتقارير. ويُعد تجار السيارات ومحاسبة هامش الربح (VMB) أحد المجالات التي نتمتع فيها بخبرة عميقة.",
-  } satisfies Localized<string>,
-  otherTrades: {
-    sv: "Vi har även erfarenhet av att arbeta med företagare inom bland annat bilverkstäder, restauranger, transportföretag, byggföretag, salonger, trafikskolor och livsmedelsbutiker.",
-    en: "We've also worked with business owners in trades including car workshops, restaurants, transport companies, construction firms, salons, driving schools, and food stores.",
-    ar: "كما عملنا مع أصحاب أعمال في قطاعات منها ورش تصليح السيارات والمطاعم وشركات النقل ومقاولات البناء والصالونات ومدارس تعليم القيادة ومحلات المواد الغذائية.",
-  } satisfies Localized<string>,
-};
 
 export interface Benefit {
   icon: LucideIcon;

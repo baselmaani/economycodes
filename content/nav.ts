@@ -6,6 +6,7 @@ import type { NavLink } from "./types";
  * building a service's href requires resolving its per-locale slug.
  */
 export const primaryNav: NavLink[] = [
+  { routeKey: "/", label: { sv: "Hem", en: "Home", ar: "الرئيسية" } },
   {
     routeKey: "/tjanster",
     label: { sv: "Tjänster", en: "Services", ar: "الخدمات" },

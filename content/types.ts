@@ -64,7 +64,6 @@ export type ContentBlock =
   | { type: "heading"; level: 2 | 3; text: string }
   | { type: "paragraph"; text: string }
   | { type: "list"; items: string[] }
-  | { type: "image"; media: MediaRef; caption?: string }
   | { type: "disclaimer"; text: string };
 
 export interface ServiceFaqRef {

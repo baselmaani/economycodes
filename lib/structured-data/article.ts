@@ -16,6 +16,7 @@ export function buildArticleJsonLd(
     headline: getLocalized(article.title, locale),
     description: getLocalized(article.excerpt, locale),
     datePublished: article.publishedAt,
+    dateModified: article.updatedAt ?? article.publishedAt,
     url,
     image: new URL(article.coverImage.src, siteUrl).toString(),
     author: {

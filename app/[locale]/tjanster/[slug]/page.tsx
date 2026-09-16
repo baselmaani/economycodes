@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { CheckCircle2, Info } from "lucide-react";
 
 import { Link } from "@/i18n/navigation";
 import { routing, type AppLocale } from "@/i18n/routing";
@@ -12,6 +13,7 @@ import {
   servicesList,
 } from "@/lib/routes";
 import { buildMetadata } from "@/lib/seo/metadata";
+import { getServiceOgImageUrl } from "@/lib/seo/og-image";
 import { buildServiceJsonLd } from "@/lib/structured-data/service";
 import { buildBreadcrumbJsonLd } from "@/lib/structured-data/breadcrumb";
 import { buildFaqJsonLd } from "@/lib/structured-data/faq";
@@ -24,6 +26,7 @@ import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { ServiceCard } from "@/components/marketing/ServiceCard";
 import { PersonProfileCard } from "@/components/marketing/PersonProfileCard";
+import { IconTile } from "@/components/marketing/IconTile";
 import { AbstractDocumentPanel } from "@/components/marketing/decor/AbstractDocumentPanel";
 import { Reveal } from "@/components/motion/Reveal";
 import { RevealGroup } from "@/components/motion/RevealGroup";
@@ -64,6 +67,7 @@ export async function generateMetadata({
     title: getLocalized(service.name, locale),
     description: getLocalized(service.summary, locale),
     alternates: getServiceAlternateLinks(service),
+    ogImage: getServiceOgImageUrl(locale, slug),
   });
 }
 
@@ -92,11 +96,13 @@ export default async function ServicePage({
   // component creation despite the lint heuristic where it's used below.
   const Icon = getServiceIcon(service.key);
   const group = getServiceGroup(service.key);
-  const relatedServices = servicesList
-    .filter(
-      (other) =>
-        other.key !== service.key && getServiceGroup(other.key) === group,
-    )
+  const groupServices = servicesList.filter(
+    (other) => getServiceGroup(other.key) === group,
+  );
+  const currentIndex = groupServices.findIndex((s) => s.key === service.key);
+  const relatedServices = groupServices
+    .slice(currentIndex + 1)
+    .concat(groupServices.slice(0, currentIndex))
     .slice(0, 3);
 
   return (
@@ -154,20 +160,30 @@ export default async function ServicePage({
         <Reveal>
           <section className="mt-4 grid gap-8 sm:grid-cols-2">
             <div>
-              <h2 className="text-lg font-semibold">{s("whoItsForTitle")}</h2>
-              <ul className="text-muted-foreground text-body mt-3 flex flex-col gap-2">
+              <h2 className="text-2xl font-semibold">{s("whoItsForTitle")}</h2>
+              <ul className="text-body mt-4 flex flex-col gap-3">
                 {getLocalized(service.whoItsFor, locale).map((item) => (
-                  <li key={item}>{item}</li>
+                  <li key={item} className="flex items-start gap-3">
+                    <IconTile icon={CheckCircle2} size="sm" tone="primary" />
+                    <span className="text-muted-foreground mt-1.5">
+                      {item}
+                    </span>
+                  </li>
                 ))}
               </ul>
             </div>
             <div>
-              <h2 className="text-lg font-semibold">
+              <h2 className="text-2xl font-semibold">
                 {s("whatsIncludedTitle")}
               </h2>
-              <ul className="text-muted-foreground text-body mt-3 flex flex-col gap-2">
+              <ul className="text-body mt-4 flex flex-col gap-3">
                 {getLocalized(service.whatsIncluded, locale).map((item) => (
-                  <li key={item}>{item}</li>
+                  <li key={item} className="flex items-start gap-3">
+                    <IconTile icon={CheckCircle2} size="sm" tone="primary" />
+                    <span className="text-muted-foreground mt-1.5">
+                      {item}
+                    </span>
+                  </li>
                 ))}
               </ul>
             </div>
@@ -175,28 +191,38 @@ export default async function ServicePage({
         </Reveal>
       </Container>
 
-      <Section tone="tint" className="mt-12">
+      <Section tone="tint">
         <Container size="content">
           <Reveal>
             <section>
-              <h2 className="text-lg font-semibold">{s("processTitle")}</h2>
-              <ol className="mt-3 flex flex-col gap-3">
+              <h2 className="text-2xl font-semibold">{s("processTitle")}</h2>
+              <ol className="mt-4 flex flex-col gap-4">
                 {getLocalized(service.process, locale).map((step, index) => (
-                  <li key={step} className="text-body flex gap-3">
-                    <span dir="ltr" className="text-primary font-semibold">
-                      {index + 1}.
+                  <li key={step} className="text-body flex items-start gap-3">
+                    <span
+                      dir="ltr"
+                      className="bg-primary/10 text-primary flex size-8 shrink-0 items-center justify-center rounded-full font-semibold"
+                    >
+                      {index + 1}
                     </span>
-                    <span className="text-muted-foreground">{step}</span>
+                    <span className="text-muted-foreground mt-1.5">
+                      {step}
+                    </span>
                   </li>
                 ))}
               </ol>
             </section>
 
             <section className="mt-10">
-              <h2 className="text-lg font-semibold">{s("prepareTitle")}</h2>
-              <ul className="text-muted-foreground text-body mt-3 flex flex-col gap-2">
+              <h2 className="text-2xl font-semibold">{s("prepareTitle")}</h2>
+              <ul className="text-body mt-4 flex flex-col gap-3">
                 {getLocalized(service.whatToPrepare, locale).map((item) => (
-                  <li key={item}>{item}</li>
+                  <li key={item} className="flex items-start gap-3">
+                    <IconTile icon={CheckCircle2} size="sm" tone="primary" />
+                    <span className="text-muted-foreground mt-1.5">
+                      {item}
+                    </span>
+                  </li>
                 ))}
               </ul>
             </section>
@@ -205,12 +231,12 @@ export default async function ServicePage({
       </Section>
 
       <Container size="content">
-        <section className="prose prose-neutral mt-12 max-w-none">
+        <section className="prose prose-neutral max-w-none">
           {getLocalized(service.body, locale).map((block, index) => {
             if (block.type === "heading") {
               const Tag = block.level === 2 ? "h2" : "h3";
               return (
-                <Tag key={index} className="mt-8 text-xl font-semibold">
+                <Tag key={index} className="mt-8 text-2xl font-semibold">
                   {block.text}
                 </Tag>
               );
@@ -226,22 +252,34 @@ export default async function ServicePage({
               return (
                 <ul
                   key={index}
-                  className="text-muted-foreground text-body mt-3"
+                  className="text-body mt-3 flex list-none flex-col gap-3 ps-0"
                 >
                   {block.items.map((item) => (
-                    <li key={item}>{item}</li>
+                    <li key={item} className="flex items-start gap-3">
+                      <IconTile icon={CheckCircle2} size="sm" tone="primary" />
+                      <span className="text-muted-foreground mt-1.5">
+                        {item}
+                      </span>
+                    </li>
                   ))}
                 </ul>
               );
             }
             if (block.type === "disclaimer") {
               return (
-                <p
+                <div
                   key={index}
-                  className="border-border bg-muted text-muted-foreground mt-6 rounded-lg border p-4 text-sm"
+                  className="border-border bg-secondary/40 mt-6 flex items-start gap-3 rounded-xl border p-5"
                 >
-                  {block.text}
-                </p>
+                  <Info
+                    size={18}
+                    className="text-primary mt-0.5 shrink-0"
+                    aria-hidden="true"
+                  />
+                  <p className="text-muted-foreground text-sm">
+                    {block.text}
+                  </p>
+                </div>
               );
             }
             return null;
@@ -253,7 +291,7 @@ export default async function ServicePage({
         <Section tone="tint" className="mt-12">
           <Container size="content">
             <Reveal>
-              <h2 className="text-lg font-semibold">{t("faqTitle")}</h2>
+              <h2 className="text-2xl font-semibold">{t("faqTitle")}</h2>
               <div className="mt-4">
                 <FaqAccordion faqs={serviceFaqs} locale={locale} />
               </div>
@@ -265,12 +303,13 @@ export default async function ServicePage({
       <Container size="content">
         <Reveal>
           <section className="mt-12">
-            <h2 className="text-lg font-semibold">{nav("about")}</h2>
-            <div className="border-border bg-card mt-4 rounded-2xl border p-6">
+            <h2 className="text-2xl font-semibold">{nav("about")}</h2>
+            <div className="border-border bg-card mt-4 rounded-3xl border p-8 shadow-md sm:p-10">
               <PersonProfileCard
                 person={hadi}
                 locale={locale}
                 learnMoreLabel={t("learnMore")}
+                facebookLabel={t("facebook")}
                 compact
               />
             </div>
@@ -279,7 +318,9 @@ export default async function ServicePage({
 
         {relatedServices.length > 0 && (
           <section className="mt-12">
-            <h2 className="text-lg font-semibold">{nav("services")}</h2>
+            <h2 className="text-2xl font-semibold">
+              {s("relatedServicesTitle")}
+            </h2>
             <RevealGroup
               step={80}
               className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
@@ -297,13 +338,13 @@ export default async function ServicePage({
         )}
 
         <Reveal>
-          <div className="border-border mt-12 mb-16 flex flex-col items-start gap-4 rounded-2xl border p-6 sm:flex-row sm:items-center sm:justify-between">
+          <div className="border-border bg-secondary/40 mt-12 flex flex-col items-start gap-4 rounded-2xl border p-6 sm:flex-row sm:items-center sm:justify-between">
             <p className="font-medium">{s("ctaQuestion")}</p>
             <Button render={<Link href="/kontakt" />}>{t("contactUs")}</Button>
           </div>
         </Reveal>
 
-        <p className="text-muted-foreground -mt-8 mb-16 text-xs">
+        <p className="text-muted-foreground mt-6 mb-16 text-xs">
           {t("lastReviewed")}: {service.lastReviewed}
         </p>
       </Container>

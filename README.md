@@ -17,7 +17,7 @@ npm run test:e2e     # Playwright smoke tests (builds + starts the app itself)
 npm run verify       # lint + typecheck + test, the pre-ship gate
 ```
 
-English/Arabic content currently exists for every page built so far (homepage, all 7 service pages, About Hadi, Contact, legal pages) — see `content/*.ts` `Localized<T>` fields. Any future page should follow the same pattern.
+English/Arabic content currently exists for every page built so far (homepage, all 14 service pages, About Hadi, Contact, legal pages) — see `content/*.ts` `Localized<T>` fields. Any future page should follow the same pattern.
 
 ## Structure
 
@@ -31,3 +31,10 @@ English/Arabic content currently exists for every page built so far (homepage, a
 ## Environment
 
 Copy `.env.example` to `.env.local` and fill in values once a contact-form email provider is chosen (see `lib/email/index.ts` and CLIENT-TODO item 15). Without it, form submissions are logged server-side and still report success.
+
+## SEO & deployment
+
+- `NEXT_PUBLIC_SITE_URL` (`lib/site.ts`) is the single source of truth for every absolute URL the site generates (canonical/hreflang links, sitemap, OG images, JSON-LD `url`/`image` fields). Set it to the production domain in deployment; it falls back to `https://www.economycodes.com` if unset or empty.
+- `app/sitemap.ts` emits static pages, all 14 services, and all articles, each with per-locale `alternates.languages` (hreflang, including `x-default`). Static pages share a manually-bumped `STATIC_LAST_MODIFIED` date; service/article entries use `lastReviewed`/`updatedAt` (falling back to `publishedAt`) from their own content data.
+- `app/robots.ts` allows all crawling except `/api/` and points to the sitemap.
+- `lib/structured-data/*.ts` builds the JSON-LD (Organization, Service, Person, Article, Breadcrumb, FAQ) rendered via `components/seo/JsonLd.tsx`.

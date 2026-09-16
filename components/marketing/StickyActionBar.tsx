@@ -26,7 +26,7 @@ export function StickyActionBar() {
           className="border-border text-whatsapp active:bg-muted flex flex-1 flex-col items-center gap-0.5 border-s py-2.5 text-xs font-medium"
         >
           <MessageCircle size={18} aria-hidden="true" />
-          WhatsApp
+          {t("whatsapp")}
         </a>
       ) : null}
       <Link

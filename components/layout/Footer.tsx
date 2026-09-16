@@ -13,6 +13,7 @@ import { Container } from "@/components/layout/Container";
 
 export async function Footer({ locale }: { locale: AppLocale }) {
   const t = await getTranslations({ locale, namespace: "footer" });
+  const common = await getTranslations({ locale, namespace: "common" });
   const year = new Date().getFullYear();
 
   return (
@@ -124,7 +125,7 @@ export async function Footer({ locale }: { locale: AppLocale }) {
               href={business.socials.facebook}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Facebook"
+              aria-label={common("facebook")}
               className="inline-flex text-white/70 hover:text-white"
             >
               <FacebookIcon size={20} />

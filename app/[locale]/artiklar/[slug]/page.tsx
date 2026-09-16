@@ -4,8 +4,13 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import type { AppLocale } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
-import { getAbsoluteUrl, getArticleAlternateLinks } from "@/lib/routes";
+import {
+  getAbsoluteUrl,
+  getArticleAlternateLinks,
+  resolveArticleBySlug,
+} from "@/lib/routes";
 import { buildMetadata } from "@/lib/seo/metadata";
+import { getArticleOgImageUrl } from "@/lib/seo/og-image";
 import { buildArticleJsonLd } from "@/lib/structured-data/article";
 import { buildBreadcrumbJsonLd } from "@/lib/structured-data/breadcrumb";
 import { buildFaqJsonLd } from "@/lib/structured-data/faq";
@@ -36,25 +41,13 @@ export function generateStaticParams() {
   );
 }
 
-// See lib/service-lookup.ts's decodeSlug for why this defensive decode exists
-// (Next 16.3.4 + Turbopack doesn't always URL-decode non-ASCII dynamic segments).
-function resolveArticle(locale: AppLocale, slug: string) {
-  let decoded = slug;
-  try {
-    decoded = decodeURIComponent(slug);
-  } catch {
-    // slug was already decoded; use as-is
-  }
-  return articles.find((a) => (a.slug[locale] ?? a.slug.sv) === decoded);
-}
-
 export async function generateMetadata({
   params,
 }: {
   params: Promise<ArticlePageParams>;
 }): Promise<Metadata> {
   const { locale, slug } = await params;
-  const article = resolveArticle(locale, slug);
+  const article = resolveArticleBySlug(locale, slug);
   if (!article) return {};
 
   return buildMetadata({
@@ -62,6 +55,7 @@ export async function generateMetadata({
     title: getLocalized(article.title, locale),
     description: getLocalized(article.excerpt, locale),
     alternates: getArticleAlternateLinks(article),
+    ogImage: getArticleOgImageUrl(locale, slug),
   });
 }
 
@@ -72,7 +66,7 @@ export default async function ArticlePage({
 }) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
-  const article = resolveArticle(locale, slug);
+  const article = resolveArticleBySlug(locale, slug);
   if (!article) notFound();
 
   const t = await getTranslations({ locale, namespace: "common" });
@@ -136,6 +130,7 @@ export default async function ArticlePage({
           person={hadi}
           locale={locale}
           learnMoreLabel={t("learnMore")}
+          facebookLabel={t("facebook")}
           compact
         />
       </div>

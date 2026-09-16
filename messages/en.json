@@ -19,6 +19,8 @@
     "getDirections": "Get directions",
     "email": "Email",
     "phone": "Phone",
+    "whatsapp": "WhatsApp",
+    "facebook": "Facebook",
     "address": "Address",
     "skipToContent": "Skip to content",
     "whoWeHelp": "Who we help",
@@ -33,6 +35,7 @@
     "heroCtaSecondary": "Contact us",
     "heroCtaServices": "See our services",
     "trustTitle": "Verified authorization",
+    "servicesEyebrow": "Our services",
     "servicesTitle": "Accounting services for small and medium-sized businesses",
     "servicesSubtitle": "From ongoing bookkeeping and payroll to annual accounts, VAT, and advisory — we cover the services most small and medium-sized Swedish businesses need.",
     "whyAuthorizedTitle": "Why choose an authorized accounting firm?",
@@ -42,7 +45,6 @@
     "aboutTitle": "About Hadi Al Maani",
     "languageSupportTitle": "Bookkeeping in Swedish, English, and Arabic",
     "benefitsTitle": "Why Economy Codes",
-    "industriesTitle": "Industries we know",
     "finalCtaTitle": "Ready to get started?",
     "finalCtaSubtitle": "Tell us what you need help with, and we'll get back to you as soon as we can."
   },
@@ -51,7 +53,8 @@
     "whatsIncludedTitle": "What's included",
     "processTitle": "How it works",
     "prepareTitle": "What to prepare",
-    "ctaQuestion": "Ready to get started?"
+    "ctaQuestion": "Ready to get started?",
+    "relatedServicesTitle": "Related services"
   },
   "footer": {
     "navTitle": "Navigation",
@@ -79,5 +82,10 @@
     "title": "Page not found",
     "body": "The page you're looking for no longer exists or has moved.",
     "cta": "Back to homepage"
+  },
+  "error": {
+    "title": "Something went wrong",
+    "body": "An unexpected error occurred. Please try again or contact us.",
+    "retry": "Try again"
   }
 }

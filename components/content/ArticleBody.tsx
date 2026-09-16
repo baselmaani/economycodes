@@ -34,8 +34,6 @@ export function ArticleBody({ blocks }: { blocks: ContentBlock[] }) {
                 {block.text}
               </p>
             );
-          case "image":
-            return null;
           default:
             return null;
         }

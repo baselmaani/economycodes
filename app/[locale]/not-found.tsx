@@ -1,7 +1,12 @@
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
+
+export const metadata: Metadata = {
+  robots: { index: false },
+};
 
 export default async function LocaleNotFound() {
   const t = await getTranslations("notFound");

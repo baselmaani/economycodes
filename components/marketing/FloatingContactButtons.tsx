@@ -29,8 +29,8 @@ export function FloatingContactButtons() {
           href={business.whatsappHref}
           target="_blank"
           rel="noopener noreferrer"
-          title="WhatsApp"
-          aria-label="WhatsApp"
+          title={t("whatsapp")}
+          aria-label={t("whatsapp")}
           className="bg-whatsapp flex size-14 items-center justify-center rounded-full text-white shadow-lg transition-transform duration-200 ease-(--ease-standard) hover:-translate-y-0.5 hover:brightness-95"
         >
           <WhatsAppIcon size={28} />

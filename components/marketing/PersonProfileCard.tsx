@@ -4,18 +4,21 @@ import { Link } from "@/i18n/navigation";
 import { FacebookIcon } from "@/components/icons/FacebookIcon";
 import type { AppLocale } from "@/i18n/routing";
 import { getLocalized } from "@/lib/i18n-content";
+import { cn } from "@/lib/utils";
 import type { PersonProfile } from "@/content/types";
 
 export function PersonProfileCard({
   person,
   locale,
   learnMoreLabel,
+  facebookLabel,
   showLink = true,
   compact = false,
 }: {
   person: PersonProfile;
   locale: AppLocale;
   learnMoreLabel?: string;
+  facebookLabel: string;
   showLink?: boolean;
   compact?: boolean;
 }) {
@@ -23,9 +26,10 @@ export function PersonProfileCard({
     <div className="flex flex-col items-start gap-6 sm:flex-row">
       <div className="relative shrink-0">
         <div
-          className={`border-border bg-card relative aspect-square overflow-hidden rounded-2xl border shadow-md ${
-            compact ? "w-28" : "w-40"
-          }`}
+          className={cn(
+            "border-border bg-card relative aspect-square overflow-hidden rounded-2xl border shadow-md",
+            compact ? "w-28" : "w-40",
+          )}
         >
           <Image
             src={person.photo.src}
@@ -61,7 +65,7 @@ export function PersonProfileCard({
             href={person.socials.facebook}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Facebook"
+            aria-label={facebookLabel}
             className="text-muted-foreground hover:text-primary"
           >
             <FacebookIcon size={18} />

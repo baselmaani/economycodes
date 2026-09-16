@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 const sizes = {
   /** Wide marketing sections, grids. */
-  wide: "max-w-7xl",
+  wide: "max-w-[90rem]",
   /** Centered text-forward sections. */
   narrow: "max-w-4xl",
   /** Long-form article/service body copy. */

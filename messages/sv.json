@@ -19,6 +19,8 @@
     "getDirections": "Vägbeskrivning",
     "email": "E-post",
     "phone": "Telefon",
+    "whatsapp": "WhatsApp",
+    "facebook": "Facebook",
     "address": "Adress",
     "skipToContent": "Hoppa till innehåll",
     "whoWeHelp": "Vem vi hjälper",
@@ -33,6 +35,7 @@
     "heroCtaSecondary": "Kontakta oss",
     "heroCtaServices": "Se våra tjänster",
     "trustTitle": "Verifierad auktorisation",
+    "servicesEyebrow": "Våra tjänster",
     "servicesTitle": "Redovisningstjänster för små och medelstora företag",
     "servicesSubtitle": "Från löpande bokföring och lön till bokslut, moms och rådgivning — vi täcker de tjänster som de flesta små och medelstora företag i Sverige behöver.",
     "whyAuthorizedTitle": "Varför välja en auktoriserad redovisningsbyrå?",
@@ -42,7 +45,6 @@
     "aboutTitle": "Om Hadi Al Maani",
     "languageSupportTitle": "Bokföring på svenska, engelska och arabiska",
     "benefitsTitle": "Varför Economy Codes",
-    "industriesTitle": "Branscher vi känner till",
     "finalCtaTitle": "Redo att komma igång?",
     "finalCtaSubtitle": "Berätta vad du behöver hjälp med, så återkommer vi så snart vi kan."
   },
@@ -51,7 +53,8 @@
     "whatsIncludedTitle": "Det här ingår",
     "processTitle": "Så går det till",
     "prepareTitle": "Förbered gärna",
-    "ctaQuestion": "Vill du komma igång?"
+    "ctaQuestion": "Vill du komma igång?",
+    "relatedServicesTitle": "Relaterade tjänster"
   },
   "footer": {
     "navTitle": "Navigering",
@@ -79,5 +82,10 @@
     "title": "Sidan kunde inte hittas",
     "body": "Sidan du letar efter finns inte längre eller har flyttats.",
     "cta": "Till startsidan"
+  },
+  "error": {
+    "title": "Något gick fel",
+    "body": "Ett oväntat fel har inträffat. Försök igen eller kontakta oss.",
+    "retry": "Försök igen"
   }
 }
