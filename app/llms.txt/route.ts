@@ -2,6 +2,7 @@ import { business } from "@/content/business";
 import { articles } from "@/content/articles/meta";
 import { hadi } from "@/content/people";
 import { servicesList } from "@/content/services";
+import { getServiceGroup } from "@/content/service-icons";
 import type { AppLocale } from "@/i18n/routing";
 import { routing } from "@/i18n/routing";
 import { getLocalized } from "@/lib/i18n-content";
@@ -19,6 +20,7 @@ const LABELS: Record<
     heading: string;
     home: string;
     services: string;
+    digital: string;
     about: string;
     contact: string;
     insights: string;
@@ -32,6 +34,7 @@ const LABELS: Record<
     heading: "Svenska",
     home: "Startsida",
     services: "Tjänster",
+    digital: "Digital marknadsföring",
     about: "Om Hadi",
     contact: "Kontakt",
     insights: "Artiklar",
@@ -44,6 +47,7 @@ const LABELS: Record<
     heading: "English",
     home: "Home",
     services: "Services",
+    digital: "Digital marketing",
     about: "About Hadi",
     contact: "Contact",
     insights: "Insights",
@@ -56,6 +60,7 @@ const LABELS: Record<
     heading: "العربية",
     home: "الرئيسية",
     services: "الخدمات",
+    digital: "التسويق الرقمي",
     about: "عن هادي",
     contact: "اتصل بنا",
     insights: "مقالات",
@@ -72,12 +77,23 @@ function buildLocaleSection(locale: AppLocale): string {
 
   lines.push(`- [${t.home}](${getAbsoluteUrl("/", locale)})`);
 
+  const pushServiceLinks = (digital: boolean) => {
+    for (const service of servicesList) {
+      if ((getServiceGroup(service.key) === "digital") !== digital) continue;
+      const name = getLocalized(service.name, locale);
+      const url = getServiceAlternateLinks(service)[locale];
+      const summary = getLocalized(service.summary, locale);
+      lines.push(`  - [${name}](${url}): ${summary}`);
+    }
+  };
+
   lines.push(`- [${t.services}](${getAbsoluteUrl("/tjanster", locale)})`);
-  for (const service of servicesList) {
-    const name = getLocalized(service.name, locale);
-    const url = getServiceAlternateLinks(service)[locale];
-    lines.push(`  - [${name}](${url})`);
-  }
+  pushServiceLinks(false);
+
+  lines.push(
+    `- [${t.digital}](${getAbsoluteUrl("/digital-marknadsforing", locale)})`,
+  );
+  pushServiceLinks(true);
 
   lines.push(`- [${t.about}](${getAbsoluteUrl("/om-hadi", locale)})`);
   lines.push(`- [${t.contact}](${getAbsoluteUrl("/kontakt", locale)})`);
@@ -104,7 +120,7 @@ export function GET() {
 
   const body = `# Economy Codes AB
 
-> Srf-auktoriserad redovisningsbyrå / Srf-authorized accounting firm / مكتب محاسبة معتمد من Srf. Bookkeeping, payroll, tax returns, annual accounts, and business advisory for small and medium-sized businesses in Sweden, served in Swedish, English, and Arabic. Offices in Mellerud and Trollhättan, Sweden.
+> Srf-auktoriserad redovisningsbyrå / Srf-authorized accounting firm / مكتب محاسبة معتمد من Srf. Bookkeeping, payroll, tax returns, annual accounts, and business advisory for small and medium-sized businesses in Sweden, plus digital marketing: websites, SEO, AEO, GEO, Google Ads, social media advertising, SaaS/web app development, and iOS/Android mobile app development. Served in Swedish, English, and Arabic. Offices in Mellerud and Trollhättan, Sweden.
 
 Contact: ${business.email}, ${business.phone}
 Consultant: ${hadi.name} — ${getLocalized(hadi.title, "en")}

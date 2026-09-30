@@ -40,6 +40,11 @@ export const routing = defineRouting({
       en: "/services/[slug]",
       ar: "/الخدمات/[slug]",
     },
+    "/digital-marknadsforing": {
+      sv: "/digital-marknadsforing",
+      en: "/digital-marketing-agency-sweden",
+      ar: "/شركة-تسويق-رقمي-في-السويد",
+    },
     "/kontakt": {
       sv: "/kontakt",
       en: "/contact",

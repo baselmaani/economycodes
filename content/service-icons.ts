@@ -1,5 +1,6 @@
 import type { LucideIcon } from "lucide-react";
 import {
+  AppWindow,
   BarChart3,
   Building2,
   Calculator,
@@ -9,7 +10,15 @@ import {
   Globe2,
   Languages,
   Lightbulb,
+  Megaphone,
+  MessageSquareText,
+  MonitorSmartphone,
+  MousePointerClick,
   PlugZap,
+  Search,
+  Share2,
+  Smartphone,
+  Sparkles,
   Users2,
   Wallet,
   Wrench,
@@ -22,7 +31,7 @@ import {
  * content/services.ts, which holds verified business facts and is covered by
  * tests/unit/content-integrity.test.ts -- this file only affects styling.
  */
-export type ServiceGroup = "core" | "advisory" | "specialist";
+export type ServiceGroup = "core" | "advisory" | "specialist" | "digital";
 
 export const serviceGroups: Record<
   ServiceGroup,
@@ -42,6 +51,11 @@ export const serviceGroups: Record<
     sv: "Specialistlösningar",
     en: "Specialist solutions",
     ar: "حلول متخصصة",
+  },
+  digital: {
+    sv: "Digital marknadsföring",
+    en: "Digital marketing",
+    ar: "التسويق الرقمي",
   },
 };
 
@@ -65,6 +79,16 @@ export const serviceIcons: Record<
   "fortnox-support": { icon: PlugZap, group: "specialist" },
   "car-dealership-accounting": { icon: Car, group: "specialist" },
   "arabic-speaking-accounting": { icon: Languages, group: "specialist" },
+
+  "website-creation": { icon: MonitorSmartphone, group: "digital" },
+  seo: { icon: Search, group: "digital" },
+  aeo: { icon: MessageSquareText, group: "digital" },
+  geo: { icon: Sparkles, group: "digital" },
+  "social-media-ads": { icon: Megaphone, group: "digital" },
+  "google-ads": { icon: MousePointerClick, group: "digital" },
+  "social-media-management": { icon: Share2, group: "digital" },
+  "saas-development": { icon: AppWindow, group: "digital" },
+  "mobile-app-development": { icon: Smartphone, group: "digital" },
 };
 
 export function getServiceIcon(key: string): LucideIcon {

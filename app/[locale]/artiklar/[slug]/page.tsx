@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
-import type { AppLocale } from "@/i18n/routing";
+import { routing, type AppLocale } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
 import {
   getAbsoluteUrl,
@@ -34,7 +34,7 @@ interface ArticlePageParams {
 
 export function generateStaticParams() {
   return articles.flatMap((article) =>
-    (["sv", "en", "ar"] as const).map((locale) => ({
+    routing.locales.map((locale) => ({
       locale,
       slug: article.slug[locale] ?? article.slug.sv,
     })),
@@ -50,13 +50,17 @@ export async function generateMetadata({
   const article = resolveArticleBySlug(locale, slug);
   if (!article) return {};
 
-  return buildMetadata({
+  const title = getLocalized(article.title, locale);
+  const meta = buildMetadata({
     locale,
-    title: getLocalized(article.title, locale),
+    title,
     description: getLocalized(article.excerpt, locale),
     alternates: getArticleAlternateLinks(article),
     ogImage: getArticleOgImageUrl(locale, slug),
   });
+  // Article headlines are already 55-80 characters; the layout's
+  // " | Economy Codes" suffix would push them past what search results show.
+  return { ...meta, title: { absolute: title } };
 }
 
 export default async function ArticlePage({
@@ -82,7 +86,13 @@ export default async function ArticlePage({
       className="prose prose-neutral py-12 sm:py-16"
     >
       <JsonLd
-        data={buildArticleJsonLd(article, hadi, locale, alternates[locale])}
+        data={buildArticleJsonLd(
+          article,
+          hadi,
+          locale,
+          alternates[locale],
+          getAbsoluteUrl("/om-hadi", locale),
+        )}
       />
       <JsonLd
         data={buildBreadcrumbJsonLd([
@@ -113,7 +123,15 @@ export default async function ArticlePage({
           {" — "}
           {getLocalized(hadi.title, locale)}
           {" · "}
-          {t("lastReviewed")}: {article.publishedAt}
+          {t("published")}:{" "}
+          <time dateTime={article.publishedAt}>{article.publishedAt}</time>
+          {article.updatedAt && article.updatedAt !== article.publishedAt && (
+            <>
+              {" · "}
+              {t("lastReviewed")}:{" "}
+              <time dateTime={article.updatedAt}>{article.updatedAt}</time>
+            </>
+          )}
         </p>
         {body && <ArticleBody blocks={getLocalized(body, locale)} />}
       </Reveal>

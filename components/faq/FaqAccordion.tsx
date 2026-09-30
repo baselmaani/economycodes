@@ -20,7 +20,14 @@ export function FaqAccordion({
   if (faqs.length === 0) return null;
 
   return (
-    <Accordion className="border-border w-full divide-y rounded-2xl border">
+    // hiddenUntilFound keeps every closed answer in the server-rendered HTML
+    // (as hidden="until-found") instead of unmounting it: crawlers and AI
+    // answer engines that don't run JS can read the answers the FAQPage
+    // JSON-LD describes, and the browser's find-in-page can open them.
+    <Accordion
+      hiddenUntilFound
+      className="border-border w-full divide-y rounded-2xl border"
+    >
       {faqs.map((faq) => (
         <AccordionItem key={faq.id} value={faq.id} className="border-none px-5">
           <AccordionTrigger className="py-5 text-start text-lg font-medium">

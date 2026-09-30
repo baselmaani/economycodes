@@ -56,7 +56,6 @@ export async function Header({ locale }: { locale: AppLocale }) {
               width={180}
               height={75}
               loading="eager"
-              fetchPriority="high"
               className="h-9 w-auto lg:h-10"
             />
           </Link>

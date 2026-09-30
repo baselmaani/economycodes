@@ -519,4 +519,272 @@ export const faqs: Faq[] = [
       ar: "الخدمات نفسها التي نقدّمها بالسويدية والإنجليزية — مسك الدفاتر والرواتب وضريبة القيمة المضافة والإغلاق السنوي والإقرارات الضريبية والاستشارات — مع إمكانية التواصل باللغة العربية طوال العملية.",
     },
   },
+  // Digital marketing hub (/digital-marknadsforing)
+  {
+    id: "faq-digital-what-agency-does",
+    scope: "digital",
+    question: {
+      sv: "Vad gör en digital marknadsföringsbyrå?",
+      en: "What does a digital marketing agency do?",
+      ar: "ماذا تفعل شركة التسويق الرقمي؟",
+    },
+    answer: {
+      sv: "En digital marknadsföringsbyrå hjälper företag att nå fler kunder online. Hos Economy Codes innebär det att bygga webbplatser, webbappar och mobilappar, arbeta med sökmotoroptimering (SEO), synlighet i svarsmotorer och AI-sök (AEO och GEO), driva annonsering på Google och i sociala medier, och följa upp resultaten med tydliga rapporter.",
+      en: "A digital marketing agency helps businesses reach more customers online. At Economy Codes, that means building websites, web apps, and mobile apps, working on search engine optimization (SEO) and visibility in answer engines and AI search (AEO and GEO), running advertising on Google and social media, and tracking results with clear reports.",
+      ar: "تساعد شركة التسويق الرقمي الشركات على الوصول إلى مزيد من العملاء عبر الإنترنت. وفي Economy Codes يعني ذلك بناء المواقع وتطبيقات الويب والجوال، والعمل على تحسين محركات البحث (SEO) والظهور في محركات الإجابة وبحث الذكاء الاصطناعي (AEO وGEO)، وإدارة الإعلانات على جوجل ووسائل التواصل الاجتماعي، ومتابعة النتائج بتقارير واضحة.",
+    },
+  },
+  {
+    id: "faq-digital-cost",
+    scope: "digital",
+    question: {
+      sv: "Vad kostar digital marknadsföring?",
+      en: "How much does digital marketing cost?",
+      ar: "كم تكلفة التسويق الرقمي؟",
+    },
+    answer: {
+      sv: "Det beror på vilka tjänster du behöver och hur omfattande arbetet är. En webbplats offereras oftast som ett projekt, medan SEO, annonsering och sociala medier ofta sköts löpande. Annonsbudgeten betalas direkt till plattformarna och kommer utöver vårt arvode. Efter ett första samtal får du ett förslag anpassat efter dina mål och din budget.",
+      en: "It depends on which services you need and how extensive the work is. A website is usually quoted as a project, while SEO, advertising, and social media are often handled on an ongoing basis. Ad spend is paid directly to the platforms, on top of our fee. After an initial conversation, you'll get a proposal tailored to your goals and budget.",
+      ar: "يعتمد ذلك على الخدمات التي تحتاجها وحجم العمل. عادةً ما يُسعَّر الموقع الإلكتروني كمشروع، بينما تُدار خدمات SEO والإعلانات ووسائل التواصل غالبًا بشكل مستمر. وتُدفع الميزانية الإعلانية مباشرة إلى المنصات إضافة إلى أتعابنا. وبعد محادثة أولية، تحصل على مقترح يناسب أهدافك وميزانيتك.",
+    },
+  },
+  {
+    id: "faq-digital-area",
+    scope: "digital",
+    question: {
+      sv: "Arbetar ni med företag i hela Sverige?",
+      en: "Do you work with businesses across Sweden?",
+      ar: "هل تعملون مع الشركات في جميع أنحاء السويد؟",
+    },
+    answer: {
+      sv: "Ja. Digital marknadsföring kan skötas helt på distans, så vi arbetar med företag i hela Sverige via telefon, video, mejl och WhatsApp. Vi har kontor i Mellerud och Trollhättan.",
+      en: "Yes. Digital marketing can be handled entirely remotely, so we work with businesses throughout Sweden by phone, video, email, and WhatsApp. Our offices are in Mellerud and Trollhättan.",
+      ar: "نعم. يمكن إدارة التسويق الرقمي عن بُعد بالكامل، لذلك نعمل مع الشركات في جميع أنحاء السويد عبر الهاتف والفيديو والبريد الإلكتروني وواتساب. ومكاتبنا في ميلَّروود وتروللهاتان.",
+    },
+  },
+  {
+    id: "faq-digital-languages",
+    scope: "digital",
+    question: {
+      sv: "Kan ni ta fram marknadsföring på arabiska och engelska?",
+      en: "Can you create marketing in Arabic and English?",
+      ar: "هل يمكنكم إعداد التسويق باللغتين العربية والإنجليزية؟",
+    },
+    answer: {
+      sv: "Ja. Vi kommunicerar och tar fram webbplatser, annonser och innehåll på svenska, engelska och arabiska, inklusive webbplatser med höger-till-vänster-text. Det gör det möjligt att nå flera kundgrupper med samma budskap.",
+      en: "Yes. We communicate in, and create websites, ads, and content in, Swedish, English, and Arabic — including websites with right-to-left text. That lets you reach several customer groups with the same message.",
+      ar: "نعم. نتواصل معك ونعدّ المواقع والإعلانات والمحتوى بالسويدية والإنجليزية والعربية، بما في ذلك المواقع التي تُكتب من اليمين إلى اليسار. وهذا يتيح لك الوصول إلى عدة فئات من العملاء برسالة واحدة.",
+    },
+  },
+  {
+    id: "faq-digital-why-accounting-firm",
+    scope: "digital",
+    question: {
+      sv: "Varför välja en redovisningsbyrå för digital marknadsföring?",
+      en: "Why choose an accounting firm for digital marketing?",
+      ar: "لماذا تختار مكتب محاسبة للتسويق الرقمي؟",
+    },
+    answer: {
+      sv: "Marknadsföring är en investering, och den ska kunna mätas mot företagets ekonomi. Eftersom Economy Codes även är en auktoriserad redovisningsbyrå kan vi ställa annonskostnader och resultat mot intäkterna i bokföringen, så att du ser vad marknadsföringen faktiskt ger — och får båda tjänsterna från samma kontakt.",
+      en: "Marketing is an investment, and it should be measurable against your company's finances. Because Economy Codes is also an authorized accounting firm, we can set ad spend and results against the revenue in your books, so you see what your marketing actually delivers — and get both services from the same contact.",
+      ar: "التسويق استثمار، ويجب أن يكون قابلًا للقياس مقارنة بالوضع المالي لشركتك. ولأن Economy Codes مكتب محاسبة معتمد أيضًا، يمكننا مقارنة تكاليف الإعلانات ونتائجها بالإيرادات في محاسبتك، لترى ما يحققه التسويق فعلًا — وتحصل على الخدمتين من جهة تواصل واحدة.",
+    },
+  },
+  // Digital marketing (content/services-digital.ts)
+  {
+    id: "faq-website-cost",
+    scope: { serviceKey: "website-creation" },
+    question: {
+      sv: "Vad kostar en ny webbplats?",
+      en: "How much does a new website cost?",
+      ar: "كم تكلفة إنشاء موقع إلكتروني جديد؟",
+    },
+    answer: {
+      sv: "Det beror på hur många sidor och språk webbplatsen ska ha, om den behöver funktioner som bokning eller webbshop, och hur mycket innehåll som ska tas fram. Efter ett första samtal får du en offert utifrån just dina behov.",
+      en: "It depends on how many pages and languages the site needs, whether it requires features such as booking or a web shop, and how much content needs to be created. After an initial conversation, you'll receive a quote based on your specific needs.",
+      ar: "يعتمد ذلك على عدد صفحات الموقع ولغاته، وما إذا كان يحتاج إلى ميزات مثل الحجز أو المتجر الإلكتروني، وحجم المحتوى المطلوب إعداده. بعد محادثة أولية، تحصل على عرض سعر مبني على احتياجاتك تحديدًا.",
+    },
+  },
+  {
+    id: "faq-website-ownership",
+    scope: { serviceKey: "website-creation" },
+    question: {
+      sv: "Äger jag webbplatsen och domänen när den är klar?",
+      en: "Do I own the website and domain once it's finished?",
+      ar: "هل أمتلك الموقع والنطاق بعد الانتهاء منه؟",
+    },
+    answer: {
+      sv: "Ja, målet är att domänen registreras i ditt företags namn och att du har full åtkomst till webbplatsen och dess innehåll. Vi går igenom ägande, drift och eventuell support innan arbetet startar.",
+      en: "Yes — the aim is for the domain to be registered in your company's name and for you to have full access to the website and its content. We go through ownership, hosting, and any ongoing support before the work begins.",
+      ar: "نعم، الهدف أن يُسجَّل النطاق باسم شركتك وأن تكون لديك صلاحية كاملة على الموقع ومحتواه. ونراجع معك الملكية والاستضافة وأي دعم مستمر قبل بدء العمل.",
+    },
+  },
+  {
+    id: "faq-seo-time",
+    scope: { serviceKey: "seo" },
+    question: {
+      sv: "Hur lång tid tar det innan SEO ger resultat?",
+      en: "How long does it take for SEO to show results?",
+      ar: "كم من الوقت يحتاج تحسين محركات البحث ليُظهر نتائج؟",
+    },
+    answer: {
+      sv: "Tekniska förbättringar kan ge effekt inom några veckor, men för det mesta tar det några månader innan synligheten ökar märkbart. Tiden beror bland annat på konkurrensen i din bransch och hur webbplatsen ser ut i dag.",
+      en: "Technical improvements can have an effect within a few weeks, but it usually takes a few months before visibility increases noticeably. The timeframe depends on factors such as competition in your industry and the current state of your website.",
+      ar: "قد تُحدث التحسينات التقنية أثرًا خلال بضعة أسابيع، لكن غالبًا ما يستغرق الأمر بضعة أشهر قبل أن يزداد الظهور بشكل ملحوظ. وتعتمد المدة على عوامل منها المنافسة في مجالك والوضع الحالي لموقعك.",
+    },
+  },
+  {
+    id: "faq-seo-vs-ads",
+    scope: { serviceKey: "seo" },
+    question: {
+      sv: "Ska jag satsa på SEO eller Google Ads?",
+      en: "Should I invest in SEO or Google Ads?",
+      ar: "هل أستثمر في تحسين محركات البحث أم في إعلانات جوجل؟",
+    },
+    answer: {
+      sv: "De kompletterar varandra. Google Ads ger synlighet direkt så länge du betalar, medan SEO bygger upp synlighet som håller över tid. Många företag börjar med annonser för att få förfrågningar snabbt och bygger samtidigt upp sin organiska synlighet.",
+      en: "They complement each other. Google Ads gives you visibility immediately for as long as you pay, while SEO builds visibility that lasts over time. Many businesses start with ads to get enquiries quickly while building up their organic visibility at the same time.",
+      ar: "كلاهما يكمل الآخر. تمنحك إعلانات جوجل ظهورًا فوريًا طالما تدفع، بينما يبني تحسين محركات البحث ظهورًا يدوم مع الوقت. وتبدأ شركات كثيرة بالإعلانات للحصول على استفسارات بسرعة، مع العمل في الوقت نفسه على بناء ظهورها المجاني.",
+    },
+  },
+  {
+    id: "faq-aeo-what",
+    scope: { serviceKey: "aeo" },
+    question: {
+      sv: "Vad är skillnaden mellan AEO och SEO?",
+      en: "What's the difference between AEO and SEO?",
+      ar: "ما الفرق بين AEO وSEO؟",
+    },
+    answer: {
+      sv: "SEO handlar om att ranka högt i de vanliga sökresultaten. AEO handlar om att bli själva svaret — i utvalda svar, röstsök och AI-sammanfattningar. AEO bygger på en god SEO-grund men lägger till tydliga frågor och svar samt strukturerad data.",
+      en: "SEO is about ranking high in regular search results. AEO is about becoming the answer itself — in featured snippets, voice search, and AI summaries. AEO builds on a solid SEO foundation but adds clear questions and answers and structured data.",
+      ar: "يهدف تحسين محركات البحث (SEO) إلى الظهور في مراتب متقدمة في نتائج البحث العادية، بينما يهدف تحسين محركات الإجابة (AEO) إلى أن تكون أنت الإجابة نفسها — في المقتطفات المميزة والبحث الصوتي وملخصات الذكاء الاصطناعي. ويعتمد AEO على أساس جيد من SEO مع إضافة أسئلة وإجابات واضحة وبيانات منظمة.",
+    },
+  },
+  {
+    id: "faq-geo-what",
+    scope: { serviceKey: "geo" },
+    question: {
+      sv: "Vad är GEO?",
+      en: "What is GEO?",
+      ar: "ما هو GEO؟",
+    },
+    answer: {
+      sv: "GEO står för Generative Engine Optimization och handlar om hur ditt företag beskrivs och rekommenderas av AI-tjänster som ChatGPT, Gemini, Perplexity och Googles AI-översikter. Arbetet går ut på att göra korrekt information om ditt företag tydlig och lätt att hitta för dessa tjänster.",
+      en: "GEO stands for generative engine optimization — how your business is described and recommended by AI tools such as ChatGPT, Gemini, Perplexity, and Google's AI Overviews. The work focuses on making accurate information about your business clear and easy for these tools to find.",
+      ar: "يرمز GEO إلى تحسين الظهور في محركات الذكاء الاصطناعي التوليدي، ويتعلق بالطريقة التي تصف بها أدوات مثل ChatGPT وGemini وPerplexity وملخصات جوجل شركتك وتوصي بها. ويركز العمل على جعل المعلومات الدقيقة عن شركتك واضحة وسهلة الوصول لهذه الأدوات.",
+    },
+  },
+  {
+    id: "faq-geo-vs-seo",
+    scope: { serviceKey: "geo" },
+    question: {
+      sv: "Behöver jag GEO om jag redan arbetar med SEO?",
+      en: "Do I need GEO if I already do SEO?",
+      ar: "هل أحتاج إلى GEO إذا كنت أعمل بالفعل على تحسين محركات البحث؟",
+    },
+    answer: {
+      sv: "SEO lägger en viktig grund, men AI-tjänster väger också in information från andra källor än din webbplats, som kataloger, recensioner och omnämnanden. GEO kompletterar SEO genom att se till att bilden av ditt företag är korrekt och konsekvent i hela den informationen.",
+      en: "SEO lays an important foundation, but AI tools also draw on information from sources other than your website, such as directories, reviews, and mentions. GEO complements SEO by making sure the picture of your business is accurate and consistent across all of that information.",
+      ar: "يضع تحسين محركات البحث أساسًا مهمًا، لكن أدوات الذكاء الاصطناعي تعتمد أيضًا على مصادر غير موقعك، مثل الأدلة والتقييمات والإشارات إلى شركتك. ويكمّل GEO تحسين محركات البحث بالتأكد من أن صورة شركتك دقيقة ومتسقة في جميع هذه المصادر.",
+    },
+  },
+  {
+    id: "faq-social-ads-platforms",
+    scope: { serviceKey: "social-media-ads" },
+    question: {
+      sv: "Vilka plattformar ska mitt företag annonsera på?",
+      en: "Which platforms should my business advertise on?",
+      ar: "على أي منصات يجب أن تعلن شركتي؟",
+    },
+    answer: {
+      sv: "Det beror på var dina kunder finns. Facebook och Instagram passar många lokala företag och konsumentinriktade verksamheter, TikTok når ofta en yngre publik och LinkedIn fungerar bäst när du säljer till andra företag. Vi rekommenderar kanaler utifrån din målgrupp och budget.",
+      en: "It depends on where your customers are. Facebook and Instagram suit many local and consumer-facing businesses, TikTok often reaches a younger audience, and LinkedIn works best when you sell to other businesses. We recommend channels based on your audience and budget.",
+      ar: "يعتمد ذلك على مكان وجود عملائك. يناسب فيسبوك وإنستغرام كثيرًا من الشركات المحلية والموجهة للمستهلكين، وغالبًا ما يصل تيك توك إلى جمهور أصغر سنًا، بينما يعمل لينكدإن بشكل أفضل عند البيع لشركات أخرى. ونوصي بالمنصات بناءً على جمهورك وميزانيتك.",
+    },
+  },
+  {
+    id: "faq-ads-budget",
+    scope: { serviceKey: "google-ads" },
+    question: {
+      sv: "Hur stor annonsbudget behöver jag?",
+      en: "How big an ad budget do I need?",
+      ar: "ما حجم الميزانية الإعلانية التي أحتاجها؟",
+    },
+    answer: {
+      sv: "Det finns ingen fast miniminivå. Budgeten beror på hur konkurrensutsatt din bransch är, vilket område du vill nå och hur mycket en ny kund är värd för dig. Vi föreslår en startbudget, följer upp kostnaden per förfrågan och justerar därefter. Annonsbudgeten betalas direkt till plattformen.",
+      en: "There's no fixed minimum. The budget depends on how competitive your industry is, which area you want to reach, and how much a new customer is worth to you. We suggest a starting budget, track the cost per enquiry, and adjust from there. Ad spend is paid directly to the platform.",
+      ar: "لا يوجد حد أدنى ثابت. تعتمد الميزانية على مدى المنافسة في مجالك، والمنطقة التي تريد الوصول إليها، وقيمة العميل الجديد بالنسبة لك. نقترح ميزانية مبدئية ونتابع تكلفة كل استفسار ثم نعدّلها وفق ذلك. وتُدفع الميزانية الإعلانية مباشرة إلى المنصة.",
+    },
+  },
+  {
+    id: "faq-social-management-content",
+    scope: { serviceKey: "social-media-management" },
+    question: {
+      sv: "Behöver jag godkänna inläggen innan de publiceras?",
+      en: "Do I need to approve posts before they're published?",
+      ar: "هل أحتاج إلى الموافقة على المنشورات قبل نشرها؟",
+    },
+    answer: {
+      sv: "Ja, du godkänner innehållsplanen och kan granska inläggen innan de publiceras. När vi har lärt känna ditt företag och din ton kan du välja hur mycket du vill vara involverad.",
+      en: "Yes — you approve the content plan and can review posts before they go live. Once we've got to know your business and your tone, you can choose how involved you want to be.",
+      ar: "نعم، توافق على خطة المحتوى ويمكنك مراجعة المنشورات قبل نشرها. وبعد أن نتعرف على شركتك وأسلوبك، يمكنك اختيار مدى مشاركتك.",
+    },
+  },
+  {
+    id: "faq-saas-mvp",
+    scope: { serviceKey: "saas-development" },
+    question: {
+      sv: "Vad är en MVP och varför börja med en?",
+      en: "What is an MVP, and why start with one?",
+      ar: "ما هو MVP ولماذا نبدأ به؟",
+    },
+    answer: {
+      sv: "En MVP, minimum viable product, är den minsta version av en produkt som löser kärnproblemet för användarna. Genom att börja där kan du testa idén på riktiga användare, få feedback och undvika att lägga tid och pengar på funktioner som ingen efterfrågar.",
+      en: "An MVP, or minimum viable product, is the smallest version of a product that solves the core problem for its users. Starting there lets you test the idea on real users, get feedback, and avoid spending time and money on features nobody asks for.",
+      ar: "المنتج الأولي القابل للتطبيق (MVP) هو أصغر نسخة من المنتج تحل المشكلة الأساسية لمستخدميه. والبدء به يتيح لك اختبار الفكرة على مستخدمين حقيقيين والحصول على ملاحظاتهم، وتجنب إنفاق الوقت والمال على ميزات لا يطلبها أحد.",
+    },
+  },
+  {
+    id: "faq-saas-ownership",
+    scope: { serviceKey: "saas-development" },
+    question: {
+      sv: "Vem äger koden till min app?",
+      en: "Who owns the code for my app?",
+      ar: "من يملك الشيفرة البرمجية لتطبيقي؟",
+    },
+    answer: {
+      sv: "Ägande av kod och rättigheter regleras i avtalet innan projektet startar. Utgångspunkten är att du som kund ska ha tillgång till källkoden och kunna vidareutveckla produkten, även med andra leverantörer.",
+      en: "Ownership of code and rights is set out in the agreement before the project starts. The starting point is that you, as the client, have access to the source code and can continue developing the product, including with other providers.",
+      ar: "تُحدَّد ملكية الشيفرة والحقوق في الاتفاقية قبل بدء المشروع. والمبدأ أن تكون لك كعميل صلاحية الوصول إلى الشيفرة المصدرية وإمكانية تطوير المنتج مستقبلًا، حتى مع مزودين آخرين.",
+    },
+  },
+  {
+    id: "faq-mobile-app-ios-android",
+    scope: { serviceKey: "mobile-app-development" },
+    question: {
+      sv: "Behöver jag bygga två appar för iOS och Android?",
+      en: "Do I need to build two apps for iOS and Android?",
+      ar: "هل أحتاج إلى بناء تطبيقين منفصلين لنظامي iOS وأندرويد؟",
+    },
+    answer: {
+      sv: "Oftast inte. Med plattformsoberoende utveckling byggs appen med en gemensam kodbas som fungerar på både iOS och Android, vilket sparar tid och gör underhållet enklare. Native-utveckling per plattform kan behövas för appar med mycket speciella krav på prestanda eller hårdvara.",
+      en: "Usually not. With cross-platform development, the app is built from one shared codebase that runs on both iOS and Android, which saves time and makes maintenance simpler. Native development per platform may be needed for apps with very specific performance or hardware requirements.",
+      ar: "غالبًا لا. في التطوير متعدد المنصات يُبنى التطبيق بشيفرة مشتركة تعمل على iOS وأندرويد معًا، ما يوفر الوقت ويسهّل الصيانة. وقد يلزم التطوير الأصلي لكل نظام في التطبيقات ذات المتطلبات الخاصة جدًا في الأداء أو العتاد.",
+    },
+  },
+  {
+    id: "faq-mobile-app-store",
+    scope: { serviceKey: "mobile-app-development" },
+    question: {
+      sv: "Hur hamnar appen i App Store och Google Play?",
+      en: "How does the app get into the App Store and Google Play?",
+      ar: "كيف يصل التطبيق إلى App Store وGoogle Play؟",
+    },
+    answer: {
+      sv: "Appen publiceras via utvecklarkonton hos Apple och Google, som registreras i ditt företags namn så att du äger appen. Vi förbereder beskrivningar, skärmbilder och tekniska krav och sköter inskickningen. Båda butikerna granskar appen innan den publiceras, och vi hjälper till om de har synpunkter.",
+      en: "The app is published through developer accounts with Apple and Google, registered in your company's name so that you own the app. We prepare the descriptions, screenshots, and technical requirements and handle the submission. Both stores review the app before it goes live, and we help if they raise any issues.",
+      ar: "يُنشر التطبيق عبر حسابات مطوّر لدى Apple وGoogle تُسجَّل باسم شركتك لتكون مالكة التطبيق. نجهّز الأوصاف ولقطات الشاشة والمتطلبات التقنية ونتولى الإرسال. وتراجع المتجران التطبيق قبل نشره، ونساعدك إذا طلبا أي تعديلات.",
+    },
+  },
 ];

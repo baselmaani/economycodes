@@ -37,10 +37,12 @@
   --radius-2xl: calc(var(--radius) * 1.8);
 
   /* Fluid type scale -- generates text-hero / text-page-h1 / text-section-h2 / text-body utilities. */
-  --text-hero: clamp(2.6rem, 5vw, 5rem);
+  /* Minimums sized so long Swedish compounds ("redovisningsbyrå",
+     "marknadsföringsbyrå") fit a 360px-wide phone. */
+  --text-hero: clamp(2.1rem, 5vw, 5rem);
   --text-hero--line-height: 1.05;
   --text-hero--letter-spacing: -0.02em;
-  --text-page-h1: clamp(2.3rem, 4vw, 4.25rem);
+  --text-page-h1: clamp(1.9rem, 4vw, 4.25rem);
   --text-page-h1--line-height: 1.1;
   --text-page-h1--letter-spacing: -0.015em;
   --text-section-h2: clamp(1.8rem, 3vw, 3.2rem);
@@ -117,6 +119,13 @@
   }
   html {
     @apply font-sans;
+  }
+  /* Last line of defence against a long word overflowing a narrow screen:
+     hyphenate per the page's lang attribute, and break if that fails. */
+  h1,
+  h2 {
+    hyphens: auto;
+    overflow-wrap: break-word;
   }
 }
 

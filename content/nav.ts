@@ -12,6 +12,11 @@ export const primaryNav: NavLink[] = [
     label: { sv: "Tjänster", en: "Services", ar: "الخدمات" },
   },
   {
+    routeKey: "/digital-marknadsforing",
+    // Shorter than the footer label so the desktop header still fits at 1024px.
+    label: { sv: "Marknadsföring", en: "Marketing", ar: "التسويق الرقمي" },
+  },
+  {
     routeKey: "/om-hadi",
     label: { sv: "Om Hadi", en: "About Hadi", ar: "عن هادي" },
   },
@@ -30,6 +35,14 @@ export const footerNav: NavLink[] = [
   {
     routeKey: "/tjanster",
     label: { sv: "Tjänster", en: "Services", ar: "الخدمات" },
+  },
+  {
+    routeKey: "/digital-marknadsforing",
+    label: {
+      sv: "Digital marknadsföring",
+      en: "Digital marketing",
+      ar: "التسويق الرقمي",
+    },
   },
   {
     routeKey: "/om-hadi",

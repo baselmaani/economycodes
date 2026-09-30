@@ -34,10 +34,16 @@ export async function generateMetadata({
   params: Promise<{ locale: AppLocale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const nav = await getTranslations({ locale, namespace: "nav" });
   return buildMetadata({
     locale,
-    title: nav("insights"),
+    title: getLocalized(
+      {
+        sv: "Artiklar om redovisning, skatt och företag",
+        en: "Insights on accounting, tax and business",
+        ar: "مقالات عن المحاسبة والضرائب والأعمال",
+      },
+      locale,
+    ),
     description: getLocalized(metaDescription, locale),
     alternates: getAlternateLinks("/artiklar"),
   });
@@ -115,7 +121,10 @@ export default async function ArticlesIndexPage({
                     {getLocalized(article.excerpt, locale)}
                   </p>
                   <p className="text-muted-foreground mt-auto pt-2 text-xs">
-                    {common("lastReviewed")}: {article.publishedAt}
+                    {common("published")}:{" "}
+                    <time dateTime={article.publishedAt}>
+                      {article.publishedAt}
+                    </time>
                   </p>
                 </div>
               </article>

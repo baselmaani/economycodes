@@ -8,7 +8,8 @@
     "menuLabel": "Huvudmeny",
     "openMenu": "Öppna meny",
     "closeMenu": "Stäng meny",
-    "languageLabel": "Byt språk"
+    "languageLabel": "Byt språk",
+    "digitalMarketing": "Digital marknadsföring"
   },
   "common": {
     "callUs": "Ring oss",
@@ -27,7 +28,8 @@
     "ourProcess": "Så arbetar vi",
     "faqTitle": "Vanliga frågor",
     "locationsTitle": "Våra kontor",
-    "lastReviewed": "Senast granskad"
+    "lastReviewed": "Senast granskad",
+    "published": "Publicerad"
   },
   "home": {
     "heroEyebrow": "Digital redovisning för hela Sverige",
@@ -46,7 +48,11 @@
     "languageSupportTitle": "Bokföring på svenska, engelska och arabiska",
     "benefitsTitle": "Varför Economy Codes",
     "finalCtaTitle": "Redo att komma igång?",
-    "finalCtaSubtitle": "Berätta vad du behöver hjälp med, så återkommer vi så snart vi kan."
+    "finalCtaSubtitle": "Berätta vad du behöver hjälp med, så återkommer vi så snart vi kan.",
+    "digitalEyebrow": "Digital marknadsföring",
+    "digitalTitle": "Fler kunder online — med marknadsföring du kan mäta",
+    "digitalSubtitle": "Webbplatser, SEO, AEO och GEO, Google Ads, annonsering i sociala medier, SaaS och mobilappar. Samlat hos oss, kopplat till din ekonomi.",
+    "digitalCta": "Utforska digital marknadsföring"
   },
   "about": {
     "credentialsTitle": "Personlig auktorisation",
@@ -64,6 +70,15 @@
     "prepareTitle": "Förbered gärna",
     "ctaQuestion": "Vill du komma igång?",
     "relatedServicesTitle": "Relaterade tjänster"
+  },
+  "digital": {
+    "eyebrow": "Digital marknadsföring",
+    "servicesTitle": "Tjänster inom digital marknadsföring",
+    "processTitle": "Så arbetar vi med digital marknadsföring",
+    "benefitsTitle": "Varför välja Economy Codes för digital marknadsföring",
+    "ctaTitle": "Vill du synas mer online?",
+    "ctaSubtitle": "Berätta om ditt företag och dina mål, så föreslår vi var det är klokast att börja.",
+    "seeAll": "Se alla digitala tjänster"
   },
   "footer": {
     "navTitle": "Navigering",
@@ -85,7 +100,9 @@
     "successTitle": "Tack för ditt meddelande",
     "successBody": "Vi återkommer till dig så snart vi kan.",
     "errorTitle": "Något gick fel",
-    "errorBody": "Försök igen, eller kontakta oss direkt via telefon eller e-post."
+    "errorBody": "Försök igen, eller kontakta oss direkt via telefon eller e-post.",
+    "errorInvalid": "Kontrollera att namn, e-post och meddelande (minst 10 tecken) är ifyllda och att du har godkänt villkoret.",
+    "errorRateLimited": "Du har skickat flera meddelanden på kort tid. Vänta en minut och försök igen, eller ring oss."
   },
   "notFound": {
     "title": "Sidan kunde inte hittas",

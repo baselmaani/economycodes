@@ -1,8 +1,18 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { ArrowRight } from "lucide-react";
 
+import { Link } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
-import { getAlternateLinks } from "@/lib/routes";
+import {
+  getAbsoluteUrl,
+  getAlternateLinks,
+  getServiceAlternateLinks,
+} from "@/lib/routes";
+import { getLocalized } from "@/lib/i18n-content";
+import { buildBreadcrumbJsonLd } from "@/lib/structured-data/breadcrumb";
+import { buildServiceCatalogJsonLd } from "@/lib/structured-data/service";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { getServicesListOgImageUrl } from "@/lib/seo/og-image";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
@@ -18,7 +28,12 @@ import {
   type ServiceGroup,
 } from "@/content/service-icons";
 
-const GROUP_ORDER: ServiceGroup[] = ["core", "advisory", "specialist"];
+const GROUP_ORDER: ServiceGroup[] = [
+  "core",
+  "advisory",
+  "specialist",
+  "digital",
+];
 
 export async function generateMetadata({
   params,
@@ -26,11 +41,17 @@ export async function generateMetadata({
   params: Promise<{ locale: AppLocale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const nav = await getTranslations({ locale, namespace: "nav" });
   const home = await getTranslations({ locale, namespace: "home" });
   return buildMetadata({
     locale,
-    title: nav("services"),
+    title: getLocalized(
+      {
+        sv: "Tjänster: redovisning, lön & marknadsföring",
+        en: "Services: accounting, payroll & marketing",
+        ar: "خدماتنا: المحاسبة والرواتب والتسويق",
+      },
+      locale,
+    ),
     description: home("servicesSubtitle"),
     alternates: getAlternateLinks("/tjanster"),
     ogImage: getServicesListOgImageUrl(locale),
@@ -47,6 +68,7 @@ export default async function ServicesPage({
   const t = await getTranslations({ locale, namespace: "common" });
   const nav = await getTranslations({ locale, namespace: "nav" });
   const home = await getTranslations({ locale, namespace: "home" });
+  const digital = await getTranslations({ locale, namespace: "digital" });
 
   const grouped = GROUP_ORDER.map((group) => ({
     group,
@@ -54,8 +76,32 @@ export default async function ServicesPage({
     services: servicesList.filter((s) => getServiceGroup(s.key) === group),
   })).filter((g) => g.services.length > 0);
 
+  const pageUrl = getAbsoluteUrl("/tjanster", locale);
+
   return (
     <Container className="py-12 sm:py-16">
+      <JsonLd
+        data={buildBreadcrumbJsonLd([
+          { name: nav("home"), url: getAbsoluteUrl("/", locale) },
+          { name: nav("services"), url: pageUrl },
+        ])}
+      />
+      <JsonLd
+        data={buildServiceCatalogJsonLd({
+          name: nav("services"),
+          serviceType: "Accounting and business services",
+          description: home("servicesSubtitle"),
+          url: pageUrl,
+          locale,
+          entries: grouped.flatMap(({ services }) =>
+            services.map((service) => ({
+              name: getLocalized(service.name, locale),
+              description: getLocalized(service.summary, locale),
+              url: getServiceAlternateLinks(service)[locale],
+            })),
+          ),
+        })}
+      />
       <Breadcrumbs
         items={[
           { label: nav("home"), routeKey: "/" },
@@ -76,13 +122,28 @@ export default async function ServicesPage({
           const isCore = group === "core";
           return (
             <div key={group}>
-              <h2 className="text-muted-foreground mb-5 text-sm font-semibold tracking-wide uppercase">
-                {label}
-              </h2>
+              <div className="mb-5 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+                <h2 className="text-muted-foreground text-sm font-semibold tracking-wide uppercase">
+                  {label}
+                </h2>
+                {group === "digital" && (
+                  <Link
+                    href="/digital-marknadsforing"
+                    className="text-primary inline-flex items-center gap-1 text-sm font-semibold hover:underline"
+                  >
+                    {digital("seeAll")}
+                    <ArrowRight
+                      size={14}
+                      aria-hidden="true"
+                      className="rtl:rotate-180"
+                    />
+                  </Link>
+                )}
+              </div>
               <RevealGroup
                 step={60}
                 className={cn(
-                  "grid gap-6",
+                  "grid gap-4",
                   isCore ? "sm:grid-cols-2" : "sm:grid-cols-2 lg:grid-cols-3",
                 )}
               >

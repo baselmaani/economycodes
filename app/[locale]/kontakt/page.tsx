@@ -3,7 +3,9 @@ import { Mail, MessageCircle, Phone } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import type { AppLocale } from "@/i18n/routing";
-import { getAlternateLinks } from "@/lib/routes";
+import { getAbsoluteUrl, getAlternateLinks } from "@/lib/routes";
+import { buildBreadcrumbJsonLd } from "@/lib/structured-data/breadcrumb";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { getLocalized } from "@/lib/i18n-content";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
@@ -27,10 +29,16 @@ export async function generateMetadata({
   params: Promise<{ locale: AppLocale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const nav = await getTranslations({ locale, namespace: "nav" });
   return buildMetadata({
     locale,
-    title: nav("contact"),
+    title: getLocalized(
+      {
+        sv: "Kontakt – Mellerud, Trollhättan & digitalt",
+        en: "Contact us – Mellerud, Trollhättan & online",
+        ar: "اتصل بنا – ميلَّروود وتروللهاتان وعن بُعد",
+      },
+      locale,
+    ),
     description: getLocalized(metaDescription, locale),
     alternates: getAlternateLinks("/kontakt"),
   });
@@ -49,6 +57,12 @@ export default async function ContactPage({
 
   return (
     <Container className="py-12 sm:py-16">
+      <JsonLd
+        data={buildBreadcrumbJsonLd([
+          { name: nav("home"), url: getAbsoluteUrl("/", locale) },
+          { name: nav("contact"), url: getAbsoluteUrl("/kontakt", locale) },
+        ])}
+      />
       <Breadcrumbs
         items={[
           { label: nav("home"), routeKey: "/" },
@@ -104,24 +118,12 @@ export default async function ContactPage({
           </Reveal>
           <RevealGroup step={100} className="flex flex-col gap-6">
             {locations.map((location) => (
-              <div key={location.id} className="flex flex-col gap-3">
-                <LocationCard
-                  location={location}
-                  locale={locale}
-                  directionsLabel={t("getDirections")}
-                />
-                <div className="border-border overflow-hidden rounded-2xl border">
-                  <iframe
-                    title={getLocalized(location.name, locale)}
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    src={`https://www.google.com/maps?q=${encodeURIComponent(
-                      `${location.streetAddress}, ${location.postalCode} ${location.city}, ${location.country}`,
-                    )}&output=embed`}
-                    className="h-64 w-full border-0"
-                  />
-                </div>
-              </div>
+              <LocationCard
+                key={location.id}
+                location={location}
+                locale={locale}
+                directionsLabel={t("getDirections")}
+              />
             ))}
           </RevealGroup>
         </div>

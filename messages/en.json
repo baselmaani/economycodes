@@ -8,7 +8,8 @@
     "menuLabel": "Main menu",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
-    "languageLabel": "Change language"
+    "languageLabel": "Change language",
+    "digitalMarketing": "Digital marketing"
   },
   "common": {
     "callUs": "Call us",
@@ -27,7 +28,8 @@
     "ourProcess": "How we work",
     "faqTitle": "Frequently asked questions",
     "locationsTitle": "Our offices",
-    "lastReviewed": "Last reviewed"
+    "lastReviewed": "Last reviewed",
+    "published": "Published"
   },
   "home": {
     "heroEyebrow": "Digital accounting for all of Sweden",
@@ -46,7 +48,11 @@
     "languageSupportTitle": "Bookkeeping in Swedish, English, and Arabic",
     "benefitsTitle": "Why Economy Codes",
     "finalCtaTitle": "Ready to get started?",
-    "finalCtaSubtitle": "Tell us what you need help with, and we'll get back to you as soon as we can."
+    "finalCtaSubtitle": "Tell us what you need help with, and we'll get back to you as soon as we can.",
+    "digitalEyebrow": "Digital marketing",
+    "digitalTitle": "More customers online — with marketing you can measure",
+    "digitalSubtitle": "Websites, SEO, AEO and GEO, Google Ads, social media advertising, SaaS, and mobile apps. All in one place, connected to your finances.",
+    "digitalCta": "Explore digital marketing"
   },
   "about": {
     "credentialsTitle": "Personal authorization",
@@ -64,6 +70,15 @@
     "prepareTitle": "What to prepare",
     "ctaQuestion": "Ready to get started?",
     "relatedServicesTitle": "Related services"
+  },
+  "digital": {
+    "eyebrow": "Digital marketing",
+    "servicesTitle": "Our digital marketing services",
+    "processTitle": "How we work with digital marketing",
+    "benefitsTitle": "Why choose Economy Codes for digital marketing",
+    "ctaTitle": "Want to be more visible online?",
+    "ctaSubtitle": "Tell us about your business and your goals, and we'll suggest the smartest place to start.",
+    "seeAll": "See all digital services"
   },
   "footer": {
     "navTitle": "Navigation",
@@ -85,7 +100,9 @@
     "successTitle": "Thank you for your message",
     "successBody": "We'll get back to you as soon as we can.",
     "errorTitle": "Something went wrong",
-    "errorBody": "Please try again, or contact us directly by phone or email."
+    "errorBody": "Please try again, or contact us directly by phone or email.",
+    "errorInvalid": "Please check that your name, email and message (at least 10 characters) are filled in and that you have ticked the consent box.",
+    "errorRateLimited": "You've sent several messages in a short time. Please wait a minute and try again, or give us a call."
   },
   "notFound": {
     "title": "Page not found",

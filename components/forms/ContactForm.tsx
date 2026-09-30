@@ -17,12 +17,25 @@ import { getLocalized } from "@/lib/i18n-content";
 
 const initialState: ContactFormState = { status: "idle" };
 
+// text-base below md keeps iOS Safari from zooming in on focus (it zooms on
+// any form control under 16px).
+const SELECT_CLASS_NAME =
+  "border-input bg-background flex h-10 w-full rounded-lg border px-3 py-1 text-base shadow-xs md:text-sm";
+
 export function ContactForm({ locale }: { locale: AppLocale }) {
   const t = useTranslations("form");
   const [state, formAction, pending] = useActionState(
     submitContactForm,
     initialState,
   );
+
+  const values = state.values ?? {};
+  const errorKey =
+    state.message === "rate-limited"
+      ? "errorRateLimited"
+      : state.message === "invalid"
+        ? "errorInvalid"
+        : "errorBody";
 
   if (state.status === "success") {
     return (
@@ -37,7 +50,14 @@ export function ContactForm({ locale }: { locale: AppLocale }) {
   }
 
   return (
-    <form action={formAction} className="flex flex-col gap-5">
+    // Keyed on the submission count: React resets an uncontrolled form after
+    // its action resolves, so remounting re-applies the echoed `values` as
+    // defaults and the visitor keeps what they typed when a submission fails.
+    <form
+      key={state.submission ?? 0}
+      action={formAction}
+      className="flex flex-col gap-5"
+    >
       <input type="hidden" name="locale" value={locale} />
       {/* Honeypot: hidden from real users, visible to naive bots. */}
       <div aria-hidden="true" className="absolute -left-[9999px]">
@@ -48,21 +68,41 @@ export function ContactForm({ locale }: { locale: AppLocale }) {
       <Field>
         <FieldLabel htmlFor="name">{t("nameLabel")}</FieldLabel>
         <FieldContent>
-          <Input id="name" name="name" required maxLength={200} />
+          <Input
+            id="name"
+            name="name"
+            required
+            maxLength={200}
+            autoComplete="name"
+            defaultValue={values.name}
+          />
         </FieldContent>
       </Field>
 
       <Field>
         <FieldLabel htmlFor="email">{t("emailLabel")}</FieldLabel>
         <FieldContent>
-          <Input id="email" name="email" type="email" required />
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            required
+            autoComplete="email"
+            defaultValue={values.email}
+          />
         </FieldContent>
       </Field>
 
       <Field>
         <FieldLabel htmlFor="phone">{t("phoneLabel")}</FieldLabel>
         <FieldContent>
-          <Input id="phone" name="phone" type="tel" />
+          <Input
+            id="phone"
+            name="phone"
+            type="tel"
+            autoComplete="tel"
+            defaultValue={values.phone}
+          />
         </FieldContent>
       </Field>
 
@@ -74,8 +114,8 @@ export function ContactForm({ locale }: { locale: AppLocale }) {
           <select
             id="preferredContact"
             name="preferredContact"
-            defaultValue="email"
-            className="border-input bg-background flex h-9 w-full rounded-md border px-3 py-1 text-sm shadow-xs"
+            defaultValue={values.preferredContact ?? "email"}
+            className={SELECT_CLASS_NAME}
           >
             <option value="email">{t("emailLabel")}</option>
             <option value="phone">{t("phoneLabel")}</option>
@@ -89,8 +129,8 @@ export function ContactForm({ locale }: { locale: AppLocale }) {
           <select
             id="service"
             name="service"
-            defaultValue=""
-            className="border-input bg-background flex h-9 w-full rounded-md border px-3 py-1 text-sm shadow-xs"
+            defaultValue={values.service ?? ""}
+            className={SELECT_CLASS_NAME}
           >
             <option value="" />
             {servicesList.map((service) => (
@@ -112,6 +152,7 @@ export function ContactForm({ locale }: { locale: AppLocale }) {
             minLength={10}
             maxLength={5000}
             rows={5}
+            defaultValue={values.message}
           />
         </FieldContent>
       </Field>
@@ -122,7 +163,8 @@ export function ContactForm({ locale }: { locale: AppLocale }) {
           name="consent"
           type="checkbox"
           required
-          className="mt-1"
+          defaultChecked={values.consent}
+          className="mt-0.5 size-5 shrink-0"
         />
         <FieldLabel htmlFor="consent" className="text-sm font-normal">
           {t("consentLabel")}
@@ -131,7 +173,7 @@ export function ContactForm({ locale }: { locale: AppLocale }) {
 
       {state.status === "error" && (
         <p role="alert" className="text-destructive text-sm">
-          {t("errorTitle")} — {t("errorBody")}
+          {t("errorTitle")} — {t(errorKey)}
         </p>
       )}
 

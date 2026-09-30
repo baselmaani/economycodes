@@ -79,6 +79,8 @@ export interface Service {
   name: Localized<string>;
   /** 40-70 word direct summary shown near the top of the page. */
   summary: Localized<string>;
+  /** 8-15 word one-liner shown on service cards only. */
+  teaser: Localized<string>;
   whoItsFor: Localized<string[]>;
   whatsIncluded: Localized<string[]>;
   process: Localized<string[]>;
@@ -93,7 +95,8 @@ export interface Faq {
   id: string;
   question: Localized<string>;
   answer: Localized<string>;
-  scope: "global" | { serviceKey: string };
+  /** "digital" = shown on the /digital-marknadsforing hub only. */
+  scope: "global" | "digital" | { serviceKey: string };
 }
 
 export interface NavLink {

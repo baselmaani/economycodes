@@ -12,7 +12,7 @@ Items below are not yet confirmed and are shown on the live site using clearly n
 3. **Hadi's exact approved public title** (in Swedish, English, and Arabic) -- currently shown as the generic "Rådgivare, Economy Codes" (`content/people.ts`).
 4. **Hadi's approved biography, education, certifications, professional memberships, languages spoken, and years of experience** -- currently a short, neutral, non-claiming bio with no numeric or credential claims.
 5. **Whether Hadi is formally authorised as an Auktoriserad Redovisningskonsult and/or Auktoriserad Lönekonsult, and by which organisation.** Nothing of the kind is currently claimed anywhere on the site, and it must not be added without documented proof.
-6. **Licensing of Hadi's current portrait photo (`hadi.jpeg`)** -- the file carries a small photo-studio watermark ("Souhail") in the corner. Please confirm the studio/photographer has granted rights to use this specific photo on the rebuilt commercial website, or provide a new portrait without a third-party watermark. See `public/media/source/MANIFEST.md`.
+6. ~~Licensing of Hadi's portrait photo (`hadi.jpeg`, carried a studio watermark).~~ **Resolved:** the client supplied a new, watermark-free portrait on 2026-09-28 (`assets/media-source/hadi.jpg`); the old photo has been removed.
 
 ## Services
 
@@ -33,9 +33,13 @@ Items below are not yet confirmed and are shown on the live site using clearly n
 
 ## Media / legacy assets
 
-18. **Licensing/ownership of the legacy stock photography** used as provisional service-page images (bookkeeping, business registration, contracts, association formation, feasibility/budget, investment). None of these appear to be custom photography of the business; see `public/media/source/MANIFEST.md` for the full per-file breakdown. Recommend replacing with authentic photography or confirmed-licensed stock over time.
+18. **Licensing/ownership of the legacy stock photography** used as provisional service-page images (bookkeeping, business registration, contracts, association formation, feasibility/budget, investment). None of these appear to be custom photography of the business; see `assets/media-source/MANIFEST.md` for the full per-file breakdown. Recommend replacing with authentic photography or confirmed-licensed stock over time.
 19. **The legacy tax-reporting image (`skatterapport.jpeg`) has the Skatteverket logo overlaid on it and has been excluded from the rebuilt site entirely** -- it is not used anywhere, since it would incorrectly imply endorsement by or affiliation with Skatteverket. The Skattedeklaration service page currently has no hero image as a result.
 
 ## Structured data
 
 20. **LinkedIn, Google Business Profile, and Srf konsulterna member-directory URLs for structured-data `sameAs` fields** -- `lib/structured-data/organization.ts` and `lib/structured-data/person.ts` currently only list the confirmed Facebook URLs in `sameAs`. Additional verified profile links (company LinkedIn page, Google Business Profile listing, and Hadi's entry in the Srf konsulterna member directory, if public) would strengthen entity verification for AI answer engines and search. Do not add placeholder or guessed URLs -- omit until confirmed, per the pattern used throughout this file.
+
+## Digital marketing
+
+21. **Scope and delivery of the digital marketing services** (website creation, SEO, AEO, GEO, social media ads, Google Ads, social media management, SaaS/web app development, mobile app development — `content/services-digital.ts`). Please confirm: which of these are offered today, whether they're delivered in-house by Economy Codes or via a partner, the pricing model (fixed price, monthly retainer, hourly), and which ad platforms are managed. The pages currently describe each service in general, industry-standard terms, carry a "no guaranteed results" disclaimer on SEO/AEO/GEO/ads, and make no claims about case studies, client results, certifications (e.g. Google Partner, Meta Business Partner), or prices. Provide any approved case studies or partner badges if they should be shown.

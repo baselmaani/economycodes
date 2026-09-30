@@ -8,10 +8,14 @@ import { siteUrl } from "@/lib/site";
 // only the most-specific matching user-agent block, not an additive merge.
 const AI_CRAWLER_USER_AGENTS = [
   "GPTBot",
+  "OAI-SearchBot",
   "ChatGPT-User",
   "Google-Extended",
   "PerplexityBot",
+  "Perplexity-User",
   "ClaudeBot",
+  "Claude-SearchBot",
+  "Claude-User",
   "anthropic-ai",
   "CCBot",
   "Applebot-Extended",

@@ -36,7 +36,7 @@ export function PersonProfileCard({
             alt={getLocalized(person.photo.alt, locale)}
             fill
             sizes={compact ? "112px" : "160px"}
-            style={{ objectFit: "cover", objectPosition: "50% 88%" }}
+            className="object-cover"
           />
         </div>
         <span

@@ -2,6 +2,9 @@ import { describe, expect, it } from "vitest";
 
 import { servicesList } from "@/content/services";
 import { faqs } from "@/content/faqs";
+import { serviceIcons } from "@/content/service-icons";
+import { serviceMeta } from "@/content/service-meta";
+import { DIGITAL_HUB_FAQ_IDS, digitalAreas } from "@/content/digital-marketing";
 
 describe("service content", () => {
   it("has a unique sv slug per service", () => {
@@ -18,6 +21,19 @@ describe("service content", () => {
       expect(service.process.sv.length).toBeGreaterThan(0);
       expect(service.whatToPrepare.sv.length).toBeGreaterThan(0);
       expect(service.body.sv.length).toBeGreaterThan(0);
+    }
+  });
+
+  it("has a short card teaser in every locale", () => {
+    for (const service of servicesList) {
+      for (const locale of ["sv", "en", "ar"] as const) {
+        const teaser = service.teaser[locale];
+        expect(teaser, `${service.key}.teaser.${locale}`).toBeTruthy();
+        expect(
+          teaser!.length,
+          `${service.key}.teaser.${locale} is too long for a card`,
+        ).toBeLessThanOrEqual(120);
+      }
     }
   });
 
@@ -75,6 +91,64 @@ describe("service content", () => {
     for (const locale of ["en", "ar"] as const) {
       const slugs = servicesList.map((s) => s.slug[locale]);
       expect(new Set(slugs).size).toBe(slugs.length);
+    }
+  });
+
+  it("has an icon/group entry for every service (no silent Calculator/core fallback)", () => {
+    for (const service of servicesList) {
+      expect(serviceIcons[service.key], service.key).toBeDefined();
+    }
+  });
+});
+
+describe("digital marketing hub content", () => {
+  it("places every digital service in exactly one hub area", () => {
+    const digitalKeys = servicesList
+      .filter((s) => serviceIcons[s.key]?.group === "digital")
+      .map((s) => s.key)
+      .sort();
+    const areaKeys = digitalAreas.flatMap((area) => area.serviceKeys).sort();
+    expect(areaKeys).toEqual(digitalKeys);
+  });
+
+  it("only references hub FAQ ids that exist", () => {
+    const faqIds = new Set(faqs.map((f) => f.id));
+    for (const id of DIGITAL_HUB_FAQ_IDS) {
+      expect(faqIds.has(id), id).toBe(true);
+    }
+  });
+});
+
+describe("service search-result copy", () => {
+  // " | Economy Codes" (16 chars) is appended by the root layout's title
+  // template, so 44 keeps the full <title> within Google's ~60-char display.
+  const MAX_TITLE = 44;
+  const MIN_DESCRIPTION = 70;
+  const MAX_DESCRIPTION = 160;
+
+  it("has a meta title and description for every service, and no strays", () => {
+    const keys = servicesList.map((s) => s.key).sort();
+    expect(Object.keys(serviceMeta).sort()).toEqual(keys);
+  });
+
+  it("keeps titles and descriptions within search-result limits in every locale", () => {
+    for (const [key, meta] of Object.entries(serviceMeta)) {
+      for (const locale of ["sv", "en", "ar"] as const) {
+        const title = meta.title[locale] ?? "";
+        const description = meta.description[locale] ?? "";
+        expect(title.length, `${key}.title.${locale}`).toBeGreaterThan(0);
+        expect(title.length, `${key}.title.${locale}`).toBeLessThanOrEqual(
+          MAX_TITLE,
+        );
+        expect(
+          description.length,
+          `${key}.description.${locale}`,
+        ).toBeGreaterThanOrEqual(MIN_DESCRIPTION);
+        expect(
+          description.length,
+          `${key}.description.${locale}`,
+        ).toBeLessThanOrEqual(MAX_DESCRIPTION);
+      }
     }
   });
 });

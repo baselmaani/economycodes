@@ -27,3 +27,9 @@ export const INVESTMENT_DISCLAIMER = {
   en: "Forming or establishing a company in Sweden is a separate process from immigration matters. It does not imply any promise of a residence permit, citizenship, or financing. Residence permit questions are handled by Migrationsverket.",
   ar: "يُعد تأسيس شركة أو إنشاؤها في السويد عملية منفصلة عن معاملات الهجرة. ولا يعني ذلك أي وعد بالحصول على تصريح إقامة أو الجنسية أو التمويل. وتتولى هيئة الهجرة السويدية (Migrationsverket) البتّ في مسائل تصاريح الإقامة.",
 };
+
+export const MARKETING_RESULTS_DISCLAIMER = {
+  sv: "Placeringar i sökresultat, omnämnanden i AI-svar och annonsresultat styrs i slutändan av sökmotorernas och annonsplattformarnas egna system och regler. Vi arbetar efter vedertagna metoder och redovisar resultaten öppet, men kan inte garantera specifika placeringar eller resultat.",
+  en: "Search rankings, mentions in AI answers, and ad results are ultimately determined by the search engines' and ad platforms' own systems and policies. We work according to established best practices and report results openly, but we cannot guarantee specific rankings or outcomes.",
+  ar: "تتحدد المراتب في نتائج البحث والظهور في إجابات الذكاء الاصطناعي ونتائج الإعلانات في النهاية وفق أنظمة وسياسات محركات البحث والمنصات الإعلانية نفسها. نعمل وفق أفضل الممارسات المعتمدة ونعرض النتائج بشفافية، لكن لا يمكننا ضمان مراتب أو نتائج محددة.",
+};

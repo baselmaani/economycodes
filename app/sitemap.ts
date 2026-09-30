@@ -16,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticEntries: StaticAppPathname[] = [
     "/",
     "/tjanster",
+    "/digital-marknadsforing",
     "/om-hadi",
     "/kontakt",
     "/artiklar",

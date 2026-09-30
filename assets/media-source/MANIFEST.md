@@ -7,7 +7,7 @@ Downloaded from the legacy site (https://www.economycodes.com/) on 2026-09-06. O
 | `ecodes.jpeg` | 360x150 | Horizontal logo (original, opaque white bg) | Owned brand asset -- safe to use. Superseded by `ecodes.png` as the source for the optimized derivative. |
 | `ecodes.png` | 360x150 | Horizontal logo, background removed | Owned brand asset -- safe to use. |
 | `ecodes-s.png` | 478x478 | Stacked logo, background removed | Owned brand asset -- safe to use. |
-| `hadi.jpeg` | 320x487 | Hadi Almaani portrait | **Carries a small photo-studio watermark ("Souhail") in the top-right corner.** Confirm the photographer/studio has granted rights to use this photo on the rebuilt commercial website, or obtain a new portrait without a third-party watermark. |
+| `hadi.jpg` | 1024x1024 | Hadi Al Maani portrait (optimized: `hadi-headshot.webp` 640x640, `hadi-headshot-hero.webp` 800x878) | Supplied by the client on 2026-09-28 for the rebuilt site; no watermark. |
 | `hero.jpg` | 6000x4004 | Homepage hero image | Generic stock photo (people reviewing printed charts). No trademark issue, but stylistically a "finance cliché" the brand brief asks to avoid -- recommend replacing with authentic photography of the business/office/Hadi once available. |
 | `bokforing.jpeg` | 1024x683 | Bookkeeping service hero | Generic stock photo. Licensing/ownership unconfirmed. |
 | `skatterapport.jpeg` | 1024x684 | *(not used)* | **Excluded from the rebuilt site.** This image has the Skatteverket logo overlaid directly on the photo, which would incorrectly imply endorsement or affiliation with Skatteverket. Do not reintroduce this file without removing the logo and confirming no implied endorsement. |
@@ -16,5 +16,6 @@ Downloaded from the legacy site (https://www.economycodes.com/) on 2026-09-06. O
 | `etablering-av-foreningar.jpeg` | 780x520 | Association formation service hero | Generic stock photo. Licensing/ownership unconfirmed. |
 | `genomforbarhet-och-budget-studier.jpeg` | 540x367 | Feasibility/budget service hero | Generic stock photo, "stock-market-style" visual the brand brief asks to avoid stylistically. Licensing/ownership unconfirmed. |
 | `investeringar-i-sverige.jpeg` | 1024x512 | Investment/establishment service hero | Generic stock graphic (flag/coins/house). Licensing/ownership unconfirmed, and stylistically a finance cliche the brand brief asks to avoid. |
+| `home-benefits.jpg` | 6000x4000 | Homepage Benefits section (optimized: `home-benefits.webp`, 1600x1067) | Supplied by the client on 2026-09-28 for the rebuilt site. |
 
 All service-page stock photos above are used provisionally as structural placeholders and are flagged in CLIENT-TODO.md. None imply any third-party endorsement, partnership, or certification.

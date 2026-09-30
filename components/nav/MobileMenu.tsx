@@ -10,6 +10,7 @@ import {
   MessageCircle,
   Newspaper,
   Phone,
+  TrendingUp,
   UserRound,
   type LucideIcon,
 } from "lucide-react";
@@ -47,6 +48,7 @@ import {
 
 const navIcons: Record<string, LucideIcon> = {
   "/": Home,
+  "/digital-marknadsforing": TrendingUp,
   "/om-hadi": UserRound,
   "/artiklar": Newspaper,
   "/kontakt": Mail,

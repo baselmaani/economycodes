@@ -7,7 +7,6 @@ import { Link } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
 import { getAlternateLinks } from "@/lib/routes";
 import { buildMetadata } from "@/lib/seo/metadata";
-import { buildOrganizationJsonLd } from "@/lib/structured-data/organization";
 import { buildFaqJsonLd } from "@/lib/structured-data/faq";
 import { getLocalized } from "@/lib/i18n-content";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -21,13 +20,16 @@ import { AuthorizationSection } from "@/components/marketing/AuthorizationSectio
 import { WhyAuthorizedSection } from "@/components/marketing/WhyAuthorizedSection";
 import { NationwideDigitalSection } from "@/components/marketing/NationwideDigitalSection";
 import { LanguageSupportSection } from "@/components/marketing/LanguageSupportSection";
+import { DigitalMarketingSection } from "@/components/marketing/DigitalMarketingSection";
 import { SectionHeading } from "@/components/marketing/SectionHeading";
 import { IconTile } from "@/components/marketing/IconTile";
+import { MediaFrame } from "@/components/marketing/MediaFrame";
 import { FaqAccordion } from "@/components/faq/FaqAccordion";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/motion/Reveal";
 import { RevealGroup } from "@/components/motion/RevealGroup";
 import { RevealLine } from "@/components/motion/RevealLine";
+import { RevealScale } from "@/components/motion/RevealScale";
 import { cn } from "@/lib/utils";
 import { business } from "@/content/business";
 import { locations } from "@/content/locations";
@@ -37,6 +39,7 @@ import { faqs } from "@/content/faqs";
 import {
   authorizationContent,
   benefits,
+  benefitsImage,
   heroContent,
   homeMeta,
   processSteps,
@@ -88,13 +91,6 @@ export default async function HomePage({
 
   return (
     <>
-      <JsonLd
-        data={buildOrganizationJsonLd(
-          business,
-          locations,
-          getLocalized(homeMeta.description, locale),
-        )}
-      />
       <JsonLd data={buildFaqJsonLd(globalFaqs, locale)} />
 
       {/* 1. Hero (includes compact trust row) */}
@@ -138,7 +134,7 @@ export default async function HomePage({
                   <RevealGroup
                     step={60}
                     className={cn(
-                      "grid gap-6",
+                      "grid gap-4",
                       isCore
                         ? "sm:grid-cols-2"
                         : "sm:grid-cols-2 lg:grid-cols-3",
@@ -226,6 +222,15 @@ export default async function HomePage({
         </Container>
       </Section>
 
+      {/* 6b. Digital marketing services */}
+      <DigitalMarketingSection
+        locale={locale}
+        eyebrow={t("digitalEyebrow")}
+        heading={t("digitalTitle")}
+        lead={t("digitalSubtitle")}
+        ctaLabel={t("digitalCta")}
+      />
+
       {/* 7. About Hadi Al Maani */}
       <Section tone="tint">
         <Container size="narrow">
@@ -271,24 +276,38 @@ export default async function HomePage({
           <Reveal>
             <SectionHeading title={t("benefitsTitle")} />
           </Reveal>
-          <RevealGroup step={100} className="mt-12 grid gap-6 sm:grid-cols-2">
-            {benefits.map(({ icon, title, body }, index) => (
-              <div
-                key={index}
-                className={cn(
-                  "flex flex-col gap-3 rounded-2xl p-6",
-                  index % 2 === 0 && "bg-card border-border border shadow-sm",
-                  index % 2 === 1 && "lg:mt-8",
-                )}
-              >
-                <IconTile icon={icon} />
-                <h3 className="font-semibold">{getLocalized(title, locale)}</h3>
-                <p className="text-muted-foreground text-body">
-                  {getLocalized(body, locale)}
-                </p>
-              </div>
-            ))}
-          </RevealGroup>
+          <div className="mt-12 grid items-center gap-10 lg:grid-cols-[0.85fr_1fr]">
+            <RevealScale>
+              <MediaFrame className="aspect-[3/2] lg:aspect-[4/3]">
+                <Image
+                  src={benefitsImage.src}
+                  alt={getLocalized(benefitsImage.alt, locale)}
+                  fill
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                  className="object-cover"
+                />
+              </MediaFrame>
+            </RevealScale>
+            <RevealGroup step={100} className="grid gap-6 sm:grid-cols-2">
+              {benefits.map(({ icon, title, body }, index) => (
+                <div
+                  key={index}
+                  className={cn(
+                    "flex flex-col gap-3 rounded-2xl p-6",
+                    index % 3 === 0 && "bg-card border-border border shadow-sm",
+                  )}
+                >
+                  <IconTile icon={icon} />
+                  <h3 className="font-semibold">
+                    {getLocalized(title, locale)}
+                  </h3>
+                  <p className="text-muted-foreground text-body">
+                    {getLocalized(body, locale)}
+                  </p>
+                </div>
+              ))}
+            </RevealGroup>
+          </div>
         </Container>
       </Section>
 

@@ -37,6 +37,15 @@ export function getServicesListOgImageUrl(locale: AppLocale): string {
   return new URL(`${prefix}/tjanster/opengraph-image`, siteUrl).toString();
 }
 
+/** Absolute URL of the digital marketing hub page's own opengraph-image route. */
+export function getDigitalMarketingOgImageUrl(locale: AppLocale): string {
+  const prefix = locale === routing.defaultLocale ? "" : `/${locale}`;
+  return new URL(
+    `${prefix}/digital-marknadsforing/opengraph-image`,
+    siteUrl,
+  ).toString();
+}
+
 /**
  * Absolute URL of an article's own opengraph-image route (see
  * app/[locale]/artiklar/[slug]/opengraph-image.tsx). Uses the literal

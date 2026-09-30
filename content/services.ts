@@ -4,6 +4,7 @@ import {
   CONTRACT_DISCLAIMER,
   INVESTMENT_DISCLAIMER,
 } from "./disclaimers";
+import { digitalServices } from "./services-digital";
 
 const LAST_REVIEWED = "2026-09-06";
 
@@ -17,6 +18,11 @@ export const services: Record<string, Service> = {
       sv: "Bokföring för småföretag, aktiebolag och enskilda firmor i Sverige. Vi hjälper dig att hålla ordning på verifikationer, moms och rapportering så att din bokföring är aktuell och redo när den behövs — för dig själv, myndigheter eller banker.",
       en: "Bookkeeping for small businesses, limited companies, and sole traders in Sweden. We help you keep your vouchers, VAT, and reporting in order, so your bookkeeping is always current and ready when you need it — for yourself, the authorities, or your bank.",
       ar: "محاسبة للشركات الصغيرة والشركات المحدودة والمنشآت الفردية في السويد. نساعدك على تنظيم المستندات وضريبة القيمة المضافة والتقارير، بحيث تكون محاسبتك دائمًا محدّثة وجاهزة عند الحاجة إليها — سواء لك أو للجهات الرسمية أو للبنوك.",
+    },
+    teaser: {
+      sv: "Löpande bokföring, moms och rapportering för småföretag och aktiebolag.",
+      en: "Ongoing bookkeeping, VAT and reporting for small businesses and limited companies.",
+      ar: "محاسبة مستمرة وضريبة القيمة المضافة وتقارير للشركات الصغيرة والمحدودة.",
     },
     whoItsFor: {
       sv: [
@@ -166,6 +172,11 @@ export const services: Record<string, Service> = {
       en: "Help with VAT and tax returns for businesses in Sweden, so you submit the right documentation on time to Skatteverket. We go through what applies to your company and keep track of important dates together with you.",
       ar: "مساعدة في ضريبة القيمة المضافة والإقرارات الضريبية للشركات في السويد، بحيث تقدّم المستندات الصحيحة في الوقت المحدد إلى هيئة الضرائب (Skatteverket). نراجع معك ما ينطبق على شركتك ونتابع معك المواعيد المهمة.",
     },
+    teaser: {
+      sv: "Moms och deklaration med rätt underlag, i tid till Skatteverket.",
+      en: "VAT and tax returns with the right documentation, on time to Skatteverket.",
+      ar: "ضريبة القيمة المضافة والإقرارات الضريبية بمستندات صحيحة وفي موعدها.",
+    },
     whoItsFor: {
       sv: [
         "Aktiebolag och enskilda firmor med löpande skatteskyldigheter",
@@ -308,6 +319,11 @@ export const services: Record<string, Service> = {
       sv: "Hjälp att starta företag i Sverige, från val av bolagsform till praktiska steg hos Bolagsverket och Skatteverket. Tjänsten passar dig som redan bor eller verkar i Sverige — är du utländsk investerare som etablerar verksamhet från utlandet, se i stället vår tjänst för att etablera företag i Sverige.",
       en: "Help starting a company in Sweden, from choosing a company type to the practical steps with Bolagsverket and Skatteverket. This service is for people already living or working in Sweden — if you're a foreign investor establishing a business from abroad, see our dedicated service for establishing a company in Sweden instead.",
       ar: "مساعدة في تأسيس شركة في السويد، بدءًا من اختيار نوع الشركة وحتى الخطوات العملية لدى مكتب تسجيل الشركات (Bolagsverket) وهيئة الضرائب (Skatteverket). هذه الخدمة موجهة لمن يقيم أو يعمل بالفعل في السويد؛ أما المستثمرون الأجانب الراغبون في التأسيس من الخارج، فنوجههم إلى خدمتنا المخصصة لتأسيس شركة في السويد.",
+    },
+    teaser: {
+      sv: "Från val av bolagsform till registrering hos Bolagsverket och Skatteverket.",
+      en: "From choosing a company type to registering with Bolagsverket and Skatteverket.",
+      ar: "من اختيار نوع الشركة إلى التسجيل لدى Bolagsverket وSkatteverket.",
     },
     whoItsFor: {
       sv: [
@@ -452,6 +468,11 @@ export const services: Record<string, Service> = {
       sv: "Praktisk hjälp att bilda och administrera föreningar i Sverige — från stadgar och konstituerande möte till löpande administration. Vi hjälper er att strukturera underlaget så att föreningen kommer igång på rätt sätt.",
       en: "Practical help forming and administering associations in Sweden — from bylaws and the founding meeting to ongoing administration. We help you structure the documentation so your association gets off to the right start.",
       ar: "مساعدة عملية في تأسيس الجمعيات وإدارتها في السويد — من النظام الأساسي والاجتماع التأسيسي وحتى الإدارة المستمرة. نساعدكم على تنظيم المستندات حتى تنطلق جمعيتكم بالشكل الصحيح.",
+    },
+    teaser: {
+      sv: "Stadgar, konstituerande möte och löpande administration för föreningar.",
+      en: "Bylaws, founding meeting and ongoing administration for associations.",
+      ar: "النظام الأساسي والاجتماع التأسيسي والإدارة المستمرة للجمعيات.",
     },
     whoItsFor: {
       sv: [
@@ -608,6 +629,11 @@ export const services: Record<string, Service> = {
       sv: "Genomförbarhetsstudier, affärsplaner och budgetar som hjälper dig att se om din idé bär sig ekonomiskt innan du satsar tid och kapital. Ett tydligt underlag som du kan använda själv eller visa för banker och andra parter.",
       en: "Feasibility studies, business plans, and budgets that help you see whether your idea is financially viable before you commit time and capital. A clear document you can use yourself or show to banks and other parties.",
       ar: "دراسات جدوى وخطط عمل وميزانيات تساعدك على معرفة ما إذا كانت فكرتك مجدية ماليًا قبل الالتزام بالوقت ورأس المال. مستند واضح يمكنك استخدامه بنفسك أو عرضه على البنوك وجهات أخرى.",
+    },
+    teaser: {
+      sv: "Affärsplan, budget och kalkyl som visar om din idé bär sig.",
+      en: "Business plans, budgets and feasibility studies that test whether your idea works.",
+      ar: "خطط عمل وميزانيات ودراسات جدوى توضح إن كانت فكرتك مجدية.",
     },
     whoItsFor: {
       sv: [
@@ -777,6 +803,11 @@ export const services: Record<string, Service> = {
       en: "Practical support with contracts and agreements related to your business, such as structuring and reviewing documentation before signing. If qualified legal advice is needed, we'll refer you onward.",
       ar: "دعم عملي في العقود والاتفاقيات المتعلقة بنشاطك، مثل تنظيم المستندات ومراجعتها قبل التوقيع. وعند الحاجة إلى استشارة قانونية متخصصة، سنحيلك إلى الجهة المناسبة.",
     },
+    teaser: {
+      sv: "Praktiskt stöd att strukturera och gå igenom avtal inför signering.",
+      en: "Practical support structuring and reviewing agreements before you sign.",
+      ar: "دعم عملي في تنظيم العقود ومراجعتها قبل التوقيع.",
+    },
     whoItsFor: {
       sv: [
         "Företagare som behöver strukturera avtal med kunder eller leverantörer",
@@ -944,6 +975,11 @@ export const services: Record<string, Service> = {
       en: "Help for those who want to establish a business or invest in Sweden, with practical guidance through the Swedish steps of business establishment. This is not an immigration service — residence permit questions are handled separately by Migrationsverket.",
       ar: "مساعدة لمن يرغب في تأسيس نشاط تجاري أو الاستثمار في السويد، مع توجيه عملي خلال خطوات تأسيس الأعمال في السويد. هذه ليست خدمة هجرة — تتولى هيئة الهجرة السويدية (Migrationsverket) البتّ في مسائل تصاريح الإقامة بشكل منفصل.",
     },
+    teaser: {
+      sv: "Praktisk vägledning för dig som vill etablera eller investera i Sverige.",
+      en: "Practical guidance for establishing a business or investing in Sweden.",
+      ar: "توجيه عملي لتأسيس نشاط تجاري أو الاستثمار في السويد.",
+    },
     whoItsFor: {
       sv: [
         "Utländska företagare och investerare som vill etablera verksamhet i Sverige",
@@ -1075,6 +1111,11 @@ export const services: Record<string, Service> = {
       sv: "Löpande löneadministration för aktiebolag och andra företag i Sverige. Vi hjälper dig med lönekörning, arbetsgivardeklaration och kontakt med anställda kring lön, så att utbetalningarna blir korrekta och i tid varje månad.",
       en: "Ongoing payroll administration for limited companies and other businesses in Sweden. We help with payroll runs, employer tax returns, and communication with employees about pay, so payments are accurate and on time every month.",
       ar: "إدارة رواتب مستمرة للشركات المحدودة وغيرها من الشركات في السويد. نساعدك في تنفيذ الرواتب وإقرار صاحب العمل والتواصل مع الموظفين بشأن رواتبهم، لضمان دقة المدفوعات وانتظامها كل شهر.",
+    },
+    teaser: {
+      sv: "Lönekörning och arbetsgivardeklaration — korrekt och i tid varje månad.",
+      en: "Payroll runs and employer returns — accurate and on time every month.",
+      ar: "تنفيذ الرواتب وإقرار صاحب العمل بدقة وفي الموعد كل شهر.",
     },
     whoItsFor: {
       sv: [
@@ -1226,6 +1267,11 @@ export const services: Record<string, Service> = {
       en: "Help with annual accounts and annual reports for limited companies and other businesses in Sweden. We compile the financial year, make sure the figures add up, and help you finalize and, where required, submit the annual report to Bolagsverket on time.",
       ar: "مساعدة في إعداد الحسابات الختامية والقوائم المالية السنوية للشركات المحدودة وغيرها من الشركات في السويد. نجمّع بيانات السنة المالية، ونتأكد من صحة الأرقام، ونساعدك على استكمال القوائم المالية السنوية وتقديمها إلى مكتب تسجيل الشركات (Bolagsverket) في الوقت المحدد عند الاقتضاء.",
     },
+    teaser: {
+      sv: "Bokslut och årsredovisning, klara och inlämnade i tid.",
+      en: "Annual accounts and annual reports, finalized and filed on time.",
+      ar: "الحسابات الختامية والقوائم المالية السنوية، جاهزة ومقدَّمة في موعدها.",
+    },
     whoItsFor: {
       sv: [
         "Aktiebolag som ska upprätta årsredovisning",
@@ -1371,6 +1417,11 @@ export const services: Record<string, Service> = {
       sv: "Ekonomisk rådgivning för företag som redan är igång och vill få bättre koll på lönsamhet, likviditet och ekonomisk utveckling. Vi går igenom din situation tillsammans med dig och ger konkreta, praktiska råd utifrån ditt företags faktiska siffror.",
       en: "Business advisory for companies that are already up and running and want a clearer picture of profitability, cash flow, and financial development. We go through your situation together with you and give concrete, practical advice based on your company's actual numbers.",
       ar: "استشارات مالية للشركات القائمة الراغبة في فهم أفضل لربحيتها وسيولتها وتطورها المالي. نراجع وضعك معك ونقدّم نصائح عملية وملموسة استنادًا إلى الأرقام الفعلية لشركتك.",
+    },
+    teaser: {
+      sv: "Konkreta råd om lönsamhet och likviditet utifrån dina faktiska siffror.",
+      en: "Concrete advice on profitability and cash flow, based on your actual numbers.",
+      ar: "نصائح عملية حول الربحية والسيولة استنادًا إلى أرقامك الفعلية.",
     },
     whoItsFor: {
       sv: [
@@ -1526,6 +1577,11 @@ export const services: Record<string, Service> = {
       en: "Help correcting bookkeeping errors for businesses that have found incorrect entries, missing vouchers, or bookkeeping that doesn't match the bank and receipts. We review what needs correcting and make sure your bookkeeping is accurate again.",
       ar: "مساعدة في تصحيح أخطاء المحاسبة لمن اكتشف قيودًا خاطئة أو مستندات مفقودة أو محاسبة لا تتطابق مع كشوف البنك والإيصالات. نراجع ما يحتاج إلى تصحيح ونضمن استعادة دقة محاسبتك.",
     },
+    teaser: {
+      sv: "Vi hittar och rättar fel så att bokföringen stämmer igen.",
+      en: "We find and fix errors so your bookkeeping adds up again.",
+      ar: "نكتشف الأخطاء ونصححها لتعود محاسبتك دقيقة.",
+    },
     whoItsFor: {
       sv: [
         "Företag som upptäckt fel i sin bokföring",
@@ -1667,6 +1723,11 @@ export const services: Record<string, Service> = {
       sv: "Fortnox bokföringshjälp för dig som redan använder Fortnox eller funderar på att börja. Vi hjälper dig med löpande bokföring i systemet, avstämningar och praktiska frågor kring hur olika funktioner används.",
       en: "Fortnox bookkeeping support for businesses already using Fortnox, or considering getting started with it. We help with ongoing bookkeeping in the system, reconciliations, and practical questions about how different features work.",
       ar: "مساعدة في المحاسبة عبر برنامج Fortnox لمن يستخدمه بالفعل أو يفكر في البدء باستخدامه. نساعدك في المحاسبة المستمرة على النظام والمطابقات والمسائل العملية المتعلقة باستخدام مختلف الميزات.",
+    },
+    teaser: {
+      sv: "Bokföring, avstämningar och praktisk hjälp i Fortnox.",
+      en: "Bookkeeping, reconciliations and hands-on help in Fortnox.",
+      ar: "محاسبة ومطابقات ومساعدة عملية في برنامج Fortnox.",
     },
     whoItsFor: {
       sv: [
@@ -1818,6 +1879,11 @@ export const services: Record<string, Service> = {
       en: "Accounting and VMB (profit margin taxation) support for car dealerships and others buying and selling used vehicles in Sweden. We help you handle profit margin VAT correctly and keep the bookkeeping for each vehicle transaction in order.",
       ar: "محاسبة ودعم في نظام VMB (ضريبة هامش الربح) لتجار السيارات وغيرهم ممن يشترون ويبيعون مركبات مستعملة في السويد. نساعدك على التعامل الصحيح مع ضريبة هامش الربح والحفاظ على تنظيم المحاسبة لكل صفقة مركبة.",
     },
+    teaser: {
+      sv: "Bokföring och vinstmarginalbeskattning (VMB) för handel med begagnade fordon.",
+      en: "Bookkeeping and margin scheme VAT (VMB) for used vehicle dealers.",
+      ar: "محاسبة وضريبة هامش الربح (VMB) لتجارة المركبات المستعملة.",
+    },
     whoItsFor: {
       sv: [
         "Bilhandlare som köper och säljer begagnade fordon",
@@ -1964,6 +2030,11 @@ export const services: Record<string, Service> = {
       en: "Arabic-speaking accountant in Sweden for business owners who want to communicate in Arabic. Economy Codes AB offers the same services as in Swedish and English — bookkeeping, payroll, VAT, annual accounts, and tax returns — with personal service in Arabic throughout the process.",
       ar: "تقدّم Economy Codes AB خدمات المحاسبة الرقمية للشركات الصغيرة والمتوسطة في جميع أنحاء السويد، بما يشمل مسك الدفاتر والرواتب وضريبة القيمة المضافة والإقرارات الضريبية والإغلاق السنوي والاستشارات المالية، مع خدمة شخصية باللغة العربية من مستشار محاسبة يتحدث العربية بطلاقة، إلى جانب السويدية والإنجليزية.",
     },
+    teaser: {
+      sv: "Samma redovisningstjänster — med personlig service på arabiska.",
+      en: "The same accounting services — with personal service in Arabic.",
+      ar: "خدمات المحاسبة نفسها مع خدمة شخصية باللغة العربية.",
+    },
     whoItsFor: {
       sv: [
         "Arabisktalande företagare i Sverige",
@@ -2095,6 +2166,8 @@ export const services: Record<string, Service> = {
     faqIds: ["faq-arabic-scope"],
     lastReviewed: LAST_REVIEWED,
   },
+
+  ...digitalServices,
 };
 
 export const servicesList: Service[] = Object.values(services).sort(

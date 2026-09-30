@@ -16,7 +16,7 @@ function CardWatermark({ icon: Icon }: { icon: LucideIcon }) {
   return (
     <Icon
       aria-hidden="true"
-      className="text-primary/[0.06] pointer-events-none absolute -end-4 -bottom-4 size-32"
+      className="text-primary/[0.06] pointer-events-none absolute -end-3 -bottom-3 size-24"
     />
   );
 }
@@ -47,27 +47,26 @@ export function ServiceCard({
     >
       <Card
         className={cn(
-          "ring-border group-hover:ring-primary/30 relative h-full gap-5 overflow-hidden ring-1 transition-all duration-200 ease-(--ease-standard) group-hover:-translate-y-1 group-hover:shadow-md",
-          isLarge ? "p-8" : "p-6",
+          "ring-border group-hover:ring-primary/30 relative h-full gap-3 overflow-hidden ring-1 transition-all duration-200 ease-(--ease-standard) group-hover:-translate-y-1 group-hover:shadow-md",
+          isLarge ? "p-6" : "p-5",
           featured && "bg-secondary/40",
         )}
       >
         {isLarge && <CardWatermark icon={Icon} />}
-        <CardHeader className="relative p-0">
-          <IconTile
-            icon={Icon}
-            size={isLarge ? "lg" : "default"}
-            className="mb-3"
-          />
+        <CardHeader className="relative flex items-center gap-3 p-0">
+          <IconTile icon={Icon} size={isLarge ? "default" : "sm"} />
           <CardTitle
-            className={cn("font-semibold", isLarge ? "text-xl" : "text-lg")}
+            className={cn(
+              "leading-snug font-semibold",
+              isLarge ? "text-lg" : "text-base",
+            )}
           >
             {getLocalized(service.name, locale)}
           </CardTitle>
         </CardHeader>
-        <CardContent className="relative flex flex-1 flex-col gap-4 p-0">
-          <p className="text-muted-foreground text-body">
-            {getLocalized(service.summary, locale)}
+        <CardContent className="relative flex flex-1 flex-col gap-3 p-0">
+          <p className="text-muted-foreground line-clamp-2 text-sm">
+            {getLocalized(service.teaser, locale)}
           </p>
           <span className="text-primary mt-auto inline-flex items-center gap-1.5 text-sm font-medium">
             {readMoreLabel}

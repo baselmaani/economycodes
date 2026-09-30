@@ -6,7 +6,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 
-import type { Localized } from "./types";
+import type { Localized, MediaRef } from "./types";
 
 export const homeMeta = {
   title: {
@@ -316,3 +316,14 @@ export const benefits: Benefit[] = [
     },
   },
 ];
+
+export const benefitsImage: MediaRef = {
+  src: "/media/optimized/home-benefits.webp",
+  width: 1600,
+  height: 1067,
+  alt: {
+    sv: "Arbetsplats med miniräknare, budgetunderlag och bärbar dator",
+    en: "Desk with a calculator, budget documents and a laptop",
+    ar: "مكتب عليه آلة حاسبة ومستندات ميزانية وحاسوب محمول",
+  },
+};

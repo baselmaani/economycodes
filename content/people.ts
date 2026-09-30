@@ -5,9 +5,8 @@ import type { PersonProfile } from "./types";
  * authorized as both an Auktoriserad Redovisningskonsult and an Auktoriserad
  * Lönekonsult via Srf konsulterna; Economy Codes AB itself is a confirmed Srf
  * Auktoriserad Redovisningsbyrå (see lib/structured-data/organization.ts).
- * CLIENT-TODO.md items 4-5 (title, authorization) are resolved; item 6
- * (portrait photo licensing) remains open separately -- do not add any other
- * team member.
+ * CLIENT-TODO.md items 4-6 (title, authorization, portrait) are resolved --
+ * do not add any other team member.
  */
 export const hadi: PersonProfile = {
   id: "hadi-al-maani",
@@ -23,23 +22,20 @@ export const hadi: PersonProfile = {
     ar: "هادي المعاني مستشار محاسبة معتمد ومستشار رواتب معتمد من منظمة Srf konsulterna، ويدير شركة Economy Codes AB وهي مكتب محاسبة معتمد من Srf. يساعد أصحاب الأعمال في السويد في مسك الدفاتر والرواتب والمسائل الضريبية والخطوات العملية لتأسيس الأعمال وإدارتها — بالسويدية والإنجليزية والعربية.",
   },
   photo: {
-    src: "/media/optimized/hadi-portrait.webp",
-    width: 320,
-    height: 487,
+    src: "/media/optimized/hadi-headshot.webp",
+    width: 640,
+    height: 640,
     alt: {
       sv: "Porträtt av Hadi Al Maani, auktoriserad redovisningskonsult på Economy Codes AB",
       en: "Portrait of Hadi Al Maani, authorized accounting consultant at Economy Codes AB",
       ar: "صورة هادي المعاني، مستشار محاسبة معتمد في Economy Codes AB",
     },
   },
-  // Cropped to remove the top ~28% of the source photo (a studio watermark
-  // sits there, see CLIENT-TODO.md item 6 -- unresolved licensing) so it can
-  // be shown larger in the Hero without exposing it. Replace with a proper
-  // high-res, watermark-free portrait once available.
+  // Center-cropped to the Hero frame's 400:439 aspect ratio.
   heroPhoto: {
-    src: "/media/optimized/hadi-portrait-hero.webp",
-    width: 400,
-    height: 439,
+    src: "/media/optimized/hadi-headshot-hero.webp",
+    width: 800,
+    height: 878,
     alt: {
       sv: "Porträtt av Hadi Al Maani, auktoriserad redovisningskonsult på Economy Codes AB",
       en: "Portrait of Hadi Al Maani, authorized accounting consultant at Economy Codes AB",

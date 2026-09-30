@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
 
+import { useReveal } from "@/components/motion/useReveal";
 import { cn } from "@/lib/utils";
 
 /**
@@ -22,38 +23,16 @@ export function RevealLine({
   delay?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-    if (typeof IntersectionObserver === "undefined") return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const hiddenClass = axis === "x" ? "scale-x-0" : "scale-y-0";
-    const originClasses =
-      axis === "x" ? ["origin-left", "rtl:origin-right"] : ["origin-top"];
-
-    node.style.transitionDelay = `${delay}ms`;
-    node.classList.add(
+  useReveal(ref, {
+    delay,
+    armClasses: [
       "transition-transform",
       "duration-700",
       "ease-(--ease-standard)",
-      ...originClasses,
-      hiddenClass,
-    );
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          node.classList.remove(hiddenClass);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [axis, delay]);
+      ...(axis === "x" ? ["origin-left", "rtl:origin-right"] : ["origin-top"]),
+    ],
+    hiddenClasses: [axis === "x" ? "scale-x-0" : "scale-y-0"],
+  });
 
   return (
     <div ref={ref} className={cn(className)}>

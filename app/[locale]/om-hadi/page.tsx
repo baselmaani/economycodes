@@ -12,7 +12,11 @@ import {
 } from "lucide-react";
 
 import type { AppLocale } from "@/i18n/routing";
-import { getAlternateLinks, getServiceSlug } from "@/lib/routes";
+import {
+  getAbsoluteUrl,
+  getAlternateLinks,
+  getServiceSlug,
+} from "@/lib/routes";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { getLocalized } from "@/lib/i18n-content";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -45,6 +49,7 @@ import {
   type ServiceGroup,
 } from "@/content/service-icons";
 import { buildPersonJsonLd } from "@/lib/structured-data/person";
+import { buildBreadcrumbJsonLd } from "@/lib/structured-data/breadcrumb";
 
 const GROUP_ORDER: ServiceGroup[] = ["core", "advisory", "specialist"];
 const ABOUT_FAQ_IDS = [
@@ -72,7 +77,14 @@ export async function generateMetadata({
       },
       locale,
     ),
-    description: getLocalized(hadi.bio, locale).slice(0, 155),
+    description: getLocalized(
+      {
+        sv: "Hadi Al Maani är auktoriserad redovisningskonsult och lönekonsult via Srf konsulterna och driver Economy Codes AB. Service på svenska, engelska och arabiska.",
+        en: "Hadi Al Maani is an Srf-authorized accounting and payroll consultant who runs Economy Codes AB. Service in Swedish, English and Arabic.",
+        ar: "هادي المعاني مستشار محاسبة ورواتب معتمد من Srf konsulterna ويدير Economy Codes AB. خدمة بالعربية والسويدية والإنجليزية.",
+      },
+      locale,
+    ),
     alternates: getAlternateLinks("/om-hadi"),
   });
 }
@@ -88,7 +100,8 @@ export default async function AboutHadiPage({
   const tAbout = await getTranslations({ locale, namespace: "about" });
   const nav = await getTranslations({ locale, namespace: "nav" });
 
-  const personJsonLd = buildPersonJsonLd(hadi, locale, business);
+  const aboutUrl = getAbsoluteUrl("/om-hadi", locale);
+  const personJsonLd = buildPersonJsonLd(hadi, locale, aboutUrl);
   const aboutFaqs = ABOUT_FAQ_IDS.map((id) =>
     faqs.find((faq) => faq.id === id),
   ).filter((faq) => faq !== undefined);
@@ -101,6 +114,12 @@ export default async function AboutHadiPage({
   return (
     <>
       <JsonLd data={personJsonLd} />
+      <JsonLd
+        data={buildBreadcrumbJsonLd([
+          { name: nav("home"), url: getAbsoluteUrl("/", locale) },
+          { name: nav("about"), url: aboutUrl },
+        ])}
+      />
 
       <Section tone="base" className="py-6 sm:py-8">
         <Container>
@@ -237,7 +256,7 @@ export default async function AboutHadiPage({
 
                 <div
                   dir="ltr"
-                  className="absolute start-6 -top-4 flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-3 py-2 shadow-md backdrop-blur-sm animate-[eco-float_5s_ease-in-out_infinite] [animation-delay:-2s]"
+                  className="absolute start-6 -top-4 flex items-center gap-2 rounded-xl border border-white/15 bg-brand-navy/90 px-3 py-2 shadow-md backdrop-blur-sm animate-[eco-float_5s_ease-in-out_infinite] [animation-delay:-2s]"
                 >
                   <ShieldCheck
                     size={16}
@@ -250,7 +269,7 @@ export default async function AboutHadiPage({
                 </div>
                 <div
                   dir="ltr"
-                  className="absolute -end-4 bottom-8 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md backdrop-blur-sm animate-[eco-float_4.5s_ease-in-out_infinite] [animation-delay:-1.3s]"
+                  className="absolute -end-4 bottom-8 rounded-full border border-white/15 bg-brand-navy/90 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md backdrop-blur-sm animate-[eco-float_4.5s_ease-in-out_infinite] [animation-delay:-1.3s]"
                 >
                   Svenska · English · العربية
                 </div>
@@ -453,7 +472,7 @@ export default async function AboutHadiPage({
                 alt={getLocalized(hadi.photo.alt, locale)}
                 fill
                 sizes="96px"
-                style={{ objectFit: "cover", objectPosition: "50% 88%" }}
+                className="object-cover"
               />
             </div>
           </Reveal>

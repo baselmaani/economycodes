@@ -2,7 +2,7 @@
 
 Next.js (App Router) rebuild of the Economy Codes marketing site. Swedish (default, unprefixed), English (`/en`), and Arabic (`/ar`, RTL).
 
-See [`CLIENT-TODO.md`](./CLIENT-TODO.md) for every fact that still needs client confirmation before launch, and [`public/media/source/MANIFEST.md`](./public/media/source/MANIFEST.md) for legacy-asset licensing notes.
+See [`CLIENT-TODO.md`](./CLIENT-TODO.md) for every fact that still needs client confirmation before launch, and [`assets/media-source/MANIFEST.md`](./assets/media-source/MANIFEST.md) for legacy-asset licensing notes.
 
 ## Commands
 
@@ -26,7 +26,7 @@ English/Arabic content currently exists for every page built so far (homepage, a
 - `lib/routes.ts` / `lib/service-lookup.ts` — slug resolution and hreflang/canonical URL builders.
 - `lib/structured-data/*.ts` — JSON-LD builders (Organization, Service, Person, Article, Breadcrumb, FAQ).
 - `config/legacy-redirects.ts` — permanent redirects from the old site's URLs.
-- `public/media/source/` — original legacy assets (untouched); `public/media/optimized/` — WebP derivatives actually used on the site.
+- `assets/media-source/` — original legacy assets (untouched, deliberately outside `public/` so they are not deployed); `public/media/optimized/` — WebP derivatives actually used on the site.
 
 ## Environment
 

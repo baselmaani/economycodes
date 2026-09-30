@@ -8,6 +8,8 @@ export default defineConfig({
     url: "http://localhost:4310",
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
+    // Never deliver real email from the test suite.
+    env: { CONTACT_FORM_LOG_ONLY: "1" },
   },
   use: {
     baseURL: "http://localhost:4310",
