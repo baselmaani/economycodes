@@ -4,6 +4,9 @@ import { body as registerAktiebolagSwedenForeigner } from "./register-aktiebolag
 import { body as swedenBusinessTaxDeadlines } from "./sweden-business-tax-deadlines";
 import { body as startBusinessSwedenWithoutResidencePermit } from "./start-business-sweden-without-residence-permit";
 import { body as arabicSpeakingAccountantSwedenWhy } from "./arabic-speaking-accountant-sweden-why";
+import { body as accountingInSwedenGuide } from "./accounting-in-sweden-guide";
+import { body as chooseMarketingAgencySweden } from "./choose-marketing-agency-sweden";
+import { body as payrollSwedenEmployers } from "./payroll-sweden-employers";
 
 /** Article id -> body content, looked up by app/[locale]/artiklar/[slug]/page.tsx. */
 export const articleBodies: Record<string, Localized<ContentBlock[]>> = {
@@ -13,4 +16,7 @@ export const articleBodies: Record<string, Localized<ContentBlock[]>> = {
   "start-business-sweden-without-residence-permit":
     startBusinessSwedenWithoutResidencePermit,
   "arabic-speaking-accountant-sweden-why": arabicSpeakingAccountantSwedenWhy,
+  "accounting-in-sweden-guide": accountingInSwedenGuide,
+  "choose-marketing-agency-sweden": chooseMarketingAgencySweden,
+  "payroll-sweden-employers": payrollSwedenEmployers,
 };

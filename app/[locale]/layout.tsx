@@ -19,6 +19,8 @@ import { getLocalized } from "@/lib/i18n-content";
 import { business } from "@/content/business";
 import { locations } from "@/content/locations";
 import { homeMeta } from "@/content/home";
+import { locationPages } from "@/content/location-pages";
+import { getLocationAlternateLinks } from "@/lib/routes";
 import "../globals.css";
 
 const manrope = Manrope({
@@ -84,6 +86,7 @@ export default async function RootLayout({
     <html
       lang={locale}
       dir={direction}
+      data-scroll-behavior="smooth"
       className={`${manrope.variable} ${notoSansArabic.variable} h-full antialiased`}
     >
       <body
@@ -99,6 +102,17 @@ export default async function RootLayout({
             business,
             locations,
             getLocalized(homeMeta.description, locale),
+            (location) => {
+              const page = locationPages.find(
+                (p) => p.locationId === location.id,
+              );
+              return page
+                ? {
+                    url: getLocationAlternateLinks(page)[locale],
+                    areaServed: page.nearbyAreas,
+                  }
+                : {};
+            },
           )}
         />
         <NextIntlClientProvider locale={locale as AppLocale}>

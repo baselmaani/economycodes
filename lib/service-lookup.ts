@@ -1,7 +1,5 @@
 import type { AppLocale } from "@/i18n/routing";
 import { servicesList } from "@/content/services";
-import { articles } from "@/content/articles/meta";
-import type { ArticleMeta } from "@/content/articles/types";
 import type { Service } from "@/content/types";
 
 /**
@@ -39,15 +37,4 @@ export function resolveServiceBySlug(
 
 export function getServiceSlug(locale: AppLocale, service: Service): string {
   return service.slug[locale] ?? service.slug.sv;
-}
-
-/** Finds an article whose localized slug matches the given URL param, falling back to the sv slug. */
-export function resolveArticleBySlug(
-  locale: AppLocale,
-  slugParam: string,
-): ArticleMeta | undefined {
-  const decoded = decodeSlug(slugParam);
-  return articles.find(
-    (article) => (article.slug[locale] ?? article.slug.sv) === decoded,
-  );
 }

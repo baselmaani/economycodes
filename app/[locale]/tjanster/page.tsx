@@ -13,7 +13,8 @@ import { getLocalized } from "@/lib/i18n-content";
 import { buildBreadcrumbJsonLd } from "@/lib/structured-data/breadcrumb";
 import { buildServiceCatalogJsonLd } from "@/lib/structured-data/service";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { buildMetadata } from "@/lib/seo/metadata";
+import { getPageContent } from "@/lib/cms/content";
+import { buildPageMetadata } from "@/lib/cms/metadata";
 import { getServicesListOgImageUrl } from "@/lib/seo/og-image";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { Container } from "@/components/layout/Container";
@@ -22,11 +23,18 @@ import { Reveal } from "@/components/motion/Reveal";
 import { RevealGroup } from "@/components/motion/RevealGroup";
 import { cn } from "@/lib/utils";
 import { servicesList } from "@/content/services";
+import type { Localized } from "@/content/types";
 import {
   getServiceGroup,
   serviceGroups,
   type ServiceGroup,
 } from "@/content/service-icons";
+
+const CATALOG_SERVICE_TYPE: Localized<string> = {
+  sv: "Redovisning och företagstjänster",
+  en: "Accounting and business services",
+  ar: "خدمات المحاسبة والأعمال",
+};
 
 const GROUP_ORDER: ServiceGroup[] = [
   "core",
@@ -41,18 +49,7 @@ export async function generateMetadata({
   params: Promise<{ locale: AppLocale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const home = await getTranslations({ locale, namespace: "home" });
-  return buildMetadata({
-    locale,
-    title: getLocalized(
-      {
-        sv: "Tjänster: redovisning, lön & marknadsföring",
-        en: "Services: accounting, payroll & marketing",
-        ar: "خدماتنا: المحاسبة والرواتب والتسويق",
-      },
-      locale,
-    ),
-    description: home("servicesSubtitle"),
+  return buildPageMetadata("tjanster", locale, {
     alternates: getAlternateLinks("/tjanster"),
     ogImage: getServicesListOgImageUrl(locale),
   });
@@ -67,8 +64,9 @@ export default async function ServicesPage({
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "common" });
   const nav = await getTranslations({ locale, namespace: "nav" });
-  const home = await getTranslations({ locale, namespace: "home" });
   const digital = await getTranslations({ locale, namespace: "digital" });
+  const page = await getPageContent("tjanster");
+  const intro = getLocalized(page.text.intro, locale);
 
   const grouped = GROUP_ORDER.map((group) => ({
     group,
@@ -89,8 +87,8 @@ export default async function ServicesPage({
       <JsonLd
         data={buildServiceCatalogJsonLd({
           name: nav("services"),
-          serviceType: "Accounting and business services",
-          description: home("servicesSubtitle"),
+          serviceType: getLocalized(CATALOG_SERVICE_TYPE, locale),
+          description: intro,
           url: pageUrl,
           locale,
           entries: grouped.flatMap(({ services }) =>
@@ -110,10 +108,10 @@ export default async function ServicesPage({
       />
       <Reveal>
         <h1 className="text-page-h1 mt-4 font-semibold text-balance">
-          {nav("services")}
+          {getLocalized(page.text.heading, locale)}
         </h1>
         <p className="text-muted-foreground text-body mt-3 max-w-2xl">
-          {home("servicesSubtitle")}
+          {intro}
         </p>
       </Reveal>
 

@@ -1,8 +1,111 @@
 import type { ArticleMeta } from "./types";
 
 const PUBLISHED_AT = "2026-09-06";
+const GUIDES_PUBLISHED_AT = "2026-10-19";
 
 export const articles: ArticleMeta[] = [
+  {
+    id: "accounting-in-sweden-guide",
+    slug: {
+      sv: "redovisning-i-sverige-guide",
+      en: "accounting-in-sweden-guide",
+      ar: "المحاسبة-في-السويد",
+    },
+    title: {
+      sv: "Redovisning i Sverige: en guide för företagare",
+      en: "Accounting in Sweden: A Guide for Business Owners",
+      ar: "المحاسبة في السويد: دليل لأصحاب الأعمال",
+    },
+    excerpt: {
+      sv: "Vad redovisning i Sverige innebär: bokföring, moms, arbetsgivardeklaration, bokslut och årsredovisning — och skillnaden mellan enskild firma och aktiebolag.",
+      en: "What accounting in Sweden involves: bookkeeping, VAT, employer returns, year-end accounts and annual reports, and how sole traders and limited companies differ.",
+      ar: "ما تعنيه المحاسبة في السويد: مسك الدفاتر وضريبة القيمة المضافة وإقرار صاحب العمل والحسابات الختامية، والفرق بين المنشأة الفردية والشركة المحدودة.",
+    },
+    publishedAt: GUIDES_PUBLISHED_AT,
+    authorId: "hadi-almaani",
+    faqIds: [
+      "faq-bookkeeping-what",
+      "faq-annual-closing-difference",
+      "faq-global-what-is-authorized-firm",
+    ],
+    coverImage: {
+      src: "/media/optimized/bokforing.webp",
+      width: 1024,
+      height: 683,
+      alt: {
+        sv: "Redovisning och bokföring för ett företag i Sverige",
+        en: "Accounting and bookkeeping for a business in Sweden",
+        ar: "محاسبة ومسك دفاتر لشركة في السويد",
+      },
+    },
+  },
+  {
+    id: "choose-marketing-agency-sweden",
+    slug: {
+      sv: "valja-marknadsforingsbyra-sverige",
+      en: "choose-marketing-agency-sweden",
+      ar: "اختيار-وكالة-تسويق-في-السويد",
+    },
+    title: {
+      sv: "Så väljer du marknadsföringsbyrå i Sverige",
+      en: "How to Choose a Marketing Agency in Sweden",
+      ar: "كيف تختار وكالة تسويق في السويد",
+    },
+    excerpt: {
+      sv: "Vad en digital marknadsföringsbyrå gör, vilka frågor du ska ställa innan du väljer byrå, och vilka varningssignaler du ska se upp med.",
+      en: "What a digital marketing agency does, the questions to ask before you choose one, and the warning signs to look out for.",
+      ar: "ما الذي تقدمه وكالة التسويق الرقمي، والأسئلة التي يجب طرحها قبل اختيارها، والعلامات التحذيرية التي يجب الانتباه إليها.",
+    },
+    publishedAt: GUIDES_PUBLISHED_AT,
+    authorId: "hadi-almaani",
+    faqIds: [
+      "faq-digital-what-agency-does",
+      "faq-seo-vs-ads",
+      "faq-geo-what",
+      "faq-digital-why-accounting-firm",
+    ],
+    coverImage: {
+      src: "/media/optimized/home-benefits.webp",
+      width: 1600,
+      height: 1067,
+      alt: {
+        sv: "Företagare som planerar digital marknadsföring",
+        en: "Business owner planning digital marketing",
+        ar: "صاحب عمل يخطط للتسويق الرقمي",
+      },
+    },
+  },
+  {
+    id: "payroll-sweden-employers",
+    slug: {
+      sv: "lon-i-sverige-arbetsgivare",
+      en: "payroll-in-sweden-employers",
+      ar: "الرواتب-في-السويد",
+    },
+    title: {
+      sv: "Lön i Sverige: vad arbetsgivare måste göra varje månad",
+      en: "Payroll in Sweden: What Employers Must Do Each Month",
+      ar: "الرواتب في السويد: ما يجب على صاحب العمل فعله كل شهر",
+    },
+    excerpt: {
+      sv: "Från registrering som arbetsgivare till skatteavdrag, arbetsgivaravgifter och den månatliga arbetsgivardeklarationen — så fungerar lön i Sverige.",
+      en: "From registering as an employer to tax withholding, employer contributions and the monthly employer tax return — how payroll works in Sweden.",
+      ar: "من التسجيل كصاحب عمل إلى اقتطاع الضريبة ورسوم صاحب العمل وإقرار صاحب العمل الشهري — هكذا تعمل الرواتب في السويد.",
+    },
+    publishedAt: GUIDES_PUBLISHED_AT,
+    authorId: "hadi-almaani",
+    faqIds: ["faq-payroll-what", "faq-payroll-frequency"],
+    coverImage: {
+      src: "/media/optimized/hero.webp",
+      width: 1600,
+      height: 1068,
+      alt: {
+        sv: "Arbetsgivare som går igenom lönerna",
+        en: "Employer reviewing payroll",
+        ar: "صاحب عمل يراجع الرواتب",
+      },
+    },
+  },
   {
     id: "bookkeeping-records-sweden",
     slug: {

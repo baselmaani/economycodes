@@ -5,17 +5,13 @@ import {
   type StaticAppPathname,
 } from "@/i18n/routing";
 import { siteUrl } from "@/lib/site";
-import {
-  getServiceSlug,
-  resolveArticleBySlug,
-  resolveServiceBySlug,
-} from "@/lib/service-lookup";
+import { getServiceSlug, resolveServiceBySlug } from "@/lib/service-lookup";
 import { services, servicesList } from "@/content/services";
-import { articles } from "@/content/articles/meta";
 import type { ArticleMeta } from "@/content/articles/types";
+import { locationPages, type LocationPage } from "@/content/location-pages";
 import type { Service } from "@/content/types";
 
-export { resolveServiceBySlug, getServiceSlug, resolveArticleBySlug };
+export { resolveServiceBySlug, getServiceSlug };
 
 /** Absolute, locale-correct URL for a static (non-dynamic) pathname. */
 export function getAbsoluteUrl(
@@ -44,7 +40,8 @@ export function getAlternateLinks(
 
 /** hreflang alternates for a dynamic [slug] page, given a function that resolves the slug per locale. */
 function getDynamicAlternateLinks(
-  pathname: "/tjanster/[slug]" | "/artiklar/[slug]",
+  pathname:
+    "/tjanster/[slug]" | "/artiklar/[slug]" | "/redovisningsbyra/[slug]",
   slugForLocale: (locale: AppLocale) => string,
 ): Record<AppLocale | "x-default", string> {
   const entries = routing.locales.map((locale) => {
@@ -86,4 +83,33 @@ export function getArticleAlternateLinks(
   );
 }
 
-export { services, servicesList, articles };
+export function getLocationSlug(locale: AppLocale, page: LocationPage): string {
+  return page.slug[locale] ?? page.slug.sv;
+}
+
+/** hreflang alternates for an office landing page. */
+export function getLocationAlternateLinks(
+  page: LocationPage,
+): Record<AppLocale | "x-default", string> {
+  return getDynamicAlternateLinks("/redovisningsbyra/[slug]", (locale) =>
+    getLocationSlug(locale, page),
+  );
+}
+
+/** Office landing page for a (possibly percent-encoded) slug in a locale. */
+export function resolveLocationBySlug(
+  locale: AppLocale,
+  slugParam: string,
+): LocationPage | undefined {
+  let decoded = slugParam;
+  try {
+    decoded = decodeURIComponent(slugParam);
+  } catch {
+    // Keep the raw value; it simply won't match.
+  }
+  return locationPages.find(
+    (page) => getLocationSlug(locale, page) === decoded,
+  );
+}
+
+export { services, servicesList, locationPages };

@@ -120,6 +120,13 @@
   html {
     @apply font-sans;
   }
+  /* Smooth in-page anchor jumps (e.g. the hero CTA to #kontakt). The html
+     element's data-scroll-behavior keeps route changes instant. */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
   /* Last line of defence against a long word overflowing a narrow screen:
      hyphenate per the page's lang attribute, and break if that fails. */
   h1,

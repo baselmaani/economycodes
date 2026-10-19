@@ -21,12 +21,12 @@ export const digitalMeta = {
   title: {
     sv: "Digital marknadsföringsbyrå i Sverige",
     en: "Digital marketing agency in Sweden",
-    ar: "شركة تسويق رقمي في السويد",
+    ar: "وكالة تسويق رقمي في السويد",
   } satisfies Localized<string>,
   description: {
     sv: "Digital marknadsföringsbyrå i Sverige: webbplatser, SEO, AEO, GEO, Google Ads, sociala medier, SaaS och mobilappar — på svenska, engelska och arabiska.",
     en: "Digital marketing agency in Sweden: websites, SEO, AEO, GEO, Google Ads, social media ads, SaaS, and mobile apps — in Swedish, English, and Arabic.",
-    ar: "شركة تسويق رقمي في السويد: مواقع إلكترونية وSEO وAEO وGEO وإعلانات جوجل ووسائل التواصل وتطبيقات SaaS والجوال — بالسويدية والإنجليزية والعربية.",
+    ar: "وكالة تسويق رقمي في السويد: مواقع إلكترونية وSEO وAEO وGEO وإعلانات جوجل ووسائل التواصل وتطبيقات SaaS والجوال — بالسويدية والإنجليزية والعربية.",
   } satisfies Localized<string>,
 };
 
@@ -34,12 +34,12 @@ export const digitalHero = {
   title: {
     sv: "Digital marknadsföringsbyrå för företag i hela Sverige",
     en: "Digital marketing agency for businesses across Sweden",
-    ar: "شركة تسويق رقمي للشركات في جميع أنحاء السويد",
+    ar: "وكالة تسويق رقمي للشركات في جميع أنحاء السويد",
   } satisfies Localized<string>,
   lead: {
     sv: "Economy Codes AB hjälper små och medelstora företag i hela Sverige att få fler kunder online. Vi bygger webbplatser, webbappar och mobilappar för iOS och Android, arbetar med SEO, AEO och GEO för synlighet i Google och AI-sök, och driver annonsering på Google, Facebook, Instagram, TikTok och LinkedIn — på svenska, engelska och arabiska.",
     en: "Economy Codes AB helps small and medium-sized businesses across Sweden win more customers online. We build websites, web apps, and iOS and Android apps, work with SEO, AEO, and GEO for visibility in Google and AI search, and run advertising on Google, Facebook, Instagram, TikTok, and LinkedIn — in Swedish, English, and Arabic.",
-    ar: "تساعد Economy Codes AB الشركات الصغيرة والمتوسطة في جميع أنحاء السويد على كسب مزيد من العملاء عبر الإنترنت. نبني المواقع وتطبيقات الويب وتطبيقات iOS وأندرويد، ونعمل على SEO وAEO وGEO للظهور في جوجل وبحث الذكاء الاصطناعي، وندير الإعلانات على جوجل وفيسبوك وإنستغرام وتيك توك ولينكدإن — بالسويدية والإنجليزية والعربية.",
+    ar: "Economy Codes AB شركة تسويق رقمي تساعد الشركات الصغيرة والمتوسطة في جميع أنحاء السويد على كسب مزيد من العملاء عبر الإنترنت. نبني المواقع وتطبيقات الويب وتطبيقات iOS وأندرويد، ونعمل على SEO وAEO وGEO للظهور في جوجل وبحث الذكاء الاصطناعي، وندير الإعلانات على جوجل وفيسبوك وإنستغرام وتيك توك ولينكدإن — بالسويدية والإنجليزية والعربية.",
   } satisfies Localized<string>,
 };
 

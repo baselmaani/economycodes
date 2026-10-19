@@ -17,7 +17,8 @@ import {
   getAlternateLinks,
   getServiceSlug,
 } from "@/lib/routes";
-import { buildMetadata } from "@/lib/seo/metadata";
+import { getPageContent } from "@/lib/cms/content";
+import { buildPageMetadata } from "@/lib/cms/metadata";
 import { getLocalized } from "@/lib/i18n-content";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
@@ -29,7 +30,6 @@ import { RevealScale } from "@/components/motion/RevealScale";
 import { SectionHeading } from "@/components/marketing/SectionHeading";
 import { IconTile } from "@/components/marketing/IconTile";
 import { FeatureCard } from "@/components/marketing/FeatureCard";
-import { LocationCard } from "@/components/marketing/LocationCard";
 import { GridPattern } from "@/components/marketing/decor/GridPattern";
 import { RadialGlow } from "@/components/marketing/decor/RadialGlow";
 import { FaqAccordion } from "@/components/faq/FaqAccordion";
@@ -38,7 +38,6 @@ import { Link } from "@/i18n/navigation";
 import { FacebookIcon } from "@/components/icons/FacebookIcon";
 import { hadi } from "@/content/people";
 import { business } from "@/content/business";
-import { locations } from "@/content/locations";
 import { faqs } from "@/content/faqs";
 import { servicesList } from "@/content/services";
 import { authorizationContent } from "@/content/home";
@@ -50,6 +49,7 @@ import {
 } from "@/content/service-icons";
 import { buildPersonJsonLd } from "@/lib/structured-data/person";
 import { buildBreadcrumbJsonLd } from "@/lib/structured-data/breadcrumb";
+import { buildFaqJsonLd } from "@/lib/structured-data/faq";
 
 const GROUP_ORDER: ServiceGroup[] = ["core", "advisory", "specialist"];
 const ABOUT_FAQ_IDS = [
@@ -67,24 +67,7 @@ export async function generateMetadata({
   params: Promise<{ locale: AppLocale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  return buildMetadata({
-    locale,
-    title: getLocalized(
-      {
-        sv: "Om Hadi Al Maani",
-        en: "About Hadi Al Maani",
-        ar: "عن هادي المعاني",
-      },
-      locale,
-    ),
-    description: getLocalized(
-      {
-        sv: "Hadi Al Maani är auktoriserad redovisningskonsult och lönekonsult via Srf konsulterna och driver Economy Codes AB. Service på svenska, engelska och arabiska.",
-        en: "Hadi Al Maani is an Srf-authorized accounting and payroll consultant who runs Economy Codes AB. Service in Swedish, English and Arabic.",
-        ar: "هادي المعاني مستشار محاسبة ورواتب معتمد من Srf konsulterna ويدير Economy Codes AB. خدمة بالعربية والسويدية والإنجليزية.",
-      },
-      locale,
-    ),
+  return buildPageMetadata("om-hadi", locale, {
     alternates: getAlternateLinks("/om-hadi"),
   });
 }
@@ -99,6 +82,7 @@ export default async function AboutHadiPage({
   const t = await getTranslations({ locale, namespace: "common" });
   const tAbout = await getTranslations({ locale, namespace: "about" });
   const nav = await getTranslations({ locale, namespace: "nav" });
+  const page = await getPageContent("om-hadi");
 
   const aboutUrl = getAbsoluteUrl("/om-hadi", locale);
   const personJsonLd = buildPersonJsonLd(hadi, locale, aboutUrl);
@@ -114,6 +98,9 @@ export default async function AboutHadiPage({
   return (
     <>
       <JsonLd data={personJsonLd} />
+      {aboutFaqs.length > 0 && (
+        <JsonLd data={buildFaqJsonLd(aboutFaqs, locale)} />
+      )}
       <JsonLd
         data={buildBreadcrumbJsonLd([
           { name: nav("home"), url: getAbsoluteUrl("/", locale) },
@@ -157,7 +144,7 @@ export default async function AboutHadiPage({
               </Reveal>
               <Reveal delay={200}>
                 <p className="text-body max-w-prose text-white/80">
-                  {getLocalized(hadi.bio, locale)}
+                  {getLocalized(page.text.bio, locale)}
                 </p>
               </Reveal>
               <Reveal delay={260}>
@@ -240,8 +227,8 @@ export default async function AboutHadiPage({
                 />
                 <div className="absolute inset-0 overflow-hidden rounded-3xl border border-white/20 shadow-2xl">
                   <Image
-                    src={hadi.heroPhoto.src}
-                    alt={getLocalized(hadi.heroPhoto.alt, locale)}
+                    src={page.images.heroPhoto.src}
+                    alt={getLocalized(page.images.heroPhoto.alt, locale)}
                     fill
                     loading="eager"
                     fetchPriority="high"
@@ -408,27 +395,6 @@ export default async function AboutHadiPage({
         </Container>
       </Section>
 
-      {/* Locations */}
-      <Section tone="base">
-        <Container>
-          <Reveal>
-            <h2 className="text-section-h2 text-center font-semibold text-balance">
-              {t("locationsTitle")}
-            </h2>
-          </Reveal>
-          <RevealGroup step={100} className="mx-auto mt-10 grid max-w-4xl gap-6 sm:grid-cols-2">
-            {locations.map((location) => (
-              <LocationCard
-                key={location.id}
-                location={location}
-                locale={locale}
-                directionsLabel={t("getDirections")}
-              />
-            ))}
-          </RevealGroup>
-        </Container>
-      </Section>
-
       {/* FAQ */}
       {aboutFaqs.length > 0 && (
         <Section tone="tint">
@@ -468,8 +434,8 @@ export default async function AboutHadiPage({
           <Reveal>
             <div className="border-border relative aspect-square w-24 overflow-hidden rounded-2xl border-2 border-white/30 shadow-lg">
               <Image
-                src={hadi.photo.src}
-                alt={getLocalized(hadi.photo.alt, locale)}
+                src={page.images.photo.src}
+                alt={getLocalized(page.images.photo.alt, locale)}
                 fill
                 sizes="96px"
                 className="object-cover"

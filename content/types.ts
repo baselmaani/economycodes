@@ -95,8 +95,11 @@ export interface Faq {
   id: string;
   question: Localized<string>;
   answer: Localized<string>;
-  /** "digital" = shown on the /digital-marknadsforing hub only. */
-  scope: "global" | "digital" | { serviceKey: string };
+  /**
+   * "digital" = shown on the /digital-marknadsforing hub only. Location FAQs
+   * live in content/location-pages.ts, not in content/faqs.ts.
+   */
+  scope: "global" | "digital" | { serviceKey: string } | { locationId: string };
 }
 
 export interface NavLink {

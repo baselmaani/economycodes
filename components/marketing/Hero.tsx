@@ -12,9 +12,9 @@ import { Reveal } from "@/components/motion/Reveal";
 import { RevealScale } from "@/components/motion/RevealScale";
 import { business } from "@/content/business";
 import { authorizationContent } from "@/content/home";
-import { hadi } from "@/content/people";
 import { getLocalized } from "@/lib/i18n-content";
 import type { AppLocale } from "@/i18n/routing";
+import type { MediaRef } from "@/content/types";
 
 export function Hero({
   locale,
@@ -23,6 +23,7 @@ export function Hero({
   subtitle,
   primaryCtaLabel,
   servicesCtaLabel,
+  photo,
 }: {
   locale: AppLocale;
   eyebrow?: string;
@@ -30,6 +31,7 @@ export function Hero({
   subtitle: string;
   primaryCtaLabel: string;
   servicesCtaLabel: string;
+  photo: MediaRef;
 }) {
   const floatingLabels: Record<AppLocale, string[]> = {
     sv: ["Bokföring", "Löneadministration", "Bokslut & årsredovisning"],
@@ -68,7 +70,9 @@ export function Hero({
             <Reveal delay={240}>
               <div className="flex flex-wrap items-center gap-3 pt-1">
                 <Button
-                  render={<Link href="/kontakt" />}
+                  // The homepage ends with the contact form (#kontakt), so
+                  // the primary CTA scrolls there instead of leaving the page.
+                  render={<a href="#kontakt" />}
                   variant="shine"
                   size="xl"
                   className="gap-2"
@@ -138,8 +142,8 @@ export function Hero({
               />
               <div className="absolute inset-0 overflow-hidden rounded-3xl border border-white/20 shadow-2xl">
                 <Image
-                  src={hadi.heroPhoto.src}
-                  alt={getLocalized(hadi.heroPhoto.alt, locale)}
+                  src={photo.src}
+                  alt={getLocalized(photo.alt, locale)}
                   fill
                   sizes="(min-width: 640px) 384px, 320px"
                   loading="eager"
@@ -154,7 +158,7 @@ export function Hero({
 
               <div
                 dir="ltr"
-                className="absolute start-6 -top-4 flex items-center gap-2 rounded-xl border border-white/15 bg-brand-navy/90 px-3 py-2 shadow-md backdrop-blur-sm animate-[eco-float_5s_ease-in-out_infinite] [animation-delay:-2s]"
+                className="bg-brand-navy/90 absolute start-6 -top-4 flex animate-[eco-float_5s_ease-in-out_infinite] items-center gap-2 rounded-xl border border-white/15 px-3 py-2 shadow-md backdrop-blur-sm [animation-delay:-2s]"
               >
                 <ShieldCheck
                   size={16}
@@ -165,18 +169,18 @@ export function Hero({
                   {authorizationContent.firm.credential}
                 </span>
               </div>
-              <div className="absolute -end-4 top-1/4 rounded-full border border-white/15 bg-brand-navy/90 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md backdrop-blur-sm animate-[eco-float_4s_ease-in-out_infinite] [animation-delay:-1.3s]">
+              <div className="bg-brand-navy/90 absolute -end-4 top-1/4 animate-[eco-float_4s_ease-in-out_infinite] rounded-full border border-white/15 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md backdrop-blur-sm [animation-delay:-1.3s]">
                 {labelOne}
               </div>
-              <div className="absolute -start-6 bottom-1/3 rounded-full border border-white/15 bg-brand-navy/90 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md backdrop-blur-sm animate-[eco-float_4.5s_ease-in-out_infinite] [animation-delay:-2.6s]">
+              <div className="bg-brand-navy/90 absolute -start-6 bottom-1/3 animate-[eco-float_4.5s_ease-in-out_infinite] rounded-full border border-white/15 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md backdrop-blur-sm [animation-delay:-2.6s]">
                 {labelTwo}
               </div>
-              <div className="absolute end-2 -bottom-4 rounded-full border border-white/15 bg-brand-navy/90 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md backdrop-blur-sm animate-[eco-float_3.5s_ease-in-out_infinite] [animation-delay:-0.7s]">
+              <div className="bg-brand-navy/90 absolute end-2 -bottom-4 animate-[eco-float_3.5s_ease-in-out_infinite] rounded-full border border-white/15 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md backdrop-blur-sm [animation-delay:-0.7s]">
                 {labelThree}
               </div>
               <div
                 dir="ltr"
-                className="absolute -start-4 top-6 rounded-full border border-white/15 bg-brand-navy/90 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md backdrop-blur-sm animate-[eco-float_5s_ease-in-out_infinite] [animation-delay:-3.5s]"
+                className="bg-brand-navy/90 absolute -start-4 top-6 animate-[eco-float_5s_ease-in-out_infinite] rounded-full border border-white/15 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md backdrop-blur-sm [animation-delay:-3.5s]"
               >
                 Svenska · English · العربية
               </div>

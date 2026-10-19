@@ -4,8 +4,8 @@ import { FileText } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import type { AppLocale } from "@/i18n/routing";
-import { getAlternateLinks } from "@/lib/routes";
-import { buildMetadata } from "@/lib/seo/metadata";
+import { getAbsoluteUrl, getAlternateLinks } from "@/lib/routes";
+import { buildPageMetadata } from "@/lib/cms/metadata";
 import { getLocalized } from "@/lib/i18n-content";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { Container } from "@/components/layout/Container";
@@ -14,13 +14,9 @@ import { Reveal } from "@/components/motion/Reveal";
 import { RevealGroup } from "@/components/motion/RevealGroup";
 import { IconTile } from "@/components/marketing/IconTile";
 import { Button } from "@/components/ui/button";
-import { articles } from "@/content/articles/meta";
-
-const metaDescription = {
-  sv: "Artiklar om redovisning, skatt och företagande i Sverige från Economy Codes.",
-  en: "Articles about accounting, tax, and running a business in Sweden from Economy Codes.",
-  ar: "مقالات حول المحاسبة والضرائب وإدارة الأعمال في السويد من Economy Codes.",
-};
+import { getPageContent, getPublishedArticles } from "@/lib/cms/content";
+import { buildBreadcrumbJsonLd } from "@/lib/structured-data/breadcrumb";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 const comingSoon = {
   sv: "Vi arbetar på att publicera artiklar om redovisning, skatt och företagande i Sverige. Kom gärna tillbaka snart.",
@@ -34,17 +30,7 @@ export async function generateMetadata({
   params: Promise<{ locale: AppLocale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  return buildMetadata({
-    locale,
-    title: getLocalized(
-      {
-        sv: "Artiklar om redovisning, skatt och företag",
-        en: "Insights on accounting, tax and business",
-        ar: "مقالات عن المحاسبة والضرائب والأعمال",
-      },
-      locale,
-    ),
-    description: getLocalized(metaDescription, locale),
+  return buildPageMetadata("artiklar", locale, {
     alternates: getAlternateLinks("/artiklar"),
   });
 }
@@ -58,9 +44,17 @@ export default async function ArticlesIndexPage({
   setRequestLocale(locale);
   const nav = await getTranslations({ locale, namespace: "nav" });
   const common = await getTranslations({ locale, namespace: "common" });
+  const articles = await getPublishedArticles();
+  const page = await getPageContent("artiklar");
 
   return (
     <Container size="wide" className="py-12 sm:py-16">
+      <JsonLd
+        data={buildBreadcrumbJsonLd([
+          { name: nav("home"), url: getAbsoluteUrl("/", locale) },
+          { name: nav("insights"), url: getAbsoluteUrl("/artiklar", locale) },
+        ])}
+      />
       <Breadcrumbs
         items={[
           { label: nav("home"), routeKey: "/" },
@@ -69,8 +63,11 @@ export default async function ArticlesIndexPage({
       />
       <Reveal>
         <h1 className="text-page-h1 mt-4 font-semibold text-balance">
-          {nav("insights")}
+          {getLocalized(page.text.heading, locale)}
         </h1>
+        <p className="text-muted-foreground text-body mt-3 max-w-2xl">
+          {getLocalized(page.seo.description, locale)}
+        </p>
       </Reveal>
 
       {articles.length === 0 ? (

@@ -97,6 +97,40 @@ test.describe("contact form", () => {
     await page.click('button[type="submit"]');
     await expect(page.getByRole("status")).toBeVisible({ timeout: 10_000 });
   });
+
+  test("homepage form submits and shows a success message", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await page.locator("#kontakt").scrollIntoViewIfNeeded();
+    await page.fill("#name", "Test Testsson");
+    await page.fill("#email", "test@example.com");
+    await page.fill(
+      "#message",
+      "Detta ar ett testmeddelande fran startsidan, langre an tio tecken.",
+    );
+    await page.check("#consent");
+    await page.click('#kontakt button[type="submit"]');
+    await expect(page.getByRole("status")).toBeVisible({ timeout: 10_000 });
+  });
+
+  test("server-side validation marks the invalid field", async ({ page }) => {
+    await page.goto("/kontakt");
+    await page.fill("#name", "Test Testsson");
+    await page.fill("#email", "test@example.com");
+    // Passes the browser's minLength check but is under 10 characters once
+    // the server trims it.
+    await page.fill("#message", "          x");
+    await page.check("#consent");
+    await page.click('button[type="submit"]');
+    await expect(page.locator("#message")).toHaveAttribute(
+      "aria-invalid",
+      "true",
+      { timeout: 10_000 },
+    );
+    await expect(page.locator("#message-error")).toBeVisible();
+    await expect(page.locator("#message")).toBeFocused();
+  });
 });
 
 test.describe("legacy redirects", () => {

@@ -49,7 +49,7 @@ describe("service content", () => {
   it("has every per-service FAQ scope pointing at a real service key", () => {
     const serviceKeys = new Set(servicesList.map((s) => s.key));
     for (const faq of faqs) {
-      if (typeof faq.scope === "object") {
+      if (typeof faq.scope === "object" && "serviceKey" in faq.scope) {
         expect(serviceKeys.has(faq.scope.serviceKey)).toBe(true);
       }
     }

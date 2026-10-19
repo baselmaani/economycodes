@@ -19,7 +19,7 @@ export const serviceMeta: Record<string, ServiceMeta> = {
     title: {
       sv: "Bokföring för småföretag i Sverige",
       en: "Bookkeeping for small businesses in Sweden",
-      ar: "مسك الدفاتر للشركات في السويد",
+      ar: "المحاسبة ومسك الدفاتر في السويد",
     },
     description: {
       sv: "Bokföring för aktiebolag och enskilda firmor i hela Sverige från en Srf-auktoriserad redovisningsbyrå. Service på svenska, engelska och arabiska.",
@@ -29,7 +29,7 @@ export const serviceMeta: Record<string, ServiceMeta> = {
   },
   "tax-reporting": {
     title: {
-      sv: "Moms och skattedeklaration för företag",
+      sv: "Moms och skattedeklaration i Sverige",
       en: "VAT and tax returns for businesses in Sweden",
       ar: "الضريبة والإقرار الضريبي للشركات في السويد",
     },
@@ -115,7 +115,7 @@ export const serviceMeta: Record<string, ServiceMeta> = {
     title: {
       sv: "Bokslut och årsredovisning för aktiebolag",
       en: "Annual accounts and annual reports in Sweden",
-      ar: "الإغلاق السنوي والقوائم المالية للشركات",
+      ar: "الإغلاق السنوي والقوائم المالية في السويد",
     },
     description: {
       sv: "Bokslut och årsredovisning för aktiebolag och andra företag – sammanställt, avstämt och inlämnat till Bolagsverket i tid. Srf-auktoriserad byrå.",
@@ -125,9 +125,9 @@ export const serviceMeta: Record<string, ServiceMeta> = {
   },
   advisory: {
     title: {
-      sv: "Ekonomisk rådgivning för småföretag",
-      en: "Financial advice for small businesses",
-      ar: "استشارات مالية للشركات الصغيرة",
+      sv: "Ekonomisk rådgivning för företag i Sverige",
+      en: "Financial advice for businesses in Sweden",
+      ar: "استشارات مالية للشركات في السويد",
     },
     description: {
       sv: "Få bättre koll på lönsamhet, likviditet och utveckling. Konkreta råd utifrån ditt företags faktiska siffror – på svenska, engelska eller arabiska.",
@@ -173,7 +173,7 @@ export const serviceMeta: Record<string, ServiceMeta> = {
   },
   "arabic-speaking-accounting": {
     title: {
-      sv: "Arabisktalande redovisningskonsult",
+      sv: "Arabisktalande redovisningskonsult i Sverige",
       en: "Arabic-speaking accountant in Sweden",
       ar: "محاسب يتحدث العربية في السويد",
     },
@@ -257,9 +257,9 @@ export const serviceMeta: Record<string, ServiceMeta> = {
   },
   "social-media-management": {
     title: {
-      sv: "Hantering av sociala medier för företag",
-      en: "Social media management for businesses",
-      ar: "إدارة حسابات التواصل الاجتماعي للشركات",
+      sv: "Sociala medier för företag i Sverige",
+      en: "Social media management in Sweden",
+      ar: "إدارة وسائل التواصل للشركات في السويد",
     },
     description: {
       sv: "Aktiva, professionella sociala medier – innehållsplan, inlägg, bilder och korta videor på svenska, engelska och arabiska, utan att det tar din tid.",
@@ -281,9 +281,9 @@ export const serviceMeta: Record<string, ServiceMeta> = {
   },
   "mobile-app-development": {
     title: {
-      sv: "Apputveckling för iOS och Android",
-      en: "iOS and Android app development",
-      ar: "تطوير تطبيقات iOS وأندرويد",
+      sv: "Apputveckling iOS & Android i Sverige",
+      en: "iOS and Android app development in Sweden",
+      ar: "تطوير تطبيقات iOS وأندرويد في السويد",
     },
     description: {
       sv: "Mobilappar för iOS och Android – från idé och design till App Store och Google Play, med en gemensam kodbas som håller nere tid och kostnad.",

@@ -1,27 +1,19 @@
 import type { Metadata } from "next";
-import { Mail, MessageCircle, Phone } from "lucide-react";
+import { Clock } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import type { AppLocale } from "@/i18n/routing";
 import { getAbsoluteUrl, getAlternateLinks } from "@/lib/routes";
 import { buildBreadcrumbJsonLd } from "@/lib/structured-data/breadcrumb";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { buildMetadata } from "@/lib/seo/metadata";
+import { getPageContent } from "@/lib/cms/content";
+import { buildPageMetadata } from "@/lib/cms/metadata";
 import { getLocalized } from "@/lib/i18n-content";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { Container } from "@/components/layout/Container";
 import { ContactForm } from "@/components/forms/ContactForm";
-import { LocationCard } from "@/components/marketing/LocationCard";
 import { Reveal } from "@/components/motion/Reveal";
-import { RevealGroup } from "@/components/motion/RevealGroup";
-import { business } from "@/content/business";
-import { locations } from "@/content/locations";
-
-const metaDescription = {
-  sv: "Kontakta Economy Codes för redovisning, skattedeklaration eller andra företagsfrågor.",
-  en: "Contact Economy Codes for accounting, tax returns, or other business questions.",
-  ar: "تواصل مع Economy Codes بخصوص المحاسبة أو الإقرارات الضريبية أو أي استفسارات أخرى متعلقة بالأعمال.",
-};
+import { ContactMethods } from "@/components/marketing/ContactMethods";
 
 export async function generateMetadata({
   params,
@@ -29,17 +21,7 @@ export async function generateMetadata({
   params: Promise<{ locale: AppLocale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  return buildMetadata({
-    locale,
-    title: getLocalized(
-      {
-        sv: "Kontakt – Mellerud, Trollhättan & digitalt",
-        en: "Contact us – Mellerud, Trollhättan & online",
-        ar: "اتصل بنا – ميلَّروود وتروللهاتان وعن بُعد",
-      },
-      locale,
-    ),
-    description: getLocalized(metaDescription, locale),
+  return buildPageMetadata("kontakt", locale, {
     alternates: getAlternateLinks("/kontakt"),
   });
 }
@@ -51,9 +33,9 @@ export default async function ContactPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations({ locale, namespace: "common" });
   const nav = await getTranslations({ locale, namespace: "nav" });
   const home = await getTranslations({ locale, namespace: "home" });
+  const page = await getPageContent("kontakt");
 
   return (
     <Container className="py-12 sm:py-16">
@@ -74,59 +56,28 @@ export default async function ContactPage({
           {nav("contact")}
         </h1>
         <p className="text-muted-foreground text-body mt-3 max-w-2xl">
-          {home("finalCtaSubtitle")}
+          {getLocalized(page.text.intro, locale)}
         </p>
       </Reveal>
 
-      <div className="mt-10 grid gap-12 lg:grid-cols-2">
+      <div className="mt-10 grid items-start gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
         <Reveal delay={80}>
-          <div>
-            <div className="border-border bg-card mb-8 flex flex-col gap-3 rounded-2xl border p-5">
-              <a
-                href={business.phoneHref}
-                className="text-foreground hover:text-primary flex items-center gap-2 font-medium transition-colors"
-              >
-                <Phone size={18} aria-hidden="true" className="text-primary" />
-                <span dir="ltr">{business.phone}</span>
-              </a>
-              <a
-                href={`mailto:${business.email}`}
-                className="text-foreground hover:text-primary flex items-center gap-2 font-medium transition-colors"
-              >
-                <Mail size={18} aria-hidden="true" className="text-primary" />
-                {business.email}
-              </a>
-              <a
-                href={business.whatsappHref}
-                className="text-foreground hover:text-primary flex items-center gap-2 font-medium transition-colors"
-              >
-                <MessageCircle
-                  size={18}
-                  aria-hidden="true"
-                  className="text-primary"
-                />
-                WhatsApp
-              </a>
-            </div>
-            <ContactForm locale={locale} />
+          <div className="flex flex-col gap-4">
+            <ContactMethods />
+            <p className="text-muted-foreground flex items-center gap-2 text-sm">
+              <Clock size={16} aria-hidden="true" className="text-primary" />
+              {home("contactResponseTime")}
+            </p>
           </div>
         </Reveal>
-
-        <div className="flex flex-col gap-6">
-          <Reveal>
-            <h2 className="text-lg font-semibold">{t("locationsTitle")}</h2>
-          </Reveal>
-          <RevealGroup step={100} className="flex flex-col gap-6">
-            {locations.map((location) => (
-              <LocationCard
-                key={location.id}
-                location={location}
-                locale={locale}
-                directionsLabel={t("getDirections")}
-              />
-            ))}
-          </RevealGroup>
-        </div>
+        <Reveal delay={140}>
+          <ContactForm
+            locale={locale}
+            variant="card"
+            title={home("contactFormTitle")}
+            titleAs="h2"
+          />
+        </Reveal>
       </div>
     </Container>
   );

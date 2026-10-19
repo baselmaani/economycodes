@@ -16,15 +16,15 @@ export const homeMeta = {
   } satisfies Localized<string>,
   description: {
     sv: "Economy Codes AB är en auktoriserad redovisningsbyrå för företag i hela Sverige. Få digital hjälp med bokföring, lön, moms, bokslut och deklaration.",
-    en: "Economy Codes AB is an authorized accounting firm for businesses across Sweden. Get digital help with bookkeeping, payroll, VAT, annual accounts, and tax returns.",
-    ar: "Economy Codes AB مكتب محاسبة معتمد للشركات في جميع أنحاء السويد. احصل على مساعدة رقمية في مسك الدفاتر والرواتب وضريبة القيمة المضافة والإغلاق السنوي والإقرارات الضريبية.",
+    en: "Economy Codes is an authorized accounting firm in Sweden. Digital help with bookkeeping, payroll, VAT, annual accounts and tax returns, in English and Arabic.",
+    ar: "Economy Codes AB مكتب محاسبة معتمد في السويد. مساعدة رقمية في مسك الدفاتر والرواتب وضريبة القيمة المضافة والإغلاق السنوي والإقرارات الضريبية، بالعربية.",
   } satisfies Localized<string>,
 };
 
 export const heroContent = {
   title: {
     sv: "Auktoriserad redovisningsbyrå för företag i hela Sverige",
-    en: "Authorized Digital Accounting Services for Businesses Across Sweden",
+    en: "Authorized Accounting Firm for Businesses Across Sweden",
     ar: "مكتب محاسبة معتمد للشركات في جميع أنحاء السويد",
   } satisfies Localized<string>,
   subtitle: {

@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Handshake, MessageCircle, MessagesSquare, Search } from "lucide-react";
+import {
+  Clock,
+  Handshake,
+  MessageCircle,
+  MessagesSquare,
+  Search,
+} from "lucide-react";
 
-import { Link } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
 import { getAlternateLinks } from "@/lib/routes";
-import { buildMetadata } from "@/lib/seo/metadata";
 import { buildFaqJsonLd } from "@/lib/structured-data/faq";
 import { getLocalized } from "@/lib/i18n-content";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -14,7 +18,6 @@ import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Hero } from "@/components/marketing/Hero";
 import { ServiceCard } from "@/components/marketing/ServiceCard";
-import { LocationCard } from "@/components/marketing/LocationCard";
 import { PersonProfileCard } from "@/components/marketing/PersonProfileCard";
 import { AuthorizationSection } from "@/components/marketing/AuthorizationSection";
 import { WhyAuthorizedSection } from "@/components/marketing/WhyAuthorizedSection";
@@ -25,25 +28,19 @@ import { SectionHeading } from "@/components/marketing/SectionHeading";
 import { IconTile } from "@/components/marketing/IconTile";
 import { MediaFrame } from "@/components/marketing/MediaFrame";
 import { FaqAccordion } from "@/components/faq/FaqAccordion";
-import { Button } from "@/components/ui/button";
+import { ContactForm } from "@/components/forms/ContactForm";
+import { ContactMethods } from "@/components/marketing/ContactMethods";
 import { Reveal } from "@/components/motion/Reveal";
 import { RevealGroup } from "@/components/motion/RevealGroup";
 import { RevealLine } from "@/components/motion/RevealLine";
 import { RevealScale } from "@/components/motion/RevealScale";
 import { cn } from "@/lib/utils";
-import { business } from "@/content/business";
-import { locations } from "@/content/locations";
 import { hadi } from "@/content/people";
 import { servicesList } from "@/content/services";
 import { faqs } from "@/content/faqs";
-import {
-  authorizationContent,
-  benefits,
-  benefitsImage,
-  heroContent,
-  homeMeta,
-  processSteps,
-} from "@/content/home";
+import { authorizationContent, benefits, processSteps } from "@/content/home";
+import { getPageContent } from "@/lib/cms/content";
+import { buildPageMetadata } from "@/lib/cms/metadata";
 import {
   serviceGroups,
   getServiceGroup,
@@ -59,17 +56,12 @@ export async function generateMetadata({
   params: Promise<{ locale: AppLocale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const title = getLocalized(homeMeta.title, locale);
-  const meta = buildMetadata({
-    locale,
-    title,
-    description: getLocalized(homeMeta.description, locale),
+  // The homepage title already includes its own "| Economy Codes AB" suffix,
+  // so its registry entry (lib/cms/pages.ts) sets absoluteTitle to bypass the
+  // root layout's "%s | Economy Codes" template.
+  return buildPageMetadata("home", locale, {
     alternates: getAlternateLinks("/"),
   });
-  // The homepage title already includes its own "| Economy Codes AB" suffix
-  // (required verbatim), so it must bypass the root layout's "%s | Economy
-  // Codes" title template rather than being templated a second time.
-  return { ...meta, title: { absolute: title } };
 }
 
 export default async function HomePage({
@@ -81,6 +73,7 @@ export default async function HomePage({
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "home" });
   const common = await getTranslations({ locale, namespace: "common" });
+  const page = await getPageContent("home");
 
   const globalFaqs = faqs.filter((faq) => faq.scope === "global");
   const groupedServices = GROUP_ORDER.map((group) => ({
@@ -97,8 +90,9 @@ export default async function HomePage({
       <Hero
         locale={locale}
         eyebrow={t("heroEyebrow")}
-        title={getLocalized(heroContent.title, locale)}
-        subtitle={getLocalized(heroContent.subtitle, locale)}
+        title={getLocalized(page.text.heroTitle, locale)}
+        subtitle={getLocalized(page.text.heroSubtitle, locale)}
+        photo={page.images.heroPhoto}
         primaryCtaLabel={t("heroCtaPrimary")}
         servicesCtaLabel={t("heroCtaServices")}
       />
@@ -280,8 +274,8 @@ export default async function HomePage({
             <RevealScale>
               <MediaFrame className="aspect-[3/2] lg:aspect-[4/3]">
                 <Image
-                  src={benefitsImage.src}
-                  alt={getLocalized(benefitsImage.alt, locale)}
+                  src={page.images.benefitsImage.src}
+                  alt={getLocalized(page.images.benefitsImage.alt, locale)}
                   fill
                   sizes="(min-width: 1024px) 40vw, 100vw"
                   className="object-cover"
@@ -334,82 +328,62 @@ export default async function HomePage({
         </Container>
       </Section>
 
-      {/* 11. Locations */}
-      <Section tone="tint">
-        <Container>
-          <Reveal>
-            <h2 className="text-section-h2 text-center font-semibold text-balance">
-              {common("locationsTitle")}
-            </h2>
-          </Reveal>
-          <RevealGroup step={100} className="mt-10 grid gap-6 sm:grid-cols-2">
-            {locations.map((location) => (
-              <LocationCard
-                key={location.id}
-                location={location}
-                locale={locale}
-                directionsLabel={common("getDirections")}
-              />
-            ))}
-          </RevealGroup>
-        </Container>
-      </Section>
-
-      {/* 12. Contact and consultation CTA */}
-      <Section tone="gradient" bleed>
+      {/* 11. Contact form and direct contact methods */}
+      <Section
+        id="kontakt"
+        tone="gradient"
+        bleed
+        className="scroll-mt-16"
+        aria-labelledby="home-contact-title"
+      >
         <Image
           src="/media/optimized/logo-stacked.webp"
           alt=""
           aria-hidden="true"
           width={280}
           height={280}
-          className="pointer-events-none absolute top-1/2 left-1/2 size-64 -translate-x-1/2 -translate-y-1/2 object-contain opacity-[0.06]"
+          className="pointer-events-none absolute top-1/2 left-1/4 size-64 -translate-x-1/2 -translate-y-1/2 object-contain opacity-[0.06] rtl:left-3/4"
         />
         <div
           aria-hidden="true"
           className="bg-radial-glow pointer-events-none absolute top-0 left-1/2 size-[32rem] -translate-x-1/2 rounded-full opacity-20 blur-3xl"
         />
-        <Container
-          size="narrow"
-          className="relative flex flex-col items-center gap-6 text-center"
-        >
-          <Reveal>
-            <h2 className="text-section-h2 font-semibold text-balance">
-              {t("finalCtaTitle")}
-            </h2>
-          </Reveal>
-          <Reveal delay={80}>
-            <p className="text-body max-w-prose text-white/85">
-              {t("finalCtaSubtitle")}
-            </p>
-          </Reveal>
+        <Container className="relative grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
+          <div className="flex flex-col gap-6 lg:sticky lg:top-28">
+            <Reveal>
+              <span className="text-brand-bright text-sm font-semibold tracking-wide uppercase">
+                {t("contactEyebrow")}
+              </span>
+              <h2
+                id="home-contact-title"
+                className="text-section-h2 mt-2 font-semibold text-balance"
+              >
+                {t("finalCtaTitle")}
+              </h2>
+              <p className="text-body mt-4 max-w-prose text-white/85">
+                {t("finalCtaSubtitle")}
+              </p>
+            </Reveal>
+            <Reveal delay={80}>
+              <ContactMethods tone="onDark" className="max-w-sm" />
+            </Reveal>
+            <Reveal delay={120}>
+              <p className="flex items-center gap-2 text-sm text-white/75">
+                <Clock
+                  size={16}
+                  aria-hidden="true"
+                  className="text-brand-bright"
+                />
+                {t("contactResponseTime")}
+              </p>
+            </Reveal>
+          </div>
           <Reveal delay={160}>
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              <Button
-                render={<Link href="/kontakt" />}
-                size="xl"
-                variant="secondary"
-              >
-                {t("heroCtaPrimary")}
-              </Button>
-              <Button
-                render={<a href={business.phoneHref} />}
-                size="xl"
-                variant="outline"
-                className="border-white/30 bg-white/5 text-white hover:bg-white/10 hover:text-white"
-              >
-                {t("heroCtaSecondary")}
-              </Button>
-              <Button
-                render={<a href={business.whatsappHref} />}
-                size="xl"
-                variant="whatsapp"
-                className="gap-2"
-              >
-                <MessageCircle size={18} aria-hidden="true" />
-                WhatsApp
-              </Button>
-            </div>
+            <ContactForm
+              locale={locale}
+              variant="card"
+              title={t("contactFormTitle")}
+            />
           </Reveal>
         </Container>
       </Section>

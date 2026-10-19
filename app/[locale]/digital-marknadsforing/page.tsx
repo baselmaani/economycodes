@@ -9,7 +9,8 @@ import {
   getAlternateLinks,
   getServiceAlternateLinks,
 } from "@/lib/routes";
-import { buildMetadata } from "@/lib/seo/metadata";
+import { getPageContent } from "@/lib/cms/content";
+import { buildPageMetadata } from "@/lib/cms/metadata";
 import { getDigitalMarketingOgImageUrl } from "@/lib/seo/og-image";
 import { buildBreadcrumbJsonLd } from "@/lib/structured-data/breadcrumb";
 import { buildFaqJsonLd } from "@/lib/structured-data/faq";
@@ -35,16 +36,21 @@ import { cn } from "@/lib/utils";
 import { business } from "@/content/business";
 import { faqs } from "@/content/faqs";
 import { services } from "@/content/services";
+import type { Localized } from "@/content/types";
 import {
   DIGITAL_HUB_FAQ_IDS,
   digitalAreas,
   digitalBenefits,
   digitalFacts,
-  digitalHero,
   digitalIntro,
-  digitalMeta,
   digitalProcessSteps,
 } from "@/content/digital-marketing";
+
+const CATALOG_SERVICE_TYPE: Localized<string> = {
+  sv: "Digital marknadsföring",
+  en: "Digital marketing",
+  ar: "التسويق الرقمي",
+};
 
 export async function generateMetadata({
   params,
@@ -52,10 +58,7 @@ export async function generateMetadata({
   params: Promise<{ locale: AppLocale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  return buildMetadata({
-    locale,
-    title: getLocalized(digitalMeta.title, locale),
-    description: getLocalized(digitalMeta.description, locale),
+  return buildPageMetadata("digital-marknadsforing", locale, {
     alternates: getAlternateLinks("/digital-marknadsforing"),
     ogImage: getDigitalMarketingOgImageUrl(locale),
   });
@@ -71,6 +74,7 @@ export default async function DigitalMarketingPage({
   const t = await getTranslations({ locale, namespace: "common" });
   const nav = await getTranslations({ locale, namespace: "nav" });
   const d = await getTranslations({ locale, namespace: "digital" });
+  const page = await getPageContent("digital-marknadsforing");
 
   const hubFaqs = DIGITAL_HUB_FAQ_IDS.map((id) =>
     faqs.find((faq) => faq.id === id),
@@ -91,9 +95,9 @@ export default async function DigitalMarketingPage({
       />
       <JsonLd
         data={buildServiceCatalogJsonLd({
-          name: getLocalized(digitalMeta.title, locale),
-          serviceType: "Digital marketing",
-          description: getLocalized(digitalMeta.description, locale),
+          name: getLocalized(page.seo.title, locale),
+          serviceType: getLocalized(CATALOG_SERVICE_TYPE, locale),
+          description: getLocalized(page.seo.description, locale),
           url: hubUrl,
           locale,
           entries: areas.flatMap((area) =>
@@ -128,10 +132,10 @@ export default async function DigitalMarketingPage({
                   {d("eyebrow")}
                 </Badge>
                 <h1 className="text-page-h1 mt-4 font-semibold text-balance">
-                  {getLocalized(digitalHero.title, locale)}
+                  {getLocalized(page.text.heroTitle, locale)}
                 </h1>
                 <p className="text-muted-foreground text-body mt-4">
-                  {getLocalized(digitalHero.lead, locale)}
+                  {getLocalized(page.text.heroLead, locale)}
                 </p>
                 <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
                   <Button

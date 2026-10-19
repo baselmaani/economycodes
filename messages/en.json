@@ -27,9 +27,9 @@
     "whoWeHelp": "Who we help",
     "ourProcess": "How we work",
     "faqTitle": "Frequently asked questions",
-    "locationsTitle": "Our offices",
     "lastReviewed": "Last reviewed",
-    "published": "Published"
+    "published": "Published",
+    "relatedArticles": "Further reading"
   },
   "home": {
     "heroEyebrow": "Digital accounting for all of Sweden",
@@ -52,7 +52,10 @@
     "digitalEyebrow": "Digital marketing",
     "digitalTitle": "More customers online — with marketing you can measure",
     "digitalSubtitle": "Websites, SEO, AEO and GEO, Google Ads, social media advertising, SaaS, and mobile apps. All in one place, connected to your finances.",
-    "digitalCta": "Explore digital marketing"
+    "digitalCta": "Explore digital marketing",
+    "contactEyebrow": "Contact",
+    "contactResponseTime": "We usually reply within one business day.",
+    "contactFormTitle": "Send a message"
   },
   "about": {
     "credentialsTitle": "Personal authorization",
@@ -94,15 +97,31 @@
     "preferredContactLabel": "Preferred contact method",
     "serviceLabel": "Which service is this about?",
     "messageLabel": "Message",
-    "consentLabel": "I agree that Economy Codes may store my details in order to respond to my enquiry.",
+    "consentLabel": "I agree that Economy Codes may store my details in order to respond to my enquiry. Read more in our <privacy>privacy policy</privacy>.",
     "submit": "Send",
     "submitting": "Sending...",
     "successTitle": "Thank you for your message",
     "successBody": "We'll get back to you as soon as we can.",
     "errorTitle": "Something went wrong",
     "errorBody": "Please try again, or contact us directly by phone or email.",
-    "errorInvalid": "Please check that your name, email and message (at least 10 characters) are filled in and that you have ticked the consent box.",
-    "errorRateLimited": "You've sent several messages in a short time. Please wait a minute and try again, or give us a call."
+    "errorInvalid": "Please check the highlighted fields and try again.",
+    "errorRateLimited": "You've sent several messages in a short time. Please wait a minute and try again, or give us a call.",
+    "phoneLabelRequired": "Phone",
+    "requiredHint": "Fields marked with * are required.",
+    "servicePlaceholder": "Choose a service (optional)",
+    "preferredEmail": "Email",
+    "preferredPhone": "Phone",
+    "sendAnother": "Send another message",
+    "fieldErrors": {
+      "name": "Please enter your name.",
+      "email": "Please enter a valid email address, e.g. name@company.com.",
+      "phone": "Please enter a valid phone number.",
+      "phoneRequired": "Please enter a phone number so we can call you.",
+      "preferredContact": "Please choose how you'd like to be contacted.",
+      "service": "Please choose a service from the list.",
+      "message": "Please write a message of at least 10 characters.",
+      "consent": "You need to accept this so we can reply to you."
+    }
   },
   "notFound": {
     "title": "Page not found",
@@ -113,5 +132,12 @@
     "title": "Something went wrong",
     "body": "An unexpected error occurred. Please try again or contact us.",
     "retry": "Try again"
+  },
+  "location": {
+    "officeTitle": "Our office in {city}",
+    "areasTitle": "Areas we serve",
+    "servicesTitle": "Our services in {city}",
+    "otherOfficeTitle": "Our other office",
+    "officesTitle": "Our offices"
   }
 }

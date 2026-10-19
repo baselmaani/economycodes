@@ -27,12 +27,12 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/"],
+        disallow: ["/api/", "/admin"],
       },
       ...AI_CRAWLER_USER_AGENTS.map((userAgent) => ({
         userAgent,
         allow: "/",
-        disallow: ["/api/"],
+        disallow: ["/api/", "/admin"],
       })),
     ],
     sitemap: `${siteUrl}/sitemap.xml`,

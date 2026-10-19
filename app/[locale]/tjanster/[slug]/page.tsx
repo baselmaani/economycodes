@@ -16,12 +16,16 @@ import { Link } from "@/i18n/navigation";
 import { routing, type AppLocale } from "@/i18n/routing";
 import {
   getAbsoluteUrl,
+  getArticleSlug,
   getServiceAlternateLinks,
   getServiceSlug,
   resolveServiceBySlug,
   servicesList,
 } from "@/lib/routes";
-import { buildMetadata } from "@/lib/seo/metadata";
+import { buildPageMetadata } from "@/lib/cms/metadata";
+import { getPublishedArticles } from "@/lib/cms/content";
+import { getRelatedArticlesForService } from "@/lib/related-content";
+import { servicePageKey } from "@/lib/cms/pages";
 import { getServiceOgImageUrl } from "@/lib/seo/og-image";
 import { buildServiceJsonLd } from "@/lib/structured-data/service";
 import { buildBreadcrumbJsonLd } from "@/lib/structured-data/breadcrumb";
@@ -78,15 +82,7 @@ export async function generateMetadata({
   const service = resolveServiceBySlug(locale, slug);
   if (!service) return {};
 
-  const meta = serviceMeta[service.key];
-  return buildMetadata({
-    locale,
-    title: meta
-      ? getLocalized(meta.title, locale)
-      : getLocalized(service.name, locale),
-    description: meta
-      ? getLocalized(meta.description, locale)
-      : getLocalized(service.summary, locale),
+  return buildPageMetadata(servicePageKey(service.key), locale, {
     alternates: getServiceAlternateLinks(service),
     ogImage: getServiceOgImageUrl(locale, slug),
   });
@@ -107,10 +103,16 @@ export default async function ServicePage({
   const s = await getTranslations({ locale, namespace: "service" });
   const serviceFaqs = faqs.filter(
     (faq) =>
-      typeof faq.scope === "object" && faq.scope.serviceKey === service.key,
+      typeof faq.scope === "object" &&
+      "serviceKey" in faq.scope &&
+      faq.scope.serviceKey === service.key,
   );
   const alternates = getServiceAlternateLinks(service);
   const canonicalUrl = alternates[locale];
+  const relatedArticles = getRelatedArticlesForService(
+    (await getPublishedArticles()).filter((article) => !article.seo.noindex),
+    service.key,
+  ).slice(0, 3);
 
   // getServiceIcon looks up a stable, module-level icon component by key --
   // its identity never changes across renders, so this isn't dynamic
@@ -177,7 +179,12 @@ export default async function ServicePage({
                   {serviceGroups[group][locale]}
                 </Badge>
                 <h1 className="text-page-h1 mt-4 font-semibold text-balance">
-                  {getLocalized(service.name, locale)}
+                  {/* The keyword-led search title ("Bokföring för småföretag
+                      i Sverige") rather than the bare service name. */}
+                  {getLocalized(
+                    serviceMeta[service.key]?.title ?? service.name,
+                    locale,
+                  )}
                 </h1>
                 <p className="text-muted-foreground text-body mt-4">
                   {getLocalized(service.summary, locale)}
@@ -417,6 +424,32 @@ export default async function ServicePage({
                 />
               ))}
             </RevealGroup>
+          </section>
+        )}
+
+        {relatedArticles.length > 0 && (
+          <section className="mt-12">
+            <h2 className="text-2xl font-semibold">{t("relatedArticles")}</h2>
+            <ul className="mt-4 flex flex-col gap-3">
+              {relatedArticles.map((article) => (
+                <li key={article.id}>
+                  <Link
+                    href={{
+                      pathname: "/artiklar/[slug]",
+                      params: { slug: getArticleSlug(locale, article) },
+                    }}
+                    className="border-border bg-card hover:border-primary/40 block rounded-2xl border p-5 transition-colors"
+                  >
+                    <span className="font-semibold">
+                      {getLocalized(article.title, locale)}
+                    </span>
+                    <span className="text-muted-foreground mt-1 block text-sm">
+                      {getLocalized(article.excerpt, locale)}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </section>
         )}
 

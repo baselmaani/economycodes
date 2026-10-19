@@ -13,6 +13,8 @@ const nextConfig: NextConfig = {
     // every fixed-width image tops out at 360px) -- trimmed from Next's
     // default deviceSizes (up to 3840px) to match actual usage.
     deviceSizes: [640, 750, 828, 1080],
+    // Images uploaded through the admin dashboard's media library.
+    remotePatterns: [new URL("https://*.public.blob.vercel-storage.com/**")],
   },
   experimental: {
     // Required because the root layout lives under app/[locale]/layout.tsx

@@ -7,9 +7,12 @@ import { Link } from "@/i18n/navigation";
 import {
   getAbsoluteUrl,
   getArticleAlternateLinks,
-  resolveArticleBySlug,
+  getArticleSlug,
+  getServiceSlug,
 } from "@/lib/routes";
 import { buildMetadata } from "@/lib/seo/metadata";
+import { getArticleBySlug, getPublishedArticles } from "@/lib/cms/content";
+import { absoluteImageUrl, getArticleSeo } from "@/lib/cms/metadata";
 import { getArticleOgImageUrl } from "@/lib/seo/og-image";
 import { buildArticleJsonLd } from "@/lib/structured-data/article";
 import { buildBreadcrumbJsonLd } from "@/lib/structured-data/breadcrumb";
@@ -22,9 +25,8 @@ import { ArticleBody } from "@/components/content/ArticleBody";
 import { PersonProfileCard } from "@/components/marketing/PersonProfileCard";
 import { FaqAccordion } from "@/components/faq/FaqAccordion";
 import { Reveal } from "@/components/motion/Reveal";
-import { articles } from "@/content/articles/meta";
-import { articleBodies } from "@/content/articles/body";
 import { faqs } from "@/content/faqs";
+import { getRelatedServicesForArticle } from "@/lib/related-content";
 import { hadi } from "@/content/people";
 
 interface ArticlePageParams {
@@ -32,11 +34,15 @@ interface ArticlePageParams {
   slug: string;
 }
 
-export function generateStaticParams() {
+// Articles published after the build are rendered on first request
+// (dynamicParams defaults to true) and cached until the dashboard
+// invalidates the "cms:articles" tag.
+export async function generateStaticParams() {
+  const articles = await getPublishedArticles();
   return articles.flatMap((article) =>
     routing.locales.map((locale) => ({
       locale,
-      slug: article.slug[locale] ?? article.slug.sv,
+      slug: getArticleSlug(locale, article),
     })),
   );
 }
@@ -47,16 +53,24 @@ export async function generateMetadata({
   params: Promise<ArticlePageParams>;
 }): Promise<Metadata> {
   const { locale, slug } = await params;
-  const article = resolveArticleBySlug(locale, slug);
+  const article = await getArticleBySlug(locale, slug);
   if (!article) return {};
 
-  const title = getLocalized(article.title, locale);
+  const { title, description } = getArticleSeo(article, locale);
   const meta = buildMetadata({
     locale,
     title,
-    description: getLocalized(article.excerpt, locale),
+    description,
     alternates: getArticleAlternateLinks(article),
-    ogImage: getArticleOgImageUrl(locale, slug),
+    ogImage: article.seo.ogImage
+      ? absoluteImageUrl(article.seo.ogImage.src)
+      : getArticleOgImageUrl(locale, slug),
+    noindex: article.seo.noindex,
+    article: {
+      publishedTime: article.publishedAt,
+      modifiedTime: article.updatedAt ?? article.publishedAt,
+      authors: [getAbsoluteUrl("/om-hadi", locale)],
+    },
   });
   // Article headlines are already 55-80 characters; the layout's
   // " | Economy Codes" suffix would push them past what search results show.
@@ -70,14 +84,15 @@ export default async function ArticlePage({
 }) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
-  const article = resolveArticleBySlug(locale, slug);
+  const article = await getArticleBySlug(locale, slug);
   if (!article) notFound();
 
   const t = await getTranslations({ locale, namespace: "common" });
   const nav = await getTranslations({ locale, namespace: "nav" });
   const alternates = getArticleAlternateLinks(article);
-  const body = articleBodies[article.id];
+  const body = article.body;
   const articleFaqs = faqs.filter((faq) => article.faqIds?.includes(faq.id));
+  const relatedServices = getRelatedServicesForArticle(article);
 
   return (
     <Container
@@ -142,6 +157,31 @@ export default async function ArticlePage({
             <FaqAccordion faqs={articleFaqs} locale={locale} />
           </div>
         </Reveal>
+      )}
+      {relatedServices.length > 0 && (
+        <section className="not-prose mt-12">
+          <h2 className="text-lg font-semibold">{nav("services")}</h2>
+          <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+            {relatedServices.map((service) => (
+              <li key={service.key}>
+                <Link
+                  href={{
+                    pathname: "/tjanster/[slug]",
+                    params: { slug: getServiceSlug(locale, service) },
+                  }}
+                  className="border-border bg-card hover:border-primary/40 block h-full rounded-2xl border p-5 transition-colors"
+                >
+                  <span className="font-semibold">
+                    {getLocalized(service.name, locale)}
+                  </span>
+                  <span className="text-muted-foreground mt-1 block text-sm">
+                    {getLocalized(service.teaser, locale)}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
       )}
       <div className="not-prose border-border mt-12 border-t pt-8">
         <PersonProfileCard

@@ -1,4 +1,9 @@
+import { services } from "@/content/services";
+import { getLocalized } from "@/lib/i18n-content";
+
 import type { EmailProvider } from "./provider";
+
+const PREFERRED_CONTACT_LABELS = { email: "E-post", phone: "Telefon" } as const;
 
 const SERVICE_FROM = "Economy Codes <kontakt@economycodes.com>";
 
@@ -27,12 +32,16 @@ export function createResendEmailProvider({
 }): EmailProvider {
   return {
     async send(payload) {
+      const service = payload.service ? services[payload.service] : undefined;
       const rows: [string, string | undefined][] = [
         ["Namn", payload.name],
         ["E-post", payload.email],
         ["Telefon", payload.phone],
-        ["Föredraget kontaktsätt", payload.preferredContact],
-        ["Tjänst", payload.service],
+        [
+          "Föredraget kontaktsätt",
+          PREFERRED_CONTACT_LABELS[payload.preferredContact],
+        ],
+        ["Tjänst", service ? getLocalized(service.name, "sv") : undefined],
         ["Språk", payload.locale],
       ];
       const details = rows

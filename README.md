@@ -32,6 +32,14 @@ English/Arabic content currently exists for every page built so far (homepage, a
 
 Copy `.env.example` to `.env.local` and fill in values once a contact-form email provider is chosen (see `lib/email/index.ts` and CLIENT-TODO item 15). Without it, form submissions are logged server-side and still report success.
 
+## Admin dashboard (`/admin`)
+
+Password-protected dashboard for editing page SEO/text/images, managing articles (JSON import + form editor) and a media library. Content in `content/*.ts` stays the default; the database only stores overrides for pages, plus the articles themselves.
+
+- **Env:** `DATABASE_URL` (Neon), `BLOB_READ_WRITE_TOKEN` (Vercel Blob), `ADMIN_PASSWORD`, `ADMIN_SESSION_SECRET` (32+ chars). Without `DATABASE_URL` the site renders the static `content/` data and the dashboard shows a setup notice.
+- **Setup:** `npm run db:migrate` (tables in `drizzle/`), then `npm run cms:seed` to copy `content/articles/*` into the database (`-- --force` overwrites existing rows). After schema changes in `lib/db/schema.ts`, run `npm run db:generate`.
+- **Code:** `lib/cms/pages.ts` is the registry of editable page fields (add a field there, then read it via `getPageContent()` in the page); `lib/cms/content.ts` holds the cached public reads, invalidated by the dashboard's server actions via `updateTag()`; `lib/cms/schemas.ts` defines the article JSON format (download a template from the import page).
+
 ## SEO & deployment
 
 - `NEXT_PUBLIC_SITE_URL` (`lib/site.ts`) is the single source of truth for every absolute URL the site generates (canonical/hreflang links, sitemap, OG images, JSON-LD `url`/`image` fields). Set it to the production domain in deployment; it falls back to `https://www.economycodes.com` if unset or empty.

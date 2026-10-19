@@ -27,9 +27,9 @@
     "whoWeHelp": "Vem vi hjälper",
     "ourProcess": "Så arbetar vi",
     "faqTitle": "Vanliga frågor",
-    "locationsTitle": "Våra kontor",
     "lastReviewed": "Senast granskad",
-    "published": "Publicerad"
+    "published": "Publicerad",
+    "relatedArticles": "Läs mer i våra artiklar"
   },
   "home": {
     "heroEyebrow": "Digital redovisning för hela Sverige",
@@ -52,7 +52,10 @@
     "digitalEyebrow": "Digital marknadsföring",
     "digitalTitle": "Fler kunder online — med marknadsföring du kan mäta",
     "digitalSubtitle": "Webbplatser, SEO, AEO och GEO, Google Ads, annonsering i sociala medier, SaaS och mobilappar. Samlat hos oss, kopplat till din ekonomi.",
-    "digitalCta": "Utforska digital marknadsföring"
+    "digitalCta": "Utforska digital marknadsföring",
+    "contactEyebrow": "Kontakt",
+    "contactResponseTime": "Vi svarar vanligtvis inom en arbetsdag.",
+    "contactFormTitle": "Skicka ett meddelande"
   },
   "about": {
     "credentialsTitle": "Personlig auktorisation",
@@ -94,15 +97,31 @@
     "preferredContactLabel": "Föredraget kontaktsätt",
     "serviceLabel": "Vilken tjänst gäller det?",
     "messageLabel": "Meddelande",
-    "consentLabel": "Jag godkänner att Economy Codes lagrar mina uppgifter för att kunna besvara min förfrågan.",
+    "consentLabel": "Jag godkänner att Economy Codes lagrar mina uppgifter för att kunna besvara min förfrågan. Läs mer i vår <privacy>integritetspolicy</privacy>.",
     "submit": "Skicka",
     "submitting": "Skickar...",
     "successTitle": "Tack för ditt meddelande",
     "successBody": "Vi återkommer till dig så snart vi kan.",
     "errorTitle": "Något gick fel",
     "errorBody": "Försök igen, eller kontakta oss direkt via telefon eller e-post.",
-    "errorInvalid": "Kontrollera att namn, e-post och meddelande (minst 10 tecken) är ifyllda och att du har godkänt villkoret.",
-    "errorRateLimited": "Du har skickat flera meddelanden på kort tid. Vänta en minut och försök igen, eller ring oss."
+    "errorInvalid": "Kontrollera de markerade fälten och försök igen.",
+    "errorRateLimited": "Du har skickat flera meddelanden på kort tid. Vänta en minut och försök igen, eller ring oss.",
+    "phoneLabelRequired": "Telefon",
+    "requiredHint": "Fält markerade med * är obligatoriska.",
+    "servicePlaceholder": "Välj tjänst (valfritt)",
+    "preferredEmail": "E-post",
+    "preferredPhone": "Telefon",
+    "sendAnother": "Skicka ett nytt meddelande",
+    "fieldErrors": {
+      "name": "Ange ditt namn.",
+      "email": "Ange en giltig e-postadress, t.ex. namn@foretag.se.",
+      "phone": "Ange ett giltigt telefonnummer.",
+      "phoneRequired": "Ange ett telefonnummer så att vi kan ringa dig.",
+      "preferredContact": "Välj hur du vill bli kontaktad.",
+      "service": "Välj en tjänst i listan.",
+      "message": "Skriv ett meddelande på minst 10 tecken.",
+      "consent": "Du behöver godkänna villkoret för att vi ska kunna svara dig."
+    }
   },
   "notFound": {
     "title": "Sidan kunde inte hittas",
@@ -113,5 +132,12 @@
     "title": "Något gick fel",
     "body": "Ett oväntat fel har inträffat. Försök igen eller kontakta oss.",
     "retry": "Försök igen"
+  },
+  "location": {
+    "officeTitle": "Kontoret i {city}",
+    "areasTitle": "Här hjälper vi företag",
+    "servicesTitle": "Våra tjänster i {city}",
+    "otherOfficeTitle": "Vårt andra kontor",
+    "officesTitle": "Våra kontor"
   }
 }

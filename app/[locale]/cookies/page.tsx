@@ -3,7 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import type { AppLocale } from "@/i18n/routing";
 import { getAlternateLinks } from "@/lib/routes";
-import { buildMetadata } from "@/lib/seo/metadata";
+import { buildPageMetadata } from "@/lib/cms/metadata";
 import { getLocalized } from "@/lib/i18n-content";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { Container } from "@/components/layout/Container";
@@ -15,10 +15,7 @@ export async function generateMetadata({
   params: Promise<{ locale: AppLocale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  return buildMetadata({
-    locale,
-    title: getLocalized(cookiePolicy.title, locale),
-    description: getLocalized(cookiePolicy.intro, locale),
+  return buildPageMetadata("cookies", locale, {
     alternates: getAlternateLinks("/cookies"),
   });
 }

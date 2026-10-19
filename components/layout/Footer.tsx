@@ -8,6 +8,8 @@ import { FacebookIcon } from "@/components/icons/FacebookIcon";
 import { getLocalized } from "@/lib/i18n-content";
 import { business } from "@/content/business";
 import { locations } from "@/content/locations";
+import { locationPages } from "@/content/location-pages";
+import { getLocationSlug } from "@/lib/routes";
 import { footerLegalNav, footerNav } from "@/content/nav";
 import { Container } from "@/components/layout/Container";
 
@@ -73,20 +75,40 @@ export async function Footer({ locale }: { locale: AppLocale }) {
                   {business.email}
                 </a>
               </li>
-              {locations.map((location) => (
-                <li key={location.id}>
-                  <a
-                    href={location.mapsHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    dir="ltr"
-                    className="block text-start hover:text-white"
-                  >
-                    {location.streetAddress}, {location.postalCode}{" "}
-                    {location.city}
-                  </a>
-                </li>
-              ))}
+              {locations.map((location) => {
+                const page = locationPages.find(
+                  (p) => p.locationId === location.id,
+                );
+                const address = `${location.streetAddress}, ${location.postalCode} ${location.city}`;
+                return (
+                  <li key={location.id}>
+                    {/* The office page carries the map link, and gives local
+                        searches ("redovisningsbyrå Trollhättan") a landing page. */}
+                    {page ? (
+                      <Link
+                        href={{
+                          pathname: "/redovisningsbyra/[slug]",
+                          params: { slug: getLocationSlug(locale, page) },
+                        }}
+                        dir="ltr"
+                        className="block text-start hover:text-white"
+                      >
+                        {address}
+                      </Link>
+                    ) : (
+                      <a
+                        href={location.mapsHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        dir="ltr"
+                        className="block text-start hover:text-white"
+                      >
+                        {address}
+                      </a>
+                    )}
+                  </li>
+                );
+              })}
               {business.orgNumber && (
                 <li className="flex flex-wrap items-center gap-2 pt-1">
                   <span>Org.nr:</span>
