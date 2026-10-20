@@ -13,6 +13,7 @@ import {
   articleImportSchema,
   articleInputSchema,
   formatIssues,
+  pageOverrideSchema,
 } from "@/lib/cms/schemas";
 
 function issuesFor(input: unknown): string[] {
@@ -110,5 +111,28 @@ describe("article helpers", () => {
     expect(articlePath("sv", "a")).toBe("/artiklar/a");
     expect(articlePath("en", "a")).toBe("/en/insights/a");
     expect(articlePath("ar", "a")).toBe("/ar/مقالات/a");
+  });
+});
+
+describe("page override schema", () => {
+  it("trims list items and treats empty lists and bodies as unset", () => {
+    const parsed = pageOverrideSchema.parse({
+      lists: {
+        process: { sv: ["  Steg ett ", "", "Steg två"], en: ["", "  "] },
+      },
+      blocks: { body: { sv: [] } },
+    });
+    expect(parsed.lists?.process).toEqual({
+      sv: ["Steg ett", "Steg två"],
+      en: undefined,
+    });
+    expect(parsed.blocks?.body.sv).toBeUndefined();
+  });
+
+  it("rejects invalid body blocks", () => {
+    const result = pageOverrideSchema.safeParse({
+      blocks: { body: { sv: [{ type: "paragraph", text: " " }] } },
+    });
+    expect(result.success).toBe(false);
   });
 });

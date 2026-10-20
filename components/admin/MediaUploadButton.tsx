@@ -9,37 +9,11 @@ import {
   createMediaAction,
   type MediaItem,
 } from "@/app/admin/(dashboard)/media/actions";
+import { altFromFilename } from "@/lib/admin/alt-text";
+import { prepareImage } from "@/lib/admin/prepare-image";
 
-function readDimensions(
-  file: File,
-): Promise<{ width: number; height: number }> {
-  return new Promise((resolve, reject) => {
-    const url = URL.createObjectURL(file);
-    const img = new window.Image();
-    img.onload = () => {
-      resolve({ width: img.naturalWidth, height: img.naturalHeight });
-      URL.revokeObjectURL(url);
-    };
-    img.onerror = () => {
-      reject(new Error(`${file.name}: not a readable image`));
-      URL.revokeObjectURL(url);
-    };
-    img.src = url;
-  });
-}
-
-/** Turns "Hadi-office_2026.jpg" into a starting alt text of "Hadi office 2026". */
-function altFromFilename(name: string): string {
-  return (
-    name
-      .replace(/\.[^.]+$/, "")
-      .replace(/[-_]+/g, " ")
-      .trim() || "Image"
-  );
-}
-
-async function uploadOne(file: File): Promise<MediaItem> {
-  const { width, height } = await readDimensions(file);
+async function uploadOne(picked: File): Promise<MediaItem> {
+  const { file, width, height } = await prepareImage(picked);
   const safeName = file.name.toLowerCase().replace(/[^a-z0-9.]+/g, "-");
   const blob = await upload(`media/${safeName}`, file, {
     access: "public",
@@ -53,7 +27,7 @@ async function uploadOne(file: File): Promise<MediaItem> {
     height,
     contentType: file.type,
     size: file.size,
-    alt: { sv: altFromFilename(file.name) },
+    alt: { sv: altFromFilename(picked.name) },
   });
   if (!result.ok) throw new Error(`${file.name}: ${result.errors.join(", ")}`);
   return result.data;
@@ -110,8 +84,8 @@ export function MediaUploadButton({
         {busy ? "Uploading…" : label}
       </Button>
       <p className="text-muted-foreground text-xs">
-        JPG, PNG, WebP, AVIF or GIF, up to 5 MB. Large photos: resize to about
-        1600 px wide first.
+        JPG, PNG, WebP, AVIF or GIF. Large photos are resized and compressed
+        automatically before upload (GIFs must be under 5 MB).
       </p>
       {error && (
         <p role="alert" className="text-destructive text-xs">

@@ -3,6 +3,7 @@ import { ArrowRight, type LucideIcon } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
 import { getLocalized } from "@/lib/i18n-content";
+import { getServiceContent } from "@/lib/cms/content";
 import { getServiceSlug } from "@/lib/routes";
 import { getServiceIcon } from "@/content/service-icons";
 import type { Service } from "@/content/types";
@@ -21,7 +22,8 @@ function CardWatermark({ icon: Icon }: { icon: LucideIcon }) {
   );
 }
 
-export function ServiceCard({
+/** Server-only: reads the teaser as edited in the dashboard. */
+export async function ServiceCard({
   service,
   locale,
   readMoreLabel,
@@ -34,6 +36,7 @@ export function ServiceCard({
   featured?: boolean;
   size?: "default" | "lg";
 }) {
+  const { teaser } = await getServiceContent(service);
   const Icon = getServiceIcon(service.key);
   const isLarge = size === "lg";
 
@@ -66,7 +69,7 @@ export function ServiceCard({
         </CardHeader>
         <CardContent className="relative flex flex-1 flex-col gap-3 p-0">
           <p className="text-muted-foreground line-clamp-2 text-sm">
-            {getLocalized(service.teaser, locale)}
+            {getLocalized(teaser, locale)}
           </p>
           <span className="text-primary mt-auto inline-flex items-center gap-1.5 text-sm font-medium">
             {readMoreLabel}

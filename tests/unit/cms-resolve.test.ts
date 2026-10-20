@@ -3,7 +3,8 @@ import { describe, expect, it } from "vitest";
 import { getPageDef, pageDefs } from "@/lib/cms/pages";
 import { mergeLocalized, resolvePage } from "@/lib/cms/resolve";
 import { homeMeta, heroContent } from "@/content/home";
-import { servicesList } from "@/content/services";
+import { services, servicesList } from "@/content/services";
+import { serviceMeta } from "@/content/service-meta";
 
 describe("page registry", () => {
   it("has unique keys and an entry for every service", () => {
@@ -58,6 +59,43 @@ describe("resolvePage", () => {
     });
     expect(page.images.benefitsImage).toEqual(image);
     expect(page.images).not.toHaveProperty("unknown");
+  });
+});
+
+describe("resolvePage for a service", () => {
+  const bookkeeping = services.bookkeeping;
+  const def = getPageDef("service:bookkeeping")!;
+
+  it("returns the service's content/ data when there is no override", () => {
+    const page = resolvePage(def, null);
+    expect(page.text.heading).toEqual(serviceMeta.bookkeeping.title);
+    expect(page.text.summary).toEqual(bookkeeping.summary);
+    expect(page.text.teaser).toEqual(bookkeeping.teaser);
+    expect(page.lists.whatsIncluded).toEqual(bookkeeping.whatsIncluded);
+    expect(page.blocks.body).toEqual(bookkeeping.body);
+    // The legacy stock photo stays unused until one is picked in the dashboard.
+    expect(page.images).not.toHaveProperty("heroImage");
+  });
+
+  it("overrides lists, body and hero image per locale", () => {
+    const image = {
+      src: "https://x.public.blob.vercel-storage.com/hero.webp",
+      width: 1600,
+      height: 1067,
+      alt: { sv: "Kontoret" },
+    };
+    const body = [{ type: "paragraph" as const, text: "Ny text" }];
+    const page = resolvePage(def, {
+      lists: { process: { en: ["Step one"] } },
+      blocks: { body: { sv: body } },
+      images: { heroImage: image },
+    });
+    expect(page.lists.process).toEqual({
+      ...bookkeeping.process,
+      en: ["Step one"],
+    });
+    expect(page.blocks.body).toEqual({ ...bookkeeping.body, sv: body });
+    expect(page.images.heroImage).toEqual(image);
   });
 });
 

@@ -120,9 +120,40 @@ export const articleImportSchema = z.union([
   z.array(articleInputSchema).min(1),
 ]);
 
+/** One locale's bullet list: items trimmed, blank lines dropped, an empty list = "use the original". */
+const optionalList = z
+  .array(z.string().trim())
+  .transform((items) => {
+    const kept = items.filter(Boolean);
+    return kept.length > 0 ? kept : undefined;
+  })
+  .optional();
+
+export const partialLocalizedList = z.object({
+  sv: optionalList,
+  en: optionalList,
+  ar: optionalList,
+});
+export type PartialLocalizedList = z.infer<typeof partialLocalizedList>;
+
+/** One locale's body blocks; an empty body = "use the original". */
+const optionalBlocks = z
+  .array(contentBlockSchema)
+  .transform((blocks) => (blocks.length > 0 ? blocks : undefined))
+  .optional();
+
+export const partialLocalizedBlocks = z.object({
+  sv: optionalBlocks,
+  en: optionalBlocks,
+  ar: optionalBlocks,
+});
+export type PartialLocalizedBlocks = z.infer<typeof partialLocalizedBlocks>;
+
 export const pageOverrideSchema = z.object({
   seo: seoFieldsSchema.optional(),
   text: z.record(z.string(), partialLocalizedString).optional(),
+  lists: z.record(z.string(), partialLocalizedList).optional(),
+  blocks: z.record(z.string(), partialLocalizedBlocks).optional(),
   images: z.record(z.string(), mediaRefSchema).optional(),
 });
 export type PageOverrideData = z.infer<typeof pageOverrideSchema>;

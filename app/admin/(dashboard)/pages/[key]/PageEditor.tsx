@@ -8,14 +8,18 @@ import { ArrowLeft, ExternalLink } from "lucide-react";
 import type { Locale } from "@/content/types";
 import type { PageDef } from "@/lib/cms/pages";
 import type { PageOverrideData } from "@/lib/cms/schemas";
+import { mergeLocalized } from "@/lib/cms/resolve";
 import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/components/admin/PageHeader";
 import { SeoFields } from "@/components/admin/SeoFields";
 import { ImageField } from "@/components/admin/ImageField";
+import { BlockEditor } from "@/components/admin/BlockEditor";
 import {
   ErrorList,
   LocaleTabs,
   LocalizedField,
+  LocalizedListField,
+  OverrideToggle,
   SectionCard,
 } from "@/components/admin/fields";
 import { resetPageAction, savePageAction } from "../actions";
@@ -81,6 +85,9 @@ export function PageEditor({
     });
   }
 
+  // Picked images take the meta title (as currently edited) as alt text.
+  const metaTitle = mergeLocalized(def.seo.title, data.seo?.title);
+
   const localePath = urls
     ? decodeURI(new URL(urls[locale]).pathname)
     : viewPath;
@@ -95,7 +102,11 @@ export function PageEditor({
       </Link>
       <PageHeader
         title={def.label}
-        description={def.group === "Services" ? "Service page" : undefined}
+        description={
+          def.group === "Services"
+            ? "Service page. Fields you leave empty keep the original content."
+            : undefined
+        }
         actions={
           localePath && (
             <Button
@@ -166,6 +177,69 @@ export function PageEditor({
           </SectionCard>
         )}
 
+        {def.lists.length > 0 && (
+          <SectionCard
+            title="Lists"
+            description="Edits apply to the selected language only; other languages keep their own text."
+          >
+            {def.lists.map((field) => (
+              <LocalizedListField
+                key={field.key}
+                id={`${def.key}-${field.key}`}
+                label={field.label}
+                locale={locale}
+                value={data.lists?.[field.key]}
+                fallback={field.default}
+                onChange={(value) =>
+                  update({
+                    ...data,
+                    lists: { ...data.lists, [field.key]: value },
+                  })
+                }
+              />
+            ))}
+          </SectionCard>
+        )}
+
+        {def.blocks.map((field) => {
+          const custom = data.blocks?.[field.key]?.[locale];
+          const original = field.default[locale] ?? field.default.sv;
+          const setBlocks = (blocks: typeof custom) =>
+            update({
+              ...data,
+              blocks: {
+                ...data.blocks,
+                [field.key]: { ...data.blocks?.[field.key], [locale]: blocks },
+              },
+            });
+          return (
+            <SectionCard
+              key={field.key}
+              title={field.label}
+              description={
+                custom
+                  ? "Your version of the text for this language. Removing every block restores the original."
+                  : `Showing the original text (${original.length} blocks). Choose "Start from original" to edit it.`
+              }
+            >
+              <div className="flex justify-end">
+                <OverrideToggle
+                  overridden={custom !== undefined}
+                  onCopyOriginal={() => setBlocks(structuredClone(original))}
+                  onUseOriginal={() => setBlocks(undefined)}
+                />
+              </div>
+              {custom && (
+                <BlockEditor
+                  locale={locale}
+                  blocks={custom}
+                  onChange={setBlocks}
+                />
+              )}
+            </SectionCard>
+          );
+        })}
+
         {def.images.length > 0 && (
           <SectionCard title="Images">
             {def.images.map((field) => (
@@ -177,6 +251,7 @@ export function PageEditor({
                 locale={locale}
                 value={data.images?.[field.key]}
                 fallback={field.default}
+                autoAlt={metaTitle}
                 onChange={(image) => {
                   const images = { ...data.images };
                   if (image) images[field.key] = image;

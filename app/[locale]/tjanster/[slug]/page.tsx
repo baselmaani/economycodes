@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import {
@@ -23,7 +24,7 @@ import {
   servicesList,
 } from "@/lib/routes";
 import { buildPageMetadata } from "@/lib/cms/metadata";
-import { getPublishedArticles } from "@/lib/cms/content";
+import { getPublishedArticles, getServiceContent } from "@/lib/cms/content";
 import { getRelatedArticlesForService } from "@/lib/related-content";
 import { servicePageKey } from "@/lib/cms/pages";
 import { getServiceOgImageUrl } from "@/lib/seo/og-image";
@@ -56,7 +57,6 @@ import {
 } from "@/content/service-icons";
 import { business } from "@/content/business";
 import { faqs } from "@/content/faqs";
-import { serviceMeta } from "@/content/service-meta";
 import { hadi } from "@/content/people";
 
 interface ServicePageParams {
@@ -95,8 +95,10 @@ export default async function ServicePage({
 }) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
-  const service = resolveServiceBySlug(locale, slug);
-  if (!service) notFound();
+  const baseService = resolveServiceBySlug(locale, slug);
+  if (!baseService) notFound();
+  // Texts, lists, body and hero image as edited in the dashboard.
+  const service = await getServiceContent(baseService);
 
   const t = await getTranslations({ locale, namespace: "common" });
   const nav = await getTranslations({ locale, namespace: "nav" });
@@ -181,10 +183,7 @@ export default async function ServicePage({
                 <h1 className="text-page-h1 mt-4 font-semibold text-balance">
                   {/* The keyword-led search title ("Bokföring för småföretag
                       i Sverige") rather than the bare service name. */}
-                  {getLocalized(
-                    serviceMeta[service.key]?.title ?? service.name,
-                    locale,
-                  )}
+                  {getLocalized(service.heading, locale)}
                 </h1>
                 <p className="text-muted-foreground text-body mt-4">
                   {getLocalized(service.summary, locale)}
@@ -226,7 +225,20 @@ export default async function ServicePage({
             </Reveal>
 
             <RevealScale delay={120} className="order-first md:order-last">
-              <AbstractDocumentPanel icon={Icon} tone="light" />
+              {service.heroImage ? (
+                <Image
+                  src={service.heroImage.src}
+                  alt={getLocalized(service.heroImage.alt, locale)}
+                  width={service.heroImage.width}
+                  height={service.heroImage.height}
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  loading="eager"
+                  fetchPriority="high"
+                  className="aspect-[3/2] w-full rounded-3xl object-cover shadow-md"
+                />
+              ) : (
+                <AbstractDocumentPanel icon={Icon} tone="light" />
+              )}
             </RevealScale>
           </div>
         </Container>

@@ -2,6 +2,7 @@
 
 import type { Locale, Localized } from "@/content/types";
 import type { SeoFields as SeoValue } from "@/lib/cms/schemas";
+import { mergeLocalized } from "@/lib/cms/resolve";
 import { ImageField } from "./ImageField";
 import { LocalizedField, SectionCard, localeInputProps } from "./fields";
 
@@ -96,6 +97,7 @@ export function SeoFields({
         hint="1200 × 630 recommended. Without one, the branded card is used."
         locale={locale}
         value={value.ogImage}
+        autoAlt={mergeLocalized(defaults.title, value.title)}
         onChange={(ogImage) => onChange({ ...value, ogImage })}
       />
 

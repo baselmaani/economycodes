@@ -1,5 +1,5 @@
 import type { StaticAppPathname } from "@/i18n/routing";
-import type { Localized, MediaRef } from "@/content/types";
+import type { ContentBlock, Localized, MediaRef } from "@/content/types";
 import { heroContent, benefitsImage, homeMeta } from "@/content/home";
 import { digitalHero, digitalMeta } from "@/content/digital-marketing";
 import { hadi } from "@/content/people";
@@ -25,12 +25,27 @@ export interface TextFieldDef {
   default: Localized<string>;
 }
 
+/** A bullet list, one item per line in the editor. */
+export interface ListFieldDef {
+  key: string;
+  label: string;
+  default: Localized<string[]>;
+}
+
+/** Rich body text edited with the block editor (headings, paragraphs, lists). */
+export interface BlocksFieldDef {
+  key: string;
+  label: string;
+  default: Localized<ContentBlock[]>;
+}
+
 export interface ImageFieldDef {
   key: string;
   label: string;
   /** Shown in the editor so a replacement image is cropped to the right shape. */
   hint?: string;
-  default: MediaRef;
+  /** Absent = optional slot that stays empty until an image is picked. */
+  default?: MediaRef;
 }
 
 export interface PageDef {
@@ -49,6 +64,8 @@ export interface PageDef {
     absoluteTitle?: boolean;
   };
   text: TextFieldDef[];
+  lists: ListFieldDef[];
+  blocks: BlocksFieldDef[];
   images: ImageFieldDef[];
 }
 
@@ -96,6 +113,8 @@ const staticPages: PageDef[] = [
         default: heroContent.subtitle,
       },
     ],
+    lists: [],
+    blocks: [],
     images: [
       {
         key: "heroPhoto",
@@ -131,6 +150,8 @@ const staticPages: PageDef[] = [
     text: [
       { key: "bio", label: "Biography", kind: "textarea", default: hadi.bio },
     ],
+    lists: [],
+    blocks: [],
     images: [
       {
         key: "heroPhoto",
@@ -181,6 +202,8 @@ const staticPages: PageDef[] = [
         default: message((m) => m.home.servicesSubtitle),
       },
     ],
+    lists: [],
+    blocks: [],
     images: [],
   },
   {
@@ -203,6 +226,8 @@ const staticPages: PageDef[] = [
         default: digitalHero.lead,
       },
     ],
+    lists: [],
+    blocks: [],
     images: [],
   },
   {
@@ -230,6 +255,8 @@ const staticPages: PageDef[] = [
         default: message((m) => m.home.finalCtaSubtitle),
       },
     ],
+    lists: [],
+    blocks: [],
     images: [],
   },
   {
@@ -261,6 +288,8 @@ const staticPages: PageDef[] = [
         },
       },
     ],
+    lists: [],
+    blocks: [],
     images: [],
   },
   {
@@ -273,6 +302,8 @@ const staticPages: PageDef[] = [
       description: truncate(privacyPolicy.dataCollectedBody),
     },
     text: [],
+    lists: [],
+    blocks: [],
     images: [],
   },
   {
@@ -282,6 +313,8 @@ const staticPages: PageDef[] = [
     routeKey: "/cookies",
     seo: { title: cookiePolicy.title, description: cookiePolicy.intro },
     text: [],
+    lists: [],
+    blocks: [],
     images: [],
   },
   {
@@ -291,6 +324,8 @@ const staticPages: PageDef[] = [
     routeKey: "/villkor",
     seo: { title: termsPage.title, description: truncate(termsPage.intro) },
     text: [],
+    lists: [],
+    blocks: [],
     images: [],
   },
 ];
@@ -306,8 +341,48 @@ const servicePages: PageDef[] = servicesList.map((service) => {
       title: meta?.title ?? service.name,
       description: meta?.description ?? service.summary,
     },
-    text: [],
-    images: [],
+    text: [
+      {
+        key: "heading",
+        label: "Page heading (H1)",
+        kind: "text",
+        default: meta?.title ?? service.name,
+      },
+      {
+        key: "summary",
+        label: "Summary under the heading",
+        kind: "textarea",
+        default: service.summary,
+      },
+      {
+        key: "teaser",
+        label: "Teaser (shown on service cards)",
+        kind: "textarea",
+        default: service.teaser,
+      },
+    ],
+    lists: [
+      { key: "whoItsFor", label: "Who it's for", default: service.whoItsFor },
+      {
+        key: "whatsIncluded",
+        label: "What's included",
+        default: service.whatsIncluded,
+      },
+      { key: "process", label: "How it works (steps)", default: service.process },
+      {
+        key: "whatToPrepare",
+        label: "What to prepare",
+        default: service.whatToPrepare,
+      },
+    ],
+    blocks: [{ key: "body", label: "Body text", default: service.body }],
+    images: [
+      {
+        key: "heroImage",
+        label: "Hero image",
+        hint: "Landscape, about 3:2; replaces the icon panel in the hero",
+      },
+    ],
   };
 });
 
@@ -325,6 +400,8 @@ const locationPageDefs: PageDef[] = locationPages.map((page) => ({
       default: page.intro,
     },
   ],
+  lists: [],
+  blocks: [],
   images: [],
 }));
 
@@ -354,7 +431,7 @@ export function locationPageKey(locationId: string): string {
   return `location:${locationId}`;
 }
 
-/** Page key under which a service's SEO overrides are stored. */
+/** Page key under which a service's SEO and content overrides are stored. */
 export function servicePageKey(serviceKey: string): string {
   return `service:${serviceKey}`;
 }

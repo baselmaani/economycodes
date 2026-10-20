@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 
 import type { Locale, Localized } from "@/content/types";
 import type { PartialLocalized } from "@/lib/cms/schemas";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -162,6 +163,84 @@ export function LocalizedField({
           {...dirProps}
         />
       )}
+    </FieldShell>
+  );
+}
+
+/**
+ * "Start from original" / "Use original" toggle for override fields whose
+ * original is too long to retype (lists, body text).
+ */
+export function OverrideToggle({
+  overridden,
+  onCopyOriginal,
+  onUseOriginal,
+}: {
+  overridden: boolean;
+  onCopyOriginal: () => void;
+  onUseOriginal: () => void;
+}) {
+  return overridden ? (
+    <Button type="button" size="xs" variant="ghost" onClick={onUseOriginal}>
+      Use original
+    </Button>
+  ) : (
+    <Button type="button" size="xs" variant="outline" onClick={onCopyOriginal}>
+      Start from original
+    </Button>
+  );
+}
+
+/**
+ * A localized bullet list edited as one item per line. While the active
+ * locale has no override, the original items show greyed out as the
+ * placeholder and are what the site renders.
+ */
+export function LocalizedListField({
+  id,
+  label,
+  locale,
+  value,
+  fallback,
+  onChange,
+}: {
+  id: string;
+  label: string;
+  locale: Locale;
+  value: Partial<Record<Locale, string[]>> | undefined;
+  fallback: Localized<string[]>;
+  onChange: (next: Partial<Record<Locale, string[]>>) => void;
+}) {
+  const current = value?.[locale];
+  const original = fallback[locale] ?? fallback.sv;
+  const { className, ...dirProps } = localeInputProps(locale);
+  const fieldId = `${id}-${locale}`;
+  const set = (items: string[] | undefined) =>
+    onChange({ ...value, [locale]: items });
+
+  return (
+    <FieldShell
+      id={fieldId}
+      label={label}
+      hint="One item per line. Leave empty to keep the original list."
+      aside={
+        <OverrideToggle
+          overridden={current !== undefined}
+          onCopyOriginal={() => set([...original])}
+          onUseOriginal={() => set(undefined)}
+        />
+      }
+    >
+      <Textarea
+        id={fieldId}
+        value={current?.join("\n") ?? ""}
+        placeholder={original.join("\n")}
+        onChange={(event) =>
+          set(event.target.value ? event.target.value.split("\n") : undefined)
+        }
+        className={cn("min-h-28", className)}
+        {...dirProps}
+      />
     </FieldShell>
   );
 }

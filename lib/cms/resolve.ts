@@ -1,6 +1,6 @@
-import type { Localized, MediaRef } from "@/content/types";
+import type { ContentBlock, Localized, MediaRef } from "@/content/types";
 import type { PageDef } from "@/lib/cms/pages";
-import type { PageOverrideData, PartialLocalized } from "@/lib/cms/schemas";
+import type { PageOverrideData } from "@/lib/cms/schemas";
 
 /**
  * Pure merge of a page's registry defaults with its DB override, kept free of
@@ -16,14 +16,17 @@ export interface ResolvedPage {
     absoluteTitle: boolean;
   };
   text: Record<string, Localized<string>>;
+  lists: Record<string, Localized<string[]>>;
+  blocks: Record<string, Localized<ContentBlock[]>>;
+  /** Only slots with an override or a default are present. */
   images: Record<string, MediaRef>;
 }
 
 /** Per-locale override: a locale set in the override wins, otherwise the default's value is kept. */
-export function mergeLocalized(
-  base: Localized<string>,
-  override: PartialLocalized | undefined,
-): Localized<string> {
+export function mergeLocalized<T>(
+  base: Localized<T>,
+  override: Partial<Record<"sv" | "en" | "ar", T>> | undefined,
+): Localized<T> {
   if (!override) return base;
   return {
     sv: override.sv || base.sv,
@@ -44,9 +47,26 @@ export function resolvePage(
     );
   }
 
+  const lists: Record<string, Localized<string[]>> = {};
+  for (const field of def.lists) {
+    lists[field.key] = mergeLocalized(
+      field.default,
+      override?.lists?.[field.key],
+    );
+  }
+
+  const blocks: Record<string, Localized<ContentBlock[]>> = {};
+  for (const field of def.blocks) {
+    blocks[field.key] = mergeLocalized(
+      field.default,
+      override?.blocks?.[field.key],
+    );
+  }
+
   const images: Record<string, MediaRef> = {};
   for (const field of def.images) {
-    images[field.key] = override?.images?.[field.key] ?? field.default;
+    const image = override?.images?.[field.key] ?? field.default;
+    if (image) images[field.key] = image;
   }
 
   return {
@@ -61,6 +81,8 @@ export function resolvePage(
       absoluteTitle: def.seo.absoluteTitle ?? false,
     },
     text,
+    lists,
+    blocks,
     images,
   };
 }

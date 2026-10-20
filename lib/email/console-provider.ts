@@ -1,3 +1,4 @@
+import { buildAutoReply } from "./auto-reply";
 import type { EmailProvider } from "./provider";
 
 /**
@@ -11,6 +12,10 @@ export const consoleEmailProvider: EmailProvider = {
     console.info("[contact-form] No email provider configured. Submission:", {
       ...payload,
       message: payload.message.slice(0, 200),
+    });
+    console.info("[contact-form] Auto-reply that would be sent:", {
+      to: payload.email,
+      subject: buildAutoReply(payload.locale).subject,
     });
     return { ok: true };
   },

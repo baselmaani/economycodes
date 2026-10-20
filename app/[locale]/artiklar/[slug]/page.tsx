@@ -11,7 +11,11 @@ import {
   getServiceSlug,
 } from "@/lib/routes";
 import { buildMetadata } from "@/lib/seo/metadata";
-import { getArticleBySlug, getPublishedArticles } from "@/lib/cms/content";
+import {
+  getArticleBySlug,
+  getPublishedArticles,
+  getServiceContent,
+} from "@/lib/cms/content";
 import { absoluteImageUrl, getArticleSeo } from "@/lib/cms/metadata";
 import { getArticleOgImageUrl } from "@/lib/seo/og-image";
 import { buildArticleJsonLd } from "@/lib/structured-data/article";
@@ -92,7 +96,9 @@ export default async function ArticlePage({
   const alternates = getArticleAlternateLinks(article);
   const body = article.body;
   const articleFaqs = faqs.filter((faq) => article.faqIds?.includes(faq.id));
-  const relatedServices = getRelatedServicesForArticle(article);
+  const relatedServices = await Promise.all(
+    getRelatedServicesForArticle(article).map(getServiceContent),
+  );
 
   return (
     <Container

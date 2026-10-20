@@ -11,7 +11,10 @@ export const metadata: Metadata = { title: "Pages & SEO" };
 
 const GROUPS: { group: PageDef["group"]; description: string }[] = [
   { group: "Pages", description: "SEO, headlines, intros and images" },
-  { group: "Services", description: "SEO for each service page" },
+  {
+    group: "Services",
+    description: "SEO, texts, lists, body and hero image for each service",
+  },
   { group: "Legal", description: "SEO only" },
 ];
 

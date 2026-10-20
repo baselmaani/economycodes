@@ -6,7 +6,7 @@ import { desc, eq } from "drizzle-orm";
 
 import type { AppLocale } from "@/i18n/routing";
 import type { ArticleMeta } from "@/content/articles/types";
-import type { ContentBlock, Localized } from "@/content/types";
+import type { ContentBlock, Localized, Service } from "@/content/types";
 import { articles as staticArticles } from "@/content/articles/meta";
 import { articleBodies } from "@/content/articles/body";
 import {
@@ -16,7 +16,7 @@ import {
   pageOverridesTable,
   type ArticleRow,
 } from "@/lib/db";
-import { getPageDef } from "@/lib/cms/pages";
+import { getPageDef, servicePageKey } from "@/lib/cms/pages";
 import { resolvePage, type ResolvedPage } from "@/lib/cms/resolve";
 import type {
   ArticleStatus,
@@ -127,3 +127,31 @@ export const getPageContent = cache(
     return resolvePage(def, override);
   },
 );
+
+export interface CmsService extends Service {
+  /** H1 on the service page (the keyword-led title, not the bare name). */
+  heading: Localized<string>;
+}
+
+/**
+ * A service with its dashboard edits applied. Name and slug stay in code
+ * (navigation, forms and URLs depend on them); heroImage is only set when
+ * one was picked in the dashboard, so pages without one keep the icon panel.
+ */
+export async function getServiceContent(service: Service): Promise<CmsService> {
+  const { text, lists, blocks, images } = await getPageContent(
+    servicePageKey(service.key),
+  );
+  return {
+    ...service,
+    heading: text.heading,
+    summary: text.summary,
+    teaser: text.teaser,
+    whoItsFor: lists.whoItsFor,
+    whatsIncluded: lists.whatsIncluded,
+    process: lists.process,
+    whatToPrepare: lists.whatToPrepare,
+    body: blocks.body,
+    heroImage: images.heroImage,
+  };
+}

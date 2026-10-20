@@ -7,6 +7,7 @@ import { ArrowLeft, Download, ExternalLink, Eye, Pencil } from "lucide-react";
 
 import type { Locale } from "@/content/types";
 import type { PartialLocalized } from "@/lib/cms/schemas";
+import { mergeLocalized } from "@/lib/cms/resolve";
 import {
   articlePath,
   slugify,
@@ -358,6 +359,7 @@ export function ArticleEditor({
             hint="Landscape, about 16:10"
             locale={locale}
             value={draft.coverImage}
+            autoAlt={mergeLocalized(draft.title, draft.seo.title)}
             onChange={(coverImage) => update({ coverImage })}
           />
         </SectionCard>

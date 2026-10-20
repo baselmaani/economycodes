@@ -1,9 +1,8 @@
 import { handleUpload, type HandleUploadBody } from "@vercel/blob/client";
 import { NextResponse } from "next/server";
 
+import { MAX_UPLOAD_BYTES } from "@/lib/admin/prepare-image";
 import { isAdmin } from "@/lib/admin/session";
-
-const MAX_BYTES = 5 * 1024 * 1024;
 
 /**
  * Issues short-lived client tokens so the dashboard can upload images
@@ -33,7 +32,7 @@ export async function POST(request: Request) {
             "image/avif",
             "image/gif",
           ],
-          maximumSizeInBytes: MAX_BYTES,
+          maximumSizeInBytes: MAX_UPLOAD_BYTES,
           addRandomSuffix: true,
         };
       },
