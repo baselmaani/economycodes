@@ -185,12 +185,12 @@ export const serviceMeta: Record<string, ServiceMeta> = {
   },
   "website-creation": {
     title: {
-      sv: "Hemsida för företag – webbyrå i Sverige",
+      sv: "Webbyrå – webbdesign & hemsida för företag",
       en: "Website design for businesses in Sweden",
       ar: "تصميم مواقع إلكترونية للشركات في السويد",
     },
     description: {
-      sv: "Snabba, mobilanpassade hemsidor för småföretag – även flerspråkiga på svenska, engelska och arabiska. Byggda med SEO och tydliga kontaktvägar.",
+      sv: "Webbdesign och webbutveckling för företag: professionella, mobilanpassade hemsidor för småföretag – även flerspråkiga. Byggda med SEO från start.",
       en: "Fast, mobile-friendly websites for small businesses in Sweden – including multilingual sites in Swedish, English and Arabic, built with SEO.",
       ar: "مواقع سريعة ومتوافقة مع الجوال للشركات الصغيرة في السويد، بما فيها مواقع متعددة اللغات بالعربية والسويدية والإنجليزية ومهيأة لمحركات البحث.",
     },
@@ -202,7 +202,7 @@ export const serviceMeta: Record<string, ServiceMeta> = {
       ar: "خدمات تحسين محركات البحث SEO في السويد",
     },
     description: {
-      sv: "Syns på Google när kunderna söker. Teknisk SEO, innehåll, lokal synlighet och Google-företagsprofil – med tydliga rapporter om utvecklingen.",
+      sv: "Sökmotoroptimering för företag: teknisk SEO, innehåll, lokal sökmotoroptimering och Google-företagsprofil – med tydliga rapporter om utvecklingen.",
       en: "Get found on Google when customers search. Technical SEO, content, local visibility and Google Business Profile – with clear progress reports.",
       ar: "اظهر في جوجل عندما يبحث العملاء. تحسين تقني ومحتوى وظهور محلي وملف النشاط التجاري على جوجل — مع تقارير واضحة عن التقدم.",
     },
@@ -233,7 +233,7 @@ export const serviceMeta: Record<string, ServiceMeta> = {
   },
   "social-media-ads": {
     title: {
-      sv: "Annonsering på Facebook, Instagram & TikTok",
+      sv: "Annonsering på Facebook och Instagram",
       en: "Facebook, Instagram & TikTok advertising",
       ar: "إعلانات فيسبوك وإنستغرام وتيك توك",
     },
@@ -245,12 +245,12 @@ export const serviceMeta: Record<string, ServiceMeta> = {
   },
   "google-ads": {
     title: {
-      sv: "Google Ads-hjälp för företag i Sverige",
+      sv: "Google Ads-byrå – hjälp med Google Ads",
       en: "Google Ads management in Sweden",
       ar: "إدارة إعلانات جوجل في السويد",
     },
     description: {
-      sv: "Syns högst upp när kunderna söker. Sökannonser, Performance Max och YouTube med konverteringsspårning – så att du ser vad varje förfrågan kostar.",
+      sv: "Annonsering på Google som syns när kunderna söker. Sökannonser, Performance Max och YouTube med konverteringsspårning – se vad varje förfrågan kostar.",
       en: "Appear at the top when customers search. Search ads, Performance Max and YouTube with conversion tracking – so you can see what each enquiry costs.",
       ar: "اظهر في أعلى النتائج عندما يبحث العملاء. إعلانات البحث وPerformance Max ويوتيوب مع تتبع التحويلات لتعرف تكلفة كل استفسار.",
     },
@@ -262,21 +262,21 @@ export const serviceMeta: Record<string, ServiceMeta> = {
       ar: "إدارة وسائل التواصل للشركات في السويد",
     },
     description: {
-      sv: "Aktiva, professionella sociala medier – innehållsplan, inlägg, bilder och korta videor på svenska, engelska och arabiska, utan att det tar din tid.",
+      sv: "Hantering av sociala medier för företag – innehållsplan, inlägg, bilder och korta videor på svenska, engelska och arabiska, utan att det tar din tid.",
       en: "Active, professional social media – content plan, posts, images and short videos in Swedish, English and Arabic, without taking up your time.",
       ar: "حسابات تواصل اجتماعي نشطة واحترافية — خطة محتوى ومنشورات وصور وفيديوهات قصيرة بالعربية والسويدية والإنجليزية دون أن تأخذ من وقتك.",
     },
   },
   "saas-development": {
     title: {
-      sv: "SaaS- och webbapputveckling i Sverige",
-      en: "SaaS and web app development in Sweden",
-      ar: "تطوير تطبيقات الويب وSaaS في السويد",
+      sv: "SaaS-utvecklingsbyrå – SaaS & MVP",
+      en: "SaaS & MVP development in Sweden",
+      ar: "تطوير منتجات SaaS وMVP في السويد",
     },
     description: {
-      sv: "Skräddarsydda webbapplikationer och SaaS – kundportaler, bokningssystem och interna verktyg. Vi börjar med en MVP och bygger vidare med säker teknik.",
-      en: "Custom web applications and SaaS – customer portals, booking systems and internal tools. We start with an MVP and build on it with modern, secure tech.",
-      ar: "تطبيقات ويب ومنتجات SaaS مخصصة: بوابات عملاء وأنظمة حجز وأدوات داخلية. نبدأ بنسخة MVP ونطورها بتقنيات حديثة وآمنة.",
+      sv: "SaaS-utveckling från grunden: vi hjälper startups och företag att bygga SaaS-produkt och MVP – och står för vidareutvecklingen med modern, säker teknik.",
+      en: "SaaS development from scratch: we help startups and businesses build a SaaS product and MVP – then handle further development with modern, secure tech.",
+      ar: "تطوير SaaS من الصفر: نساعد الشركات الناشئة والشركات على بناء منتج SaaS ونسخة MVP، ثم نتولى التطوير المستمر بتقنيات حديثة وآمنة.",
     },
   },
   "mobile-app-development": {
@@ -289,6 +289,30 @@ export const serviceMeta: Record<string, ServiceMeta> = {
       sv: "Mobilappar för iOS och Android – från idé och design till App Store och Google Play, med en gemensam kodbas som håller nere tid och kostnad.",
       en: "Mobile apps for iOS and Android – from idea and design to the App Store and Google Play, with one shared codebase that keeps time and cost down.",
       ar: "تطبيقات جوال لنظامي iOS وأندرويد — من الفكرة والتصميم إلى App Store وGoogle Play، بشيفرة مشتركة تقلل الوقت والتكلفة.",
+    },
+  },
+  "ui-ux-design": {
+    title: {
+      sv: "UX-designbyrå – UI/UX-design för företag",
+      en: "UI/UX design agency in Sweden",
+      ar: "تصميم واجهات وتجربة المستخدم UI/UX",
+    },
+    description: {
+      sv: "UI/UX-design för webbplatser, SaaS och webbapplikationer – användarflöden, prototyp av app, UI-design och designsystem för företag.",
+      en: "UI/UX design for websites, SaaS and web applications – user flows, clickable app prototypes, UI design and design systems for businesses.",
+      ar: "تصميم UI/UX للمواقع ومنتجات SaaS وتطبيقات الويب: مسارات الاستخدام والنماذج الأولية وتصميم الواجهات وأنظمة التصميم للشركات.",
+    },
+  },
+  "custom-system-development": {
+    title: {
+      sv: "Systemutveckling för företag – skräddarsytt",
+      en: "Custom software development in Sweden",
+      ar: "تطوير الأنظمة المخصصة للشركات في السويد",
+    },
+    description: {
+      sv: "Skräddarsydd systemutveckling: kundportaler, bokningssystem, CRM-system, API-integrationer och automatisering av administrativa processer.",
+      en: "Custom software development: customer portals, booking systems, CRM systems, API integrations and automation of admin processes for businesses.",
+      ar: "تطوير أنظمة مخصصة: بوابات عملاء وأنظمة حجز وأنظمة CRM وتكاملات API وأتمتة العمليات الإدارية للشركات.",
     },
   },
 };

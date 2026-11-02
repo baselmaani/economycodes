@@ -12,6 +12,7 @@ import { getLocalized } from "@/lib/i18n-content";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { Container } from "@/components/layout/Container";
 import { ContactForm } from "@/components/forms/ContactForm";
+import { getServiceOptions } from "@/lib/service-lookup";
 import { Reveal } from "@/components/motion/Reveal";
 import { ContactMethods } from "@/components/marketing/ContactMethods";
 
@@ -73,6 +74,7 @@ export default async function ContactPage({
         <Reveal delay={140}>
           <ContactForm
             locale={locale}
+            serviceOptions={getServiceOptions(locale)}
             variant="card"
             title={home("contactFormTitle")}
             titleAs="h2"

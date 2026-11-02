@@ -1,25 +1,17 @@
 import { CheckCircle2 } from "lucide-react";
 
-import type { AppLocale } from "@/i18n/routing";
 import { getLocalized } from "@/lib/i18n-content";
-import { digitalNationwideContent, whoWeHelp } from "@/content/home";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/marketing/SectionHeading";
 import { IconTile } from "@/components/marketing/IconTile";
 import { Reveal } from "@/components/motion/Reveal";
 import { RevealLine } from "@/components/motion/RevealLine";
+import type { SectionProps } from "../types";
 
-export function NationwideDigitalSection({
-  locale,
-  heading,
-  whoWeHelpHeading,
-}: {
-  locale: AppLocale;
-  heading: string;
-  whoWeHelpHeading: string;
-}) {
-  const points = getLocalized(digitalNationwideContent.points, locale);
+/** Digital accounting throughout Sweden + who we help. */
+export function NationwideSection({ locale, content }: SectionProps) {
+  const { text, lists } = content;
 
   return (
     <Section tone="base">
@@ -29,18 +21,18 @@ export function NationwideDigitalSection({
             <Reveal>
               <SectionHeading
                 align="start"
-                title={heading}
-                lead={getLocalized(digitalNationwideContent.body, locale)}
+                title={getLocalized(text.nationwideTitle, locale)}
+                lead={getLocalized(text.nationwideBody, locale)}
               />
             </Reveal>
 
             <div className="border-border mt-10 border-t pt-8">
               <h3 className="text-sm font-semibold tracking-wide uppercase">
-                {whoWeHelpHeading}
+                {getLocalized(text.whoWeHelpTitle, locale)}
               </h3>
               <Reveal delay={80}>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  {getLocalized(whoWeHelp, locale).map((item) => (
+                  {getLocalized(lists.whoWeHelp, locale).map((item) => (
                     <span
                       key={item}
                       className="border-border bg-secondary/40 text-secondary-foreground rounded-full border px-3 py-1.5 text-sm font-medium"
@@ -61,7 +53,7 @@ export function NationwideDigitalSection({
               <div className="bg-border h-full w-full" />
             </RevealLine>
             <ul className="relative flex flex-col gap-6">
-              {points.map((item) => (
+              {getLocalized(lists.nationwidePoints, locale).map((item) => (
                 <li key={item} className="flex items-start gap-4">
                   <IconTile
                     icon={CheckCircle2}

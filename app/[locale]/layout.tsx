@@ -16,10 +16,10 @@ import { SkipLink } from "@/components/common/SkipLink";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildSiteGraphJsonLd } from "@/lib/structured-data/organization";
 import { getLocalized } from "@/lib/i18n-content";
-import { business } from "@/content/business";
-import { locations } from "@/content/locations";
-import { homeMeta } from "@/content/home";
 import { locationPages } from "@/content/location-pages";
+import { getPageContent } from "@/lib/cms/content";
+import { locationPageKey } from "@/lib/cms/pages";
+import { getBusiness, getLocations } from "@/lib/cms/site";
 import { getLocationAlternateLinks } from "@/lib/routes";
 import "../globals.css";
 
@@ -33,6 +33,10 @@ const notoSansArabic = Noto_Sans_Arabic({
   variable: "--font-arabic",
   subsets: ["arabic"],
   weight: "variable",
+  // Not preloaded: sv/en pages (most traffic) only use it for the short
+  // "العربية" labels, so a preload there would compete with the LCP image.
+  // Arabic pages still fetch it as soon as the CSS is parsed.
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -81,6 +85,16 @@ export default async function RootLayout({
 
   const direction = isRtlLocale(locale) ? "rtl" : "ltr";
   const isArabic = locale === "ar";
+  const [business, locations, home, locationContents] = await Promise.all([
+    getBusiness(),
+    getLocations(),
+    getPageContent("home"),
+    Promise.all(
+      locationPages.map((page) =>
+        getPageContent(locationPageKey(page.locationId)),
+      ),
+    ),
+  ]);
 
   return (
     <html
@@ -101,15 +115,16 @@ export default async function RootLayout({
           data={buildSiteGraphJsonLd(
             business,
             locations,
-            getLocalized(homeMeta.description, locale),
+            getLocalized(home.seo.description, locale),
             (location) => {
-              const page = locationPages.find(
+              const index = locationPages.findIndex(
                 (p) => p.locationId === location.id,
               );
+              const page = locationPages[index];
               return page
                 ? {
                     url: getLocationAlternateLinks(page)[locale],
-                    areaServed: page.nearbyAreas,
+                    areaServed: locationContents[index].lists.nearbyAreas.sv,
                   }
                 : {};
             },
@@ -123,8 +138,8 @@ export default async function RootLayout({
               {children}
             </main>
             <Footer locale={locale as AppLocale} />
-            <StickyActionBar />
-            <FloatingContactButtons />
+            <StickyActionBar business={business} />
+            <FloatingContactButtons business={business} />
           </DirectionProvider>
         </NextIntlClientProvider>
       </body>

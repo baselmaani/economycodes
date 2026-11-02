@@ -4,9 +4,9 @@ import { MessageCircle, Phone, Send } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
-import { business } from "@/content/business";
+import type { ContactLinks } from "@/content/types";
 
-export function StickyActionBar() {
+export function StickyActionBar({ business }: { business: ContactLinks }) {
   const t = useTranslations("common");
 
   return (

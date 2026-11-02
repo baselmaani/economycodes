@@ -40,21 +40,8 @@ export const contactFormSchema = z
 
 export type ContactFormValues = z.infer<typeof contactFormSchema>;
 
-/** Visitor-facing fields that can carry a validation error. */
-export const contactFields = [
-  "name",
-  "email",
-  "phone",
-  "preferredContact",
-  "service",
-  "message",
-  "consent",
-] as const;
-
-export type ContactField = (typeof contactFields)[number];
-
-/**
- * Per-field error codes the form translates. "phoneRequired" is split from
- * "invalid" so the phone field can say *why* it needs a value.
- */
-export type ContactFieldError = "invalid" | "phoneRequired";
+export {
+  contactFields,
+  type ContactField,
+  type ContactFieldError,
+} from "@/lib/validation/contact-fields";

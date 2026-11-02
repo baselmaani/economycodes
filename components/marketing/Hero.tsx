@@ -10,13 +10,12 @@ import { GridPattern } from "@/components/marketing/decor/GridPattern";
 import { RadialGlow } from "@/components/marketing/decor/RadialGlow";
 import { Reveal } from "@/components/motion/Reveal";
 import { RevealScale } from "@/components/motion/RevealScale";
-import { business } from "@/content/business";
-import { authorizationContent } from "@/content/home";
+import { getBusiness } from "@/lib/cms/site";
 import { getLocalized } from "@/lib/i18n-content";
 import type { AppLocale } from "@/i18n/routing";
 import type { MediaRef } from "@/content/types";
 
-export function Hero({
+export async function Hero({
   locale,
   eyebrow,
   title,
@@ -24,6 +23,7 @@ export function Hero({
   primaryCtaLabel,
   servicesCtaLabel,
   photo,
+  credential,
 }: {
   locale: AppLocale;
   eyebrow?: string;
@@ -32,7 +32,10 @@ export function Hero({
   primaryCtaLabel: string;
   servicesCtaLabel: string;
   photo: MediaRef;
+  /** Firm credential shown in the trust row and the floating badge. */
+  credential: string;
 }) {
+  const business = await getBusiness();
   const floatingLabels: Record<AppLocale, string[]> = {
     sv: ["Bokföring", "Löneadministration", "Bokslut & årsredovisning"],
     en: ["Bookkeeping", "Payroll", "Annual accounts"],
@@ -92,9 +95,17 @@ export function Hero({
                 >
                   {servicesCtaLabel}
                 </Button>
+              </div>
+            </Reveal>
+
+            {/* Phone/WhatsApp as a quiet secondary row, so the hero keeps two
+                primary actions. The credential and languages live in the
+                floating badges on the portrait. */}
+            <Reveal delay={320}>
+              <div className="mt-2 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-white/20 pt-5">
                 <a
                   href={business.phoneHref}
-                  className="inline-flex items-center gap-2 px-2 text-sm font-medium text-white/90 transition-colors hover:text-white"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-white/90 transition-colors hover:text-white"
                 >
                   <Phone
                     size={16}
@@ -103,33 +114,21 @@ export function Hero({
                   />
                   <span dir="ltr">{business.phone}</span>
                 </a>
-                <a
-                  href={business.whatsappHref}
-                  className="inline-flex items-center gap-2 px-2 text-sm font-medium text-white/90 transition-colors hover:text-white"
-                >
-                  <MessageCircle
-                    size={16}
-                    aria-hidden="true"
-                    className="text-brand-bright"
-                  />
-                  WhatsApp
-                </a>
-              </div>
-            </Reveal>
-
-            <Reveal delay={320}>
-              <div className="mt-2 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-white/20 pt-5">
-                <span className="inline-flex items-center gap-2 text-sm font-medium text-white/80">
-                  <ShieldCheck
-                    size={16}
-                    className="text-brand-bright shrink-0"
-                    aria-hidden="true"
-                  />
-                  <span dir="ltr">{authorizationContent.firm.credential}</span>
-                </span>
-                <span dir="ltr" className="text-sm font-medium text-white/80">
-                  Svenska · English · العربية
-                </span>
+                {business.whatsappHref ? (
+                  <a
+                    href={business.whatsappHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-white/90 transition-colors hover:text-white"
+                  >
+                    <MessageCircle
+                      size={16}
+                      aria-hidden="true"
+                      className="text-brand-bright"
+                    />
+                    WhatsApp
+                  </a>
+                ) : null}
               </div>
             </Reveal>
           </div>
@@ -158,7 +157,7 @@ export function Hero({
 
               <div
                 dir="ltr"
-                className="bg-brand-navy/90 absolute start-6 -top-4 flex animate-[eco-float_5s_ease-in-out_infinite] items-center gap-2 rounded-xl border border-white/15 px-3 py-2 shadow-md backdrop-blur-sm [animation-delay:-2s]"
+                className="bg-brand-navy/90 absolute start-6 -top-4 flex animate-[eco-float_5s_ease-in-out_infinite] items-center gap-2 rounded-xl border border-white/15 px-3 py-2 shadow-md [animation-delay:-2s]"
               >
                 <ShieldCheck
                   size={16}
@@ -166,21 +165,21 @@ export function Hero({
                   aria-hidden="true"
                 />
                 <span className="text-xs font-semibold whitespace-nowrap text-white">
-                  {authorizationContent.firm.credential}
+                  {credential}
                 </span>
               </div>
-              <div className="bg-brand-navy/90 absolute -end-4 top-1/4 animate-[eco-float_4s_ease-in-out_infinite] rounded-full border border-white/15 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md backdrop-blur-sm [animation-delay:-1.3s]">
+              <div className="bg-brand-navy/90 absolute -end-4 top-1/4 hidden animate-[eco-float_4s_ease-in-out_infinite] rounded-full border border-white/15 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md [animation-delay:-1.3s] sm:block">
                 {labelOne}
               </div>
-              <div className="bg-brand-navy/90 absolute -start-6 bottom-1/3 animate-[eco-float_4.5s_ease-in-out_infinite] rounded-full border border-white/15 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md backdrop-blur-sm [animation-delay:-2.6s]">
+              <div className="bg-brand-navy/90 absolute -start-6 bottom-1/3 hidden animate-[eco-float_4.5s_ease-in-out_infinite] rounded-full border border-white/15 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md [animation-delay:-2.6s] sm:block">
                 {labelTwo}
               </div>
-              <div className="bg-brand-navy/90 absolute end-2 -bottom-4 animate-[eco-float_3.5s_ease-in-out_infinite] rounded-full border border-white/15 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md backdrop-blur-sm [animation-delay:-0.7s]">
+              <div className="bg-brand-navy/90 absolute end-2 -bottom-4 hidden animate-[eco-float_3.5s_ease-in-out_infinite] rounded-full border border-white/15 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md [animation-delay:-0.7s] sm:block">
                 {labelThree}
               </div>
               <div
                 dir="ltr"
-                className="bg-brand-navy/90 absolute -start-4 top-6 animate-[eco-float_5s_ease-in-out_infinite] rounded-full border border-white/15 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md backdrop-blur-sm [animation-delay:-3.5s]"
+                className="bg-brand-navy/90 absolute -start-4 top-6 animate-[eco-float_5s_ease-in-out_infinite] rounded-full border border-white/15 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md [animation-delay:-3.5s]"
               >
                 Svenska · English · العربية
               </div>

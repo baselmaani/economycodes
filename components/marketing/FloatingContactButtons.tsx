@@ -3,7 +3,7 @@
 import { Phone } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { business } from "@/content/business";
+import type { ContactLinks } from "@/content/types";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 
 /**
@@ -11,7 +11,7 @@ import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
  * actions from StickyActionBar (fixed bottom bar, lg:hidden) -- showing both
  * at once would duplicate the UI, so this is hidden below lg.
  */
-export function FloatingContactButtons() {
+export function FloatingContactButtons({ business }: { business: ContactLinks }) {
   const t = useTranslations("common");
 
   return (

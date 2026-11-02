@@ -24,7 +24,7 @@ export const digitalMeta = {
     ar: "وكالة تسويق رقمي في السويد",
   } satisfies Localized<string>,
   description: {
-    sv: "Digital marknadsföringsbyrå i Sverige: webbplatser, SEO, AEO, GEO, Google Ads, sociala medier, SaaS och mobilappar — på svenska, engelska och arabiska.",
+    sv: "Digital marknadsföringsbyrå för företag och småföretag i Sverige: hemsidor, SEO, Google Ads, sociala medier, UI/UX-design, systemutveckling och SaaS.",
     en: "Digital marketing agency in Sweden: websites, SEO, AEO, GEO, Google Ads, social media ads, SaaS, and mobile apps — in Swedish, English, and Arabic.",
     ar: "وكالة تسويق رقمي في السويد: مواقع إلكترونية وSEO وAEO وGEO وإعلانات جوجل ووسائل التواصل وتطبيقات SaaS والجوال — بالسويدية والإنجليزية والعربية.",
   } satisfies Localized<string>,
@@ -37,7 +37,7 @@ export const digitalHero = {
     ar: "وكالة تسويق رقمي للشركات في جميع أنحاء السويد",
   } satisfies Localized<string>,
   lead: {
-    sv: "Economy Codes AB hjälper små och medelstora företag i hela Sverige att få fler kunder online. Vi bygger webbplatser, webbappar och mobilappar för iOS och Android, arbetar med SEO, AEO och GEO för synlighet i Google och AI-sök, och driver annonsering på Google, Facebook, Instagram, TikTok och LinkedIn — på svenska, engelska och arabiska.",
+    sv: "Economy Codes AB hjälper små och medelstora företag i hela Sverige att få fler kunder online — digital marknadsföring för företag och småföretag, samlat hos en byrå. Vi bygger webbplatser, webbappar och mobilappar för iOS och Android, arbetar med SEO, AEO och GEO för synlighet i Google och AI-sök, och driver annonsering på Google, Facebook, Instagram, TikTok och LinkedIn — på svenska, engelska och arabiska.",
     en: "Economy Codes AB helps small and medium-sized businesses across Sweden win more customers online. We build websites, web apps, and iOS and Android apps, work with SEO, AEO, and GEO for visibility in Google and AI search, and run advertising on Google, Facebook, Instagram, TikTok, and LinkedIn — in Swedish, English, and Arabic.",
     ar: "Economy Codes AB شركة تسويق رقمي تساعد الشركات الصغيرة والمتوسطة في جميع أنحاء السويد على كسب مزيد من العملاء عبر الإنترنت. نبني المواقع وتطبيقات الويب وتطبيقات iOS وأندرويد، ونعمل على SEO وAEO وGEO للظهور في جوجل وبحث الذكاء الاصطناعي، وندير الإعلانات على جوجل وفيسبوك وإنستغرام وتيك توك ولينكدإن — بالسويدية والإنجليزية والعربية.",
   } satisfies Localized<string>,
@@ -57,15 +57,15 @@ export const digitalIntro = {
   paragraphs: {
     sv: [
       "Digital marknadsföring är allt ett företag gör för att nå och vinna kunder online: en webbplats som gör besökare till kunder, synlighet i Google och AI-tjänster, annonsering i sökmotorer och sociala medier, och innehåll som bygger förtroende. Till skillnad från traditionell reklam går nästan allt att mäta.",
-      "Economy Codes arbetar med hela kedjan — från att bygga webbplatsen till att driva trafik och följa upp vad varje krona ger. Eftersom vi också är en redovisningsbyrå kan vi visa vad marknadsföringen betyder för företagets intäkter och lönsamhet, inte bara för klick och visningar.",
+      "Economy Codes arbetar med hela kedjan — från att bygga webbplatsen till att driva trafik och följa upp vad varje krona ger. När du anlitar oss som marknadsföringsbyrå får du sökmotoroptimering, annonsering på Google, Facebook och Instagram och hantering av sociala medier samlat på ett ställe. Eftersom vi också är en redovisningsbyrå kan vi visa vad marknadsföringen betyder för företagets intäkter och lönsamhet, inte bara för klick och visningar.",
     ],
     en: [
       "Digital marketing is everything a business does to reach and win customers online: a website that turns visitors into customers, visibility in Google and AI tools, advertising on search engines and social media, and content that builds trust. Unlike traditional advertising, almost all of it can be measured.",
-      "Economy Codes works across the whole chain — from building the website to driving traffic and tracking what every krona delivers. Because we're also an accounting firm, we can show what your marketing means for your company's revenue and profitability, not just clicks and impressions.",
+      "Economy Codes works across the whole chain — from building the website to driving traffic and tracking what every krona delivers. When you hire us as your marketing agency, you get search engine optimization, advertising on Google, Facebook, and Instagram, and social media management in one place. Because we're also an accounting firm, we can show what your marketing means for your company's revenue and profitability, not just clicks and impressions.",
     ],
     ar: [
       "التسويق الرقمي هو كل ما تفعله الشركة للوصول إلى العملاء وكسبهم عبر الإنترنت: موقع إلكتروني يحوّل الزوار إلى عملاء، وظهور في جوجل وأدوات الذكاء الاصطناعي، وإعلانات في محركات البحث ووسائل التواصل الاجتماعي، ومحتوى يبني الثقة. وعلى عكس الإعلان التقليدي، يمكن قياس كل شيء تقريبًا.",
-      "تعمل Economy Codes على السلسلة كاملة — من بناء الموقع إلى جلب الزيارات ومتابعة العائد من كل كرونة. ولأننا مكتب محاسبة أيضًا، يمكننا أن نوضح لك أثر التسويق على إيرادات شركتك وربحيتها، لا على النقرات ومرات الظهور فحسب.",
+      "تعمل Economy Codes على السلسلة كاملة — من بناء الموقع إلى جلب الزيارات ومتابعة العائد من كل كرونة. وعندما تتعاقد معنا كوكالة تسويق، تحصل على تحسين محركات البحث والإعلان على جوجل وفيسبوك وإنستغرام وإدارة وسائل التواصل الاجتماعي في مكان واحد. ولأننا مكتب محاسبة أيضًا، يمكننا أن نوضح لك أثر التسويق على إيرادات شركتك وربحيتها، لا على النقرات ومرات الظهور فحسب.",
     ],
   } satisfies Localized<string[]>,
 };
@@ -93,9 +93,9 @@ export const digitalFacts = {
     {
       label: { sv: "Tjänster", en: "Services", ar: "الخدمات" },
       value: {
-        sv: "Webbplatser, SEO, AEO, GEO, Google Ads, annonsering och hantering av sociala medier, SaaS- och webbapputveckling, mobilappar för iOS och Android",
-        en: "Websites, SEO, AEO, GEO, Google Ads, social media advertising and management, SaaS and web app development, iOS and Android apps",
-        ar: "المواقع الإلكترونية وSEO وAEO وGEO وإعلانات جوجل وإعلانات وإدارة وسائل التواصل وتطوير تطبيقات الويب وSaaS وتطبيقات الجوال",
+        sv: "Webbdesign och hemsidor, UI/UX-design, skräddarsydd systemutveckling, SaaS-utveckling, mobilappar för iOS och Android, SEO, AEO, GEO, Google Ads, annonsering och hantering av sociala medier",
+        en: "Web design and websites, UI/UX design, custom software development, SaaS development, iOS and Android apps, SEO, AEO, GEO, Google Ads, social media advertising and management",
+        ar: "تصميم المواقع الإلكترونية وتصميم UI/UX وتطوير الأنظمة المخصصة وتطوير SaaS وتطبيقات الجوال وSEO وAEO وGEO وإعلانات جوجل وإعلانات وإدارة وسائل التواصل",
       },
     },
     {
@@ -250,6 +250,8 @@ export const digitalAreas = [
     } satisfies Localized<string>,
     serviceKeys: [
       "website-creation",
+      "ui-ux-design",
+      "custom-system-development",
       "saas-development",
       "mobile-app-development",
     ],
@@ -277,6 +279,7 @@ export const digitalAreas = [
 /** FAQs shown on the hub page, in display order: hub-scoped first, then a few service-scoped ones. */
 export const DIGITAL_HUB_FAQ_IDS = [
   "faq-digital-what-agency-does",
+  "faq-digital-hire-agency",
   "faq-digital-cost",
   "faq-digital-area",
   "faq-digital-languages",

@@ -1,7 +1,6 @@
 import { ArrowRight, TrendingUp } from "lucide-react";
 
 import { Link } from "@/i18n/navigation";
-import type { AppLocale } from "@/i18n/routing";
 import { getLocalized } from "@/lib/i18n-content";
 import { servicesList } from "@/content/services";
 import { getServiceGroup, getServiceIcon } from "@/content/service-icons";
@@ -10,25 +9,15 @@ import { Section } from "@/components/layout/Section";
 import { IconTile } from "@/components/marketing/IconTile";
 import { Card } from "@/components/ui/card";
 import { Reveal } from "@/components/motion/Reveal";
+import type { SectionProps } from "../types";
 
 /**
- * Homepage teaser for the digital marketing hub: a single card linking to
+ * Teaser for the digital marketing hub: a single card linking to
  * /digital-marknadsforing. Service names are shown as plain labels, not
  * links, since the whole card is already one link.
  */
-export function DigitalMarketingSection({
-  locale,
-  eyebrow,
-  heading,
-  lead,
-  ctaLabel,
-}: {
-  locale: AppLocale;
-  eyebrow: string;
-  heading: string;
-  lead: string;
-  ctaLabel: string;
-}) {
+export function DigitalSection({ locale, content }: SectionProps) {
+  const { text } = content;
   const digitalServices = servicesList.filter(
     (s) => getServiceGroup(s.key) === "digital",
   );
@@ -50,14 +39,16 @@ export function DigitalMarketingSection({
                 <div className="flex flex-col gap-4">
                   <IconTile icon={TrendingUp} size="lg" />
                   <span className="text-primary text-sm font-semibold tracking-wide uppercase">
-                    {eyebrow}
+                    {getLocalized(text.digitalEyebrow, locale)}
                   </span>
                   <h2 className="text-section-h2 font-semibold text-balance">
-                    {heading}
+                    {getLocalized(text.digitalTitle, locale)}
                   </h2>
-                  <p className="text-muted-foreground text-body">{lead}</p>
+                  <p className="text-muted-foreground text-body">
+                    {getLocalized(text.digitalLead, locale)}
+                  </p>
                   <span className="text-primary mt-2 inline-flex items-center gap-1.5 font-semibold">
-                    {ctaLabel}
+                    {getLocalized(text.digitalCta, locale)}
                     <ArrowRight
                       size={18}
                       aria-hidden="true"

@@ -543,7 +543,7 @@ export const faqs: Faq[] = [
       ar: "كم تكلفة التسويق الرقمي؟",
     },
     answer: {
-      sv: "Det beror på vilka tjänster du behöver och hur omfattande arbetet är. En webbplats offereras oftast som ett projekt, medan SEO, annonsering och sociala medier ofta sköts löpande. Annonsbudgeten betalas direkt till plattformarna och kommer utöver vårt arvode. Efter ett första samtal får du ett förslag anpassat efter dina mål och din budget.",
+      sv: "Priset för digital marknadsföring beror på vilka tjänster du behöver och hur omfattande arbetet är. En webbplats offereras oftast som ett projekt, medan SEO, annonsering och sociala medier ofta sköts löpande. Annonsbudgeten betalas direkt till plattformarna och kommer utöver vårt arvode. Efter ett första samtal får du ett förslag anpassat efter dina mål och din budget.",
       en: "It depends on which services you need and how extensive the work is. A website is usually quoted as a project, while SEO, advertising, and social media are often handled on an ongoing basis. Ad spend is paid directly to the platforms, on top of our fee. After an initial conversation, you'll get a proposal tailored to your goals and budget.",
       ar: "يعتمد ذلك على الخدمات التي تحتاجها وحجم العمل. عادةً ما يُسعَّر الموقع الإلكتروني كمشروع، بينما تُدار خدمات SEO والإعلانات ووسائل التواصل غالبًا بشكل مستمر. وتُدفع الميزانية الإعلانية مباشرة إلى المنصات إضافة إلى أتعابنا. وبعد محادثة أولية، تحصل على مقترح يناسب أهدافك وميزانيتك.",
     },
@@ -595,12 +595,12 @@ export const faqs: Faq[] = [
     id: "faq-website-cost",
     scope: { serviceKey: "website-creation" },
     question: {
-      sv: "Vad kostar en ny webbplats?",
-      en: "How much does a new website cost?",
+      sv: "Vad kostar en hemsida för företag?",
+      en: "How much does a business website cost?",
       ar: "كم تكلفة إنشاء موقع إلكتروني جديد؟",
     },
     answer: {
-      sv: "Det beror på hur många sidor och språk webbplatsen ska ha, om den behöver funktioner som bokning eller webbshop, och hur mycket innehåll som ska tas fram. Efter ett första samtal får du en offert utifrån just dina behov.",
+      sv: "Priset på en hemsida för företag beror på hur många sidor och språk webbplatsen ska ha, om den behöver funktioner som bokning eller webbshop, och hur mycket innehåll som ska tas fram. Efter ett första samtal får du en offert utifrån just dina behov.",
       en: "It depends on how many pages and languages the site needs, whether it requires features such as booking or a web shop, and how much content needs to be created. After an initial conversation, you'll receive a quote based on your specific needs.",
       ar: "يعتمد ذلك على عدد صفحات الموقع ولغاته، وما إذا كان يحتاج إلى ميزات مثل الحجز أو المتجر الإلكتروني، وحجم المحتوى المطلوب إعداده. بعد محادثة أولية، تحصل على عرض سعر مبني على احتياجاتك تحديدًا.",
     },
@@ -785,6 +785,94 @@ export const faqs: Faq[] = [
       sv: "Appen publiceras via utvecklarkonton hos Apple och Google, som registreras i ditt företags namn så att du äger appen. Vi förbereder beskrivningar, skärmbilder och tekniska krav och sköter inskickningen. Båda butikerna granskar appen innan den publiceras, och vi hjälper till om de har synpunkter.",
       en: "The app is published through developer accounts with Apple and Google, registered in your company's name so that you own the app. We prepare the descriptions, screenshots, and technical requirements and handle the submission. Both stores review the app before it goes live, and we help if they raise any issues.",
       ar: "يُنشر التطبيق عبر حسابات مطوّر لدى Apple وGoogle تُسجَّل باسم شركتك لتكون مالكة التطبيق. نجهّز الأوصاف ولقطات الشاشة والمتطلبات التقنية ونتولى الإرسال. وتراجع المتجران التطبيق قبل نشره، ونساعدك إذا طلبا أي تعديلات.",
+    },
+  },
+  // Digital marketing hub (added with the keyword update)
+  {
+    id: "faq-digital-hire-agency",
+    scope: "digital",
+    question: {
+      sv: "Varför anlita en marknadsföringsbyrå?",
+      en: "Why hire a marketing agency?",
+      ar: "لماذا تتعاقد مع وكالة تسويق؟",
+    },
+    answer: {
+      sv: "En marknadsföringsbyrå har kunskap om webb, sök, annonsering och sociala medier som ett mindre företag sällan har internt. När du anlitar en byrå får du hjälp att prioritera rätt kanaler, undvika dyra misstag i annonseringen och följa upp vad marknadsföringen faktiskt ger — så att du kan lägga din egen tid på verksamheten.",
+      en: "A marketing agency brings know-how in web, search, advertising, and social media that a smaller business rarely has in-house. Hiring an agency helps you prioritize the right channels, avoid costly advertising mistakes, and track what your marketing actually delivers — so you can spend your own time on running the business.",
+      ar: "تمتلك وكالة التسويق خبرة في المواقع والبحث والإعلانات ووسائل التواصل نادرًا ما تتوفر داخل الشركات الصغيرة. ويساعدك التعاقد مع وكالة على اختيار القنوات المناسبة وتجنب الأخطاء الإعلانية المكلفة ومتابعة ما يحققه التسويق فعلًا — لتتفرغ لإدارة عملك.",
+    },
+  },
+  // UI/UX design (content/services-digital.ts)
+  {
+    id: "faq-uiux-difference",
+    scope: { serviceKey: "ui-ux-design" },
+    question: {
+      sv: "Vad är skillnaden mellan UI-design och UX-design?",
+      en: "What's the difference between UI design and UX design?",
+      ar: "ما الفرق بين تصميم UI وتصميم UX؟",
+    },
+    answer: {
+      sv: "UX-design (user experience) handlar om hur något fungerar: flöden, struktur och hur lätt det är för användaren att nå sitt mål. UI-design (user interface) handlar om hur det ser ut: layout, färger, typografi och knappar. Bra digitala tjänster behöver båda, och vi arbetar med dem tillsammans.",
+      en: "UX design (user experience) is about how something works: flows, structure, and how easily users reach their goal. UI design (user interface) is about how it looks: layout, colors, typography, and buttons. Good digital services need both, and we work on them together.",
+      ar: "يهتم تصميم UX (تجربة المستخدم) بطريقة عمل الخدمة: مسارات الاستخدام والهيكل ومدى سهولة وصول المستخدم إلى هدفه. أما تصميم UI (واجهة المستخدم) فيهتم بالشكل: التخطيط والألوان والخطوط والأزرار. تحتاج الخدمات الرقمية الجيدة إلى كليهما، ونعمل عليهما معًا.",
+    },
+  },
+  {
+    id: "faq-uiux-design-system",
+    scope: { serviceKey: "ui-ux-design" },
+    question: {
+      sv: "Behöver mitt företag ett designsystem?",
+      en: "Does my business need a design system?",
+      ar: "هل تحتاج شركتي إلى نظام تصميم؟",
+    },
+    answer: {
+      sv: "Om du har eller planerar flera digitala produkter, eller om flera personer bygger på samma tjänst, sparar ett designsystem tid och ger ett enhetligt resultat. För en enklare webbplats räcker det ofta med en tydlig stilguide, som kan växa till ett designsystem senare.",
+      en: "If you have or plan several digital products, or several people build on the same service, a design system saves time and keeps the result consistent. For a simpler website, a clear style guide is often enough, and it can grow into a design system later.",
+      ar: "إذا كانت لديك أو تخطط لعدة منتجات رقمية، أو كان أكثر من شخص يعمل على الخدمة نفسها، فإن نظام التصميم يوفر الوقت ويضمن نتيجة متناسقة. أما للموقع البسيط فغالبًا ما يكفي دليل أسلوب واضح يمكن أن يتطور لاحقًا إلى نظام تصميم.",
+    },
+  },
+  // Custom system development (content/services-digital.ts)
+  {
+    id: "faq-systems-cost",
+    scope: { serviceKey: "custom-system-development" },
+    question: {
+      sv: "Vad kostar systemutveckling?",
+      en: "How much does custom software development cost?",
+      ar: "كم تكلفة تطوير نظام مخصص؟",
+    },
+    answer: {
+      sv: "Priset för systemutveckling beror på hur många funktioner och användare systemet ska ha, vilka integrationer som behövs och om det byggs i etapper. Vi börjar ofta med de delar som sparar mest tid och bygger vidare därifrån. Efter en första genomgång får du en offert utifrån era behov.",
+      en: "The price depends on how many features and users the system needs, which integrations are required, and whether it's built in stages. We often start with the parts that save the most time and build from there. After an initial review, you'll receive a quote based on your needs.",
+      ar: "تعتمد التكلفة على عدد الميزات والمستخدمين في النظام، والتكاملات المطلوبة، وما إذا كان سيُبنى على مراحل. وغالبًا ما نبدأ بالأجزاء التي توفر أكبر قدر من الوقت ثم نبني عليها. وبعد مراجعة أولية تحصل على عرض سعر مبني على احتياجاتكم.",
+    },
+  },
+  {
+    id: "faq-systems-integrations",
+    scope: { serviceKey: "custom-system-development" },
+    question: {
+      sv: "Kan ett skräddarsytt system kopplas till de program vi redan använder?",
+      en: "Can a custom system connect to the software we already use?",
+      ar: "هل يمكن ربط النظام المخصص بالبرامج التي نستخدمها حاليًا؟",
+    },
+    answer: {
+      sv: "Oftast ja. Många moderna program, till exempel ekonomi-, boknings- och CRM-system, har API:er som gör det möjligt att utbyta uppgifter automatiskt. Vi går igenom vilka program ni använder och vilka kopplingar som är möjliga innan arbetet startar.",
+      en: "Usually, yes. Many modern programs, such as finance, booking, and CRM systems, have APIs that make it possible to exchange data automatically. We go through which software you use and which connections are possible before the work starts.",
+      ar: "في الغالب نعم. فكثير من البرامج الحديثة، مثل الأنظمة المحاسبية وأنظمة الحجز وأنظمة CRM، توفر واجهات API تتيح تبادل البيانات تلقائيًا. ونراجع البرامج التي تستخدمونها والروابط الممكنة قبل بدء العمل.",
+    },
+  },
+  // SaaS development (added with the keyword update)
+  {
+    id: "faq-saas-cost",
+    scope: { serviceKey: "saas-development" },
+    question: {
+      sv: "Vad kostar det att utveckla en SaaS?",
+      en: "How much does it cost to develop a SaaS product?",
+      ar: "كم تكلفة تطوير منتج SaaS؟",
+    },
+    answer: {
+      sv: "Det beror på hur många funktioner första versionen behöver, vilka integrationer och betalningslösningar som ska ingå och hur produkten ska vidareutvecklas. Genom att börja med en avgränsad MVP håller du nere den första investeringen. Efter ett första samtal får du en uppskattning utifrån din idé.",
+      en: "It depends on how many features the first version needs, which integrations and payment solutions it should include, and how the product will be developed further. Starting with a tightly scoped MVP keeps the initial investment down. After an initial conversation, you'll receive an estimate based on your idea.",
+      ar: "يعتمد ذلك على عدد الميزات التي تحتاجها النسخة الأولى، والتكاملات وحلول الدفع المطلوبة، وخطة تطوير المنتج لاحقًا. والبدء بنسخة MVP محددة النطاق يبقي الاستثمار الأولي منخفضًا. وبعد محادثة أولية تحصل على تقدير مبني على فكرتك.",
     },
   },
 ];

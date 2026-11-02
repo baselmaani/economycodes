@@ -13,7 +13,7 @@ const GROUPS: { group: PageDef["group"]; description: string }[] = [
   { group: "Pages", description: "SEO, headlines, intros and images" },
   {
     group: "Services",
-    description: "SEO, texts, lists, body and hero image for each service",
+    description: "SEO, texts, lists, body and feature image for each service",
   },
   { group: "Legal", description: "SEO only" },
 ];

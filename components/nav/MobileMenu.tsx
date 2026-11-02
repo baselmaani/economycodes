@@ -19,15 +19,9 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { AppLocale, StaticAppPathname } from "@/i18n/routing";
 import { getLocalized } from "@/lib/i18n-content";
-import { getServiceSlug } from "@/lib/routes";
-import { servicesList } from "@/content/services";
-import {
-  getServiceGroup,
-  getServiceIcon,
-  serviceGroups,
-  type ServiceGroup,
-} from "@/content/service-icons";
-import { business } from "@/content/business";
+import { getServiceIcon, type ServiceGroup } from "@/content/service-icons";
+import { business as brand } from "@/content/business";
+import type { ContactLinks } from "@/content/types";
 import { primaryNav } from "@/content/nav";
 import { Button } from "@/components/ui/button";
 import { NavLink } from "@/components/nav/NavLink";
@@ -62,19 +56,25 @@ function NavRowIcon({ icon: Icon }: { icon: LucideIcon }) {
   );
 }
 
-export function MobileMenu({ locale }: { locale: AppLocale }) {
+/** Already localized by the server Header, so the full service content stays out of this bundle. */
+export interface MobileServiceGroup {
+  group: ServiceGroup;
+  label: string;
+  services: { key: string; name: string; slug: string }[];
+}
+
+export function MobileMenu({
+  locale,
+  business,
+  serviceGroups,
+}: {
+  locale: AppLocale;
+  business: ContactLinks;
+  serviceGroups: MobileServiceGroup[];
+}) {
   const t = useTranslations("nav");
   const common = useTranslations("common");
   const [open, setOpen] = useState(false);
-
-  const groupOrder: ServiceGroup[] = ["core", "advisory", "specialist"];
-  const grouped = groupOrder
-    .map((group) => ({
-      group,
-      label: serviceGroups[group][locale],
-      services: servicesList.filter((s) => getServiceGroup(s.key) === group),
-    }))
-    .filter((g) => g.services.length > 0);
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -95,7 +95,7 @@ export function MobileMenu({ locale }: { locale: AppLocale }) {
           <SheetTitle className="flex items-center gap-2">
             <Image
               src="/media/optimized/logo-horizontal.webp"
-              alt={business.brandName}
+              alt={brand.brandName}
               width={180}
               height={75}
               className="h-8 w-auto"
@@ -111,7 +111,7 @@ export function MobileMenu({ locale }: { locale: AppLocale }) {
                 key={link.routeKey}
                 href={link.routeKey as StaticAppPathname}
                 onClick={() => setOpen(false)}
-                className="group border-border/60 data-[active]:bg-secondary data-[active]:text-secondary-foreground data-[active]:border-transparent hover:bg-muted/60 -mx-2 flex items-center gap-3 border-b px-2 py-2.5 text-base font-medium data-[active]:font-semibold data-[active]:rounded-lg"
+                className="group border-border/60 data-[active]:bg-secondary data-[active]:text-secondary-foreground hover:bg-muted/60 -mx-2 flex items-center gap-3 border-b px-2 py-2.5 text-base font-medium data-[active]:rounded-lg data-[active]:border-transparent data-[active]:font-semibold"
               >
                 <NavRowIcon icon={navIcons[link.routeKey] ?? Home} />
                 {getLocalized(link.label, locale)}
@@ -119,7 +119,7 @@ export function MobileMenu({ locale }: { locale: AppLocale }) {
             ))}
           <Accordion>
             <AccordionItem value="services" className="border-none">
-              <AccordionTrigger className="border-border/60 hover:bg-muted/60 hover:no-underline -mx-2 items-center border-b px-2 py-2.5 text-base font-medium">
+              <AccordionTrigger className="border-border/60 hover:bg-muted/60 -mx-2 items-center border-b px-2 py-2.5 text-base font-medium hover:no-underline">
                 <span className="flex items-center gap-3">
                   <NavRowIcon icon={Layers} />
                   {t("services")}
@@ -127,7 +127,7 @@ export function MobileMenu({ locale }: { locale: AppLocale }) {
               </AccordionTrigger>
               <AccordionContent className="[&_a]:no-underline">
                 <div className="flex flex-col gap-4 ps-2">
-                  {grouped.map(({ group, label, services }) => (
+                  {serviceGroups.map(({ group, label, services }) => (
                     <div key={group}>
                       <p className="text-muted-foreground pb-1 text-xs font-semibold tracking-wide uppercase">
                         {label}
@@ -141,7 +141,7 @@ export function MobileMenu({ locale }: { locale: AppLocale }) {
                                 href={{
                                   pathname: "/tjanster/[slug]",
                                   params: {
-                                    slug: getServiceSlug(locale, service),
+                                    slug: service.slug,
                                   },
                                 }}
                                 onClick={() => setOpen(false)}
@@ -152,7 +152,7 @@ export function MobileMenu({ locale }: { locale: AppLocale }) {
                                   aria-hidden="true"
                                   className="text-primary shrink-0"
                                 />
-                                {getLocalized(service.name, locale)}
+                                {service.name}
                               </Link>
                             </li>
                           );
@@ -173,7 +173,7 @@ export function MobileMenu({ locale }: { locale: AppLocale }) {
                 key={link.routeKey}
                 href={link.routeKey as StaticAppPathname}
                 onClick={() => setOpen(false)}
-                className="group border-border/60 data-[active]:bg-secondary data-[active]:text-secondary-foreground data-[active]:border-transparent hover:bg-muted/60 -mx-2 flex items-center gap-3 border-b px-2 py-2.5 text-base font-medium data-[active]:font-semibold data-[active]:rounded-lg"
+                className="group border-border/60 data-[active]:bg-secondary data-[active]:text-secondary-foreground hover:bg-muted/60 -mx-2 flex items-center gap-3 border-b px-2 py-2.5 text-base font-medium data-[active]:rounded-lg data-[active]:border-transparent data-[active]:font-semibold"
               >
                 <NavRowIcon icon={navIcons[link.routeKey] ?? Mail} />
                 {getLocalized(link.label, locale)}
@@ -189,14 +189,22 @@ export function MobileMenu({ locale }: { locale: AppLocale }) {
               <Phone size={16} aria-hidden="true" />
               {common("callUs")}
             </Button>
-            <Button
-              render={<a href={business.whatsappHref} />}
-              variant="whatsapp"
-              className="flex-1 gap-2"
-            >
-              <MessageCircle size={16} aria-hidden="true" />
-              WhatsApp
-            </Button>
+            {business.whatsappHref ? (
+              <Button
+                render={
+                  <a
+                    href={business.whatsappHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  />
+                }
+                variant="whatsapp"
+                className="flex-1 gap-2"
+              >
+                <MessageCircle size={16} aria-hidden="true" />
+                WhatsApp
+              </Button>
+            ) : null}
           </div>
           <LanguageSwitcher />
         </div>

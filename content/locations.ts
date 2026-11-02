@@ -14,6 +14,7 @@ export const locations: Location[] = [
     country: "Sverige",
     mapsHref:
       "https://www.google.com/maps/search/?api=1&query=Backegatan+13C%2C+464+30+Mellerud%2C+Sweden",
+    geo: { latitude: 58.70016, longitude: 12.45461 },
     openingHours: undefined,
     isCustomerFacing: undefined,
   },
@@ -30,6 +31,7 @@ export const locations: Location[] = [
     country: "Sverige",
     mapsHref:
       "https://www.google.com/maps/search/?api=1&query=%C3%85kerssj%C3%B6v%C3%A4gen+10%2C+461+53+Trollh%C3%A4ttan%2C+Sweden",
+    geo: { latitude: 58.27233, longitude: 12.27718 },
     openingHours: undefined,
     isCustomerFacing: undefined,
   },

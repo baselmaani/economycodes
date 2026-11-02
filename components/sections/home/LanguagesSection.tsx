@@ -1,27 +1,23 @@
+import { getTranslations } from "next-intl/server";
 import { Languages } from "lucide-react";
 
 import { Link } from "@/i18n/navigation";
-import type { AppLocale } from "@/i18n/routing";
 import { getLocalized } from "@/lib/i18n-content";
 import { getServiceSlug } from "@/lib/routes";
-import { languageSupportContent } from "@/content/home";
 import { services } from "@/content/services";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { IconTile } from "@/components/marketing/IconTile";
 import { Reveal } from "@/components/motion/Reveal";
+import type { SectionProps } from "../types";
 
-export function LanguageSupportSection({
-  locale,
-  heading,
-  linkLabel,
-}: {
-  locale: AppLocale;
-  heading: string;
-  linkLabel: string;
-}) {
+const LANGUAGE_LABELS = ["Svenska", "English", "العربية"];
+
+/** Swedish, English and Arabic support, linking to the Arabic service. */
+export async function LanguagesSection({ locale, content }: SectionProps) {
+  const common = await getTranslations({ locale, namespace: "common" });
+  const { text } = content;
   const arabicService = services["arabic-speaking-accounting"];
-  const languageLabels = ["Svenska", "English", "العربية"];
 
   return (
     <Section tone="gradient" bleed>
@@ -31,24 +27,24 @@ export function LanguageSupportSection({
         </Reveal>
         <Reveal delay={80}>
           <h2 className="text-section-h2 mt-5 font-semibold text-balance">
-            {heading}
+            {getLocalized(text.languagesTitle, locale)}
           </h2>
         </Reveal>
         <Reveal delay={140}>
           <p className="text-body mx-auto mt-4 max-w-2xl text-white/80">
-            {getLocalized(languageSupportContent.body, locale)}
+            {getLocalized(text.languagesBody, locale)}
           </p>
         </Reveal>
         <div
           dir="ltr"
           className="mt-5 flex justify-center gap-2 text-sm font-medium text-white/70"
         >
-          {languageLabels.map((label, index) => (
+          {LANGUAGE_LABELS.map((label, index) => (
             <span key={label} className="inline-flex items-center gap-2">
               <Reveal delay={200 + index * 80} className="inline-block">
                 <span>{label}</span>
               </Reveal>
-              {index < languageLabels.length - 1 && (
+              {index < LANGUAGE_LABELS.length - 1 && (
                 <span aria-hidden="true">·</span>
               )}
             </span>
@@ -62,7 +58,7 @@ export function LanguageSupportSection({
             }}
             className="mt-6 inline-block text-sm font-medium text-white underline underline-offset-4 hover:text-white/80"
           >
-            {linkLabel}
+            {common("learnMore")}
           </Link>
         </Reveal>
       </Container>

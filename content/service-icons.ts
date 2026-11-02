@@ -14,6 +14,7 @@ import {
   MessageSquareText,
   MonitorSmartphone,
   MousePointerClick,
+  PenTool,
   PlugZap,
   Search,
   Share2,
@@ -21,6 +22,7 @@ import {
   Sparkles,
   Users2,
   Wallet,
+  Workflow,
   Wrench,
   Car,
 } from "lucide-react";
@@ -89,6 +91,8 @@ export const serviceIcons: Record<
   "social-media-management": { icon: Share2, group: "digital" },
   "saas-development": { icon: AppWindow, group: "digital" },
   "mobile-app-development": { icon: Smartphone, group: "digital" },
+  "ui-ux-design": { icon: PenTool, group: "digital" },
+  "custom-system-development": { icon: Workflow, group: "digital" },
 };
 
 export function getServiceIcon(key: string): LucideIcon {

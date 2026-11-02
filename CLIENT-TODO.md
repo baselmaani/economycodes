@@ -9,9 +9,9 @@ Items below are not yet confirmed and are shown on the live site using clearly n
 
 ## Hadi Almaani's profile
 
-3. **Hadi's exact approved public title** (in Swedish, English, and Arabic) -- currently shown as the generic "Rådgivare, Economy Codes" (`content/people.ts`).
+3. ~~Hadi's exact approved public title.~~ **Resolved:** "Auktoriserad redovisningskonsult & auktoriserad lönekonsult, Economy Codes AB" in all three languages (`content/people.ts`).
 4. **Hadi's approved biography, education, certifications, professional memberships, languages spoken, and years of experience** -- currently a short, neutral, non-claiming bio with no numeric or credential claims.
-5. **Whether Hadi is formally authorised as an Auktoriserad Redovisningskonsult and/or Auktoriserad Lönekonsult, and by which organisation.** Nothing of the kind is currently claimed anywhere on the site, and it must not be added without documented proof.
+5. ~~Whether Hadi is formally authorised as an Auktoriserad Redovisningskonsult and/or Auktoriserad Lönekonsult.~~ **Resolved:** confirmed as both, via Srf konsulterna; Economy Codes AB is an Srf Auktoriserad Redovisningsbyrå. Now stated on the homepage, About page, location pages and in structured data.
 6. ~~Licensing of Hadi's portrait photo (`hadi.jpeg`, carried a studio watermark).~~ **Resolved:** the client supplied a new, watermark-free portrait on 2026-09-28 (`assets/media-source/hadi.jpg`); the old photo has been removed.
 
 ## Services
@@ -29,7 +29,7 @@ Items below are not yet confirmed and are shown on the live site using clearly n
 14. ~~Whether +46 73 479 82 10 is also an approved WhatsApp number.~~ **Resolved:** confirmed as the WhatsApp number; `whatsappHref` is now set in `content/business.ts` and the button appears in the mobile sticky action bar and the desktop floating buttons.
 15. **Booking method** -- contact form, a booking link (e.g. Calendly), phone, WhatsApp, or a combination. The contact page/form is built in phase 2; confirm before launch.
 16. **Approved social links, Google Business Profile link, testimonials, client logos, accounting-software certifications, and partner logos**, if any exist and are approved for display. None are currently shown beyond the two verified Facebook links (business page and Hadi's personal profile).
-17. **Privacy-controller details, cookie/analytics tools in use, and the email address for privacy requests** -- needed to finalize the privacy policy and cookie policy pages (phase 2).
+17. **Privacy-controller details, cookie/analytics tools in use, and the email address for privacy requests** -- needed to finalize the privacy policy and cookie policy pages (phase 2). **Update:** the privacy policy and terms now cover WhatsApp Business Platform (Meta Cloud API) messaging so the pages can be submitted to Meta. They assume WhatsApp is used for replying to inbound chats and for service messages (reminders, document requests, booking confirmations) to clients who opted in, with no marketing messages and no bot. Please confirm this, along with the email provider behind info@economycodes.com (listed generically as "our email service" under data sharing), and have the texts reviewed. The org.nr (item 1) would strengthen the controller section and is also required for Meta Business Verification.
 
 ## Media / legacy assets
 
@@ -42,4 +42,4 @@ Items below are not yet confirmed and are shown on the live site using clearly n
 
 ## Digital marketing
 
-21. **Scope and delivery of the digital marketing services** (website creation, SEO, AEO, GEO, social media ads, Google Ads, social media management, SaaS/web app development, mobile app development — `content/services-digital.ts`). Please confirm: which of these are offered today, whether they're delivered in-house by Economy Codes or via a partner, the pricing model (fixed price, monthly retainer, hourly), and which ad platforms are managed. The pages currently describe each service in general, industry-standard terms, carry a "no guaranteed results" disclaimer on SEO/AEO/GEO/ads, and make no claims about case studies, client results, certifications (e.g. Google Partner, Meta Business Partner), or prices. Provide any approved case studies or partner badges if they should be shown.
+21. **Scope and delivery of the digital marketing services** (website creation, SEO, AEO, GEO, social media ads, Google Ads, social media management, SaaS/MVP development, mobile app development, UI/UX design, custom system development — `content/services-digital.ts`). Please confirm: which of these are offered today, whether they're delivered in-house by Economy Codes or via a partner, the pricing model (fixed price, monthly retainer, hourly), and which ad platforms are managed. The pages currently describe each service in general, industry-standard terms, carry a "no guaranteed results" disclaimer on SEO/AEO/GEO/ads, and make no claims about case studies, client results, certifications (e.g. Google Partner, Meta Business Partner), or prices. Provide any approved case studies or partner badges if they should be shown.

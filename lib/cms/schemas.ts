@@ -149,11 +149,26 @@ export const partialLocalizedBlocks = z.object({
 });
 export type PartialLocalizedBlocks = z.infer<typeof partialLocalizedBlocks>;
 
+/** One collection item: per-field localized text (required fields are checked against the registry on save). */
+export const collectionItemSchema = z.record(
+  z.string(),
+  partialLocalizedString,
+);
+
+/** Section order and visibility on pages whose def is `arrangeable`. */
+export const pageLayoutSchema = z.object({
+  order: z.array(z.string()).optional(),
+  hidden: z.array(z.string()).optional(),
+});
+export type PageLayout = z.infer<typeof pageLayoutSchema>;
+
 export const pageOverrideSchema = z.object({
   seo: seoFieldsSchema.optional(),
+  layout: pageLayoutSchema.optional(),
   text: z.record(z.string(), partialLocalizedString).optional(),
   lists: z.record(z.string(), partialLocalizedList).optional(),
   blocks: z.record(z.string(), partialLocalizedBlocks).optional(),
+  collections: z.record(z.string(), z.array(collectionItemSchema)).optional(),
   images: z.record(z.string(), mediaRefSchema).optional(),
 });
 export type PageOverrideData = z.infer<typeof pageOverrideSchema>;

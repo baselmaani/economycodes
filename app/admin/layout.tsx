@@ -13,6 +13,9 @@ const notoSansArabic = Noto_Sans_Arabic({
   variable: "--font-arabic",
   subsets: ["arabic"],
   weight: "variable",
+  // Must match app/[locale]/layout.tsx: both resolve to the same font file,
+  // and a preload here would make the public sv/en pages preload it too.
+  preload: false,
 });
 
 // Every admin route depends on the session cookie; never prerender one (a

@@ -1,6 +1,6 @@
 import { Mail, MessageCircle, Phone } from "lucide-react";
 
-import { business } from "@/content/business";
+import { getBusiness } from "@/lib/cms/site";
 import { cn } from "@/lib/utils";
 
 const tones = {
@@ -15,7 +15,7 @@ const tones = {
 } as const;
 
 /** Direct phone / email / WhatsApp links, shared by the homepage and /kontakt. */
-export function ContactMethods({
+export async function ContactMethods({
   tone = "light",
   className,
 }: {
@@ -23,6 +23,7 @@ export function ContactMethods({
   className?: string;
 }) {
   const styles = tones[tone];
+  const business = await getBusiness();
   const methods = [
     {
       href: business.phoneHref,
@@ -31,7 +32,7 @@ export function ContactMethods({
     },
     { href: `mailto:${business.email}`, icon: Mail, label: business.email },
     { href: business.whatsappHref, icon: MessageCircle, label: "WhatsApp" },
-  ];
+  ].filter((method) => method.href);
 
   return (
     <ul className={cn("flex flex-col gap-3", className)}>

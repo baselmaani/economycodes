@@ -2,14 +2,16 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import type { AppLocale } from "@/i18n/routing";
-import { getAlternateLinks } from "@/lib/routes";
+import { getAbsoluteUrl, getAlternateLinks } from "@/lib/routes";
+import { buildBreadcrumbJsonLd } from "@/lib/structured-data/breadcrumb";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { buildPageMetadata } from "@/lib/cms/metadata";
+import { getPageContent } from "@/lib/cms/content";
 import { getLocalized } from "@/lib/i18n-content";
 import { Link } from "@/i18n/navigation";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { Container } from "@/components/layout/Container";
 import { business } from "@/content/business";
-import { termsPage } from "@/content/legal";
 
 export async function generateMetadata({
   params,
@@ -29,10 +31,12 @@ export default async function TermsPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const nav = await getTranslations({ locale, namespace: "nav" });
-  const common = await getTranslations({ locale, namespace: "common" });
-  const t = (v: { sv: string; en?: string; ar?: string }) =>
-    getLocalized(v, locale);
+  const [nav, common, page] = await Promise.all([
+    getTranslations({ locale, namespace: "nav" }),
+    getTranslations({ locale, namespace: "common" }),
+    getPageContent("villkor"),
+  ]);
+  const t = (key: string) => getLocalized(page.text[key], locale);
 
   return (
     <Container
@@ -40,38 +44,62 @@ export default async function TermsPage({
       size="content"
       className="prose prose-neutral py-12 sm:py-16"
     >
-      <Breadcrumbs
-        items={[
-          { label: nav("home"), routeKey: "/" },
-          { label: t(termsPage.title) },
-        ]}
+      <JsonLd
+        data={buildBreadcrumbJsonLd([
+          { name: nav("home"), url: getAbsoluteUrl("/", locale) },
+          { name: t("title"), url: getAbsoluteUrl("/villkor", locale) },
+        ])}
       />
-      <h1>{t(termsPage.title)}</h1>
+      <Breadcrumbs
+        items={[{ label: nav("home"), routeKey: "/" }, { label: t("title") }]}
+      />
+      <h1>{t("title")}</h1>
       <p className="text-muted-foreground text-sm">
-        {common("lastReviewed")}: {termsPage.lastUpdated}
+        {common("lastReviewed")}: {t("lastUpdated")}
       </p>
 
-      <p>{t(termsPage.intro)}</p>
+      <p>{t("intro")}</p>
 
-      <h2>{t(termsPage.engagementHeading)}</h2>
-      <p>{t(termsPage.engagementBody)}</p>
+      <h2>{t("servicesHeading")}</h2>
+      <p>{t("servicesBody")}</p>
 
-      <h2>{t(termsPage.privacyHeading)}</h2>
+      <h2>{t("engagementHeading")}</h2>
+      <p>{t("engagementBody")}</p>
+
+      <h2>{t("whatsappHeading")}</h2>
+      <p>{t("whatsappBody")}</p>
+
+      <h2>{t("acceptableUseHeading")}</h2>
+      <p>{t("acceptableUseBody")}</p>
+
+      <h2>{t("privacyHeading")}</h2>
       <p>
-        {t(termsPage.privacyBodyPrefix)}{" "}
-        <Link href="/integritetspolicy">{t(termsPage.privacyLinkLabel)}</Link>
-        {t(termsPage.privacyBodySuffix)
-          ? ` ${t(termsPage.privacyBodySuffix)}`
-          : "."}
+        {t("privacyBodyPrefix")}{" "}
+        <Link href="/integritetspolicy">{t("privacyLinkLabel")}</Link>
+        {t("privacyBodySuffix") ? ` ${t("privacyBodySuffix")}` : "."}
       </p>
 
-      <h2>{t(termsPage.liabilityHeading)}</h2>
-      <p>{t(termsPage.liabilityBody)}</p>
+      <h2>{t("intellectualPropertyHeading")}</h2>
+      <p>{t("intellectualPropertyBody")}</p>
 
-      <h2>{t(termsPage.contactHeading)}</h2>
+      <h2>{t("liabilityHeading")}</h2>
+      <p>{t("liabilityBody")}</p>
+
+      <h2>{t("lawHeading")}</h2>
+      <p>{t("lawBody")}</p>
+
+      <h2>{t("changesHeading")}</h2>
+      <p>{t("changesBody")}</p>
+
+      <h2>{t("contactHeading")}</h2>
       <p>
-        {t(termsPage.contactBodyPrefix)}{" "}
-        <a href={`mailto:${business.email}`}>{business.email}</a>.
+        {t("contactBodyPrefix")}{" "}
+        <a href={`mailto:${business.email}`}>{business.email}</a>{" "}
+        {t("contactBodySuffix")}{" "}
+        <a href={business.phoneHref}>
+          <span dir="ltr">{business.phone}</span>
+        </a>
+        .
       </p>
     </Container>
   );

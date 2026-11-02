@@ -6,14 +6,17 @@ import { Link } from "@/i18n/navigation";
 import type { AppLocale, StaticAppPathname } from "@/i18n/routing";
 import { FacebookIcon } from "@/components/icons/FacebookIcon";
 import { getLocalized } from "@/lib/i18n-content";
-import { business } from "@/content/business";
-import { locations } from "@/content/locations";
+import { getBusiness, getLocations } from "@/lib/cms/site";
 import { locationPages } from "@/content/location-pages";
 import { getLocationSlug } from "@/lib/routes";
 import { footerLegalNav, footerNav } from "@/content/nav";
 import { Container } from "@/components/layout/Container";
 
 export async function Footer({ locale }: { locale: AppLocale }) {
+  const [business, locations] = await Promise.all([
+    getBusiness(),
+    getLocations(),
+  ]);
   const t = await getTranslations({ locale, namespace: "footer" });
   const common = await getTranslations({ locale, namespace: "common" });
   const year = new Date().getFullYear();

@@ -21,13 +21,13 @@ export const digitalServices: Record<string, Service> = {
       ar: "تصميم-المواقع",
     },
     name: {
-      sv: "Webbplatser & hemsidor",
+      sv: "Webbdesign & hemsidor",
       en: "Website creation",
       ar: "تصميم وإنشاء المواقع",
     },
     summary: {
-      sv: "Vi bygger snabba, mobilanpassade webbplatser för småföretag i Sverige — från enkla företagssidor till flerspråkiga sajter på svenska, engelska och arabiska. Webbplatsen byggs med sökmotoroptimering, tillgänglighet och tydliga kontaktvägar från början, så att den blir ett verktyg för att få nya kunder, inte bara ett visitkort.",
-      en: "We build fast, mobile-friendly websites for small businesses in Sweden — from simple company pages to multilingual sites in Swedish, English, and Arabic. Every site is built with search optimization, accessibility, and clear contact paths from day one, so it works as a tool for winning new customers, not just a digital business card.",
+      sv: "Som webbyrå hjälper vi dig att skapa en professionell hemsida till ditt företag — från en ny hemsida för småföretag till skräddarsydda, flerspråkiga sajter på svenska, engelska och arabiska. Vi står för både webbdesign och webbutveckling för företag, med sökmotoroptimering, tillgänglighet och tydliga kontaktvägar från början, så att hemsidan blir ett verktyg för att få nya kunder, inte bara ett visitkort.",
+      en: "As a web agency, we help you create a professional website for your business — from a new website for a small business to custom, multilingual sites in Swedish, English, and Arabic. We handle both web design and web development, with search optimization, accessibility, and clear contact paths from day one, so the site works as a tool for winning new customers, not just a digital business card.",
       ar: "نبني مواقع إلكترونية سريعة ومتوافقة مع الجوال للشركات الصغيرة في السويد — من صفحات تعريفية بسيطة إلى مواقع متعددة اللغات بالسويدية والإنجليزية والعربية. نراعي في كل موقع تحسين محركات البحث وسهولة الوصول ووضوح طرق التواصل منذ البداية، ليصبح أداة لكسب عملاء جدد لا مجرد بطاقة تعريف رقمية.",
     },
     teaser: {
@@ -37,19 +37,22 @@ export const digitalServices: Record<string, Service> = {
     },
     whoItsFor: {
       sv: [
-        "Företag som saknar webbplats eller har en föråldrad sajt",
+        "Företag som saknar webbplats och vill bygga en ny hemsida till företaget",
+        "Företag med en föråldrad sajt som behöver en redesign av hemsidan",
         "Företagare som vill nå kunder på flera språk",
-        "Nystartade företag som behöver en professionell närvaro snabbt",
+        "Nystartade företag och småföretag som behöver en professionell närvaro snabbt",
       ],
       en: [
-        "Businesses without a website, or with an outdated one",
+        "Businesses without a website that want to build a new one",
+        "Businesses with an outdated site that needs a redesign",
         "Business owners who want to reach customers in several languages",
-        "New companies that need a professional presence quickly",
+        "New companies and small businesses that need a professional presence quickly",
       ],
       ar: [
-        "الشركات التي لا تملك موقعًا أو لديها موقع قديم",
+        "الشركات التي لا تملك موقعًا وتريد بناء موقع جديد",
+        "الشركات التي لديها موقع قديم يحتاج إلى إعادة تصميم",
         "أصحاب الأعمال الراغبون في الوصول إلى العملاء بعدة لغات",
-        "الشركات الناشئة التي تحتاج إلى حضور احترافي بسرعة",
+        "الشركات الناشئة والصغيرة التي تحتاج إلى حضور احترافي بسرعة",
       ],
     },
     whatsIncluded: {
@@ -129,6 +132,24 @@ export const digitalServices: Record<string, Service> = {
           type: "paragraph",
           text: "Riktar du dig till kunder på svenska, engelska eller arabiska kan webbplatsen byggas flerspråkig med rätt språkinställningar, stöd för höger-till-vänster-text och separata adresser per språk, så att varje version kan hittas i sökmotorerna.",
         },
+        {
+          type: "heading",
+          level: 2,
+          text: "Köpa eller beställa hemsida – så går det till",
+        },
+        {
+          type: "paragraph",
+          text: "När du vill köpa eller beställa en hemsida av oss börjar vi med ett kort samtal om dina mål och dina kunder. Därefter får du ett förslag på struktur och design, och vi bygger en skräddarsydd hemsida utifrån din verksamhet i stället för ett generiskt tema. När sidan är lanserad visar vi hur du själv uppdaterar den.",
+        },
+        {
+          type: "heading",
+          level: 2,
+          text: "Redesign av hemsida",
+        },
+        {
+          type: "paragraph",
+          text: "Har du redan en hemsida som känns föråldrad, är långsam eller inte ger några förfrågningar? Vid en redesign behåller vi det som fungerar, till exempel sidor som redan syns i Google, och bygger om resten med modern webbdesign, bättre struktur och tydligare vägar till kontakt.",
+        },
       ],
       en: [
         {
@@ -148,6 +169,24 @@ export const digitalServices: Record<string, Service> = {
         {
           type: "paragraph",
           text: "If you serve customers in Swedish, English, or Arabic, the site can be built multilingual with the correct language settings, right-to-left text support, and separate addresses per language, so every version can be found in search engines.",
+        },
+        {
+          type: "heading",
+          level: 2,
+          text: "Ordering a website – how it works",
+        },
+        {
+          type: "paragraph",
+          text: "When you order a website from us, we start with a short conversation about your goals and your customers. You then receive a proposed structure and design, and we build a custom website around your business rather than a generic theme. Once the site is live, we show you how to update it yourself.",
+        },
+        {
+          type: "heading",
+          level: 2,
+          text: "Website redesign",
+        },
+        {
+          type: "paragraph",
+          text: "Already have a website that feels outdated, loads slowly, or brings in no enquiries? In a redesign, we keep what works, such as pages that already show up in Google, and rebuild the rest with modern web design, better structure, and clearer paths to getting in touch.",
         },
       ],
       ar: [
@@ -169,6 +208,24 @@ export const digitalServices: Record<string, Service> = {
           type: "paragraph",
           text: "إذا كنت تخدم عملاء بالسويدية أو الإنجليزية أو العربية، يمكن بناء الموقع بعدة لغات مع إعدادات اللغة الصحيحة ودعم الكتابة من اليمين إلى اليسار وعناوين منفصلة لكل لغة، بحيث يمكن العثور على كل نسخة في محركات البحث.",
         },
+        {
+          type: "heading",
+          level: 2,
+          text: "طلب موقع إلكتروني – كيف تتم العملية",
+        },
+        {
+          type: "paragraph",
+          text: "عندما تطلب موقعًا إلكترونيًا منا، نبدأ بمحادثة قصيرة حول أهدافك وعملائك. ثم تحصل على مقترح للهيكل والتصميم، ونبني موقعًا مخصصًا حول نشاطك التجاري بدلًا من قالب عام. وبعد إطلاق الموقع نشرح لك كيف تحدّثه بنفسك.",
+        },
+        {
+          type: "heading",
+          level: 2,
+          text: "إعادة تصميم الموقع",
+        },
+        {
+          type: "paragraph",
+          text: "هل لديك موقع يبدو قديمًا أو بطيئًا أو لا يجلب أي استفسارات؟ عند إعادة التصميم نحتفظ بما يعمل جيدًا، مثل الصفحات التي تظهر بالفعل في جوجل، ونعيد بناء الباقي بتصميم حديث وهيكل أفضل وطرق أوضح للتواصل.",
+        },
       ],
     },
     faqIds: ["faq-website-cost", "faq-website-ownership"],
@@ -189,8 +246,8 @@ export const digitalServices: Record<string, Service> = {
       ar: "تحسين محركات البحث (SEO)",
     },
     summary: {
-      sv: "Sökmotoroptimering hjälper ditt företag att synas när kunder söker efter det du erbjuder på Google. Vi arbetar med teknisk SEO, innehåll, lokal synlighet och Google-företagsprofil, och följer upp utvecklingen med tydliga rapporter — så att du ser vad som händer och varför, utan att behöva vara expert själv.",
-      en: "Search engine optimization helps your business show up when customers search Google for what you offer. We work on technical SEO, content, local visibility, and your Google Business Profile, and track progress with clear reports — so you can see what's happening and why, without having to be an expert yourself.",
+      sv: "Som SEO-byrå hjälper vi ditt företag att synas när kunder söker efter det du erbjuder på Google. Sökmotoroptimering för företag omfattar teknisk SEO, innehåll och lokal sökmotoroptimering med Google-företagsprofil, och vi följer upp utvecklingen med tydliga rapporter — så att du ser vad som händer och varför, utan att behöva vara expert själv.",
+      en: "As an SEO agency, we help your business show up when customers search Google for what you offer. Search engine optimization for businesses covers technical SEO, content, and local SEO with your Google Business Profile, and we track progress with clear reports — so you can see what's happening and why, without having to be an expert yourself.",
       ar: "يساعد تحسين محركات البحث شركتك على الظهور عندما يبحث العملاء في جوجل عمّا تقدمه. نعمل على الجوانب التقنية والمحتوى والظهور المحلي وملف النشاط التجاري على جوجل، ونتابع التقدم بتقارير واضحة — لتعرف ما يحدث ولماذا، دون أن تحتاج إلى أن تكون خبيرًا.",
     },
     teaser: {
@@ -220,7 +277,7 @@ export const digitalServices: Record<string, Service> = {
         "Genomgång av webbplatsens tekniska hälsa, hastighet och indexering",
         "Sökordsanalys utifrån vad dina kunder faktiskt söker på",
         "Optimering av sidtitlar, texter, struktur och intern länkning",
-        "Lokal SEO och Google-företagsprofil samt löpande rapportering",
+        "Lokal sökmotoroptimering, Google-företagsprofil och löpande rapportering",
       ],
       en: [
         "A review of your site's technical health, speed, and indexing",
@@ -687,7 +744,7 @@ export const digitalServices: Record<string, Service> = {
       ar: "إعلانات وسائل التواصل الاجتماعي",
     },
     summary: {
-      sv: "Vi planerar, skapar och driver annonskampanjer på Facebook, Instagram, TikTok och LinkedIn för små och medelstora företag. Annonserna riktas mot rätt målgrupp, på rätt språk och i rätt område, och vi följer upp vad varje krona ger — med mätning som visar förfrågningar och försäljning, inte bara visningar.",
+      sv: "Vi planerar, skapar och driver annonsering på Facebook och Instagram, liksom på TikTok och LinkedIn, för små och medelstora företag. Annonserna riktas mot rätt målgrupp, på rätt språk och i rätt område, och vi följer upp vad varje krona ger — med mätning som visar förfrågningar och försäljning, inte bara visningar.",
       en: "We plan, create, and run ad campaigns on Facebook, Instagram, TikTok, and LinkedIn for small and medium-sized businesses. Ads are targeted at the right audience, in the right language and area, and we follow up on what every krona delivers — with tracking that shows enquiries and sales, not just impressions.",
       ar: "نخطط لحملات إعلانية على فيسبوك وإنستغرام وتيك توك ولينكدإن وننشئها ونديرها للشركات الصغيرة والمتوسطة. نوجّه الإعلانات إلى الجمهور المناسب باللغة والمنطقة المناسبتين، ونتابع العائد من كل كرونة — بقياس يُظهر الاستفسارات والمبيعات لا مجرد مرات الظهور.",
     },
@@ -853,7 +910,7 @@ export const digitalServices: Record<string, Service> = {
       ar: "إعلانات جوجل (Google Ads)",
     },
     summary: {
-      sv: "Med Google Ads syns ditt företag högst upp när kunder aktivt söker efter det du erbjuder. Vi sätter upp och driver sökannonser, Performance Max, YouTube- och displaykampanjer med noggrann sökordsstyrning och konverteringsspårning, så att budgeten går till klick som faktiskt kan bli kunder — och du ser vad varje förfrågan kostar.",
+      sv: "Med Google Ads syns ditt företag högst upp när kunder aktivt söker efter det du erbjuder. Som Google Ads-byrå sätter vi upp och driver din annonsering på Google — sökannonser, Performance Max, YouTube- och displaykampanjer — med noggrann sökordsstyrning och konverteringsspårning, så att budgeten går till klick som faktiskt kan bli kunder och du ser vad varje förfrågan kostar.",
       en: "With Google Ads, your business appears at the top when customers are actively searching for what you offer. We set up and run search ads, Performance Max, YouTube, and display campaigns with careful keyword control and conversion tracking, so your budget goes to clicks that can actually become customers — and you can see what each enquiry costs.",
       ar: "مع إعلانات جوجل تظهر شركتك في أعلى النتائج عندما يبحث العملاء فعليًا عمّا تقدمه. نُعدّ ونُدير إعلانات البحث وحملات Performance Max ويوتيوب والإعلانات المصورة مع ضبط دقيق للكلمات المفتاحية وتتبع التحويلات، لتذهب ميزانيتك إلى نقرات يمكن أن تتحول إلى عملاء — وترى تكلفة كل استفسار.",
     },
@@ -1019,7 +1076,7 @@ export const digitalServices: Record<string, Service> = {
       ar: "إدارة وسائل التواصل الاجتماعي",
     },
     summary: {
-      sv: "Vi hjälper dig att hålla företagets sociala medier aktiva och professionella — från innehållsplan och inlägg till bilder, korta videor och uppföljning. Innehållet kan tas fram på svenska, engelska och arabiska, så att du når alla dina kundgrupper med en enhetlig ton, utan att det tar tid från din kärnverksamhet.",
+      sv: "Vi sköter hantering av sociala medier för företag och håller dina kanaler aktiva och professionella — från innehållsplan och inlägg till bilder, korta videor och uppföljning. Innehållet kan tas fram på svenska, engelska och arabiska, så att du når alla dina kundgrupper med en enhetlig ton, utan att det tar tid från din kärnverksamhet.",
       en: "We help you keep your company's social media active and professional — from a content plan and posts to images, short videos, and follow-up. Content can be produced in Swedish, English, and Arabic, so you reach all your customer groups with a consistent voice, without it taking time away from your core business.",
       ar: "نساعدك على إبقاء حسابات شركتك على وسائل التواصل الاجتماعي نشطة واحترافية — من خطة المحتوى والمنشورات إلى الصور والفيديوهات القصيرة والمتابعة. يمكن إعداد المحتوى بالسويدية والإنجليزية والعربية، لتصل إلى جميع فئات عملائك بأسلوب موحد، دون أن يأخذ ذلك من وقت عملك الأساسي.",
     },
@@ -1177,54 +1234,54 @@ export const digitalServices: Record<string, Service> = {
       ar: "تطوير-تطبيقات-الويب",
     },
     name: {
-      sv: "SaaS- & webbapputveckling",
-      en: "SaaS & web app development",
-      ar: "تطوير تطبيقات الويب وSaaS",
+      sv: "SaaS-utveckling & MVP",
+      en: "SaaS & MVP development",
+      ar: "تطوير منتجات SaaS وMVP",
     },
     summary: {
-      sv: "Vi utvecklar skräddarsydda webbapplikationer och SaaS-produkter — från kundportaler och bokningssystem till interna verktyg och egna mjukvarutjänster med abonnemang. Vi hjälper dig att börja med en fungerande första version, ett så kallat MVP, och bygga vidare utifrån verkliga användares behov, med modern och säker teknik.",
-      en: "We develop custom web applications and SaaS products — from customer portals and booking systems to internal tools and your own subscription software. We help you start with a working first version, a so-called MVP, and build on it based on real users' needs, using modern, secure technology.",
-      ar: "نطوّر تطبيقات ويب مخصصة ومنتجات برمجية كخدمة (SaaS) — من بوابات العملاء وأنظمة الحجز إلى الأدوات الداخلية وخدماتك البرمجية الخاصة بنظام الاشتراك. نساعدك على البدء بنسخة أولى عاملة (MVP) ثم تطويرها وفق احتياجات المستخدمين الفعلية، باستخدام تقنيات حديثة وآمنة.",
+      sv: "Vi är en SaaS-utvecklingsbyrå och utvecklingspartner för startups och företag som vill bygga en SaaS-produkt eller utveckla en annan digital produkt. Vi hjälper dig att utveckla SaaS från grunden — med MVP-utveckling som ger en fungerande första version — och står sedan för vidareutvecklingen av SaaS-plattformen utifrån verkliga användares behov, med modern och säker teknik.",
+      en: "We're a SaaS development agency and development partner for startups and businesses that want to build a SaaS product or another digital product. We help you develop SaaS from the ground up — with MVP development that delivers a working first version — and then handle further development of the platform based on real users' needs, using modern, secure technology.",
+      ar: "نحن شريك تطوير للشركات الناشئة والشركات التي تريد بناء منتج SaaS أو منتج رقمي آخر. نساعدك على تطوير SaaS من الصفر — بتطوير نسخة أولى عاملة (MVP) — ثم نتولى تطوير المنصة باستمرار وفق احتياجات المستخدمين الفعلية، باستخدام تقنيات حديثة وآمنة.",
     },
     teaser: {
-      sv: "Skräddarsydda webbappar och SaaS-produkter, från första MVP och vidare.",
-      en: "Custom web apps and SaaS products, from a first MVP onward.",
-      ar: "تطبيقات ويب ومنتجات SaaS مخصصة، من النسخة الأولى (MVP) فصاعدًا.",
+      sv: "SaaS-utveckling från idé och MVP till färdig plattform.",
+      en: "SaaS development from idea and MVP to a full platform.",
+      ar: "تطوير SaaS من الفكرة والنسخة الأولى (MVP) إلى منصة متكاملة.",
     },
     whoItsFor: {
       sv: [
-        "Entreprenörer med en idé till en digital tjänst eller SaaS-produkt",
-        "Företag som behöver ett eget system i stället för kalkylblad och manuella rutiner",
-        "Företag som vill erbjuda sina kunder en portal eller app",
+        "Entreprenörer och startups med en idé till en SaaS-produkt eller digital tjänst",
+        "Startups som vill bygga en MVP och testa idén på riktiga användare",
+        "Företag med en befintlig SaaS-plattform som behöver vidareutveckling",
       ],
       en: [
-        "Entrepreneurs with an idea for a digital service or SaaS product",
-        "Businesses that need their own system instead of spreadsheets and manual routines",
-        "Businesses that want to offer their customers a portal or app",
+        "Entrepreneurs and startups with an idea for a SaaS product or digital service",
+        "Startups that want to build an MVP and test the idea on real users",
+        "Companies with an existing SaaS platform that needs further development",
       ],
       ar: [
-        "رواد الأعمال الذين لديهم فكرة لخدمة رقمية أو منتج SaaS",
-        "الشركات التي تحتاج إلى نظام خاص بدلًا من جداول البيانات والإجراءات اليدوية",
-        "الشركات الراغبة في تقديم بوابة أو تطبيق لعملائها",
+        "رواد الأعمال والشركات الناشئة الذين لديهم فكرة لمنتج SaaS أو خدمة رقمية",
+        "الشركات الناشئة الراغبة في بناء MVP واختبار الفكرة على مستخدمين حقيقيين",
+        "الشركات التي لديها منصة SaaS قائمة تحتاج إلى تطوير مستمر",
       ],
     },
     whatsIncluded: {
       sv: [
         "Kravanalys, prioritering av funktioner och avgränsning av första versionen",
         "Design av gränssnitt och användarflöden",
-        "Utveckling med inloggning, betalningar, databaser och integrationer",
+        "Utveckling av SaaS-plattformen med inloggning, abonnemang, betalningar och integrationer",
         "Driftsättning, säkerhet, dokumentation och vidareutveckling",
       ],
       en: [
         "Requirements analysis, feature prioritization, and scoping of the first version",
         "Interface and user-flow design",
-        "Development with login, payments, databases, and integrations",
+        "Development of the SaaS platform with login, subscriptions, payments, and integrations",
         "Deployment, security, documentation, and further development",
       ],
       ar: [
         "تحليل المتطلبات وترتيب أولويات الميزات وتحديد نطاق النسخة الأولى",
         "تصميم الواجهات ومسارات الاستخدام",
-        "التطوير بما يشمل تسجيل الدخول والمدفوعات وقواعد البيانات والتكاملات",
+        "تطوير منصة SaaS بما يشمل تسجيل الدخول والاشتراكات والمدفوعات والتكاملات",
         "النشر والأمان والتوثيق والتطوير المستمر",
       ],
     },
@@ -1270,11 +1327,11 @@ export const digitalServices: Record<string, Service> = {
         {
           type: "heading",
           level: 2,
-          text: "Börja smått, bygg rätt",
+          text: "MVP-utveckling för startups: börja smått, bygg rätt",
         },
         {
           type: "paragraph",
-          text: "Det vanligaste misstaget i mjukvaruprojekt är att bygga för mycket innan någon använt produkten. Vi hjälper dig att avgränsa en första version som löser kärnproblemet, så att du kan testa idén på riktiga användare innan du investerar i fler funktioner.",
+          text: "Det vanligaste misstaget i mjukvaruprojekt är att bygga för mycket innan någon använt produkten. När vi bygger en MVP hjälper vi dig att avgränsa en första version som löser kärnproblemet, så att du kan testa idén på riktiga användare innan du investerar i fler funktioner.",
         },
         {
           type: "heading",
@@ -1284,6 +1341,15 @@ export const digitalServices: Record<string, Service> = {
         {
           type: "paragraph",
           text: "En SaaS-produkt är också ett företag. Eftersom vi även arbetar med redovisning och rådgivning kan vi hjälpa dig att se på prissättning, abonnemangsintäkter, moms på digitala tjänster och budget för utvecklingen, inte bara tekniken.",
+        },
+        {
+          type: "heading",
+          level: 2,
+          text: "Vidareutveckling av SaaS",
+        },
+        {
+          type: "paragraph",
+          text: "Har du redan en SaaS-produkt kan vi ta över eller förstärka utvecklingen — med nya funktioner, bättre prestanda och en tydlig plan för hur plattformen ska växa i takt med antalet kunder.",
         },
       ],
       en: [
@@ -1305,6 +1371,15 @@ export const digitalServices: Record<string, Service> = {
           type: "paragraph",
           text: "A SaaS product is also a business. Since we also work with accounting and advisory, we can help you look at pricing, subscription revenue, VAT on digital services, and the development budget — not just the technology.",
         },
+        {
+          type: "heading",
+          level: 2,
+          text: "Further development of your SaaS",
+        },
+        {
+          type: "paragraph",
+          text: "If you already have a SaaS product, we can take over or strengthen its development — with new features, better performance, and a clear plan for how the platform grows along with its customer base.",
+        },
       ],
       ar: [
         {
@@ -1325,9 +1400,18 @@ export const digitalServices: Record<string, Service> = {
           type: "paragraph",
           text: "منتج SaaS هو أيضًا مشروع تجاري. وبما أننا نعمل أيضًا في المحاسبة والاستشارات، يمكننا مساعدتك في التسعير وإيرادات الاشتراكات وضريبة القيمة المضافة على الخدمات الرقمية وميزانية التطوير — لا التقنية فحسب.",
         },
+        {
+          type: "heading",
+          level: 2,
+          text: "التطوير المستمر لمنتج SaaS",
+        },
+        {
+          type: "paragraph",
+          text: "إذا كان لديك منتج SaaS قائم، يمكننا تولي تطويره أو دعمه — بميزات جديدة وأداء أفضل وخطة واضحة لنمو المنصة مع ازدياد عدد العملاء.",
+        },
       ],
     },
-    faqIds: ["faq-saas-mvp", "faq-saas-ownership"],
+    faqIds: ["faq-saas-mvp", "faq-saas-cost", "faq-saas-ownership"],
     lastReviewed: LAST_REVIEWED,
   },
   "mobile-app-development": {
@@ -1490,6 +1574,390 @@ export const digitalServices: Record<string, Service> = {
       ],
     },
     faqIds: ["faq-mobile-app-ios-android", "faq-mobile-app-store"],
+    lastReviewed: LAST_REVIEWED,
+  },
+  "ui-ux-design": {
+    key: "ui-ux-design",
+    order: 24,
+    slug: {
+      sv: "ui-ux-design",
+      en: "ui-ux-design",
+      ar: "تصميم-واجهات-المستخدم",
+    },
+    name: {
+      sv: "UI/UX-design",
+      en: "UI/UX design",
+      ar: "تصميم واجهات وتجربة المستخدم (UI/UX)",
+    },
+    summary: {
+      sv: "Som UX-designbyrå hjälper vi företag att skapa digitala tjänster som är enkla att förstå och trevliga att använda. Vi arbetar med UX-design för webbplatser, UI/UX-design för SaaS och design av webbapplikationer — från användarflöden och klickbara prototyper till färdig UI-design och designsystem som gör det enkelt att bygga vidare.",
+      en: "As a UX design agency, we help businesses create digital services that are easy to understand and pleasant to use. We work on UX design for websites, UI/UX design for SaaS, and web application design — from user flows and clickable prototypes to finished UI design and design systems that make it easy to keep building.",
+      ar: "نساعد الشركات على ابتكار خدمات رقمية سهلة الفهم وممتعة الاستخدام. نعمل على تصميم تجربة المستخدم للمواقع، وتصميم UI/UX لمنتجات SaaS، وتصميم تطبيقات الويب — من مسارات الاستخدام والنماذج الأولية التفاعلية إلى تصميم الواجهات النهائي وأنظمة التصميم التي تسهّل التطوير لاحقًا.",
+    },
+    teaser: {
+      sv: "Användarvänlig UI/UX-design för webbplatser, appar och SaaS.",
+      en: "User-friendly UI/UX design for websites, apps, and SaaS.",
+      ar: "تصميم UI/UX سهل الاستخدام للمواقع والتطبيقات ومنتجات SaaS.",
+    },
+    whoItsFor: {
+      sv: [
+        "Företag som ska bygga en ny webbplats, app eller digital tjänst och vill göra rätt från början",
+        "SaaS-företag och startups som behöver produktdesign för sin digitala tjänst",
+        "Företag vars webbplats eller system upplevs som krångligt av kunder och anställda",
+        "Företag med flera digitala produkter som behöver ett gemensamt designsystem",
+      ],
+      en: [
+        "Businesses building a new website, app, or digital service that want to get it right from the start",
+        "SaaS companies and startups that need product design for their digital service",
+        "Businesses whose website or system feels confusing to customers and staff",
+        "Businesses with several digital products that need a shared design system",
+      ],
+      ar: [
+        "الشركات التي تبني موقعًا أو تطبيقًا أو خدمة رقمية جديدة وتريد البداية الصحيحة",
+        "شركات SaaS والشركات الناشئة التي تحتاج إلى تصميم منتج لخدمتها الرقمية",
+        "الشركات التي يجد عملاؤها أو موظفوها موقعها أو نظامها معقدًا",
+        "الشركات التي لديها عدة منتجات رقمية وتحتاج إلى نظام تصميم موحد",
+      ],
+    },
+    whatsIncluded: {
+      sv: [
+        "Användarresor, informationsarkitektur och wireframes",
+        "Klickbar prototyp av app, webbplats eller webbapplikation att testa innan utveckling",
+        "UI-design med typografi, färger, komponenter och tillgänglighet",
+        "Vi hjälper dig att utveckla ett designsystem med återanvändbara komponenter och riktlinjer",
+      ],
+      en: [
+        "User journeys, information architecture, and wireframes",
+        "A clickable prototype of the app, website, or web application to test before development",
+        "UI design with typography, colors, components, and accessibility",
+        "Design system development with reusable components and guidelines",
+      ],
+      ar: [
+        "رحلات المستخدم وهيكلة المعلومات والمخططات الأولية",
+        "نموذج أولي تفاعلي للتطبيق أو الموقع أو تطبيق الويب لاختباره قبل التطوير",
+        "تصميم الواجهات بما يشمل الخطوط والألوان والمكونات وسهولة الوصول",
+        "تطوير نظام تصميم بمكونات قابلة لإعادة الاستخدام وإرشادات واضحة",
+      ],
+    },
+    process: {
+      sv: [
+        "Vi går igenom dina mål, dina användare och vad de behöver kunna göra",
+        "Vi tar fram flöden och wireframes som visar struktur och funktion",
+        "Du får en klickbar prototyp som vi testar och justerar tillsammans med dig",
+        "Vi levererar färdig UI-design och designsystem, redo för utveckling",
+      ],
+      en: [
+        "We go through your goals, your users, and what they need to be able to do",
+        "We create flows and wireframes that show structure and function",
+        "You get a clickable prototype that we test and refine together with you",
+        "We deliver finished UI design and a design system, ready for development",
+      ],
+      ar: [
+        "نراجع أهدافك ومستخدميك وما يحتاجون إلى القيام به",
+        "نُعدّ مسارات الاستخدام والمخططات الأولية التي توضح الهيكل والوظائف",
+        "تحصل على نموذج أولي تفاعلي نختبره ونعدّله معك",
+        "نسلّم تصميم الواجهات النهائي ونظام التصميم جاهزين للتطوير",
+      ],
+    },
+    whatToPrepare: {
+      sv: [
+        "En beskrivning av tjänsten och vem som ska använda den",
+        "Logotyp, färger och eventuell grafisk profil",
+        "Befintliga skisser, system eller webbplatser som ska förbättras",
+      ],
+      en: [
+        "A description of the service and who will use it",
+        "Your logo, colors, and any brand guidelines",
+        "Any existing sketches, systems, or websites to be improved",
+      ],
+      ar: [
+        "وصف للخدمة ومن سيستخدمها",
+        "الشعار والألوان وأي هوية بصرية قائمة",
+        "أي رسومات أو أنظمة أو مواقع قائمة يجب تحسينها",
+      ],
+    },
+    body: {
+      sv: [
+        {
+          type: "heading",
+          level: 2,
+          text: "UX-design för webbplatser och användarvänlig webbdesign",
+        },
+        {
+          type: "paragraph",
+          text: "Användarvänlig webbdesign handlar om att besökaren snabbt hittar det den söker och förstår vad nästa steg är. Med UX-design för webbplatser utgår vi från hur dina kunder faktiskt tänker och letar, och testar strukturen innan något byggs — så att webbplatsen ger fler förfrågningar, inte bara ser bra ut.",
+        },
+        {
+          type: "heading",
+          level: 2,
+          text: "UI/UX-design för SaaS och webbapplikationer",
+        },
+        {
+          type: "paragraph",
+          text: "I en SaaS-produkt eller webbapplikation avgör designen om användarna kommer tillbaka. Vår produktdesign för digitala tjänster omfattar allt från första inloggningen till vyer med tabeller, formulär och inställningar. En prototyp av appen låter dig testa idén på riktiga användare innan du lägger pengar på utveckling.",
+        },
+        {
+          type: "heading",
+          level: 2,
+          text: "Designsystem för företag",
+        },
+        {
+          type: "paragraph",
+          text: "Ett designsystem är en samling återanvändbara komponenter, färger, typografi och regler som gör att alla delar av dina digitala tjänster ser ut och fungerar likadant. Vi hjälper dig att utveckla ett designsystem som gör det snabbare att bygga nya funktioner och lättare att hålla en enhetlig känsla över webbplats, app och system.",
+        },
+      ],
+      en: [
+        {
+          type: "heading",
+          level: 2,
+          text: "UX design for websites and user-friendly web design",
+        },
+        {
+          type: "paragraph",
+          text: "User-friendly web design means visitors quickly find what they're looking for and understand the next step. With UX design for websites, we start from how your customers actually think and search, and test the structure before anything is built — so the site brings in more enquiries, not just looks good.",
+        },
+        {
+          type: "heading",
+          level: 2,
+          text: "UI/UX design for SaaS and web applications",
+        },
+        {
+          type: "paragraph",
+          text: "In a SaaS product or web application, design decides whether users come back. Our product design for digital services covers everything from the first login to views with tables, forms, and settings. A prototype of the app lets you test the idea on real users before you spend money on development.",
+        },
+        {
+          type: "heading",
+          level: 2,
+          text: "Design systems for businesses",
+        },
+        {
+          type: "paragraph",
+          text: "A design system is a collection of reusable components, colors, typography, and rules that make every part of your digital services look and work the same way. We help you develop a design system that makes new features faster to build and keeps a consistent feel across website, app, and systems.",
+        },
+      ],
+      ar: [
+        {
+          type: "heading",
+          level: 2,
+          text: "تصميم تجربة المستخدم للمواقع وتصميم ويب سهل الاستخدام",
+        },
+        {
+          type: "paragraph",
+          text: "يعني تصميم الويب سهل الاستخدام أن يجد الزائر ما يبحث عنه بسرعة ويفهم الخطوة التالية. في تصميم تجربة المستخدم للمواقع ننطلق من الطريقة التي يفكر بها عملاؤك ويبحثون، ونختبر الهيكل قبل البناء — ليجلب الموقع مزيدًا من الاستفسارات لا أن يبدو جميلًا فحسب.",
+        },
+        {
+          type: "heading",
+          level: 2,
+          text: "تصميم UI/UX لمنتجات SaaS وتطبيقات الويب",
+        },
+        {
+          type: "paragraph",
+          text: "في منتج SaaS أو تطبيق ويب، يحدد التصميم ما إذا كان المستخدمون سيعودون. يشمل تصميم المنتجات الرقمية لدينا كل شيء من أول تسجيل دخول إلى الشاشات التي تحتوي على جداول ونماذج وإعدادات. ويتيح لك النموذج الأولي للتطبيق اختبار الفكرة على مستخدمين حقيقيين قبل الإنفاق على التطوير.",
+        },
+        {
+          type: "heading",
+          level: 2,
+          text: "أنظمة التصميم للشركات",
+        },
+        {
+          type: "paragraph",
+          text: "نظام التصميم مجموعة من المكونات القابلة لإعادة الاستخدام والألوان والخطوط والقواعد التي تجعل كل أجزاء خدماتك الرقمية متناسقة في الشكل والأداء. نساعدك على تطوير نظام تصميم يسرّع بناء الميزات الجديدة ويحافظ على تجربة موحدة عبر الموقع والتطبيق والأنظمة.",
+        },
+      ],
+    },
+    faqIds: ["faq-uiux-difference", "faq-uiux-design-system"],
+    lastReviewed: LAST_REVIEWED,
+  },
+  "custom-system-development": {
+    key: "custom-system-development",
+    order: 25,
+    slug: {
+      sv: "systemutveckling",
+      en: "custom-software-development",
+      ar: "تطوير-الأنظمة-المخصصة",
+    },
+    name: {
+      sv: "Skräddarsydd systemutveckling",
+      en: "Custom software development",
+      ar: "تطوير الأنظمة المخصصة",
+    },
+    summary: {
+      sv: "Vi är ett systemutvecklingsföretag som hjälper företag att utveckla skräddarsydda system och verktyg när standardprogram inte räcker till — kundportaler, bokningssystem, CRM-system, verksamhetssystem och interna verktyg. Vi kopplar ihop dina befintliga system med API-integrationer och hjälper dig att automatisera administrativa processer, så att mindre tid går till manuellt arbete.",
+      en: "We're a software development company that helps businesses build custom systems and tools when off-the-shelf software falls short — customer portals, booking systems, CRM systems, business systems, and internal tools. We connect your existing systems through API integrations and help you automate administrative processes, so less time goes on manual work.",
+      ar: "نساعد الشركات على تطوير أنظمة وأدوات مخصصة عندما لا تكفي البرامج الجاهزة — بوابات العملاء وأنظمة الحجز وأنظمة إدارة علاقات العملاء (CRM) وأنظمة الأعمال والأدوات الداخلية. نربط أنظمتك القائمة عبر تكاملات API ونساعدك على أتمتة العمليات الإدارية، ليقل الوقت الذي يذهب إلى العمل اليدوي.",
+    },
+    teaser: {
+      sv: "Skräddarsydda system, kundportaler och integrationer för ditt företag.",
+      en: "Custom systems, customer portals, and integrations for your business.",
+      ar: "أنظمة مخصصة وبوابات عملاء وتكاملات لشركتك.",
+    },
+    whoItsFor: {
+      sv: [
+        "Företag som har vuxit ur kalkylblad, mejl och manuella rutiner",
+        "Företag vars standardprogram inte passar hur verksamheten faktiskt arbetar",
+        "Företag med flera system som inte pratar med varandra",
+        "Företag som vill erbjuda sina kunder en egen kundportal eller bokning",
+      ],
+      en: [
+        "Businesses that have outgrown spreadsheets, email, and manual routines",
+        "Businesses whose off-the-shelf software doesn't fit how they actually work",
+        "Businesses with several systems that don't talk to each other",
+        "Businesses that want to offer customers their own portal or booking",
+      ],
+      ar: [
+        "الشركات التي تجاوزت جداول البيانات والبريد الإلكتروني والإجراءات اليدوية",
+        "الشركات التي لا تناسب برامجها الجاهزة طريقة عملها الفعلية",
+        "الشركات التي لديها عدة أنظمة لا تتواصل مع بعضها",
+        "الشركات الراغبة في تقديم بوابة عملاء أو نظام حجز خاص لعملائها",
+      ],
+    },
+    whatsIncluded: {
+      sv: [
+        "Kartläggning av arbetsflöden och krav på systemet",
+        "Utveckling av webbapplikationer: kundportal, bokningssystem, CRM-system eller skräddarsydda affärssystem",
+        "API-integrationer och systemintegration mot dina befintliga program",
+        "Driftsättning, säkerhet, behörigheter, dokumentation och support",
+      ],
+      en: [
+        "Mapping of workflows and system requirements",
+        "Web application development: customer portal, booking system, CRM system, or custom business system",
+        "API integrations and system integration with your existing software",
+        "Deployment, security, permissions, documentation, and support",
+      ],
+      ar: [
+        "تحليل سير العمل ومتطلبات النظام",
+        "تطوير تطبيقات الويب: بوابة عملاء أو نظام حجز أو نظام CRM أو نظام أعمال مخصص",
+        "تكاملات API وربط النظام ببرامجك القائمة",
+        "النشر والأمان والصلاحيات والتوثيق والدعم",
+      ],
+    },
+    process: {
+      sv: [
+        "Vi kartlägger hur ni arbetar i dag och var tid och pengar går förlorade",
+        "Du får ett förslag med prioriterade funktioner, integrationer och tidsplan",
+        "Vi utvecklar i etapper och låter er testa systemet löpande",
+        "Vi driftsätter, utbildar användarna och vidareutvecklar efter behov",
+      ],
+      en: [
+        "We map how you work today and where time and money are lost",
+        "You receive a proposal with prioritized features, integrations, and a timeline",
+        "We develop in stages and let you test the system along the way",
+        "We deploy, train users, and keep developing as needs change",
+      ],
+      ar: [
+        "نحلل طريقة عملكم الحالية وأين يضيع الوقت والمال",
+        "تحصل على مقترح بالميزات ذات الأولوية والتكاملات والجدول الزمني",
+        "نطوّر على مراحل ونتيح لكم اختبار النظام أولًا بأول",
+        "ننشر النظام وندرّب المستخدمين ونطوّره حسب الحاجة",
+      ],
+    },
+    whatToPrepare: {
+      sv: [
+        "En beskrivning av de arbetsmoment som ska förenklas",
+        "Vilka program och system ni använder i dag",
+        "Exempel på underlag, rapporter eller blanketter som hanteras manuellt",
+      ],
+      en: [
+        "A description of the tasks you want to simplify",
+        "Which software and systems you use today",
+        "Examples of documents, reports, or forms that are handled manually",
+      ],
+      ar: [
+        "وصف للمهام التي تريد تبسيطها",
+        "البرامج والأنظمة التي تستخدمونها حاليًا",
+        "أمثلة على المستندات أو التقارير أو النماذج التي تُعالج يدويًا",
+      ],
+    },
+    body: {
+      sv: [
+        {
+          type: "heading",
+          level: 2,
+          text: "Systemutveckling för företag – när standardprogram inte räcker",
+        },
+        {
+          type: "paragraph",
+          text: "Många företag lägger timmar varje vecka på att flytta information mellan kalkylblad, mejl och olika program. Med skräddarsydd systemutveckling får ni ett verksamhetssystem som följer era egna arbetssätt i stället för tvärtom — byggt för de användare och processer ni faktiskt har.",
+        },
+        {
+          type: "heading",
+          level: 2,
+          text: "API-integrationer och systemintegration för företag",
+        },
+        {
+          type: "paragraph",
+          text: "Ofta finns redan bra program i verksamheten; problemet är att de inte hänger ihop. Med API-integrationer kopplar vi ihop till exempel webbplats, bokning, CRM-system och ekonomisystem, så att uppgifter bara behöver matas in en gång.",
+        },
+        {
+          type: "heading",
+          level: 2,
+          text: "Automatisera administrativa processer",
+        },
+        {
+          type: "paragraph",
+          text: "Eftersom vi också är en redovisningsbyrå vet vi var administrationen brukar ta mest tid — fakturaunderlag, rapporter, påminnelser och avstämningar. Vi hjälper er att automatisera administrativa processer så att personalen kan lägga tiden på kunderna i stället.",
+        },
+      ],
+      en: [
+        {
+          type: "heading",
+          level: 2,
+          text: "Custom software for businesses – when off-the-shelf isn't enough",
+        },
+        {
+          type: "paragraph",
+          text: "Many businesses spend hours every week moving information between spreadsheets, email, and different programs. With custom software development, you get a business system that follows your own way of working instead of the other way round — built for the users and processes you actually have.",
+        },
+        {
+          type: "heading",
+          level: 2,
+          text: "API integrations and system integration",
+        },
+        {
+          type: "paragraph",
+          text: "Often the business already has good software; the problem is that it doesn't connect. With API integrations, we link things like your website, booking, CRM system, and finance system, so information only needs to be entered once.",
+        },
+        {
+          type: "heading",
+          level: 2,
+          text: "Automate administrative processes",
+        },
+        {
+          type: "paragraph",
+          text: "Because we're also an accounting firm, we know where administration tends to take the most time — invoicing data, reports, reminders, and reconciliations. We help you automate administrative processes so your staff can spend their time on customers instead.",
+        },
+      ],
+      ar: [
+        {
+          type: "heading",
+          level: 2,
+          text: "تطوير الأنظمة للشركات – عندما لا تكفي البرامج الجاهزة",
+        },
+        {
+          type: "paragraph",
+          text: "تقضي شركات كثيرة ساعات كل أسبوع في نقل المعلومات بين جداول البيانات والبريد الإلكتروني والبرامج المختلفة. ومع تطوير نظام مخصص تحصلون على نظام أعمال يتبع طريقة عملكم بدلًا من العكس — مبني للمستخدمين والعمليات الموجودة لديكم فعلًا.",
+        },
+        {
+          type: "heading",
+          level: 2,
+          text: "تكاملات API وربط الأنظمة",
+        },
+        {
+          type: "paragraph",
+          text: "غالبًا ما تكون لدى الشركة برامج جيدة، لكن المشكلة أنها غير مترابطة. عبر تكاملات API نربط مثلًا الموقع ونظام الحجز ونظام CRM والنظام المحاسبي، بحيث لا تحتاج البيانات إلى الإدخال إلا مرة واحدة.",
+        },
+        {
+          type: "heading",
+          level: 2,
+          text: "أتمتة العمليات الإدارية",
+        },
+        {
+          type: "paragraph",
+          text: "لأننا مكتب محاسبة أيضًا، نعرف أين تستهلك الأعمال الإدارية أكبر وقت — بيانات الفواتير والتقارير والتذكيرات والمطابقات. نساعدكم على أتمتة العمليات الإدارية ليتفرغ الموظفون للعملاء.",
+        },
+      ],
+    },
+    faqIds: ["faq-systems-cost", "faq-systems-integrations"],
     lastReviewed: LAST_REVIEWED,
   },
 };

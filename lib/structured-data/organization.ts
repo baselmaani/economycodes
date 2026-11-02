@@ -63,6 +63,9 @@ export function buildOfficeJsonLd(
     telephone: business.phone,
     email: business.email,
     address: buildPostalAddress(location),
+    ...(location.geo && {
+      geo: { "@type": "GeoCoordinates", ...location.geo },
+    }),
     hasMap: location.mapsHref,
     ...(areaServed && {
       areaServed: areaServed.map((name) => ({ "@type": "Place", name })),

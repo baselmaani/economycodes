@@ -1,9 +1,7 @@
 import type { ReactNode } from "react";
 import { Building2, Info, UserCheck } from "lucide-react";
 
-import type { AppLocale } from "@/i18n/routing";
 import { getLocalized } from "@/lib/i18n-content";
-import { authorizationContent } from "@/content/home";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/marketing/SectionHeading";
@@ -12,6 +10,7 @@ import { FeatureCard } from "@/components/marketing/FeatureCard";
 import { GridPattern } from "@/components/marketing/decor/GridPattern";
 import { RadialGlow } from "@/components/marketing/decor/RadialGlow";
 import { Reveal } from "@/components/motion/Reveal";
+import type { SectionProps } from "../types";
 
 function CredentialPill({ children }: { children: ReactNode }) {
   return (
@@ -24,13 +23,10 @@ function CredentialPill({ children }: { children: ReactNode }) {
   );
 }
 
-export function AuthorizationSection({
-  locale,
-  heading,
-}: {
-  locale: AppLocale;
-  heading: string;
-}) {
+/** Verified authorization: the firm's and Hadi's credentials. */
+export function TrustSection({ locale, content }: SectionProps) {
+  const { text } = content;
+
   return (
     <Section tone="tint" bleed>
       <GridPattern className="inset-0 hidden size-full sm:block" />
@@ -39,9 +35,9 @@ export function AuthorizationSection({
       <Container size="wide" className="relative">
         <Reveal>
           <SectionHeading
-            eyebrow={authorizationContent.issuingBody.name}
-            title={heading}
-            lead={getLocalized(authorizationContent.intro, locale)}
+            eyebrow={getLocalized(text.trustEyebrow, locale)}
+            title={getLocalized(text.trustTitle, locale)}
+            lead={getLocalized(text.trustIntro, locale)}
           />
         </Reveal>
 
@@ -49,9 +45,11 @@ export function AuthorizationSection({
           <Reveal delay={120}>
             <FeatureCard>
               <IconTile icon={Building2} tone="primary" size="lg" />
-              <CredentialPill>{authorizationContent.firm.credential}</CredentialPill>
+              <CredentialPill>
+                {getLocalized(text.firmCredential, locale)}
+              </CredentialPill>
               <p className="text-muted-foreground text-body">
-                {getLocalized(authorizationContent.firm.body, locale)}
+                {getLocalized(text.firmBody, locale)}
               </p>
             </FeatureCard>
           </Reveal>
@@ -60,10 +58,10 @@ export function AuthorizationSection({
             <FeatureCard>
               <IconTile icon={UserCheck} tone="primary" size="lg" />
               <CredentialPill>
-                {authorizationContent.person.credentials.join(" · ")}
+                {getLocalized(text.personCredentials, locale)}
               </CredentialPill>
               <p className="text-muted-foreground text-body">
-                {getLocalized(authorizationContent.person.body, locale)}
+                {getLocalized(text.personBody, locale)}
               </p>
             </FeatureCard>
           </Reveal>
@@ -77,7 +75,7 @@ export function AuthorizationSection({
               aria-hidden="true"
             />
             <p className="text-muted-foreground text-sm">
-              {getLocalized(authorizationContent.issuingBody.description, locale)}
+              {getLocalized(text.issuingBodyNote, locale)}
             </p>
           </div>
         </Reveal>

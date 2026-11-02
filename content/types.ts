@@ -35,6 +35,9 @@ export interface BusinessIdentity {
   };
 }
 
+/** What client components need to render call/WhatsApp buttons. */
+export type ContactLinks = Pick<BusinessIdentity, "phoneHref" | "whatsappHref">;
+
 export interface Location {
   id: string;
   name: Localized<string>;
@@ -43,6 +46,8 @@ export interface Location {
   city: string;
   country: string;
   mapsHref: string;
+  /** Building-level coordinates (OpenStreetMap geocode of streetAddress), for local-search structured data. */
+  geo?: { latitude: number; longitude: number };
   /** Undefined until the client confirms opening hours -- CLIENT-TODO item 11. */
   openingHours?: Localized<string>;
   /** Undefined until the client confirms this office takes walk-in customers -- CLIENT-TODO item 2 (offices). */

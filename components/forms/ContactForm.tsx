@@ -18,7 +18,11 @@ import {
   type ContactFieldErrors,
   type ContactFormState,
 } from "@/app/[locale]/kontakt/actions";
-import { contactFields, type ContactField } from "@/lib/validation/contact";
+import {
+  contactFields,
+  type ContactField,
+} from "@/lib/validation/contact-fields";
+import type { ServiceOption } from "@/lib/service-lookup";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -28,8 +32,6 @@ import {
   FieldError,
   FieldLabel,
 } from "@/components/ui/field";
-import { servicesList } from "@/content/services";
-import { getLocalized } from "@/lib/i18n-content";
 import { cn } from "@/lib/utils";
 
 const initialState: ContactFormState = { status: "idle" };
@@ -49,12 +51,15 @@ type PreferredContact = (typeof PREFERRED_CONTACT_OPTIONS)[number]["value"];
 
 export function ContactForm({
   locale,
+  serviceOptions,
   variant = "default",
   title,
   titleAs: Title = "h3",
   className,
 }: {
   locale: AppLocale;
+  /** From getServiceOptions(); passed in so content/services stays server-side. */
+  serviceOptions: ServiceOption[];
   /** "card" wraps the form in its own surface, for use on tinted or dark sections. */
   variant?: "default" | "card";
   /** Optional heading shown above the form (card variant only). */
@@ -84,6 +89,7 @@ export function ContactForm({
     <ContactFormFields
       key={state.submission ?? 0}
       locale={locale}
+      serviceOptions={serviceOptions}
       state={state}
       formAction={formAction}
       pending={pending}
@@ -147,11 +153,13 @@ function ContactFormSuccess({ onSendAnother }: { onSendAnother: () => void }) {
 
 function ContactFormFields({
   locale,
+  serviceOptions,
   state,
   formAction,
   pending,
 }: {
   locale: AppLocale;
+  serviceOptions: ServiceOption[];
   state: ContactFormState;
   formAction: (formData: FormData) => void;
   pending: boolean;
@@ -333,9 +341,9 @@ function ContactFormFields({
               {...errorProps("service")}
             >
               <option value="">{t("servicePlaceholder")}</option>
-              {servicesList.map((service) => (
+              {serviceOptions.map((service) => (
                 <option key={service.key} value={service.key}>
-                  {getLocalized(service.name, locale)}
+                  {service.name}
                 </option>
               ))}
             </select>

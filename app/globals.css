@@ -187,19 +187,6 @@
       translate: 6px 6px;
     }
   }
-
-  /* Slow ambient pulse for the radial glow. Scale-only (not opacity) so it
-     doesn't fight per-instance opacity overrides such as `opacity-10` in
-     AuthorizationSection. */
-  @keyframes eco-pulse-glow {
-    0%,
-    100% {
-      scale: 1;
-    }
-    50% {
-      scale: 1.06;
-    }
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

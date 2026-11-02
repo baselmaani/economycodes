@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ArrowRight, type LucideIcon } from "lucide-react";
 
 import { Link } from "@/i18n/navigation";
@@ -22,7 +23,10 @@ function CardWatermark({ icon: Icon }: { icon: LucideIcon }) {
   );
 }
 
-/** Server-only: reads the teaser as edited in the dashboard. */
+/**
+ * Server-only: reads the teaser and feature image as edited in the dashboard.
+ * Services without a feature image keep the icon-only card.
+ */
 export async function ServiceCard({
   service,
   locale,
@@ -36,7 +40,7 @@ export async function ServiceCard({
   featured?: boolean;
   size?: "default" | "lg";
 }) {
-  const { teaser } = await getServiceContent(service);
+  const { teaser, heroImage: image } = await getServiceContent(service);
   const Icon = getServiceIcon(service.key);
   const isLarge = size === "lg";
 
@@ -55,7 +59,24 @@ export async function ServiceCard({
           featured && "bg-secondary/40",
         )}
       >
-        {isLarge && <CardWatermark icon={Icon} />}
+        {image ? (
+          <div
+            className={cn(
+              "relative mb-1 aspect-[3/2] overflow-hidden",
+              isLarge ? "-mx-6 -mt-6" : "-mx-5 -mt-5",
+            )}
+          >
+            <Image
+              src={image.src}
+              alt={getLocalized(image.alt, locale)}
+              fill
+              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+              className="object-cover transition-transform duration-300 ease-(--ease-standard) group-hover:scale-[1.03] motion-reduce:transition-none"
+            />
+          </div>
+        ) : (
+          isLarge && <CardWatermark icon={Icon} />
+        )}
         <CardHeader className="relative flex items-center gap-3 p-0">
           <IconTile icon={Icon} size={isLarge ? "default" : "sm"} />
           <CardTitle

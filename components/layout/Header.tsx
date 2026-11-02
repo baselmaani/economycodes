@@ -15,6 +15,7 @@ import {
 } from "@/content/service-icons";
 import { business } from "@/content/business";
 import { primaryNav } from "@/content/nav";
+import { getBusiness } from "@/lib/cms/site";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/Container";
 import { HeaderScrollShell } from "@/components/layout/HeaderScrollShell";
@@ -27,7 +28,10 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { LanguageSwitcher } from "@/components/nav/LanguageSwitcher";
-import { MobileMenu } from "@/components/nav/MobileMenu";
+import {
+  MobileMenu,
+  type MobileServiceGroup,
+} from "@/components/nav/MobileMenu";
 import { NavLink } from "@/components/nav/NavLink";
 
 const GROUP_ORDER: ServiceGroup[] = ["core", "advisory", "specialist"];
@@ -41,6 +45,19 @@ export async function Header({ locale }: { locale: AppLocale }) {
     label: serviceGroups[group][locale],
     services: servicesList.filter((s) => getServiceGroup(s.key) === group),
   })).filter((g) => g.services.length > 0);
+  // Only names and slugs cross into the client bundle, not the full
+  // content/services.ts (every service's copy in three languages).
+  const mobileGroups: MobileServiceGroup[] = grouped.map(
+    ({ group, label, services }) => ({
+      group,
+      label,
+      services: services.map((service) => ({
+        key: service.key,
+        name: getLocalized(service.name, locale),
+        slug: getServiceSlug(locale, service),
+      })),
+    }),
+  );
 
   return (
     <HeaderScrollShell>
@@ -70,7 +87,7 @@ export async function Header({ locale }: { locale: AppLocale }) {
                       render={
                         <NavLink
                           href={link.routeKey as StaticAppPathname}
-                          className="data-[active]:bg-secondary data-[active]:text-secondary-foreground px-4 py-2.5 text-sm font-medium text-foreground/80 hover:text-foreground data-[active]:font-semibold"
+                          className="data-[active]:bg-secondary data-[active]:text-secondary-foreground text-foreground/80 hover:text-foreground px-4 py-2.5 text-sm font-medium data-[active]:font-semibold"
                         />
                       }
                     >
@@ -103,7 +120,7 @@ export async function Header({ locale }: { locale: AppLocale }) {
                         <ArrowRight
                           size={13}
                           aria-hidden="true"
-                          className="rtl:rotate-180 transition-transform group-hover/all-services:translate-x-0.5 rtl:group-hover/all-services:-translate-x-0.5"
+                          className="transition-transform group-hover/all-services:translate-x-0.5 rtl:rotate-180 rtl:group-hover/all-services:-translate-x-0.5"
                         />
                       </NavigationMenuLink>
                     </div>
@@ -156,7 +173,7 @@ export async function Header({ locale }: { locale: AppLocale }) {
                       render={
                         <NavLink
                           href={link.routeKey as StaticAppPathname}
-                          className="data-[active]:bg-secondary data-[active]:text-secondary-foreground px-4 py-2.5 text-sm font-medium text-foreground/80 hover:text-foreground data-[active]:font-semibold"
+                          className="data-[active]:bg-secondary data-[active]:text-secondary-foreground text-foreground/80 hover:text-foreground px-4 py-2.5 text-sm font-medium data-[active]:font-semibold"
                         />
                       }
                     >
@@ -176,7 +193,11 @@ export async function Header({ locale }: { locale: AppLocale }) {
             >
               {t("contactUs")}
             </Button>
-            <MobileMenu locale={locale} />
+            <MobileMenu
+              locale={locale}
+              business={await getBusiness()}
+              serviceGroups={mobileGroups}
+            />
           </div>
         </div>
       </Container>

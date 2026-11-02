@@ -149,22 +149,20 @@ export default async function AboutHadiPage({
               </Reveal>
               <Reveal delay={260}>
                 <div className="flex flex-wrap gap-2">
-                  {authorizationContent.person.credentials.map(
-                    (credential) => (
-                      <span
-                        key={credential}
-                        dir="ltr"
-                        className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-sm font-medium text-white backdrop-blur-sm"
-                      >
-                        <ShieldCheck
-                          size={14}
-                          className="text-brand-bright shrink-0"
-                          aria-hidden="true"
-                        />
-                        {credential}
-                      </span>
-                    ),
-                  )}
+                  {authorizationContent.person.credentials.map((credential) => (
+                    <span
+                      key={credential}
+                      dir="ltr"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-sm font-medium text-white backdrop-blur-sm"
+                    >
+                      <ShieldCheck
+                        size={14}
+                        className="text-brand-bright shrink-0"
+                        aria-hidden="true"
+                      />
+                      {credential}
+                    </span>
+                  ))}
                 </div>
               </Reveal>
               <Reveal delay={320}>
@@ -243,7 +241,7 @@ export default async function AboutHadiPage({
 
                 <div
                   dir="ltr"
-                  className="absolute start-6 -top-4 flex items-center gap-2 rounded-xl border border-white/15 bg-brand-navy/90 px-3 py-2 shadow-md backdrop-blur-sm animate-[eco-float_5s_ease-in-out_infinite] [animation-delay:-2s]"
+                  className="bg-brand-navy/90 absolute start-6 -top-4 flex animate-[eco-float_5s_ease-in-out_infinite] items-center gap-2 rounded-xl border border-white/15 px-3 py-2 shadow-md [animation-delay:-2s]"
                 >
                   <ShieldCheck
                     size={16}
@@ -256,7 +254,7 @@ export default async function AboutHadiPage({
                 </div>
                 <div
                   dir="ltr"
-                  className="absolute -end-4 bottom-8 rounded-full border border-white/15 bg-brand-navy/90 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md backdrop-blur-sm animate-[eco-float_4.5s_ease-in-out_infinite] [animation-delay:-1.3s]"
+                  className="bg-brand-navy/90 absolute -end-4 bottom-8 animate-[eco-float_4.5s_ease-in-out_infinite] rounded-full border border-white/15 px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white shadow-md [animation-delay:-1.3s]"
                 >
                   Svenska · English · العربية
                 </div>
@@ -319,10 +317,7 @@ export default async function AboutHadiPage({
                 <h3 className="text-muted-foreground mb-5 text-sm font-semibold tracking-wide uppercase">
                   {label}
                 </h3>
-                <RevealGroup
-                  step={50}
-                  className="flex flex-wrap gap-3"
-                >
+                <RevealGroup step={50} className="flex flex-wrap gap-3">
                   {services.map((service) => {
                     const Icon = getServiceIcon(service.key);
                     return (

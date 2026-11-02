@@ -38,3 +38,16 @@ export function resolveServiceBySlug(
 export function getServiceSlug(locale: AppLocale, service: Service): string {
   return service.slug[locale] ?? service.slug.sv;
 }
+
+export interface ServiceOption {
+  key: string;
+  name: string;
+}
+
+/** Localized service names for the contact form, passed to it as plain data. */
+export function getServiceOptions(locale: AppLocale): ServiceOption[] {
+  return servicesList.map((service) => ({
+    key: service.key,
+    name: service.name[locale] ?? service.name.sv,
+  }));
+}

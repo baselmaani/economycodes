@@ -1,6 +1,3 @@
-import { business } from "@/content/business";
-import { hadi } from "@/content/people";
-import { locations } from "@/content/locations";
 import { servicesList } from "@/content/services";
 import { getServiceGroup } from "@/content/service-icons";
 import type { AppLocale } from "@/i18n/routing";
@@ -14,6 +11,7 @@ import {
   locationPages,
 } from "@/lib/routes";
 import { getPublishedArticles, type CmsArticle } from "@/lib/cms/content";
+import { LLMS_FULL_URL, llmsIntro } from "@/lib/llms";
 
 // Regenerated hourly so articles published from the dashboard show up
 // without a rebuild.
@@ -131,22 +129,13 @@ export async function GET() {
     .map((locale) => buildLocaleSection(locale, articles))
     .join("\n\n");
 
-  const body = `# Economy Codes AB
-
-> Srf-auktoriserad redovisningsbyrå / Srf-authorized accounting firm / مكتب محاسبة معتمد من Srf. Bookkeeping, payroll, tax returns, annual accounts, and business advisory for small and medium-sized businesses in Sweden, plus digital marketing: websites, SEO, AEO, GEO, Google Ads, social media advertising, SaaS/web app development, and iOS/Android mobile app development. Served in Swedish, English, and Arabic. Offices in Mellerud and Trollhättan, Sweden.
-
-## Key facts
-
-- Accounting firm in Sweden: Srf Auktoriserad Redovisningsbyrå (redovisningsbyrå i Sverige, مكتب محاسبة معتمد في السويد).
-- Digital marketing agency in Sweden (digital marknadsföringsbyrå, وكالة تسويق رقمي في السويد): websites, SEO, AEO, GEO, Google Ads and social media.
-- Languages: Swedish, English and Arabic, including an Arabic-speaking accountant.
-- Serves businesses across Sweden digitally; offices: ${locations
-    .map((l) => `${l.streetAddress}, ${l.postalCode} ${l.city}`)
-    .join("; ")}.
-- Contact: ${business.email}, ${business.phone}
-- Consultant: ${hadi.name} — ${getLocalized(hadi.title, "en")}
+  const body = `${llmsIntro()}
 
 ${sections}
+
+## Optional
+
+- [Full content](${LLMS_FULL_URL}): every service, FAQ and article as plain text
 `;
 
   return new Response(body, {

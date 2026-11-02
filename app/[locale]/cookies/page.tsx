@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import type { AppLocale } from "@/i18n/routing";
-import { getAlternateLinks } from "@/lib/routes";
+import { getAbsoluteUrl, getAlternateLinks } from "@/lib/routes";
+import { buildBreadcrumbJsonLd } from "@/lib/structured-data/breadcrumb";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { buildPageMetadata } from "@/lib/cms/metadata";
 import { getLocalized } from "@/lib/i18n-content";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
@@ -38,6 +40,15 @@ export default async function CookiePolicyPage({
       size="content"
       className="prose prose-neutral py-12 sm:py-16"
     >
+      <JsonLd
+        data={buildBreadcrumbJsonLd([
+          { name: nav("home"), url: getAbsoluteUrl("/", locale) },
+          {
+            name: t(cookiePolicy.title),
+            url: getAbsoluteUrl("/cookies", locale),
+          },
+        ])}
+      />
       <Breadcrumbs
         items={[
           { label: nav("home"), routeKey: "/" },
