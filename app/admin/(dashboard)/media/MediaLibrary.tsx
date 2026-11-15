@@ -37,6 +37,8 @@ function MediaCard({
   const [dirty, setDirty] = useState(false);
   const [copied, setCopied] = useState(false);
   const [errors, setErrors] = useState<string[]>([]);
+  /** Where the image is still used, after a delete was blocked. */
+  const [usage, setUsage] = useState<string[]>([]);
   const [pending, startTransition] = useTransition();
 
   function saveAlt() {
@@ -54,7 +56,28 @@ function MediaCard({
     startTransition(async () => {
       const result = await deleteMediaAction(item.id);
       if (result.ok) onDeleted();
-      else setErrors(result.errors);
+      else {
+        setErrors(result.errors);
+        setUsage("usage" in result ? result.usage : []);
+      }
+    });
+  }
+
+  function removeEverywhere() {
+    if (
+      !window.confirm(
+        `Remove this image from ${usage.join(", ")} and delete it permanently? Those pages will show their default image instead.`,
+      )
+    ) {
+      return;
+    }
+    startTransition(async () => {
+      const result = await deleteMediaAction(item.id, { force: true });
+      if (result.ok) onDeleted();
+      else {
+        setErrors(result.errors);
+        setUsage([]);
+      }
     });
   }
 
@@ -76,7 +99,7 @@ function MediaCard({
         </p>
         <LocalizedField
           id={`media-${item.id}`}
-          label="Alt text"
+          label="Alt text (optional)"
           locale={locale}
           value={alt}
           fallback={locale === "sv" ? undefined : { sv: alt.sv }}
@@ -86,6 +109,17 @@ function MediaCard({
           }}
         />
         <ErrorList errors={errors} />
+        {usage.length > 0 && (
+          <Button
+            size="sm"
+            variant="destructive"
+            className="self-start"
+            onClick={removeEverywhere}
+            disabled={pending}
+          >
+            Remove from pages and delete
+          </Button>
+        )}
         <div className="mt-auto flex flex-wrap gap-1">
           <Button size="sm" onClick={saveAlt} disabled={!dirty || pending}>
             Save alt

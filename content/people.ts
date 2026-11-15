@@ -21,27 +21,6 @@ export const hadi: PersonProfile = {
     en: "Hadi Al Maani is an authorized accounting consultant and authorized payroll consultant through Srf konsulterna, and runs Economy Codes AB, an Srf Auktoriserad Redovisningsbyrå (Srf-authorized accounting firm). He helps business owners in Sweden with bookkeeping, payroll, tax questions, and the practical steps of starting and running a business — in Swedish, English, and Arabic.",
     ar: "هادي المعاني مستشار محاسبة معتمد ومستشار رواتب معتمد من منظمة Srf konsulterna، ويدير شركة Economy Codes AB وهي مكتب محاسبة معتمد من Srf. يساعد أصحاب الأعمال في السويد في مسك الدفاتر والرواتب والمسائل الضريبية والخطوات العملية لتأسيس الأعمال وإدارتها — بالسويدية والإنجليزية والعربية.",
   },
-  photo: {
-    src: "/media/optimized/hadi-headshot.webp",
-    width: 640,
-    height: 640,
-    alt: {
-      sv: "Porträtt av Hadi Al Maani, auktoriserad redovisningskonsult på Economy Codes AB",
-      en: "Portrait of Hadi Al Maani, authorized accounting consultant at Economy Codes AB",
-      ar: "صورة هادي المعاني، مستشار محاسبة معتمد في Economy Codes AB",
-    },
-  },
-  // Center-cropped to the Hero frame's 400:439 aspect ratio.
-  heroPhoto: {
-    src: "/media/optimized/hadi-headshot-hero.webp",
-    width: 800,
-    height: 878,
-    alt: {
-      sv: "Porträtt av Hadi Al Maani, auktoriserad redovisningskonsult på Economy Codes AB",
-      en: "Portrait of Hadi Al Maani, authorized accounting consultant at Economy Codes AB",
-      ar: "صورة هادي المعاني، مستشار محاسبة معتمد في Economy Codes AB",
-    },
-  },
   socials: {
     facebook: "https://www.facebook.com/hadi.maani",
   },

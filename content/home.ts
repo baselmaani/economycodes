@@ -6,31 +6,31 @@ import {
   ShieldCheck,
 } from "lucide-react";
 
-import type { Localized, MediaRef } from "./types";
+import type { Localized } from "./types";
 
 export const homeMeta = {
   title: {
-    sv: "Auktoriserad redovisningsbyrå i Sverige | Economy Codes AB",
-    en: "Authorized Accounting Firm in Sweden | Economy Codes AB",
-    ar: "مكتب محاسبة معتمد في السويد | Economy Codes AB",
+    sv: "Redovisning, bokföringsprogram och marknadsföring | Economy Codes",
+    en: "Accounting, accounting software and marketing | Economy Codes",
+    ar: "المحاسبة وبرنامج المحاسبة والتسويق | Economy Codes",
   } satisfies Localized<string>,
   description: {
-    sv: "Economy Codes AB är en auktoriserad redovisningsbyrå för företag i hela Sverige. Få digital hjälp med bokföring, lön, moms, bokslut och deklaration.",
-    en: "Economy Codes is an authorized accounting firm in Sweden. Digital help with bookkeeping, payroll, VAT, annual accounts and tax returns, in English and Arabic.",
-    ar: "Economy Codes AB مكتب محاسبة معتمد في السويد. مساعدة رقمية في مسك الدفاتر والرواتب وضريبة القيمة المضافة والإغلاق السنوي والإقرارات الضريبية، بالعربية.",
+    sv: "Srf-auktoriserad redovisningsbyrå med eget bokföringsprogram och digital marknadsföring. Vi sköter ekonomin åt dig – eller så bokför du själv i vårt program.",
+    en: "Srf-authorized accounting firm with its own accounting software and digital marketing. We handle your books for you – or you do them yourself in our software.",
+    ar: "مكتب محاسبة معتمد من Srf لديه برنامج محاسبة خاص وخدمات تسويق رقمي. نتولى حساباتك نيابةً عنك، أو تمسك دفاترك بنفسك في برنامجنا.",
   } satisfies Localized<string>,
 };
 
 export const heroContent = {
   title: {
-    sv: "Auktoriserad redovisningsbyrå för företag i hela Sverige",
-    en: "Authorized Accounting Firm for Businesses Across Sweden",
-    ar: "مكتب محاسبة معتمد للشركات في جميع أنحاء السويد",
+    sv: "Redovisning, bokföringsprogram och marknadsföring för småföretag",
+    en: "Accounting, accounting software and marketing for small businesses",
+    ar: "المحاسبة وبرنامج المحاسبة والتسويق الرقمي للشركات الصغيرة",
   } satisfies Localized<string>,
   subtitle: {
-    sv: "Economy Codes AB hjälper små och medelstora företag med bokföring, löner, moms, bokslut, årsredovisning, deklaration och ekonomisk rådgivning. Vi erbjuder digital och personlig service på svenska, engelska och arabiska.",
-    en: "Economy Codes AB helps small and medium-sized businesses with bookkeeping, payroll, VAT, annual accounts, and tax returns, along with practical financial advice. We offer digital, personal service in Swedish, English, and Arabic.",
-    ar: "تساعد Economy Codes AB الشركات الصغيرة والمتوسطة في مسك الدفاتر والرواتب وضريبة القيمة المضافة والإغلاق السنوي وإعداد القوائم المالية والإقرارات الضريبية، إضافة إلى الاستشارات المالية العملية. نقدّم خدمة رقمية وشخصية باللغات السويدية والإنجليزية والعربية.",
+    sv: "Economy Codes AB är en auktoriserad redovisningsbyrå. Låt oss sköta bokföringen åt dig, gör den själv i vårt eget bokföringsprogram eller få hjälp att nå fler kunder online – på svenska, engelska och arabiska.",
+    en: "Economy Codes AB is an authorized accounting firm. Let us handle your bookkeeping, do it yourself in our own accounting software, or get help reaching more customers online – in Swedish, English and Arabic.",
+    ar: "Economy Codes AB مكتب محاسبة معتمد. دعنا نتولى مسك دفاترك، أو تولَّه بنفسك في برنامج المحاسبة الخاص بنا، أو احصل على مساعدة للوصول إلى عملاء أكثر عبر الإنترنت – بالسويدية والإنجليزية والعربية.",
   } satisfies Localized<string>,
   imageAlt: {
     sv: "Economy Codes, redovisning och företagsrådgivning",
@@ -317,13 +317,121 @@ export const benefits: Benefit[] = [
   },
 ];
 
-export const benefitsImage: MediaRef = {
-  src: "/media/optimized/home-benefits.webp",
-  width: 1600,
-  height: 1067,
-  alt: {
-    sv: "Arbetsplats med miniräknare, budgetunderlag och bärbar dator",
-    en: "Desk with a calculator, budget documents and a laptop",
-    ar: "مكتب عليه آلة حاسبة ومستندات ميزانية وحاسوب محمول",
-  },
+/**
+ * The three business areas shown as quick-choice cards under the hero
+ * (components/sections/home/AreasSection.tsx). Order is fixed: the links and
+ * icons for accounting, marketing and the accounting software live in code.
+ */
+export const homeAreas = {
+  lead: {
+    sv: "Med redovisning sköter vi bokföringen åt dig. Med bokföringsprogrammet gör du den själv. Vill du ha fler kunder hjälper vi dig att synas online, och behöver du en app eller ett eget system bygger vi det.",
+    en: "With accounting services, we do the bookkeeping for you. With the accounting software, you do it yourself. If you want more customers, we help you get found online, and if you need an app or a system of your own, we build it.",
+    ar: "مع خدمات المحاسبة نتولى مسك الدفاتر نيابةً عنك. ومع برنامج المحاسبة تتولاه بنفسك. وإذا كنت تريد عملاء أكثر فنساعدك على الظهور عبر الإنترنت، وإذا كنت تحتاج إلى تطبيق أو نظام خاص فنحن نبنيه.",
+  } satisfies Localized<string>,
+  eyebrow: {
+    sv: "Välj rätt hjälp",
+    en: "Choose the right help",
+    ar: "اختر المساعدة المناسبة",
+  } satisfies Localized<string>,
+  title: {
+    sv: "Redovisning eller bokföringsprogram – vad passar dig?",
+    en: "Accounting services or accounting software – which suits you?",
+    ar: "خدمات المحاسبة أم برنامج المحاسبة – أيهما يناسبك؟",
+  } satisfies Localized<string>,
+  items: [
+    {
+      title: { sv: "Redovisning", en: "Accounting", ar: "المحاسبة" },
+      body: {
+        sv: "Passar dig som vill lämna över bokföring, lön, moms, bokslut och deklaration till en Srf-auktoriserad redovisningsbyrå.",
+        en: "For you who want to hand over bookkeeping, payroll, VAT, annual accounts and tax returns to an Srf-authorized accounting firm.",
+        ar: "مناسب لك إذا كنت تريد تسليم مسك الدفاتر والرواتب وضريبة القيمة المضافة والإغلاق السنوي والإقرارات الضريبية إلى مكتب محاسبة معتمد من Srf.",
+      },
+    },
+    {
+      title: {
+        sv: "Digital marknadsföring",
+        en: "Digital marketing",
+        ar: "التسويق الرقمي",
+      },
+      body: {
+        sv: "Passar dig som vill att fler kunder hittar företaget, med webbplats, SEO, annonsering och sociala medier.",
+        en: "For you who want more customers to find your business, with a website, SEO, advertising and social media.",
+        ar: "مناسب لك إذا كنت تريد أن يجد المزيد من العملاء شركتك، عبر موقع إلكتروني وتحسين محركات البحث والإعلانات ووسائل التواصل الاجتماعي.",
+      },
+    },
+    {
+      title: {
+        sv: "Bokföringsprogram",
+        en: "Accounting software",
+        ar: "برنامج المحاسبة",
+      },
+      body: {
+        sv: "Passar dig som vill sköta fakturering, bokföring och lön själv, i ett program byggt för svenska småföretag.",
+        en: "For you who want to handle invoicing, bookkeeping and payroll yourself, in software built for Swedish small businesses.",
+        ar: "مناسب لك إذا كنت تريد إدارة الفوترة ومسك الدفاتر والرواتب بنفسك، في برنامج مصمم للشركات السويدية الصغيرة.",
+      },
+    },
+    {
+      title: {
+        sv: "Systemutveckling",
+        en: "Software development",
+        ar: "تطوير البرمجيات",
+      },
+      body: {
+        sv: "Passar dig som behöver en app, en SaaS-produkt eller ett eget system som är byggt för hur ditt företag arbetar.",
+        en: "For you who need an app, a SaaS product or a system of your own, built around how your business works.",
+        ar: "مناسب لك إذا كنت تحتاج إلى تطبيق أو منتج SaaS أو نظام خاص مبني وفق طريقة عمل شركتك.",
+      },
+    },
+  ] satisfies { title: Localized<string>; body: Localized<string> }[],
 };
+
+/** Accounting software teaser on the homepage (components/sections/home/SoftwareSection.tsx). */
+export const homeSoftware = {
+  eyebrow: {
+    sv: "Bokföringsprogram",
+    en: "Accounting software",
+    ar: "برنامج المحاسبة",
+  } satisfies Localized<string>,
+  title: {
+    sv: "Sköt fakturering, bokföring och lön i Economy Codes",
+    en: "Handle invoicing, bookkeeping and payroll in Economy Codes",
+    ar: "أدِر الفوترة ومسك الدفاتر والرواتب في Economy Codes",
+  } satisfies Localized<string>,
+  lead: {
+    sv: "Vårt eget bokföringsprogram för svenska småföretag. Skicka fakturor och följ betalningarna, bokför med kvitton som underlag, redovisa moms, flytta bokföring med SIE och skapa lönebesked.",
+    en: "Our own accounting software for Swedish small businesses. Send invoices and follow payments, book with receipts attached, report VAT, move your books with SIE and create payslips.",
+    ar: "برنامج المحاسبة الخاص بنا للشركات السويدية الصغيرة. أرسل الفواتير وتابع المدفوعات، وسجّل القيود مع إرفاق الإيصالات، وصرّح بالضريبة، وانقل دفاترك عبر SIE، وأنشئ قسائم الرواتب.",
+  } satisfies Localized<string>,
+  cta: {
+    sv: "Läs mer om bokföringsprogrammet",
+    en: "Read more about the software",
+    ar: "اقرأ المزيد عن البرنامج",
+  } satisfies Localized<string>,
+};
+
+/** Eyebrows and one-line descriptions that give every homepage section the same header. */
+export const homeSectionHeaders = {
+  processEyebrow: { sv: "Så arbetar vi", en: "How we work", ar: "كيف نعمل" },
+  processLead: {
+    sv: "Fyra steg från första kontakt till löpande stöd.",
+    en: "Four steps from the first conversation to ongoing support.",
+    ar: "أربع خطوات من التواصل الأول إلى الدعم المستمر.",
+  },
+  aboutEyebrow: { sv: "Din konsult", en: "Your consultant", ar: "مستشارك" },
+  aboutLead: {
+    sv: "Personlig service från en auktoriserad redovisnings- och lönekonsult.",
+    en: "Personal service from an authorized accounting and payroll consultant.",
+    ar: "خدمة شخصية من مستشار محاسبة ورواتب معتمد.",
+  },
+  faqEyebrow: {
+    sv: "Frågor och svar",
+    en: "Questions and answers",
+    ar: "أسئلة وأجوبة",
+  },
+  faqLead: {
+    sv: "Svar på det våra kunder oftast undrar över – hittar du inte ditt svar, kontakta oss.",
+    en: "Answers to what our clients ask most often – if yours isn't here, contact us.",
+    ar: "إجابات عن أكثر ما يسأل عنه عملاؤنا – إن لم تجد إجابتك فتواصل معنا.",
+  },
+} satisfies Record<string, Localized<string>>;

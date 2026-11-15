@@ -1,20 +1,21 @@
+import { accountingHero } from "@/content/accounting";
 import { definePage, message } from "./types";
 
 export const servicesOverviewPage = definePage({
   key: "tjanster",
-  label: "Services overview",
+  label: "Redovisning (accounting hub)",
   group: "Pages",
   routeKey: "/tjanster",
   seo: {
     title: {
-      sv: "Redovisning och marknadsföring i Sverige",
-      en: "Accounting & marketing services in Sweden",
-      ar: "خدمات المحاسبة والتسويق في السويد",
+      sv: "Redovisningsbyrå för småföretag i hela Sverige",
+      en: "Accounting firm for small businesses in Sweden",
+      ar: "مكتب محاسبة للشركات الصغيرة في السويد",
     },
     description: {
-      sv: "Redovisning, lön, moms, bokslut och digital marknadsföring för företag i hela Sverige från en Srf-auktoriserad byrå. På svenska, engelska och arabiska.",
-      en: "Accounting, bookkeeping, payroll, VAT, annual accounts and digital marketing for businesses across Sweden from an Srf-authorized firm. In English and Arabic.",
-      ar: "المحاسبة ومسك الدفاتر والرواتب وضريبة القيمة المضافة والإغلاق السنوي والتسويق الرقمي للشركات في جميع أنحاء السويد من مكتب معتمد من Srf، بالعربية.",
+      sv: "Srf-auktoriserad redovisningsbyrå för småföretag: bokföring, lön, moms, bokslut och deklaration. Digitalt i hela Sverige, kontor i Mellerud och Trollhättan.",
+      en: "Srf-authorized accounting firm for small businesses: bookkeeping, payroll, VAT, annual accounts and tax returns. Digital across Sweden, in English and Arabic too.",
+      ar: "مكتب محاسبة معتمد من Srf للشركات الصغيرة: مسك الدفاتر والرواتب وضريبة القيمة المضافة والإغلاق السنوي والإقرارات الضريبية، رقميًا في كل السويد وبالعربية.",
     },
   },
   text: [
@@ -22,17 +23,13 @@ export const servicesOverviewPage = definePage({
       key: "heading",
       label: "Page heading (H1)",
       kind: "text",
-      default: {
-        sv: "Redovisning och marknadsföring för företag i Sverige",
-        en: "Accounting and marketing services in Sweden",
-        ar: "خدمات المحاسبة والتسويق للشركات في السويد",
-      },
+      default: accountingHero.title,
     },
     {
       key: "intro",
-      label: "Intro under the heading",
+      label: "Intro under the heading (answers what the firm does)",
       kind: "textarea",
-      default: message((m) => m.home.servicesSubtitle),
+      default: accountingHero.lead,
     },
   ],
 });
@@ -49,8 +46,8 @@ export const contactPage = definePage({
       ar: "اتصل بنا – ميلَّروود وتروللهاتان وعن بُعد",
     },
     description: {
-      sv: "Kontakta Economy Codes för redovisning, lön, deklaration eller digital marknadsföring. Kontor i Mellerud och Trollhättan, digital service i hela Sverige.",
-      en: "Contact Economy Codes about accounting, payroll, tax returns or digital marketing. Offices in Mellerud and Trollhättan, digital service across Sweden.",
+      sv: "Kontakta Economy Codes om redovisning, digital marknadsföring eller en demo av bokföringsprogrammet. Kontor i Mellerud och Trollhättan, digitalt i hela Sverige.",
+      en: "Contact Economy Codes about accounting, digital marketing or a demo of the accounting software. Offices in Mellerud and Trollhättan, digital across Sweden.",
       ar: "تواصل مع Economy Codes بخصوص المحاسبة والرواتب والإقرارات الضريبية أو التسويق الرقمي. مكاتب في ميلَّروود وتروللهاتان وخدمة رقمية في جميع أنحاء السويد.",
     },
   },
@@ -65,7 +62,11 @@ export const contactPage = definePage({
       key: "heading",
       label: "Page heading (H1)",
       kind: "text",
-      default: message((m) => m.nav.contact),
+      default: {
+        sv: "Kontakta Economy Codes",
+        en: "Contact Economy Codes",
+        ar: "تواصل مع Economy Codes",
+      },
     },
     {
       key: "responseTime",

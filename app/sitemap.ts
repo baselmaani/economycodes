@@ -15,6 +15,7 @@ import {
 } from "@/lib/routes";
 import { getPageContent, getPublishedArticles } from "@/lib/cms/content";
 import { locationPageKey, servicePageKey } from "@/lib/cms/pages";
+import { liveSoftwarePages } from "@/content/software";
 
 /** Pages set to noindex in the admin dashboard are left out of the sitemap. */
 async function isNoindex(pageKey: string): Promise<boolean> {
@@ -23,6 +24,9 @@ async function isNoindex(pageKey: string): Promise<boolean> {
 
 // Bumped whenever a static (non-content-dated) page's copy changes materially.
 const STATIC_LAST_MODIFIED = "2026-10-19";
+
+// The /bokforingsprogram section; bump when its copy or screenshots change.
+const SOFTWARE_LAST_MODIFIED = "2026-11-12";
 
 /**
  * One <url> per locale, each carrying the full hreflang set. Google wants every
@@ -45,6 +49,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/",
     "/tjanster",
     "/digital-marknadsforing",
+    "/systemutveckling",
     "/om-hadi",
     "/kontakt",
     "/artiklar",
@@ -67,6 +72,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     locationPages.map((page) => isNoindex(locationPageKey(page.locationId))),
   );
   const indexedLocations = locationPages.filter((_, i) => !locationNoindex[i]);
+  // Pending software pages are never listed, whatever their CMS setting.
+  const softwarePages = liveSoftwarePages();
+  const softwareNoindex = await Promise.all(
+    softwarePages.map((page) => isNoindex(page.cmsKey)),
+  );
+  const indexedSoftware = softwarePages.filter((_, i) => !softwareNoindex[i]);
   const articles = (await getPublishedArticles()).filter(
     (article) => !article.seo.noindex,
   );
@@ -87,5 +98,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ),
   );
 
-  return [...staticUrls, ...locationUrls, ...serviceUrls, ...articleUrls];
+  const softwareUrls = indexedSoftware.flatMap((page) =>
+    localizedEntries(getAlternateLinks(page.route), SOFTWARE_LAST_MODIFIED),
+  );
+
+  return [
+    ...staticUrls,
+    ...softwareUrls,
+    ...locationUrls,
+    ...serviceUrls,
+    ...articleUrls,
+  ];
 }

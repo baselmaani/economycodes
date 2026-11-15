@@ -33,7 +33,8 @@ import {
  * content/services.ts, which holds verified business facts and is covered by
  * tests/unit/content-integrity.test.ts -- this file only affects styling.
  */
-export type ServiceGroup = "core" | "advisory" | "specialist" | "digital";
+export type ServiceGroup =
+  "core" | "advisory" | "specialist" | "digital" | "development";
 
 export const serviceGroups: Record<
   ServiceGroup,
@@ -58,6 +59,11 @@ export const serviceGroups: Record<
     sv: "Digital marknadsföring",
     en: "Digital marketing",
     ar: "التسويق الرقمي",
+  },
+  development: {
+    sv: "Systemutveckling",
+    en: "Software development",
+    ar: "تطوير البرمجيات",
   },
 };
 
@@ -89,10 +95,10 @@ export const serviceIcons: Record<
   "social-media-ads": { icon: Megaphone, group: "digital" },
   "google-ads": { icon: MousePointerClick, group: "digital" },
   "social-media-management": { icon: Share2, group: "digital" },
-  "saas-development": { icon: AppWindow, group: "digital" },
-  "mobile-app-development": { icon: Smartphone, group: "digital" },
-  "ui-ux-design": { icon: PenTool, group: "digital" },
-  "custom-system-development": { icon: Workflow, group: "digital" },
+  "saas-development": { icon: AppWindow, group: "development" },
+  "mobile-app-development": { icon: Smartphone, group: "development" },
+  "ui-ux-design": { icon: PenTool, group: "development" },
+  "custom-system-development": { icon: Workflow, group: "development" },
 };
 
 export function getServiceIcon(key: string): LucideIcon {
@@ -101,4 +107,48 @@ export function getServiceIcon(key: string): LucideIcon {
 
 export function getServiceGroup(key: string): ServiceGroup {
   return serviceIcons[key]?.group ?? "core";
+}
+
+/** The accounting groups, in display order; "digital" and "development" are their own offerings. */
+export const ACCOUNTING_GROUPS: readonly ServiceGroup[] = [
+  "core",
+  "advisory",
+  "specialist",
+];
+
+/** Marketing services only (the /digital-marknadsforing offering). */
+export function isDigitalService(key: string): boolean {
+  return getServiceGroup(key) === "digital";
+}
+
+/** Programming services (the /systemutveckling offering). */
+export function isDevelopmentService(key: string): boolean {
+  return getServiceGroup(key) === "development";
+}
+
+/** The offerings that have service detail pages (bokforingsprogram has its own pages). */
+export type ServiceOfferingKey =
+  "redovisning" | "marknadsforing" | "utveckling";
+
+/** Which offering a service belongs to; this decides its URL, nav menu and hub. */
+export function getServiceOffering(key: string): ServiceOfferingKey {
+  const group = getServiceGroup(key);
+  if (group === "digital") return "marknadsforing";
+  if (group === "development") return "utveckling";
+  return "redovisning";
+}
+
+/** Splits services into the given groups, in that order, skipping empty groups. */
+export function groupServices<S extends { key: string }>(
+  list: readonly S[],
+  groups: readonly ServiceGroup[],
+  locale: "sv" | "en" | "ar",
+): { group: ServiceGroup; label: string; services: S[] }[] {
+  return groups
+    .map((group) => ({
+      group,
+      label: serviceGroups[group][locale],
+      services: list.filter((s) => getServiceGroup(s.key) === group),
+    }))
+    .filter((entry) => entry.services.length > 0);
 }

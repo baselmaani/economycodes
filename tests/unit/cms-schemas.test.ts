@@ -16,6 +16,13 @@ import {
   pageOverrideSchema,
 } from "@/lib/cms/schemas";
 
+const COVER = {
+  src: "https://example.blob.vercel-storage.com/cover.webp",
+  width: 1600,
+  height: 1000,
+  alt: { sv: "Omslagsbild" },
+};
+
 function issuesFor(input: unknown): string[] {
   const result = articleInputSchema.safeParse(cleanArticleJson(input));
   return result.success ? [] : formatIssues(result.error);
@@ -24,6 +31,11 @@ function issuesFor(input: unknown): string[] {
 describe("article JSON schema", () => {
   it("accepts the downloadable template", () => {
     expect(issuesFor(ARTICLE_TEMPLATE)).toEqual([]);
+  });
+
+  it("accepts an article with or without a cover image", () => {
+    expect(ARTICLE_TEMPLATE).not.toHaveProperty("coverImage");
+    expect(issuesFor({ ...ARTICLE_TEMPLATE, coverImage: COVER })).toEqual([]);
   });
 
   it("accepts every existing article (so cms:seed can't fail)", () => {
@@ -78,10 +90,7 @@ describe("article JSON schema", () => {
     const issues = issuesFor({
       ...ARTICLE_TEMPLATE,
       slug: { sv: "Min Artikel" },
-      coverImage: {
-        ...ARTICLE_TEMPLATE.coverImage,
-        src: "http://x.test/a.jpg",
-      },
+      coverImage: { ...COVER, src: "http://x.test/a.jpg" },
     });
     expect(issues.some((issue) => issue.startsWith("slug.sv"))).toBe(true);
     expect(issues.some((issue) => issue.startsWith("coverImage.src"))).toBe(
@@ -96,6 +105,14 @@ describe("article JSON schema", () => {
       body: { ...ARTICLE_TEMPLATE.body, ar: [] },
     });
     expect(issues).toEqual([]);
+  });
+
+  it("accepts an empty cover image alt text", () => {
+    const result = articleInputSchema.safeParse({
+      ...ARTICLE_TEMPLATE,
+      coverImage: { ...COVER, alt: { sv: " ", en: "" } },
+    });
+    expect(result.success && result.data.coverImage?.alt).toEqual({ sv: "" });
   });
 });
 

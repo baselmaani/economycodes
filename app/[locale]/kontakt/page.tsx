@@ -1,20 +1,22 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Clock } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import type { AppLocale } from "@/i18n/routing";
 import { getAbsoluteUrl, getAlternateLinks } from "@/lib/routes";
-import { buildBreadcrumbJsonLd } from "@/lib/structured-data/breadcrumb";
-import { JsonLd } from "@/components/seo/JsonLd";
+import { CONTACT_FORM_ID } from "@/lib/contact-links";
 import { getPageContent } from "@/lib/cms/content";
 import { buildPageMetadata } from "@/lib/cms/metadata";
 import { getLocalized } from "@/lib/i18n-content";
-import { Breadcrumbs } from "@/components/common/Breadcrumbs";
+import { getServiceOptions } from "@/lib/service-lookup";
+import { inquiryTopicList } from "@/content/inquiries";
 import { Container } from "@/components/layout/Container";
 import { ContactForm } from "@/components/forms/ContactForm";
-import { getServiceOptions } from "@/lib/service-lookup";
-import { Reveal } from "@/components/motion/Reveal";
+import { ContactInquiryPrefill } from "@/components/forms/ContactInquiryPrefill";
 import { ContactMethods } from "@/components/marketing/ContactMethods";
+import { Reveal } from "@/components/motion/Reveal";
+import { PageBreadcrumbs } from "@/components/page/PageBreadcrumbs";
 
 export async function generateMetadata({
   params,
@@ -35,51 +37,50 @@ export default async function ContactPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const nav = await getTranslations({ locale, namespace: "nav" });
-  const home = await getTranslations({ locale, namespace: "home" });
   const page = await getPageContent("kontakt");
 
   return (
     <Container className="py-12 sm:py-16">
-      <JsonLd
-        data={buildBreadcrumbJsonLd([
-          { name: nav("home"), url: getAbsoluteUrl("/", locale) },
-          { name: nav("contact"), url: getAbsoluteUrl("/kontakt", locale) },
-        ])}
+      <PageBreadcrumbs
+        locale={locale}
+        items={[{ label: nav("contact") }]}
+        currentUrl={getAbsoluteUrl("/kontakt", locale)}
       />
-      <Breadcrumbs
-        items={[
-          { label: nav("home"), routeKey: "/" },
-          { label: nav("contact") },
-        ]}
-      />
-      <Reveal>
-        <h1 className="text-page-h1 mt-4 font-semibold text-balance">
-          {nav("contact")}
-        </h1>
-        <p className="text-muted-foreground text-body mt-3 max-w-2xl">
-          {getLocalized(page.text.intro, locale)}
-        </p>
-      </Reveal>
+      <h1 className="text-page-h1 mt-4 font-semibold text-balance">
+        {getLocalized(page.text.heading, locale)}
+      </h1>
+      <p className="text-muted-foreground text-body mt-3 max-w-2xl">
+        {getLocalized(page.text.intro, locale)}
+      </p>
 
       <div className="mt-10 grid items-start gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
-        <Reveal delay={80}>
+        <Reveal delay={80} className="order-last lg:order-first">
           <div className="flex flex-col gap-4">
             <ContactMethods />
             <p className="text-muted-foreground flex items-center gap-2 text-sm">
               <Clock size={16} aria-hidden="true" className="text-primary" />
-              {home("contactResponseTime")}
+              {getLocalized(page.text.responseTime, locale)}
             </p>
           </div>
         </Reveal>
-        <Reveal delay={140}>
+        <div id={CONTACT_FORM_ID} className="scroll-mt-24">
           <ContactForm
             locale={locale}
             serviceOptions={getServiceOptions(locale)}
             variant="card"
-            title={home("contactFormTitle")}
+            title={getLocalized(page.text.formTitle, locale)}
             titleAs="h2"
           />
-        </Reveal>
+          <Suspense fallback={null}>
+            <ContactInquiryPrefill
+              topics={inquiryTopicList.map((topic) => ({
+                query: topic.query,
+                value: topic.value,
+                message: getLocalized(topic.message, locale),
+              }))}
+            />
+          </Suspense>
+        </div>
       </div>
     </Container>
   );

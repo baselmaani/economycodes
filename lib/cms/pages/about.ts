@@ -195,15 +195,13 @@ export const aboutPage = definePage({
       key: "heroPhoto",
       label: "Hero photo",
       section: "profile",
-      hint: "Portrait, about 400:439 (e.g. 800 × 878)",
-      default: hadi.heroPhoto,
+      hint: "Portrait, about 400:439 (e.g. 800 × 878). Without one, a decorative panel is shown.",
     },
     {
       key: "photo",
       label: "Small profile photo (profile cards and final call to action)",
       section: "profile",
-      hint: "Square",
-      default: hadi.photo,
+      hint: "Square. Without one, profile cards show initials and the call to action shows no photo.",
     },
   ],
 });

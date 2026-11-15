@@ -1,15 +1,17 @@
 import {
   authorizationContent,
   benefits,
-  benefitsImage,
   digitalNationwideContent,
   heroContent,
+  homeAreas,
+  homeSectionHeaders,
+  homeSoftware,
   homeMeta,
   languageSupportContent,
   processSteps,
   whoWeHelp,
 } from "@/content/home";
-import { hadi } from "@/content/people";
+import { homeDevelopment } from "@/content/development";
 import { cmsIconName } from "@/lib/cms/icons";
 import {
   definePage,
@@ -28,12 +30,20 @@ const PROCESS_STEP_ICONS = [
 ] as const;
 
 /** Homepage sections, in default order; each key has a component in components/sections/home. */
-// Eight sections shown by default; the four marked hiddenByDefault repeat
+// Ten sections shown by default; the four marked hiddenByDefault repeat
 // points made by trust/about/faq and can be switched back on in the dashboard.
+// The hero links to the four offerings (content/offerings.ts); "areas"
+// then helps visitors choose between them, and services (accounting),
+// digital (marketing), software and development each get their own teaser
+// section.
 const HOME_SECTIONS = [
   { key: "hero", label: "Hero", locked: true },
+  { key: "areas", label: "Which offering suits you" },
   { key: "trust", label: "Verified authorization" },
-  { key: "services", label: "Services overview" },
+  { key: "services", label: "Accounting services" },
+  { key: "digital", label: "Digital marketing teaser" },
+  { key: "software", label: "Accounting software teaser" },
+  { key: "development", label: "Software development teaser" },
   { key: "why", label: "Why an authorized firm", hiddenByDefault: true },
   {
     key: "nationwide",
@@ -43,7 +53,6 @@ const HOME_SECTIONS = [
   { key: "process", label: "How the collaboration works" },
   { key: "about", label: "About Hadi" },
   { key: "languages", label: "Language support", hiddenByDefault: true },
-  { key: "digital", label: "Digital marketing teaser" },
   { key: "benefits", label: "Benefits", hiddenByDefault: true },
   { key: "faq", label: "FAQ" },
   // The hero's primary button scrolls to this section (#kontakt).
@@ -221,6 +230,17 @@ export const homePage = definePage({
       section: "services",
       default: message((m) => m.home.servicesSubtitle),
     },
+    {
+      key: "servicesCta",
+      label: "Link to the accounting page",
+      kind: "text",
+      section: "services",
+      default: {
+        sv: "Läs mer om redovisning",
+        en: "Read more about accounting",
+        ar: "اقرأ المزيد عن المحاسبة",
+      },
+    },
 
     {
       key: "nationwideTitle",
@@ -245,11 +265,76 @@ export const homePage = definePage({
     },
 
     {
+      key: "processEyebrow",
+      label: "Eyebrow",
+      kind: "text",
+      section: "process",
+      default: homeSectionHeaders.processEyebrow,
+    },
+    {
       key: "processTitle",
       label: "Heading",
       kind: "text",
       section: "process",
       default: message((m) => m.home.collaborationTitle),
+    },
+    {
+      key: "processLead",
+      label: "Intro",
+      kind: "textarea",
+      section: "process",
+      default: homeSectionHeaders.processLead,
+    },
+
+    {
+      key: "areasEyebrow",
+      label: "Eyebrow",
+      kind: "text",
+      section: "areas",
+      default: homeAreas.eyebrow,
+    },
+    {
+      key: "areasTitle",
+      label: "Heading",
+      kind: "text",
+      section: "areas",
+      default: homeAreas.title,
+    },
+    {
+      key: "areasLead",
+      label: "Intro",
+      kind: "textarea",
+      section: "areas",
+      default: homeAreas.lead,
+    },
+
+    {
+      key: "softwareEyebrow",
+      label: "Eyebrow",
+      kind: "text",
+      section: "software",
+      default: homeSoftware.eyebrow,
+    },
+    {
+      key: "softwareTitle",
+      label: "Heading",
+      kind: "text",
+      section: "software",
+      default: homeSoftware.title,
+    },
+    {
+      key: "softwareLead",
+      label: "Intro",
+      kind: "textarea",
+      section: "software",
+      default: homeSoftware.lead,
+    },
+    {
+      key: "softwareCta",
+      label: "Link label",
+      kind: "text",
+      section: "software",
+      default: homeSoftware.cta,
     },
 
     {
@@ -282,11 +367,54 @@ export const homePage = definePage({
     },
 
     {
+      key: "developmentEyebrow",
+      label: "Eyebrow",
+      kind: "text",
+      section: "development",
+      default: homeDevelopment.eyebrow,
+    },
+    {
+      key: "developmentTitle",
+      label: "Heading",
+      kind: "text",
+      section: "development",
+      default: homeDevelopment.title,
+    },
+    {
+      key: "developmentLead",
+      label: "Intro",
+      kind: "textarea",
+      section: "development",
+      default: homeDevelopment.lead,
+    },
+    {
+      key: "developmentCta",
+      label: "Button label",
+      kind: "text",
+      section: "development",
+      default: homeDevelopment.cta,
+    },
+
+    {
+      key: "aboutEyebrow",
+      label: "Eyebrow",
+      kind: "text",
+      section: "about",
+      default: homeSectionHeaders.aboutEyebrow,
+    },
+    {
       key: "aboutTitle",
       label: "Heading",
       kind: "text",
       section: "about",
       default: message((m) => m.home.aboutTitle),
+    },
+    {
+      key: "aboutLead",
+      label: "Intro",
+      kind: "textarea",
+      section: "about",
+      default: homeSectionHeaders.aboutLead,
     },
 
     {
@@ -313,12 +441,26 @@ export const homePage = definePage({
     },
 
     {
+      key: "faqEyebrow",
+      label: "Eyebrow",
+      kind: "text",
+      section: "faq",
+      default: homeSectionHeaders.faqEyebrow,
+    },
+    {
       key: "faqTitle",
       label: "Heading",
       kind: "text",
       section: "faq",
       hint: "The questions themselves are edited under FAQs (placement: Global).",
       default: message((m) => m.common.faqTitle),
+    },
+    {
+      key: "faqLead",
+      label: "Intro",
+      kind: "textarea",
+      section: "faq",
+      default: homeSectionHeaders.faqLead,
     },
 
     {
@@ -373,6 +515,23 @@ export const homePage = definePage({
   ],
   collections: [
     {
+      key: "areas",
+      label: "Area cards",
+      itemLabel: "Area",
+      section: "areas",
+      // Tied to the accounting, marketing, software and development pages in
+      // that order (content/offerings.ts).
+      fixedLength: true,
+      fields: [
+        { key: "title", label: "Title", kind: "text" },
+        { key: "body", label: "Text", kind: "textarea" },
+      ],
+      default: homeAreas.items.map((item) => ({
+        title: item.title,
+        body: item.body,
+      })),
+    },
+    {
       key: "processSteps",
       label: "Steps",
       itemLabel: "Step",
@@ -402,15 +561,57 @@ export const homePage = definePage({
       key: "heroPhoto",
       label: "Hero photo",
       section: "hero",
-      hint: "Portrait, about 400:439 (e.g. 800 × 878)",
-      default: hadi.heroPhoto,
+      hint: "Portrait, about 400:439 (e.g. 800 × 878). Without one, the About page's hero photo is used.",
+    },
+    {
+      key: "servicesImage",
+      label: "Accounting section image",
+      section: "services",
+      hint: "Landscape, about 3:2 (e.g. 1600 × 1067). Shown beside the heading.",
+      default: {
+        src: "/media/optimized/home-benefits.webp",
+        width: 1600,
+        height: 1067,
+        alt: {
+          sv: "Miniräknare och budgetrapporter på ett skrivbord",
+          en: "Calculator and budget reports on a desk",
+          ar: "آلة حاسبة وتقارير ميزانية على مكتب",
+        },
+      },
+    },
+    {
+      key: "digitalImage",
+      label: "Digital marketing section image",
+      section: "digital",
+      hint: "Landscape, about 3:2 (e.g. 1600 × 1067). Shown beside the heading.",
+      default: {
+        src: "/media/optimized/hero.webp",
+        width: 1600,
+        height: 1068,
+        alt: {
+          sv: "Diagram och rapporter som gås igenom vid ett skrivbord",
+          en: "Charts and reports being reviewed at a desk",
+          ar: "مخططات وتقارير تتم مراجعتها على مكتب",
+        },
+      },
+    },
+    {
+      key: "developmentImage",
+      label: "Software development section image",
+      section: "development",
+      hint: "Optional. Landscape, about 3:2 (e.g. 1600 × 1067). Without one, an illustration is shown.",
+    },
+    {
+      key: "softwareImage",
+      label: "Accounting software section image",
+      section: "software",
+      hint: "Optional. Without one, the real dashboard screenshot is shown (in the visitor's language).",
     },
     {
       key: "benefitsImage",
       label: "Benefits section image",
       section: "benefits",
-      hint: "Landscape, about 3:2",
-      default: benefitsImage,
+      hint: "Landscape, about 3:2. Without one, the benefits fill the full width.",
     },
   ],
 });

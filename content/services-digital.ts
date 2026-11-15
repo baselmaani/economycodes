@@ -4,10 +4,11 @@ import { MARKETING_RESULTS_DISCLAIMER } from "./disclaimers";
 const LAST_REVIEWED = "2026-09-28";
 
 /**
- * Digital marketing services. Spread into `services` in content/services.ts
- * so they share the /tjanster/[slug] detail template, sitemap, OG images and
- * contact-form dropdown with the accounting services. Grouped as "digital"
- * in content/service-icons.ts. Scope, delivery and pricing are not yet
+ * Digital marketing and software development services. Spread into
+ * `services` in content/services.ts so they share the service detail
+ * template, sitemap, OG images and contact-form dropdown with the accounting
+ * services. content/service-icons.ts groups them as "digital" (served under
+ * /digital-marknadsforing/[slug]) or "development" (/systemutveckling/[slug]). Scope, delivery and pricing are not yet
  * confirmed by the client (CLIENT-TODO item 21) -- copy stays general and
  * never promises specific rankings or results.
  */

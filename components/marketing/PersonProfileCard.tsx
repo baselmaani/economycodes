@@ -7,6 +7,13 @@ import { getLocalized } from "@/lib/i18n-content";
 import { cn } from "@/lib/utils";
 import type { PersonProfile } from "@/content/types";
 
+/** "Hadi Al Maani" -> "HM": first and last name. */
+function initials(name: string): string {
+  const words = name.trim().split(/\s+/);
+  const last = words.length > 1 ? words[words.length - 1] : "";
+  return `${words[0]?.[0] ?? ""}${last[0] ?? ""}`.toUpperCase();
+}
+
 export function PersonProfileCard({
   person,
   locale,
@@ -31,13 +38,26 @@ export function PersonProfileCard({
             compact ? "w-28" : "w-40",
           )}
         >
-          <Image
-            src={person.photo.src}
-            alt={getLocalized(person.photo.alt, locale)}
-            fill
-            sizes={compact ? "112px" : "160px"}
-            className="object-cover"
-          />
+          {person.photo ? (
+            <Image
+              src={person.photo.src}
+              alt={getLocalized(person.photo.alt, locale)}
+              fill
+              sizes={compact ? "112px" : "160px"}
+              className="object-cover"
+            />
+          ) : (
+            // No photo picked in the dashboard yet: show initials instead.
+            <span
+              aria-hidden="true"
+              className={cn(
+                "bg-primary/10 text-primary flex size-full items-center justify-center font-semibold",
+                compact ? "text-2xl" : "text-4xl",
+              )}
+            >
+              {initials(person.name)}
+            </span>
+          )}
         </div>
         <span
           aria-hidden="true"

@@ -45,7 +45,7 @@ export function rowToArticle(row: ArticleRow): CmsArticle {
     title: row.title,
     excerpt: row.excerpt,
     body: row.body,
-    coverImage: row.coverImage,
+    coverImage: row.coverImage ?? undefined,
     faqIds: row.faqIds,
     seo: row.seo ?? {},
     publishedAt: row.publishedAt,

@@ -1,5 +1,7 @@
 import { routing, type AppLocale } from "@/i18n/routing";
 import { siteUrl } from "@/lib/site";
+import { getServiceRoute, getServiceSlug } from "@/lib/service-lookup";
+import type { Service } from "@/content/types";
 
 export const alt = "Economy Codes AB";
 export const size = { width: 1200, height: 630 };
@@ -19,14 +21,19 @@ export function getDefaultOgImageUrl(locale: AppLocale): string {
 
 /**
  * Absolute URL of a service's own opengraph-image route (see
- * app/[locale]/tjanster/[slug]/opengraph-image.tsx). Uses the literal
- * internal "tjanster" route segment, same as getDefaultOgImageUrl() above --
- * not the next-intl-localized pathname (e.g. "/services", "/الخدمات").
+ * app/[locale]/{tjanster,digital-marknadsforing,systemutveckling}/[slug]/
+ * opengraph-image.tsx). Uses the literal internal route segment of the
+ * service's offering, same as getDefaultOgImageUrl() above -- not the
+ * next-intl-localized pathname (e.g. "/services", "/الخدمات").
  */
-export function getServiceOgImageUrl(locale: AppLocale, slug: string): string {
+export function getServiceOgImageUrl(
+  locale: AppLocale,
+  service: Service,
+): string {
   const prefix = locale === routing.defaultLocale ? "" : `/${locale}`;
+  const segment = getServiceRoute(service).replace("/[slug]", "");
   return new URL(
-    `${prefix}/tjanster/${slug}/opengraph-image`,
+    `${prefix}${segment}/${getServiceSlug(locale, service)}/opengraph-image`,
     siteUrl,
   ).toString();
 }
@@ -42,6 +49,30 @@ export function getDigitalMarketingOgImageUrl(locale: AppLocale): string {
   const prefix = locale === routing.defaultLocale ? "" : `/${locale}`;
   return new URL(
     `${prefix}/digital-marknadsforing/opengraph-image`,
+    siteUrl,
+  ).toString();
+}
+
+/** Absolute URL of the software development hub page's own opengraph-image route. */
+export function getDevelopmentOgImageUrl(locale: AppLocale): string {
+  const prefix = locale === routing.defaultLocale ? "" : `/${locale}`;
+  return new URL(
+    `${prefix}/systemutveckling/opengraph-image`,
+    siteUrl,
+  ).toString();
+}
+
+/**
+ * Absolute URL of a /bokforingsprogram page's own opengraph-image route, using
+ * the literal internal (Swedish) path like the other builders here.
+ */
+export function getSoftwareOgImageUrl(
+  locale: AppLocale,
+  internalPath: string,
+): string {
+  const prefix = locale === routing.defaultLocale ? "" : `/${locale}`;
+  return new URL(
+    `${prefix}${internalPath}/opengraph-image`,
     siteUrl,
   ).toString();
 }

@@ -1,10 +1,12 @@
 import { aboutPage } from "./about";
 import { contactPage, articlesPage, servicesOverviewPage } from "./misc";
+import { developmentPage } from "./development";
 import { digitalPage } from "./digital";
 import { homePage } from "./home";
 import { legalPages } from "./legal";
 import { locationPageDefs } from "./locations";
 import { servicePageDefs } from "./services";
+import { softwarePageDefs } from "./software";
 import { businessSettings, faqSettings } from "./settings";
 import type { PageDef } from "./types";
 
@@ -23,6 +25,8 @@ export const pageDefs: PageDef[] = [
   aboutPage,
   servicesOverviewPage,
   digitalPage,
+  developmentPage,
+  ...softwarePageDefs,
   contactPage,
   articlesPage,
   ...legalPages,
@@ -41,6 +45,7 @@ export type StaticPageKey =
   | "om-hadi"
   | "tjanster"
   | "digital-marknadsforing"
+  | "systemutveckling"
   | "kontakt"
   | "artiklar"
   | "integritetspolicy"

@@ -22,7 +22,9 @@ export function buildPersonJsonLd(
     url: profileUrl,
     jobTitle: getLocalized(person.title, locale),
     description: getLocalized(person.bio, locale),
-    image: new URL(person.photo.src, siteUrl).toString(),
+    ...(person.photo && {
+      image: new URL(person.photo.src, siteUrl).toString(),
+    }),
     sameAs: [person.socials.facebook],
     knowsLanguage: AVAILABLE_LANGUAGES,
     worksFor: orgRef,

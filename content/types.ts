@@ -59,9 +59,10 @@ export interface PersonProfile {
   name: string;
   title: Localized<string>;
   bio: Localized<string>;
-  photo: MediaRef;
-  /** Tighter, watermark-free crop of `photo` used for the larger Hero display. */
-  heroPhoto: MediaRef;
+  /** Picked in the dashboard (About page); unset until one is chosen. */
+  photo?: MediaRef;
+  /** Portrait for the larger Hero display; unset until one is chosen. */
+  heroPhoto?: MediaRef;
   socials: {
     facebook: string;
   };

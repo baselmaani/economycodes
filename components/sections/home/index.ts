@@ -3,8 +3,10 @@ import type { ComponentType } from "react";
 import type { HomeSectionKey } from "@/lib/cms/pages/home";
 import type { SectionProps } from "../types";
 import { AboutSection } from "./AboutSection";
+import { AreasSection } from "./AreasSection";
 import { BenefitsSection } from "./BenefitsSection";
 import { ContactSection } from "./ContactSection";
+import { DevelopmentSection } from "./DevelopmentSection";
 import { DigitalSection } from "./DigitalSection";
 import { FaqSection } from "./FaqSection";
 import { HeroSection } from "./HeroSection";
@@ -12,6 +14,7 @@ import { LanguagesSection } from "./LanguagesSection";
 import { NationwideSection } from "./NationwideSection";
 import { ProcessSection } from "./ProcessSection";
 import { ServicesSection } from "./ServicesSection";
+import { SoftwareSection } from "./SoftwareSection";
 import { TrustSection } from "./TrustSection";
 import { WhySection } from "./WhySection";
 
@@ -23,12 +26,15 @@ import { WhySection } from "./WhySection";
  */
 export const homeSections = {
   hero: HeroSection,
+  areas: AreasSection,
   trust: TrustSection,
   why: WhySection,
   services: ServicesSection,
   nationwide: NationwideSection,
   process: ProcessSection,
   digital: DigitalSection,
+  software: SoftwareSection,
+  development: DevelopmentSection,
   about: AboutSection,
   languages: LanguagesSection,
   benefits: BenefitsSection,

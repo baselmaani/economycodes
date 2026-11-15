@@ -19,7 +19,7 @@ export const articlesTable = pgTable("articles", {
   title: jsonb("title").$type<Localized<string>>().notNull(),
   excerpt: jsonb("excerpt").$type<Localized<string>>().notNull(),
   body: jsonb("body").$type<Localized<ContentBlock[]>>().notNull(),
-  coverImage: jsonb("cover_image").$type<MediaRef>().notNull(),
+  coverImage: jsonb("cover_image").$type<MediaRef>(),
   faqIds: text("faq_ids").array().notNull().default([]),
   seo: jsonb("seo").$type<SeoFields>().notNull().default({}),
   /** Content dates shown on the page (YYYY-MM-DD), distinct from row timestamps. */

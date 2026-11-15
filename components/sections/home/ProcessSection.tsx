@@ -15,7 +15,11 @@ export function ProcessSection({ locale, content }: SectionProps) {
     <Section tone="tint">
       <Container size="wide">
         <Reveal>
-          <SectionHeading title={getLocalized(text.processTitle, locale)} />
+          <SectionHeading
+            eyebrow={getLocalized(text.processEyebrow, locale)}
+            title={getLocalized(text.processTitle, locale)}
+            lead={getLocalized(text.processLead, locale)}
+          />
         </Reveal>
         <div className="relative mt-14">
           <RevealLine

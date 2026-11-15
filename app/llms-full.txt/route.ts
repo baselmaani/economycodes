@@ -14,6 +14,13 @@ import {
 } from "@/lib/cms/content";
 import { getFaqs } from "@/lib/cms/site";
 import { llmsIntro } from "@/lib/llms";
+import { getAbsoluteUrl } from "@/lib/routes";
+import { liveSoftwarePages, softwarePages } from "@/content/software";
+import {
+  softwareIntegrations,
+  softwareOverview,
+  softwareSubpages,
+} from "@/content/software-pages";
 
 // Same cadence as /llms.txt, so dashboard edits show up without a rebuild.
 export const revalidate = 3600;
@@ -100,6 +107,39 @@ function articleSection(
   ].join("\n\n");
 }
 
+/** The accounting software: overview, features, integrations and the live pages' FAQs. */
+function softwareSection(locale: AppLocale): string {
+  const live = liveSoftwarePages();
+  const subpageFaqs = live.flatMap((page) =>
+    page.key in softwareSubpages
+      ? softwareSubpages[page.key as keyof typeof softwareSubpages].faqs
+      : [],
+  );
+  return [
+    `### ${getLocalized(softwareOverview.hero.title, locale)}`,
+    `URL: ${getAbsoluteUrl(softwarePages.overview.route, locale)}`,
+    getLocalized(softwareOverview.hero.lead, locale),
+    ...bulletList(
+      getLocalized(softwareOverview.featuresTitle, locale),
+      softwareOverview.features.map(
+        (feature) =>
+          `${getLocalized(feature.title, locale)}: ${getLocalized(feature.body, locale)}`,
+      ),
+    ),
+    ...bulletList(
+      getLocalized(softwareIntegrations.title, locale),
+      softwareIntegrations.items.map(
+        (item) =>
+          `${getLocalized(item.name, locale)}: ${getLocalized(item.what, locale)} ${getLocalized(item.who, locale)}`,
+      ),
+    ),
+    ...[...softwareOverview.faqs, ...subpageFaqs].map(
+      (faq) =>
+        `**${getLocalized(faq.question, locale)}**\n${getLocalized(faq.answer, locale)}`,
+    ),
+  ].join("\n\n");
+}
+
 /**
  * The full text behind /llms.txt: every service, FAQ and published article,
  * per language, so answer engines can quote the site without crawling it.
@@ -120,6 +160,7 @@ export async function GET() {
       `## ${LANGUAGE_NAMES[locale]}`,
       ...faqsToMarkdown(generalFaqs, locale),
       ...services.map((service) => serviceSection(service, faqs, locale)),
+      softwareSection(locale),
       ...indexedArticles.map((article) =>
         articleSection(article, faqs, locale),
       ),

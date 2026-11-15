@@ -120,6 +120,21 @@
   html {
     @apply font-sans;
   }
+  /* Visible keyboard focus for anything without its own focus style (plain
+     links in the footer, prose, etc.). :where() keeps specificity at zero,
+     so components that style focus themselves still win. */
+  :where(
+    a,
+    button,
+    summary,
+    select,
+    input,
+    textarea,
+    [tabindex]
+  ):focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
   /* Smooth in-page anchor jumps (e.g. the hero CTA to #kontakt). The html
      element's data-scroll-behavior keeps route changes instant. */
   @media (prefers-reduced-motion: no-preference) {

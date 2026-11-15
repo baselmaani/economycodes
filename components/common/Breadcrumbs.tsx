@@ -9,12 +9,16 @@ export interface BreadcrumbItem {
   routeKey?: StaticAppPathname;
 }
 
-export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
+export function Breadcrumbs({
+  items,
+  label = "Breadcrumb",
+}: {
+  items: BreadcrumbItem[];
+  /** Localized landmark name (messages nav.breadcrumb). */
+  label?: string;
+}) {
   return (
-    <nav
-      aria-label="Breadcrumb"
-      className="not-prose text-muted-foreground text-sm"
-    >
+    <nav aria-label={label} className="not-prose text-muted-foreground text-sm">
       <ol className="flex flex-wrap items-center gap-1.5">
         {items.map((item, index) => (
           <li key={index} className="flex items-center gap-1.5">
@@ -28,7 +32,7 @@ export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
             {item.routeKey ? (
               <Link
                 href={item.routeKey}
-                className="hover:text-foreground transition-colors"
+                className="hover:text-foreground focus-visible:ring-ring/50 rounded-sm transition-colors focus-visible:ring-3 focus-visible:outline-none"
               >
                 {item.label}
               </Link>

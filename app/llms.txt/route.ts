@@ -1,5 +1,8 @@
-import { servicesList } from "@/content/services";
-import { getServiceGroup } from "@/content/service-icons";
+import {
+  getServiceOffering,
+  type ServiceOfferingKey,
+} from "@/content/service-icons";
+import { offerings } from "@/content/offerings";
 import type { AppLocale } from "@/i18n/routing";
 import { routing } from "@/i18n/routing";
 import { getLocalized } from "@/lib/i18n-content";
@@ -9,9 +12,11 @@ import {
   getLocationAlternateLinks,
   getServiceAlternateLinks,
   locationPages,
+  servicesList,
 } from "@/lib/routes";
 import { getPublishedArticles, type CmsArticle } from "@/lib/cms/content";
 import { LLMS_FULL_URL, llmsIntro } from "@/lib/llms";
+import { liveSoftwarePages } from "@/content/software";
 
 // Regenerated hourly so articles published from the dashboard show up
 // without a rebuild.
@@ -36,7 +41,7 @@ const LABELS: Record<
   sv: {
     heading: "Svenska",
     home: "Startsida",
-    services: "Tjänster",
+    services: "Redovisning",
     digital: "Digital marknadsföring",
     about: "Om Hadi",
     contact: "Kontakt",
@@ -49,7 +54,7 @@ const LABELS: Record<
   en: {
     heading: "English",
     home: "Home",
-    services: "Services",
+    services: "Accounting",
     digital: "Digital marketing",
     about: "About Hadi",
     contact: "Contact",
@@ -62,7 +67,7 @@ const LABELS: Record<
   ar: {
     heading: "العربية",
     home: "الرئيسية",
-    services: "الخدمات",
+    services: "المحاسبة",
     digital: "التسويق الرقمي",
     about: "عن هادي",
     contact: "اتصل بنا",
@@ -80,9 +85,9 @@ function buildLocaleSection(locale: AppLocale, articles: CmsArticle[]): string {
 
   lines.push(`- [${t.home}](${getAbsoluteUrl("/", locale)})`);
 
-  const pushServiceLinks = (digital: boolean) => {
+  const pushServiceLinks = (offering: ServiceOfferingKey) => {
     for (const service of servicesList) {
-      if ((getServiceGroup(service.key) === "digital") !== digital) continue;
+      if (getServiceOffering(service.key) !== offering) continue;
       const name = getLocalized(service.name, locale);
       const url = getServiceAlternateLinks(service)[locale];
       const summary = getLocalized(service.summary, locale);
@@ -91,12 +96,28 @@ function buildLocaleSection(locale: AppLocale, articles: CmsArticle[]): string {
   };
 
   lines.push(`- [${t.services}](${getAbsoluteUrl("/tjanster", locale)})`);
-  pushServiceLinks(false);
+  pushServiceLinks("redovisning");
 
   lines.push(
     `- [${t.digital}](${getAbsoluteUrl("/digital-marknadsforing", locale)})`,
   );
-  pushServiceLinks(true);
+  pushServiceLinks("marknadsforing");
+
+  lines.push(
+    `- [${getLocalized(offerings.utveckling.label, locale)}](${getAbsoluteUrl("/systemutveckling", locale)})`,
+  );
+  pushServiceLinks("utveckling");
+
+  // Accounting software: live pages only (pending pages stay out).
+  const [softwareHub, ...softwareSubpages] = liveSoftwarePages();
+  lines.push(
+    `- [${getLocalized(softwareHub.navLabel, locale)}](${getAbsoluteUrl(softwareHub.route, locale)}): ${getLocalized(softwareHub.summary, locale)}`,
+  );
+  for (const page of softwareSubpages) {
+    lines.push(
+      `  - [${getLocalized(page.navLabel, locale)}](${getAbsoluteUrl(page.route, locale)}): ${getLocalized(page.summary, locale)}`,
+    );
+  }
 
   lines.push(`- [${t.about}](${getAbsoluteUrl("/om-hadi", locale)})`);
   lines.push(`- [${t.contact}](${getAbsoluteUrl("/kontakt", locale)})`);

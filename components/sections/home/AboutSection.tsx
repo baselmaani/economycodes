@@ -6,6 +6,7 @@ import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { PersonProfileCard } from "@/components/marketing/PersonProfileCard";
 import { Reveal } from "@/components/motion/Reveal";
+import { SectionHeading } from "@/components/marketing/SectionHeading";
 import type { SectionProps } from "../types";
 
 /** About Hadi: profile card with his credentials. */
@@ -22,19 +23,22 @@ export async function AboutSection({ locale, content }: SectionProps) {
     .filter(Boolean);
 
   return (
-    <Section tone="tint">
+    <Section tone="base">
       <Container size="narrow">
         <Reveal>
-          <h2 className="text-section-h2 mb-8 font-semibold text-balance">
-            {getLocalized(text.aboutTitle, locale)}
-          </h2>
+          <SectionHeading
+            className="mb-10"
+            eyebrow={getLocalized(text.aboutEyebrow, locale)}
+            title={getLocalized(text.aboutTitle, locale)}
+            lead={getLocalized(text.aboutLead, locale)}
+          />
         </Reveal>
         <Reveal delay={100}>
           <div className="border-border bg-card rounded-3xl border p-8 shadow-md sm:p-10">
             <PersonProfileCard
               person={person}
               locale={locale}
-              learnMoreLabel={common("learnMore")}
+              learnMoreLabel={common("aboutHadiLink")}
               facebookLabel={common("facebook")}
             />
             <div className="border-border mt-6 flex flex-wrap gap-2 border-t pt-6">

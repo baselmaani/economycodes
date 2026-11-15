@@ -1,3 +1,4 @@
+import { offerings } from "./offerings";
 import type { NavLink } from "./types";
 
 /**
@@ -7,22 +8,22 @@ import type { NavLink } from "./types";
  */
 export const primaryNav: NavLink[] = [
   { routeKey: "/", label: { sv: "Hem", en: "Home", ar: "الرئيسية" } },
-  {
-    routeKey: "/tjanster",
-    label: { sv: "Tjänster", en: "Services", ar: "الخدمات" },
-  },
+  // The four offerings (content/offerings.ts) each get a dropdown in
+  // components/layout/Header.tsx and an accordion in the mobile menu.
+  { routeKey: "/tjanster", label: offerings.redovisning.navLabel },
   {
     routeKey: "/digital-marknadsforing",
     // Shorter than the footer label so the desktop header still fits at 1024px.
-    label: { sv: "Marknadsföring", en: "Marketing", ar: "التسويق الرقمي" },
+    label: offerings.marknadsforing.navLabel,
+  },
+  { routeKey: "/systemutveckling", label: offerings.utveckling.navLabel },
+  {
+    routeKey: "/bokforingsprogram",
+    label: offerings.bokforingsprogram.navLabel,
   },
   {
     routeKey: "/om-hadi",
     label: { sv: "Om Hadi", en: "About Hadi", ar: "عن هادي" },
-  },
-  {
-    routeKey: "/artiklar",
-    label: { sv: "Artiklar", en: "Insights", ar: "مقالات" },
   },
   {
     routeKey: "/kontakt",
@@ -32,25 +33,16 @@ export const primaryNav: NavLink[] = [
 
 export const footerNav: NavLink[] = [
   { routeKey: "/", label: { sv: "Hem", en: "Home", ar: "الرئيسية" } },
-  {
-    routeKey: "/tjanster",
-    label: { sv: "Tjänster", en: "Services", ar: "الخدمات" },
-  },
+  { routeKey: "/tjanster", label: offerings.redovisning.label },
   {
     routeKey: "/digital-marknadsforing",
-    label: {
-      sv: "Digital marknadsföring",
-      en: "Digital marketing",
-      ar: "التسويق الرقمي",
-    },
+    label: offerings.marknadsforing.label,
   },
+  { routeKey: "/systemutveckling", label: offerings.utveckling.label },
+  { routeKey: "/bokforingsprogram", label: offerings.bokforingsprogram.label },
   {
     routeKey: "/om-hadi",
     label: { sv: "Om Hadi", en: "About Hadi", ar: "عن هادي" },
-  },
-  {
-    routeKey: "/artiklar",
-    label: { sv: "Artiklar", en: "Insights", ar: "مقالات" },
   },
   {
     routeKey: "/kontakt",

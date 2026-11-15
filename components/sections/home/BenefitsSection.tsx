@@ -13,9 +13,10 @@ import { RevealScale } from "@/components/motion/RevealScale";
 import { Reveal } from "@/components/motion/Reveal";
 import type { SectionProps } from "../types";
 
-/** Benefits grid next to an image. */
+/** Benefits grid next to an image (full width when none is picked). */
 export function BenefitsSection({ locale, content }: SectionProps) {
   const { text, collections, images } = content;
+  const image = images.benefitsImage;
 
   return (
     <Section tone="tint">
@@ -23,19 +24,32 @@ export function BenefitsSection({ locale, content }: SectionProps) {
         <Reveal>
           <SectionHeading title={getLocalized(text.benefitsTitle, locale)} />
         </Reveal>
-        <div className="mt-12 grid items-center gap-10 lg:grid-cols-[0.85fr_1fr]">
-          <RevealScale>
-            <MediaFrame className="aspect-[3/2] lg:aspect-[4/3]">
-              <Image
-                src={images.benefitsImage.src}
-                alt={getLocalized(images.benefitsImage.alt, locale)}
-                fill
-                sizes="(min-width: 1024px) 40vw, 100vw"
-                className="object-cover"
-              />
-            </MediaFrame>
-          </RevealScale>
-          <RevealGroup step={100} className="grid gap-6 sm:grid-cols-2">
+        <div
+          className={cn(
+            "mt-12 grid items-center gap-10",
+            image && "lg:grid-cols-[0.85fr_1fr]",
+          )}
+        >
+          {image && (
+            <RevealScale>
+              <MediaFrame className="aspect-[3/2] lg:aspect-[4/3]">
+                <Image
+                  src={image.src}
+                  alt={getLocalized(image.alt, locale)}
+                  fill
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                  className="object-cover"
+                />
+              </MediaFrame>
+            </RevealScale>
+          )}
+          <RevealGroup
+            step={100}
+            className={cn(
+              "grid gap-6 sm:grid-cols-2",
+              !image && "lg:grid-cols-4",
+            )}
+          >
             {collections.benefits.map(({ icon, title, body }, index) => (
               <div
                 key={index}

@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import { services } from "@/content/services";
+import { findInquiryTopicByValue } from "@/content/inquiries";
 
 // Loose on purpose: digits, spaces, +, (), dots and dashes. Swedish and
 // international numbers are written in too many ways to be stricter.
@@ -15,7 +16,12 @@ export const contactFormSchema = z
     service: z
       .string()
       .trim()
-      .refine((key) => key === "" || Object.hasOwn(services, key))
+      .refine(
+        (key) =>
+          key === "" ||
+          findInquiryTopicByValue(key) !== undefined ||
+          Object.hasOwn(services, key),
+      )
       .optional(),
     message: z.string().trim().min(10).max(5000),
     consent: z.literal(true),

@@ -4,8 +4,6 @@
  *
  *   npm run cms:seed            # adds missing articles, leaves existing rows alone
  *   npm run cms:seed -- --force # overwrites rows with the content/ version
- *
- * Images keep their /media/optimized/... paths.
  */
 import { loadEnvConfig } from "@next/env";
 import { neon } from "@neondatabase/serverless";

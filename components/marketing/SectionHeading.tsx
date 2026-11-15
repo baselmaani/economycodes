@@ -41,7 +41,8 @@ export function SectionHeading({
       )}
       <h2
         className={cn(
-          "text-section-h2 font-semibold text-balance",
+          // Whole words only; overflow-wrap (globals.css) still guards narrow screens.
+          "text-section-h2 font-semibold text-balance hyphens-manual",
           titleClassName,
         )}
       >

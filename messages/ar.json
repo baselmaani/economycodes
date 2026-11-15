@@ -1,7 +1,7 @@
 {
   "nav": {
     "home": "الرئيسية",
-    "services": "الخدمات",
+    "services": "المحاسبة",
     "about": "عن هادي",
     "contact": "اتصل بنا",
     "insights": "مقالات",
@@ -9,7 +9,10 @@
     "openMenu": "افتح القائمة",
     "closeMenu": "أغلق القائمة",
     "languageLabel": "تغيير اللغة",
-    "digitalMarketing": "التسويق الرقمي"
+    "digitalMarketing": "التسويق الرقمي",
+    "breadcrumb": "مسار التنقل",
+    "allAccounting": "عرض جميع خدمات المحاسبة",
+    "allDevelopment": "عرض جميع خدمات التطوير"
   },
   "common": {
     "callUs": "اتصل بنا",
@@ -29,11 +32,13 @@
     "faqTitle": "الأسئلة الشائعة",
     "lastReviewed": "آخر مراجعة",
     "published": "تاريخ النشر",
-    "relatedArticles": "مقالات ذات صلة"
+    "relatedArticles": "مقالات ذات صلة",
+    "readMoreAbout": "اقرأ المزيد عن {topic}",
+    "aboutHadiLink": "اقرأ المزيد عن هادي"
   },
   "home": {
-    "heroEyebrow": "محاسبة رقمية لكل أنحاء السويد",
-    "heroCtaPrimary": "احجز استشارة أولى",
+    "heroEyebrow": "مكتب محاسبة معتمد من Srf",
+    "heroCtaPrimary": "لست متأكدًا؟ احجز مكالمة أولى",
     "heroCtaSecondary": "تواصل معنا",
     "heroCtaServices": "شاهد خدماتنا",
     "trustTitle": "اعتماد موثّق",
@@ -51,11 +56,12 @@
     "finalCtaSubtitle": "أخبرنا بما تحتاج مساعدة فيه، وسنعاود التواصل معك في أقرب وقت ممكن.",
     "digitalEyebrow": "التسويق الرقمي",
     "digitalTitle": "عملاء أكثر عبر الإنترنت — بتسويق يمكنك قياسه",
-    "digitalSubtitle": "مواقع إلكترونية وتحسين محركات البحث وAEO وGEO وإعلانات جوجل وإعلانات وسائل التواصل وتطبيقات SaaS والجوال. كلها في مكان واحد ومرتبطة بوضعك المالي.",
+    "digitalSubtitle": "مواقع إلكترونية وتحسين محركات البحث وAEO وGEO وإعلانات جوجل وإعلانات وإدارة وسائل التواصل. كلها في مكان واحد ومرتبطة بوضعك المالي.",
     "digitalCta": "استكشف التسويق الرقمي",
     "contactEyebrow": "تواصل معنا",
     "contactResponseTime": "نرد عادةً خلال يوم عمل واحد.",
-    "contactFormTitle": "أرسل رسالة"
+    "contactFormTitle": "أرسل رسالة",
+    "heroEntriesLabel": "مجالاتنا الأربعة"
   },
   "about": {
     "credentialsTitle": "الاعتماد الشخصي",
@@ -82,6 +88,15 @@
     "ctaTitle": "هل تريد ظهورًا أكبر على الإنترنت؟",
     "ctaSubtitle": "أخبرنا عن شركتك وأهدافك، وسنقترح عليك أفضل نقطة للبدء.",
     "seeAll": "عرض جميع الخدمات الرقمية"
+  },
+  "development": {
+    "eyebrow": "تطوير البرمجيات",
+    "servicesTitle": "خدماتنا في تطوير البرمجيات",
+    "processTitle": "كيف نعمل في تطوير البرمجيات",
+    "benefitsTitle": "لماذا تختار Economy Codes لتطوير البرمجيات",
+    "ctaTitle": "هل لديك شيء تريد بناءه؟",
+    "ctaSubtitle": "أخبرنا عن فكرتك أو المشكلة التي تريد حلها، وسنقترح نسخة أولى مناسبة.",
+    "seeAll": "عرض جميع خدمات التطوير"
   },
   "footer": {
     "navTitle": "التصفح",

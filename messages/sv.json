@@ -1,7 +1,7 @@
 {
   "nav": {
     "home": "Hem",
-    "services": "Tjänster",
+    "services": "Redovisning",
     "about": "Om Hadi",
     "contact": "Kontakt",
     "insights": "Artiklar",
@@ -9,7 +9,10 @@
     "openMenu": "Öppna meny",
     "closeMenu": "Stäng meny",
     "languageLabel": "Byt språk",
-    "digitalMarketing": "Digital marknadsföring"
+    "digitalMarketing": "Digital marknadsföring",
+    "breadcrumb": "Brödsmulor",
+    "allAccounting": "Se alla redovisningstjänster",
+    "allDevelopment": "Se alla utvecklingstjänster"
   },
   "common": {
     "callUs": "Ring oss",
@@ -29,11 +32,13 @@
     "faqTitle": "Vanliga frågor",
     "lastReviewed": "Senast granskad",
     "published": "Publicerad",
-    "relatedArticles": "Läs mer i våra artiklar"
+    "relatedArticles": "Läs mer i våra artiklar",
+    "readMoreAbout": "Läs mer om {topic}",
+    "aboutHadiLink": "Läs mer om Hadi"
   },
   "home": {
-    "heroEyebrow": "Digital redovisning för hela Sverige",
-    "heroCtaPrimary": "Boka ett första samtal",
+    "heroEyebrow": "Srf-auktoriserad redovisningsbyrå",
+    "heroCtaPrimary": "Osäker? Boka ett första samtal",
     "heroCtaSecondary": "Kontakta oss",
     "heroCtaServices": "Se våra tjänster",
     "trustTitle": "Verifierad auktorisation",
@@ -51,11 +56,12 @@
     "finalCtaSubtitle": "Berätta vad du behöver hjälp med, så återkommer vi så snart vi kan.",
     "digitalEyebrow": "Digital marknadsföring",
     "digitalTitle": "Fler kunder online — med marknadsföring du kan mäta",
-    "digitalSubtitle": "Webbplatser, SEO, AEO och GEO, Google Ads, annonsering i sociala medier, SaaS och mobilappar. Samlat hos oss, kopplat till din ekonomi.",
+    "digitalSubtitle": "Webbplatser, SEO, AEO och GEO, Google Ads, annonsering och hantering av sociala medier. Samlat hos oss, kopplat till din ekonomi.",
     "digitalCta": "Utforska digital marknadsföring",
     "contactEyebrow": "Kontakt",
     "contactResponseTime": "Vi svarar vanligtvis inom en arbetsdag.",
-    "contactFormTitle": "Skicka ett meddelande"
+    "contactFormTitle": "Skicka ett meddelande",
+    "heroEntriesLabel": "Våra fyra områden"
   },
   "about": {
     "credentialsTitle": "Personlig auktorisation",
@@ -82,6 +88,15 @@
     "ctaTitle": "Vill du synas mer online?",
     "ctaSubtitle": "Berätta om ditt företag och dina mål, så föreslår vi var det är klokast att börja.",
     "seeAll": "Se alla digitala tjänster"
+  },
+  "development": {
+    "eyebrow": "Systemutveckling",
+    "servicesTitle": "Tjänster inom systemutveckling",
+    "processTitle": "Så arbetar vi med systemutveckling",
+    "benefitsTitle": "Varför välja Economy Codes för systemutveckling",
+    "ctaTitle": "Har du något du vill bygga?",
+    "ctaSubtitle": "Berätta om idén eller problemet du vill lösa, så föreslår vi en rimlig första version.",
+    "seeAll": "Se alla utvecklingstjänster"
   },
   "footer": {
     "navTitle": "Navigering",

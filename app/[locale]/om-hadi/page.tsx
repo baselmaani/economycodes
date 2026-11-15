@@ -8,6 +8,7 @@ import {
   Phone,
   ShieldCheck,
   UserCheck,
+  UserRound,
   Wallet,
 } from "lucide-react";
 
@@ -15,13 +16,12 @@ import type { AppLocale } from "@/i18n/routing";
 import {
   getAbsoluteUrl,
   getAlternateLinks,
-  getServiceSlug,
+  getServiceHref,
 } from "@/lib/routes";
 import { getPageContent } from "@/lib/cms/content";
 import { buildPageMetadata } from "@/lib/cms/metadata";
 import { getLocalized } from "@/lib/i18n-content";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Reveal } from "@/components/motion/Reveal";
@@ -30,6 +30,7 @@ import { RevealScale } from "@/components/motion/RevealScale";
 import { SectionHeading } from "@/components/marketing/SectionHeading";
 import { IconTile } from "@/components/marketing/IconTile";
 import { FeatureCard } from "@/components/marketing/FeatureCard";
+import { AbstractDocumentPanel } from "@/components/marketing/decor/AbstractDocumentPanel";
 import { GridPattern } from "@/components/marketing/decor/GridPattern";
 import { RadialGlow } from "@/components/marketing/decor/RadialGlow";
 import { FaqAccordion } from "@/components/faq/FaqAccordion";
@@ -108,19 +109,8 @@ export default async function AboutHadiPage({
         ])}
       />
 
-      <Section tone="base" className="py-6 sm:py-8">
-        <Container>
-          <Breadcrumbs
-            items={[
-              { label: nav("home"), routeKey: "/" },
-              { label: nav("about") },
-            ]}
-          />
-        </Container>
-      </Section>
-
       {/* Profile hero */}
-      <Section tone="gradient" bleed className="pt-2 pb-16 sm:pt-4 sm:pb-20">
+      <Section tone="gradient" bleed className="py-16 sm:py-20">
         <GridPattern className="inset-0 hidden size-full text-white/[0.08] sm:block" />
         <RadialGlow className="-end-40 top-1/3 size-[42rem] -translate-y-1/2" />
 
@@ -219,25 +209,35 @@ export default async function AboutHadiPage({
 
             <RevealScale delay={200} className="relative order-1 md:order-2">
               <div className="relative mx-auto aspect-[400/439] max-w-xs sm:max-w-sm">
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-4 -rotate-2 rounded-3xl border border-white/15 bg-white/[0.04] backdrop-blur-sm"
-                />
-                <div className="absolute inset-0 overflow-hidden rounded-3xl border border-white/20 shadow-2xl">
-                  <Image
-                    src={page.images.heroPhoto.src}
-                    alt={getLocalized(page.images.heroPhoto.alt, locale)}
-                    fill
-                    loading="eager"
-                    fetchPriority="high"
-                    sizes="(min-width: 640px) 384px, 320px"
-                    className="object-cover"
+                {page.images.heroPhoto ? (
+                  <>
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-4 -rotate-2 rounded-3xl border border-white/15 bg-white/[0.04] backdrop-blur-sm"
+                    />
+                    <div className="absolute inset-0 overflow-hidden rounded-3xl border border-white/20 shadow-2xl">
+                      <Image
+                        src={page.images.heroPhoto.src}
+                        alt={getLocalized(page.images.heroPhoto.alt, locale)}
+                        fill
+                        loading="eager"
+                        fetchPriority="high"
+                        sizes="(min-width: 640px) 384px, 320px"
+                        className="object-cover"
+                      />
+                      <div
+                        aria-hidden="true"
+                        className="from-brand-navy/40 absolute inset-0 bg-gradient-to-t via-transparent to-transparent"
+                      />
+                    </div>
+                  </>
+                ) : (
+                  <AbstractDocumentPanel
+                    icon={UserRound}
+                    tone="dark"
+                    className="absolute inset-0 aspect-auto max-w-none"
                   />
-                  <div
-                    aria-hidden="true"
-                    className="from-brand-navy/40 absolute inset-0 bg-gradient-to-t via-transparent to-transparent"
-                  />
-                </div>
+                )}
 
                 <div
                   dir="ltr"
@@ -323,10 +323,7 @@ export default async function AboutHadiPage({
                     return (
                       <Link
                         key={service.key}
-                        href={{
-                          pathname: "/tjanster/[slug]",
-                          params: { slug: getServiceSlug(locale, service) },
-                        }}
+                        href={getServiceHref(locale, service)}
                         className="border-border bg-card hover:border-primary/40 hover:text-primary flex items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-medium shadow-sm transition-all duration-200 ease-(--ease-standard) hover:-translate-y-0.5 hover:shadow-md"
                       >
                         <Icon
@@ -426,17 +423,19 @@ export default async function AboutHadiPage({
           size="narrow"
           className="relative flex flex-col items-center gap-6 text-center"
         >
-          <Reveal>
-            <div className="border-border relative aspect-square w-24 overflow-hidden rounded-2xl border-2 border-white/30 shadow-lg">
-              <Image
-                src={page.images.photo.src}
-                alt={getLocalized(page.images.photo.alt, locale)}
-                fill
-                sizes="96px"
-                className="object-cover"
-              />
-            </div>
-          </Reveal>
+          {page.images.photo && (
+            <Reveal>
+              <div className="border-border relative aspect-square w-24 overflow-hidden rounded-2xl border-2 border-white/30 shadow-lg">
+                <Image
+                  src={page.images.photo.src}
+                  alt={getLocalized(page.images.photo.alt, locale)}
+                  fill
+                  sizes="96px"
+                  className="object-cover"
+                />
+              </div>
+            </Reveal>
+          )}
           <Reveal delay={80}>
             <h2 className="text-section-h2 font-semibold text-balance">
               {tAbout("ctaTitle")}

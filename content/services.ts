@@ -149,16 +149,6 @@ export const services: Record<string, Service> = {
       ],
     },
     faqIds: ["faq-bookkeeping-what", "faq-bookkeeping-software"],
-    heroImage: {
-      src: "/media/optimized/bokforing.webp",
-      width: 1024,
-      height: 683,
-      alt: {
-        sv: "Bokföring och löpande redovisning för företag",
-        en: "Bookkeeping and ongoing accounting for businesses",
-        ar: "المحاسبة والحسابات المستمرة للشركات",
-      },
-    },
     lastReviewed: LAST_REVIEWED,
   },
 
@@ -297,8 +287,6 @@ export const services: Record<string, Service> = {
       ],
     },
     faqIds: ["faq-tax-deadlines", "faq-tax-general"],
-    // No heroImage: the legacy stock photo for this topic has the Skatteverket
-    // logo overlaid, which would wrongly imply endorsement -- see CLIENT-TODO.md.
     lastReviewed: LAST_REVIEWED,
   },
 
@@ -438,16 +426,6 @@ export const services: Record<string, Service> = {
       ],
     },
     faqIds: ["faq-registration-time", "faq-registration-form"],
-    heroImage: {
-      src: "/media/optimized/foretagsregistrering.webp",
-      width: 370,
-      height: 245,
-      alt: {
-        sv: "Registrering av nytt företag i Sverige",
-        en: "Registering a new company in Sweden",
-        ar: "تسجيل شركة جديدة في السويد",
-      },
-    },
     lastReviewed: LAST_REVIEWED,
   },
 
@@ -599,16 +577,6 @@ export const services: Record<string, Service> = {
       ],
     },
     faqIds: ["faq-association-difference", "faq-association-administration"],
-    heroImage: {
-      src: "/media/optimized/etablering-av-foreningar.webp",
-      width: 780,
-      height: 520,
-      alt: {
-        sv: "Bildande och administration av föreningar",
-        en: "Forming and administering associations",
-        ar: "تأسيس الجمعيات وإدارتها",
-      },
-    },
     lastReviewed: "2026-09-16",
   },
 
@@ -772,16 +740,6 @@ export const services: Record<string, Service> = {
       ],
     },
     faqIds: ["faq-budget-purpose", "faq-budget-bank"],
-    heroImage: {
-      src: "/media/optimized/genomforbarhet-och-budget-studier.webp",
-      width: 540,
-      height: 367,
-      alt: {
-        sv: "Affärsplan, budget och genomförbarhetsstudie",
-        en: "Business plan, budget, and feasibility study",
-        ar: "خطة العمل والميزانية ودراسة الجدوى",
-      },
-    },
     lastReviewed: "2026-09-16",
   },
 
@@ -944,16 +902,6 @@ export const services: Record<string, Service> = {
       ],
     },
     faqIds: ["faq-contracts-legal-advice", "faq-contracts-types"],
-    heroImage: {
-      src: "/media/optimized/kontrakt-och-avtal.webp",
-      width: 1024,
-      height: 683,
-      alt: {
-        sv: "Stöd med avtal och kontrakt för företag",
-        en: "Support with contracts and agreements for businesses",
-        ar: "دعم في العقود والاتفاقيات للشركات",
-      },
-    },
     lastReviewed: "2026-09-16",
   },
 
@@ -1089,16 +1037,6 @@ export const services: Record<string, Service> = {
       ],
     },
     faqIds: ["faq-investment-guarantee", "faq-investment-scope"],
-    heroImage: {
-      src: "/media/optimized/investeringar-i-sverige.webp",
-      width: 1024,
-      height: 512,
-      alt: {
-        sv: "Etablera företag och investera i Sverige",
-        en: "Establishing a business and investing in Sweden",
-        ar: "تأسيس شركة والاستثمار في السويد",
-      },
-    },
     lastReviewed: LAST_REVIEWED,
   },
 

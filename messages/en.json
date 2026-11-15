@@ -1,7 +1,7 @@
 {
   "nav": {
     "home": "Home",
-    "services": "Services",
+    "services": "Accounting",
     "about": "About Hadi",
     "contact": "Contact",
     "insights": "Insights",
@@ -9,7 +9,10 @@
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "languageLabel": "Change language",
-    "digitalMarketing": "Digital marketing"
+    "digitalMarketing": "Digital marketing",
+    "breadcrumb": "Breadcrumb",
+    "allAccounting": "See all accounting services",
+    "allDevelopment": "See all development services"
   },
   "common": {
     "callUs": "Call us",
@@ -29,11 +32,13 @@
     "faqTitle": "Frequently asked questions",
     "lastReviewed": "Last reviewed",
     "published": "Published",
-    "relatedArticles": "Further reading"
+    "relatedArticles": "Further reading",
+    "readMoreAbout": "Read more about {topic}",
+    "aboutHadiLink": "Read more about Hadi"
   },
   "home": {
-    "heroEyebrow": "Digital accounting for all of Sweden",
-    "heroCtaPrimary": "Book a first consultation",
+    "heroEyebrow": "Srf-authorized accounting firm",
+    "heroCtaPrimary": "Not sure? Book a first call",
     "heroCtaSecondary": "Contact us",
     "heroCtaServices": "See our services",
     "trustTitle": "Verified authorization",
@@ -51,11 +56,12 @@
     "finalCtaSubtitle": "Tell us what you need help with, and we'll get back to you as soon as we can.",
     "digitalEyebrow": "Digital marketing",
     "digitalTitle": "More customers online — with marketing you can measure",
-    "digitalSubtitle": "Websites, SEO, AEO and GEO, Google Ads, social media advertising, SaaS, and mobile apps. All in one place, connected to your finances.",
+    "digitalSubtitle": "Websites, SEO, AEO and GEO, Google Ads, social media advertising and management. All in one place, connected to your finances.",
     "digitalCta": "Explore digital marketing",
     "contactEyebrow": "Contact",
     "contactResponseTime": "We usually reply within one business day.",
-    "contactFormTitle": "Send a message"
+    "contactFormTitle": "Send a message",
+    "heroEntriesLabel": "Our four areas"
   },
   "about": {
     "credentialsTitle": "Personal authorization",
@@ -82,6 +88,15 @@
     "ctaTitle": "Want to be more visible online?",
     "ctaSubtitle": "Tell us about your business and your goals, and we'll suggest the smartest place to start.",
     "seeAll": "See all digital services"
+  },
+  "development": {
+    "eyebrow": "Software development",
+    "servicesTitle": "Our software development services",
+    "processTitle": "How we work with software development",
+    "benefitsTitle": "Why choose Economy Codes for software development",
+    "ctaTitle": "Have something you want to build?",
+    "ctaSubtitle": "Tell us about the idea or the problem you want to solve, and we'll suggest a sensible first version.",
+    "seeAll": "See all development services"
   },
   "footer": {
     "navTitle": "Navigation",

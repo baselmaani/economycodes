@@ -19,27 +19,28 @@ import type { Benefit, ProcessStep } from "./home";
  */
 export const digitalMeta = {
   title: {
-    sv: "Digital marknadsföringsbyrå i Sverige",
-    en: "Digital marketing agency in Sweden",
-    ar: "وكالة تسويق رقمي في السويد",
+    sv: "Digital marknadsföring för småföretag i Sverige",
+    en: "Digital marketing for small businesses in Sweden",
+    ar: "التسويق الرقمي للشركات الصغيرة في السويد",
   } satisfies Localized<string>,
   description: {
-    sv: "Digital marknadsföringsbyrå för företag och småföretag i Sverige: hemsidor, SEO, Google Ads, sociala medier, UI/UX-design, systemutveckling och SaaS.",
-    en: "Digital marketing agency in Sweden: websites, SEO, AEO, GEO, Google Ads, social media ads, SaaS, and mobile apps — in Swedish, English, and Arabic.",
-    ar: "وكالة تسويق رقمي في السويد: مواقع إلكترونية وSEO وAEO وGEO وإعلانات جوجل ووسائل التواصل وتطبيقات SaaS والجوال — بالسويدية والإنجليزية والعربية.",
+    sv: "Digital marknadsföring för småföretag i Sverige: webbplatser, SEO, AEO, GEO, Google Ads och sociala medier – samlat hos en byrå som också är redovisningsbyrå.",
+    en: "Digital marketing for small businesses in Sweden: websites, SEO, AEO, GEO, Google Ads and social media – from one agency that is also an accounting firm.",
+    ar: "التسويق الرقمي للشركات الصغيرة في السويد: مواقع إلكترونية وSEO وAEO وGEO وإعلانات جوجل ووسائل التواصل الاجتماعي، من وكالة هي أيضًا مكتب محاسبة.",
   } satisfies Localized<string>,
 };
 
 export const digitalHero = {
   title: {
-    sv: "Digital marknadsföringsbyrå för företag i hela Sverige",
-    en: "Digital marketing agency for businesses across Sweden",
-    ar: "وكالة تسويق رقمي للشركات في جميع أنحاء السويد",
+    sv: "Digital marknadsföring för småföretag i hela Sverige",
+    en: "Digital marketing for small businesses across Sweden",
+    ar: "التسويق الرقمي للشركات الصغيرة في جميع أنحاء السويد",
   } satisfies Localized<string>,
+  /** Direct answer near the top: what we do, for whom, in which languages. */
   lead: {
-    sv: "Economy Codes AB hjälper små och medelstora företag i hela Sverige att få fler kunder online — digital marknadsföring för företag och småföretag, samlat hos en byrå. Vi bygger webbplatser, webbappar och mobilappar för iOS och Android, arbetar med SEO, AEO och GEO för synlighet i Google och AI-sök, och driver annonsering på Google, Facebook, Instagram, TikTok och LinkedIn — på svenska, engelska och arabiska.",
-    en: "Economy Codes AB helps small and medium-sized businesses across Sweden win more customers online. We build websites, web apps, and iOS and Android apps, work with SEO, AEO, and GEO for visibility in Google and AI search, and run advertising on Google, Facebook, Instagram, TikTok, and LinkedIn — in Swedish, English, and Arabic.",
-    ar: "Economy Codes AB شركة تسويق رقمي تساعد الشركات الصغيرة والمتوسطة في جميع أنحاء السويد على كسب مزيد من العملاء عبر الإنترنت. نبني المواقع وتطبيقات الويب وتطبيقات iOS وأندرويد، ونعمل على SEO وAEO وGEO للظهور في جوجل وبحث الذكاء الاصطناعي، وندير الإعلانات على جوجل وفيسبوك وإنستغرام وتيك توك ولينكدإن — بالسويدية والإنجليزية والعربية.",
+    sv: "Economy Codes AB hjälper små och medelstora företag att få fler kunder online. Vi bygger webbplatser, arbetar med SEO, AEO och GEO för synlighet i Google och AI-sök, och sköter annonsering och sociala medier – på svenska, engelska och arabiska.",
+    en: "Economy Codes AB helps small and medium-sized businesses win more customers online. We build websites, work with SEO, AEO and GEO for visibility in Google and AI search, and handle advertising and social media – in Swedish, English and Arabic.",
+    ar: "تساعد Economy Codes AB الشركات الصغيرة والمتوسطة على كسب عملاء أكثر عبر الإنترنت. نبني المواقع الإلكترونية، ونعمل على SEO وAEO وGEO للظهور في جوجل وبحث الذكاء الاصطناعي، ونتولى الإعلانات ووسائل التواصل الاجتماعي – بالسويدية والإنجليزية والعربية.",
   } satisfies Localized<string>,
 };
 
@@ -93,9 +94,9 @@ export const digitalFacts = {
     {
       label: { sv: "Tjänster", en: "Services", ar: "الخدمات" },
       value: {
-        sv: "Webbdesign och hemsidor, UI/UX-design, skräddarsydd systemutveckling, SaaS-utveckling, mobilappar för iOS och Android, SEO, AEO, GEO, Google Ads, annonsering och hantering av sociala medier",
-        en: "Web design and websites, UI/UX design, custom software development, SaaS development, iOS and Android apps, SEO, AEO, GEO, Google Ads, social media advertising and management",
-        ar: "تصميم المواقع الإلكترونية وتصميم UI/UX وتطوير الأنظمة المخصصة وتطوير SaaS وتطبيقات الجوال وSEO وAEO وGEO وإعلانات جوجل وإعلانات وإدارة وسائل التواصل",
+        sv: "Webbdesign och hemsidor, SEO, AEO, GEO, Google Ads, annonsering och hantering av sociala medier",
+        en: "Web design and websites, SEO, AEO, GEO, Google Ads, social media advertising and management",
+        ar: "تصميم المواقع الإلكترونية وSEO وAEO وGEO وإعلانات جوجل وإعلانات وإدارة وسائل التواصل",
       },
     },
     {
@@ -248,13 +249,9 @@ export const digitalAreas = [
       en: "Build",
       ar: "البناء",
     } satisfies Localized<string>,
-    serviceKeys: [
-      "website-creation",
-      "ui-ux-design",
-      "custom-system-development",
-      "saas-development",
-      "mobile-app-development",
-    ],
+    // Apps, SaaS, systems and UI/UX are their own offering
+    // (/systemutveckling, content/development.ts).
+    serviceKeys: ["website-creation"],
   },
   {
     icon: Search,

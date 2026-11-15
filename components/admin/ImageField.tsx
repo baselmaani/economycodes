@@ -96,23 +96,14 @@ export function ImageField({
         {value && (
           <LocalizedField
             id={`${id}-alt`}
-            label="Alt text"
+            label="Alt text (optional)"
             locale={locale}
             value={value.alt}
             fallback={locale === "sv" ? undefined : { sv: value.alt.sv }}
             onChange={(alt) =>
               onChange({ ...value, alt: { ...alt, sv: alt.sv ?? "" } })
             }
-            hint={
-              value.alt.sv.trim() ? (
-                "Describe the image for screen readers and search engines."
-              ) : (
-                <span className="text-destructive">
-                  Swedish alt text is required
-                  {locale === "sv" ? "." : " (switch to the Svenska tab)."}
-                </span>
-              )
-            }
+            hint="Describe the image for screen readers and search engines. Leave empty for decorative images."
           />
         )}
         {value && usableAutoAlt && !sameAlt(value.alt, usableAutoAlt) && (

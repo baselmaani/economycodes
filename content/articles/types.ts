@@ -9,7 +9,7 @@ export interface ArticleMeta {
   /** Set when an article's content is materially edited after publishing; defaults to publishedAt. */
   updatedAt?: string;
   authorId: "hadi-almaani";
-  coverImage: MediaRef;
+  coverImage?: MediaRef;
   /** FAQ ids (from content/faqs.ts) to surface as a "Related questions" section. */
   faqIds?: string[];
 }

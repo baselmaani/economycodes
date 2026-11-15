@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { contactFormSchema } from "@/lib/validation/contact";
 import { servicesList } from "@/content/services";
+import { SOFTWARE_DEMO_INQUIRY } from "@/content/software";
 
 const valid = {
   name: "Test Testsson",
@@ -30,6 +31,13 @@ describe("contactFormSchema", () => {
         contactFormSchema.safeParse({ ...valid, service: service.key }).success,
       ).toBe(true);
     }
+  });
+
+  it("accepts the accounting-software demo inquiry", () => {
+    expect(
+      contactFormSchema.safeParse({ ...valid, service: SOFTWARE_DEMO_INQUIRY })
+        .success,
+    ).toBe(true);
   });
 
   it("rejects an unknown service key", () => {

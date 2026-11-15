@@ -1,7 +1,5 @@
-"use client";
-
 import { Phone } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
 import type { ContactLinks } from "@/content/types";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
@@ -11,8 +9,12 @@ import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
  * actions from StickyActionBar (fixed bottom bar, lg:hidden) -- showing both
  * at once would duplicate the UI, so this is hidden below lg.
  */
-export function FloatingContactButtons({ business }: { business: ContactLinks }) {
-  const t = useTranslations("common");
+export async function FloatingContactButtons({
+  business,
+}: {
+  business: ContactLinks;
+}) {
+  const t = await getTranslations("common");
 
   return (
     <div className="fixed end-6 bottom-6 z-40 hidden flex-col gap-3 lg:flex">

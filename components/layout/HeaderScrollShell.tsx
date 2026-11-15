@@ -30,7 +30,7 @@ export function HeaderScrollShell({ children }: { children: ReactNode }) {
   const overHero = isHome && !scrolled;
 
   return (
-    <div
+    <header
       className={cn(
         "sticky top-0 z-40 transition-all duration-300 ease-(--ease-standard)",
         overHero
@@ -39,6 +39,6 @@ export function HeaderScrollShell({ children }: { children: ReactNode }) {
       )}
     >
       {children}
-    </div>
+    </header>
   );
 }

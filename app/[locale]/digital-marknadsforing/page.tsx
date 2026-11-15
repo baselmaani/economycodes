@@ -1,56 +1,35 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { ArrowRight, MessageCircle, Phone, TrendingUp } from "lucide-react";
+import { TrendingUp } from "lucide-react";
 
-import { Link } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
-import {
-  getAbsoluteUrl,
-  getAlternateLinks,
-  getServiceAlternateLinks,
-} from "@/lib/routes";
+import { getAbsoluteUrl, getAlternateLinks } from "@/lib/routes";
+import { getInquiryHref } from "@/lib/contact-links";
 import { getPageContent } from "@/lib/cms/content";
+import { getCmsIcon } from "@/lib/cms/icons";
 import { buildPageMetadata } from "@/lib/cms/metadata";
 import { getDigitalMarketingOgImageUrl } from "@/lib/seo/og-image";
-import { buildBreadcrumbJsonLd } from "@/lib/structured-data/breadcrumb";
-import { buildFaqJsonLd } from "@/lib/structured-data/faq";
-import { buildServiceCatalogJsonLd } from "@/lib/structured-data/service";
 import { getLocalized } from "@/lib/i18n-content";
-import { JsonLd } from "@/components/seo/JsonLd";
-import { Breadcrumbs } from "@/components/common/Breadcrumbs";
-import { FaqAccordion } from "@/components/faq/FaqAccordion";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { faqs } from "@/content/faqs";
+import { offerings } from "@/content/offerings";
+import { services } from "@/content/services";
+import { DIGITAL_HUB_FAQ_IDS, digitalAreas } from "@/content/digital-marketing";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/marketing/SectionHeading";
 import { ServiceCard } from "@/components/marketing/ServiceCard";
 import { IconTile } from "@/components/marketing/IconTile";
 import { AbstractDocumentPanel } from "@/components/marketing/decor/AbstractDocumentPanel";
-import { GridPattern } from "@/components/marketing/decor/GridPattern";
-import { RadialGlow } from "@/components/marketing/decor/RadialGlow";
 import { Reveal } from "@/components/motion/Reveal";
 import { RevealGroup } from "@/components/motion/RevealGroup";
-import { RevealScale } from "@/components/motion/RevealScale";
-import { cn } from "@/lib/utils";
-import { business } from "@/content/business";
-import { faqs } from "@/content/faqs";
-import { services } from "@/content/services";
-import type { Localized } from "@/content/types";
-import {
-  DIGITAL_HUB_FAQ_IDS,
-  digitalAreas,
-  digitalBenefits,
-  digitalFacts,
-  digitalIntro,
-  digitalProcessSteps,
-} from "@/content/digital-marketing";
-
-const CATALOG_SERVICE_TYPE: Localized<string> = {
-  sv: "Digital marknadsföring",
-  en: "Digital marketing",
-  ar: "التسويق الرقمي",
-};
+import { ContactActions } from "@/components/page/ContactActions";
+import { CtaBand } from "@/components/page/CtaBand";
+import { FaqBlock } from "@/components/page/FaqBlock";
+import { PageBreadcrumbs } from "@/components/page/PageBreadcrumbs";
+import { PageHero } from "@/components/page/PageHero";
+import { ProcessSteps } from "@/components/page/ProcessSteps";
+import { ServiceCatalogJsonLd } from "@/components/page/ServiceCatalogJsonLd";
 
 export async function generateMetadata({
   params,
@@ -64,6 +43,12 @@ export async function generateMetadata({
   });
 }
 
+/**
+ * Digital marknadsföring: the marketing offering's landing page. Every
+ * heading, list and collection below is editable in the dashboard
+ * (lib/cms/pages/digital.ts); the services themselves live in
+ * content/services-digital.ts.
+ */
 export default async function DigitalMarketingPage({
   params,
 }: {
@@ -71,118 +56,63 @@ export default async function DigitalMarketingPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations({ locale, namespace: "common" });
-  const nav = await getTranslations({ locale, namespace: "nav" });
-  const d = await getTranslations({ locale, namespace: "digital" });
+  const common = await getTranslations({ locale, namespace: "common" });
   const page = await getPageContent("digital-marknadsforing");
+  const { text, lists, collections } = page;
+  const offering = offerings.marknadsforing;
+  const hubUrl = getAbsoluteUrl("/digital-marknadsforing", locale);
+  const t = (key: string) => getLocalized(text[key], locale);
 
   const hubFaqs = DIGITAL_HUB_FAQ_IDS.map((id) =>
     faqs.find((faq) => faq.id === id),
   ).filter((faq) => faq !== undefined);
-  const areas = digitalAreas.map((area) => ({
-    ...area,
+  // Area icons and labels come from the CMS; which services sit in each
+  // area is fixed in content/digital-marketing.ts.
+  const areas = digitalAreas.map((area, index) => ({
+    key: area.label.sv,
+    icon: getCmsIcon(collections.areas?.[index]?.icon?.sv),
+    label: getLocalized(
+      collections.areas?.[index]?.label ?? area.label,
+      locale,
+    ),
     services: area.serviceKeys.map((key) => services[key]).filter(Boolean),
   }));
-  const hubUrl = getAbsoluteUrl("/digital-marknadsforing", locale);
+  const inquiry = (tone: "light" | "dark", ctaId: string) => (
+    <ContactActions
+      href={getInquiryHref(locale, offering.inquiry)}
+      label={getLocalized(offering.cta, locale)}
+      tone={tone}
+      ctaId={ctaId}
+    />
+  );
 
   return (
     <>
-      <JsonLd
-        data={buildBreadcrumbJsonLd([
-          { name: nav("home"), url: getAbsoluteUrl("/", locale) },
-          { name: nav("digitalMarketing"), url: hubUrl },
-        ])}
+      <ServiceCatalogJsonLd
+        locale={locale}
+        name={t("heroTitle")}
+        serviceType={getLocalized(offering.label, locale)}
+        description={getLocalized(page.seo.description, locale)}
+        url={hubUrl}
+        services={areas.flatMap((area) => area.services)}
       />
-      <JsonLd
-        data={buildServiceCatalogJsonLd({
-          name: getLocalized(page.seo.title, locale),
-          serviceType: getLocalized(CATALOG_SERVICE_TYPE, locale),
-          description: getLocalized(page.seo.description, locale),
-          url: hubUrl,
-          locale,
-          entries: areas.flatMap((area) =>
-            area.services.map((service) => ({
-              name: getLocalized(service.name, locale),
-              description: getLocalized(service.summary, locale),
-              url: getServiceAlternateLinks(service)[locale],
-            })),
-          ),
-        })}
-      />
-      <JsonLd data={buildFaqJsonLd(hubFaqs, locale)} />
 
-      {/* Hero */}
-      <Section tone="tint" bleed>
-        <GridPattern className="inset-0 hidden size-full sm:block" />
-        <RadialGlow className="-end-32 -top-24 size-[32rem] opacity-10" />
-
-        <Container size="wide" className="relative">
-          <Breadcrumbs
-            items={[
-              { label: nav("home"), routeKey: "/" },
-              { label: nav("digitalMarketing") },
-            ]}
+      <PageHero
+        breadcrumbs={
+          <PageBreadcrumbs
+            locale={locale}
+            items={[{ label: getLocalized(offering.label, locale) }]}
+            currentUrl={hubUrl}
           />
-
-          <div className="mt-6 grid items-center gap-10 md:grid-cols-2">
-            <Reveal>
-              <div>
-                <Badge className="h-auto gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold tracking-wide uppercase">
-                  <TrendingUp size={14} aria-hidden="true" />
-                  {d("eyebrow")}
-                </Badge>
-                <h1 className="text-page-h1 mt-4 font-semibold text-balance">
-                  {getLocalized(page.text.heroTitle, locale)}
-                </h1>
-                <p className="text-muted-foreground text-body mt-4">
-                  {getLocalized(page.text.heroLead, locale)}
-                </p>
-                <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
-                  <Button
-                    render={<Link href="/kontakt" />}
-                    variant="shine"
-                    size="lg"
-                    className="gap-2"
-                  >
-                    {t("contactUs")}
-                    <ArrowRight
-                      size={18}
-                      aria-hidden="true"
-                      className="rtl:rotate-180"
-                    />
-                  </Button>
-                  <a
-                    href={business.phoneHref}
-                    className="text-muted-foreground hover:text-primary inline-flex items-center gap-2 text-sm font-medium transition-colors"
-                  >
-                    <Phone
-                      size={16}
-                      className="text-primary"
-                      aria-hidden="true"
-                    />
-                    <span dir="ltr">{business.phone}</span>
-                  </a>
-                  <a
-                    href={business.whatsappHref}
-                    className="text-muted-foreground hover:text-primary inline-flex items-center gap-2 text-sm font-medium transition-colors"
-                  >
-                    <MessageCircle
-                      size={16}
-                      className="text-primary"
-                      aria-hidden="true"
-                    />
-                    WhatsApp
-                  </a>
-                </div>
-              </div>
-            </Reveal>
-
-            <RevealScale delay={120} className="order-first md:order-last">
-              <AbstractDocumentPanel icon={TrendingUp} tone="light" />
-            </RevealScale>
-          </div>
-        </Container>
-      </Section>
+        }
+        eyebrow={t("eyebrow")}
+        eyebrowIcon={TrendingUp}
+        title={t("heroTitle")}
+        lead={<p>{t("heroLead")}</p>}
+        actions={inquiry("light", "marketing-hero")}
+        visual={<AbstractDocumentPanel icon={TrendingUp} tone="light" />}
+        hideVisualOnMobile
+      />
 
       {/* Answer-first definition + quotable facts, for featured snippets and AI answers */}
       <Section tone="base">
@@ -191,9 +121,9 @@ export default async function DigitalMarketingPage({
             <Reveal>
               <div className="max-w-2xl">
                 <h2 className="text-section-h2 font-semibold text-balance">
-                  {getLocalized(digitalIntro.title, locale)}
+                  {t("introTitle")}
                 </h2>
-                {getLocalized(digitalIntro.paragraphs, locale).map(
+                {getLocalized(lists.introParagraphs, locale).map(
                   (paragraph) => (
                     <p
                       key={paragraph}
@@ -207,13 +137,11 @@ export default async function DigitalMarketingPage({
             </Reveal>
             <Reveal delay={100}>
               <aside className="border-border bg-card rounded-2xl border p-6 shadow-sm sm:p-8">
-                <h2 className="text-lg font-semibold">
-                  {getLocalized(digitalFacts.title, locale)}
-                </h2>
+                <h2 className="text-lg font-semibold">{t("factsTitle")}</h2>
                 <dl className="divide-border mt-4 divide-y">
-                  {digitalFacts.items.map(({ label, value }) => (
+                  {collections.facts.map(({ label, value }, index) => (
                     <div
-                      key={label.sv}
+                      key={index}
                       className="grid gap-1 py-3 sm:grid-cols-[8rem_1fr] sm:gap-4"
                     >
                       <dt className="text-muted-foreground text-sm font-medium">
@@ -230,18 +158,18 @@ export default async function DigitalMarketingPage({
       </Section>
 
       {/* All digital services, grouped by area */}
-      <Section tone="tint">
+      <Section tone="tint" id="tjanster" className="scroll-mt-20">
         <Container>
           <Reveal>
-            <SectionHeading title={d("servicesTitle")} />
+            <SectionHeading title={t("servicesTitle")} />
           </Reveal>
           <div className="mt-12 flex flex-col gap-12">
-            {areas.map(({ icon, label, services: areaServices }) => (
-              <div key={label.sv}>
+            {areas.map(({ key, icon, label, services: areaServices }) => (
+              <div key={key}>
                 <div className="mb-5 flex items-center gap-3">
                   <IconTile icon={icon} size="sm" />
                   <h3 className="text-muted-foreground text-sm font-semibold tracking-wide uppercase">
-                    {getLocalized(label, locale)}
+                    {label}
                   </h3>
                 </div>
                 <RevealGroup
@@ -253,7 +181,7 @@ export default async function DigitalMarketingPage({
                       key={service.key}
                       service={service}
                       locale={locale}
-                      readMoreLabel={t("readMore")}
+                      readMoreLabel={common("readMore")}
                     />
                   ))}
                 </RevealGroup>
@@ -263,47 +191,26 @@ export default async function DigitalMarketingPage({
         </Container>
       </Section>
 
-      {/* How we work */}
-      <Section tone="base">
-        <Container size="wide">
-          <Reveal>
-            <SectionHeading title={d("processTitle")} />
-          </Reveal>
-          <Reveal delay={120}>
-            <ol className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-              {digitalProcessSteps.map((step, index) => (
-                <li key={index} className="flex flex-col gap-3">
-                  <span
-                    dir="ltr"
-                    aria-hidden="true"
-                    className="text-primary/15 -mb-2 text-5xl font-bold"
-                  >
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="font-semibold">
-                    {getLocalized(step.title, locale)}
-                  </h3>
-                  <p className="text-muted-foreground text-body">
-                    {getLocalized(step.body, locale)}
-                  </p>
-                </li>
-              ))}
-            </ol>
-          </Reveal>
-        </Container>
-      </Section>
+      <ProcessSteps
+        locale={locale}
+        title={t("processTitle")}
+        steps={collections.processSteps.map(({ title, body }) => ({
+          title,
+          body,
+        }))}
+      />
 
       {/* Why us */}
       <Section tone="tint">
         <Container>
           <Reveal>
-            <SectionHeading title={d("benefitsTitle")} />
+            <SectionHeading title={t("benefitsTitle")} />
           </Reveal>
           <RevealGroup
             step={100}
             className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
           >
-            {digitalBenefits.map(({ icon, title, body }, index) => (
+            {collections.benefits.map(({ icon, title, body }, index) => (
               <div
                 key={index}
                 className={cn(
@@ -311,7 +218,7 @@ export default async function DigitalMarketingPage({
                   index % 2 === 0 && "bg-card border-border border shadow-sm",
                 )}
               >
-                <IconTile icon={icon} />
+                <IconTile icon={getCmsIcon(icon?.sv)} />
                 <h3 className="font-semibold">{getLocalized(title, locale)}</h3>
                 <p className="text-muted-foreground text-body">
                   {getLocalized(body, locale)}
@@ -322,56 +229,13 @@ export default async function DigitalMarketingPage({
         </Container>
       </Section>
 
-      {/* FAQ */}
-      <Section tone="base">
-        <Container size="content">
-          <Reveal>
-            <h2 className="text-section-h2 text-center font-semibold text-balance">
-              {t("faqTitle")}
-            </h2>
-          </Reveal>
-          <Reveal delay={100}>
-            <div className="mt-10">
-              <FaqAccordion faqs={hubFaqs} locale={locale} />
-            </div>
-          </Reveal>
-        </Container>
-      </Section>
+      <FaqBlock faqs={hubFaqs} locale={locale} title={t("faqTitle")} />
 
-      {/* CTA */}
-      <Section tone="gradient" bleed>
-        <GridPattern className="inset-0 hidden size-full text-white/[0.08] sm:block" />
-        <Container
-          size="narrow"
-          className="relative flex flex-col items-center gap-6 text-center"
-        >
-          <Reveal>
-            <h2 className="text-section-h2 font-semibold text-balance">
-              {d("ctaTitle")}
-            </h2>
-          </Reveal>
-          <Reveal delay={80}>
-            <p className="text-body max-w-prose text-white/85">
-              {d("ctaSubtitle")}
-            </p>
-          </Reveal>
-          <Reveal delay={160}>
-            <Button
-              render={<Link href="/kontakt" />}
-              size="xl"
-              variant="secondary"
-              className="gap-2"
-            >
-              {t("contactUs")}
-              <ArrowRight
-                size={18}
-                aria-hidden="true"
-                className="rtl:rotate-180"
-              />
-            </Button>
-          </Reveal>
-        </Container>
-      </Section>
+      <CtaBand
+        title={t("ctaTitle")}
+        body={t("ctaSubtitle")}
+        actions={inquiry("dark", "marketing-cta-band")}
+      />
     </>
   );
 }

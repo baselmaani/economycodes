@@ -1,0 +1,152 @@
+{
+  "sv": {
+    "dashboard": {
+      "width": 2880,
+      "height": 1800
+    },
+    "invoice-edit": {
+      "width": 2368,
+      "height": 1672
+    },
+    "invoice-list": {
+      "width": 2368,
+      "height": 1672
+    },
+    "invoice-paid": {
+      "width": 2368,
+      "height": 1672
+    },
+    "invoice-rot": {
+      "width": 1512,
+      "height": 490
+    },
+    "supplier-invoice": {
+      "width": 2368,
+      "height": 1672
+    },
+    "underlag": {
+      "width": 2368,
+      "height": 1672
+    },
+    "voucher": {
+      "width": 2368,
+      "height": 1672
+    },
+    "ledger": {
+      "width": 2368,
+      "height": 1672
+    },
+    "sie": {
+      "width": 2368,
+      "height": 1672
+    },
+    "payslips": {
+      "width": 2368,
+      "height": 1672
+    },
+    "project": {
+      "width": 2368,
+      "height": 1672
+    }
+  },
+  "en": {
+    "dashboard": {
+      "width": 2880,
+      "height": 1800
+    },
+    "invoice-edit": {
+      "width": 2368,
+      "height": 1672
+    },
+    "invoice-list": {
+      "width": 2368,
+      "height": 1672
+    },
+    "invoice-paid": {
+      "width": 2368,
+      "height": 1672
+    },
+    "invoice-rot": {
+      "width": 1512,
+      "height": 490
+    },
+    "supplier-invoice": {
+      "width": 2368,
+      "height": 1672
+    },
+    "underlag": {
+      "width": 2368,
+      "height": 1672
+    },
+    "voucher": {
+      "width": 2368,
+      "height": 1672
+    },
+    "ledger": {
+      "width": 2368,
+      "height": 1672
+    },
+    "sie": {
+      "width": 2368,
+      "height": 1672
+    },
+    "payslips": {
+      "width": 2368,
+      "height": 1672
+    },
+    "project": {
+      "width": 2368,
+      "height": 1672
+    }
+  },
+  "ar": {
+    "dashboard": {
+      "width": 2880,
+      "height": 1800
+    },
+    "invoice-edit": {
+      "width": 2368,
+      "height": 1672
+    },
+    "invoice-list": {
+      "width": 2368,
+      "height": 1672
+    },
+    "invoice-paid": {
+      "width": 2368,
+      "height": 1672
+    },
+    "invoice-rot": {
+      "width": 1512,
+      "height": 490
+    },
+    "supplier-invoice": {
+      "width": 2368,
+      "height": 1672
+    },
+    "underlag": {
+      "width": 2368,
+      "height": 1672
+    },
+    "voucher": {
+      "width": 2368,
+      "height": 1672
+    },
+    "ledger": {
+      "width": 2368,
+      "height": 1672
+    },
+    "sie": {
+      "width": 2368,
+      "height": 1672
+    },
+    "payslips": {
+      "width": 2368,
+      "height": 1672
+    },
+    "project": {
+      "width": 2368,
+      "height": 1672
+    }
+  }
+}

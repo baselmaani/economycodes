@@ -2,17 +2,18 @@ import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
 import { legacyRedirects } from "./config/legacy-redirects";
+import { serviceRedirects } from "./config/service-redirects";
 
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
 const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
-    // No image on this site is ever rendered wider than a phone/small-tablet
-    // viewport (the largest `sizes` in use is 100vw on the article grid, and
-    // every fixed-width image tops out at 360px) -- trimmed from Next's
-    // default deviceSizes (up to 3840px) to match actual usage.
-    deviceSizes: [640, 750, 828, 1080],
+    // Trimmed from Next's default deviceSizes (up to 3840px) to match actual
+    // usage. Most images top out at a phone/small-tablet width; the app
+    // screenshots on /bokforingsprogram render up to 720px wide, so 1440
+    // keeps their small UI text sharp on 2x screens.
+    deviceSizes: [640, 750, 828, 1080, 1440],
     // Images uploaded through the admin dashboard's media library.
     remotePatterns: [new URL("https://*.public.blob.vercel-storage.com/**")],
   },
@@ -22,7 +23,7 @@ const nextConfig: NextConfig = {
     globalNotFound: true,
   },
   async redirects() {
-    return legacyRedirects;
+    return [...legacyRedirects, ...serviceRedirects];
   },
   async headers() {
     return [

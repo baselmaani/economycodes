@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 import type { MediaRef } from "@/content/types";
-import { staticMedia } from "@/lib/cms/static-media";
 import {
   Dialog,
   DialogContent,
@@ -12,7 +11,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { cn } from "@/lib/utils";
 import {
   listMediaAction,
   type MediaItem,
@@ -21,7 +19,7 @@ import { MediaUploadButton } from "./MediaUploadButton";
 
 export type PickedImage = Omit<MediaRef, "alt"> & { alt?: MediaRef["alt"] };
 
-/** Dialog listing uploaded media plus the images that ship with the site. */
+/** Dialog listing uploaded media, with an upload button. */
 export function MediaPicker({
   open,
   onOpenChange,
@@ -32,7 +30,6 @@ export function MediaPicker({
   onPick: (image: PickedImage) => void;
 }) {
   const [items, setItems] = useState<MediaItem[] | null>(null);
-  const [tab, setTab] = useState<"uploads" | "site">("uploads");
 
   useEffect(() => {
     if (!open || items) return;
@@ -44,23 +41,16 @@ export function MediaPicker({
     onOpenChange(false);
   }
 
-  const tiles =
-    tab === "uploads"
-      ? (items ?? []).map((item) => ({
-          key: item.id,
-          image: {
-            src: item.url,
-            width: item.width,
-            height: item.height,
-            alt: item.alt,
-          },
-          caption: item.alt.sv,
-        }))
-      : staticMedia.map((media) => ({
-          key: media.src,
-          image: media,
-          caption: media.src.split("/").pop() ?? media.src,
-        }));
+  const tiles = (items ?? []).map((item) => ({
+    key: item.id,
+    image: {
+      src: item.url,
+      width: item.width,
+      height: item.height,
+      alt: item.alt,
+    },
+    caption: item.alt.sv || (item.url.split("/").pop() ?? item.url),
+  }));
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -68,45 +58,20 @@ export function MediaPicker({
         <DialogHeader>
           <DialogTitle>Choose an image</DialogTitle>
           <DialogDescription>
-            Pick an uploaded image, upload a new one, or reuse one of the
-            site&apos;s built-in images.
+            Pick an uploaded image or upload a new one.
           </DialogDescription>
         </DialogHeader>
 
-        <div className="flex flex-wrap items-start justify-between gap-3">
-          <div className="bg-muted inline-flex rounded-lg p-1">
-            {(
-              [
-                ["uploads", "Uploads"],
-                ["site", "Site images"],
-              ] as const
-            ).map(([value, label]) => (
-              <button
-                key={value}
-                type="button"
-                onClick={() => setTab(value)}
-                className={cn(
-                  "rounded-md px-3 py-1.5 text-sm font-medium",
-                  tab === value
-                    ? "bg-background shadow-sm"
-                    : "text-muted-foreground",
-                )}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-          {tab === "uploads" && (
-            <MediaUploadButton
-              label="Upload new"
-              onUploaded={(uploaded) =>
-                setItems((current) => [...uploaded, ...(current ?? [])])
-              }
-            />
-          )}
+        <div className="flex justify-end">
+          <MediaUploadButton
+            label="Upload new"
+            onUploaded={(uploaded) =>
+              setItems((current) => [...uploaded, ...(current ?? [])])
+            }
+          />
         </div>
 
-        {tab === "uploads" && items === null ? (
+        {items === null ? (
           <p className="text-muted-foreground text-sm">Loading…</p>
         ) : tiles.length === 0 ? (
           <p className="text-muted-foreground text-sm">

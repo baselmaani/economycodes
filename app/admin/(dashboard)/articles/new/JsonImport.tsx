@@ -219,15 +219,17 @@ export function JsonImport() {
               className={cn("prose prose-neutral max-w-none", dirClass)}
               {...dirProps}
             >
-              <div className="not-prose bg-muted relative mb-4 aspect-[16/10] max-w-sm overflow-hidden rounded-xl">
-                <Image
-                  src={preview.coverImage.src}
-                  alt=""
-                  fill
-                  sizes="384px"
-                  className="object-cover"
-                />
-              </div>
+              {preview.coverImage && (
+                <div className="not-prose bg-muted relative mb-4 aspect-[16/10] max-w-sm overflow-hidden rounded-xl">
+                  <Image
+                    src={preview.coverImage.src}
+                    alt=""
+                    fill
+                    sizes="384px"
+                    className="object-cover"
+                  />
+                </div>
+              )}
               <h1>{preview.title[locale] ?? preview.title.sv}</h1>
               <p className="lead">
                 {preview.excerpt[locale] ?? preview.excerpt.sv}

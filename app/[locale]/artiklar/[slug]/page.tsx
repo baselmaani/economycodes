@@ -8,7 +8,7 @@ import {
   getAbsoluteUrl,
   getArticleAlternateLinks,
   getArticleSlug,
-  getServiceSlug,
+  getServiceHref,
 } from "@/lib/routes";
 import { buildMetadata } from "@/lib/seo/metadata";
 import {
@@ -171,10 +171,7 @@ export default async function ArticlePage({
             {relatedServices.map((service) => (
               <li key={service.key}>
                 <Link
-                  href={{
-                    pathname: "/tjanster/[slug]",
-                    params: { slug: getServiceSlug(locale, service) },
-                  }}
+                  href={getServiceHref(locale, service)}
                   className="border-border bg-card hover:border-primary/40 block h-full rounded-2xl border p-5 transition-colors"
                 >
                   <span className="font-semibold">
@@ -193,7 +190,7 @@ export default async function ArticlePage({
         <PersonProfileCard
           person={hadi}
           locale={locale}
-          learnMoreLabel={t("learnMore")}
+          learnMoreLabel={t("aboutHadiLink")}
           facebookLabel={t("facebook")}
           compact
         />

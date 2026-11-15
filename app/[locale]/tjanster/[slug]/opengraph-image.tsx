@@ -1,5 +1,6 @@
-import { isRtlLocale, routing, type AppLocale } from "@/i18n/routing";
-import { getServiceSlug, resolveServiceBySlug, servicesList } from "@/lib/routes";
+import { isRtlLocale, type AppLocale } from "@/i18n/routing";
+import { resolveServiceBySlug } from "@/lib/service-lookup";
+import { serviceStaticParams } from "@/lib/service-page";
 import { getLocalized } from "@/lib/i18n-content";
 import { alt, contentType, size } from "@/lib/seo/og-image";
 import { renderOgImage } from "@/lib/seo/render-og-image";
@@ -8,12 +9,7 @@ import { getServiceGroup, serviceGroups } from "@/content/service-icons";
 export { alt, contentType, size };
 
 export function generateStaticParams() {
-  return routing.locales.flatMap((locale) =>
-    servicesList.map((service) => ({
-      locale,
-      slug: getServiceSlug(locale, service),
-    })),
-  );
+  return serviceStaticParams("redovisning");
 }
 
 export default async function Image({

@@ -3,7 +3,15 @@
 import { useState, useTransition } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, Download, ExternalLink, Eye, Pencil } from "lucide-react";
+import {
+  ArrowLeft,
+  Check,
+  Copy,
+  Download,
+  ExternalLink,
+  Eye,
+  Pencil,
+} from "lucide-react";
 
 import type { Locale } from "@/content/types";
 import type { PartialLocalized } from "@/lib/cms/schemas";
@@ -34,6 +42,66 @@ import { saveArticleAction } from "./actions";
 /** Keeps `sv` present (Localized<string> requires it) when a field edit clears it. */
 function withSv(value: PartialLocalized) {
   return { ...value, sv: value.sv ?? "" };
+}
+
+/** The article's public URL: muted host, the path in full, copy button, and a link once it's live. */
+function UrlPreview({
+  siteUrl,
+  path,
+  live,
+}: {
+  siteUrl: string;
+  path: string | undefined;
+  live: boolean;
+}) {
+  const [copied, setCopied] = useState(false);
+  const host = new URL(siteUrl).host;
+
+  return (
+    <span dir="ltr" className="flex items-start gap-1.5">
+      <span className="min-w-0 font-mono break-all">
+        <span className="text-muted-foreground">{host}</span>
+        {!path ? (
+          <span className="italic">/…</span>
+        ) : live ? (
+          <a
+            href={path}
+            target="_blank"
+            rel="noreferrer"
+            className="text-foreground hover:text-primary underline-offset-2 hover:underline"
+          >
+            {path}
+            <ExternalLink
+              size={12}
+              aria-hidden="true"
+              className="ms-1 inline align-[-1px]"
+            />
+          </a>
+        ) : (
+          <span className="text-foreground">{path}</span>
+        )}
+      </span>
+      {path && (
+        <button
+          type="button"
+          aria-label="Copy URL"
+          title="Copy URL"
+          className="text-muted-foreground hover:text-foreground shrink-0 pt-px"
+          onClick={async () => {
+            await navigator.clipboard.writeText(`${siteUrl}${path}`);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 1500);
+          }}
+        >
+          {copied ? (
+            <Check size={12} aria-hidden="true" />
+          ) : (
+            <Copy size={12} aria-hidden="true" />
+          )}
+        </button>
+      )}
+    </span>
+  );
 }
 
 export function ArticleEditor({
@@ -102,6 +170,13 @@ export function ArticleEditor({
   );
   const { className: dirClass, ...dirProps } = localeInputProps(locale);
   const slugForLocale = draft.slug[locale] || draft.slug.sv;
+  const articleUrl = `${siteUrl}${articlePath(locale, slugForLocale || "…")}`;
+  // Only link to the public page when it exists at exactly this URL.
+  const live =
+    mode === "update" &&
+    initial.status === "published" &&
+    (locale === "sv" || Boolean(initial.title[locale])) &&
+    slugForLocale === (initial.slug[locale] || initial.slug.sv);
 
   return (
     <div className="max-w-4xl">
@@ -230,10 +305,15 @@ export function ArticleEditor({
               fallback={locale === "sv" ? undefined : { sv: draft.slug.sv }}
               onChange={setSlug}
               hint={
-                <span dir="ltr">
-                  {siteUrl}
-                  {articlePath(locale, slugForLocale || "…")}
-                </span>
+                <UrlPreview
+                  siteUrl={siteUrl}
+                  path={
+                    slugForLocale
+                      ? articlePath(locale, slugForLocale)
+                      : undefined
+                  }
+                  live={live}
+                />
               }
             />
             <Button
@@ -355,8 +435,8 @@ export function ArticleEditor({
         >
           <ImageField
             id="article-cover"
-            label="Cover image"
-            hint="Landscape, about 16:10"
+            label="Cover image (optional)"
+            hint="Landscape, about 16:10. Without one, the article card shows text only."
             locale={locale}
             value={draft.coverImage}
             autoAlt={mergeLocalized(draft.title, draft.seo.title)}
@@ -395,7 +475,7 @@ export function ArticleEditor({
           value={draft.seo}
           onChange={(seo) => update({ seo })}
           defaults={{ title: draft.title, description: draft.excerpt }}
-          url={`${siteUrl}${articlePath(locale, slugForLocale || "…")}`}
+          url={articleUrl}
           absoluteTitle
         />
 

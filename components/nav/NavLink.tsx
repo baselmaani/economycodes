@@ -20,7 +20,9 @@ export function NavLink({
   ...props
 }: ComponentProps<typeof Link> & { href: StaticAppPathname }) {
   const pathname = usePathname();
-  const isActive = pathname === href;
+  // Section roots stay highlighted on their subpages (e.g. /bokforingsprogram/lon).
+  const isActive =
+    pathname === href || (href !== "/" && pathname.startsWith(`${href}/`));
 
   return (
     <Link

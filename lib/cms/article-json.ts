@@ -1,7 +1,7 @@
 import { routing } from "@/i18n/routing";
 import type { Locale } from "@/content/types";
 import type { ArticleMeta } from "@/content/articles/types";
-import type { ContentBlock, Localized, MediaRef } from "@/content/types";
+import type { ContentBlock, Localized } from "@/content/types";
 import type { ArticleInput, SeoFields } from "@/lib/cms/schemas";
 
 /**
@@ -97,10 +97,8 @@ export function articlePath(locale: Locale, slug: string): string {
   return `${prefix}${template.replace("[slug]", slug)}`;
 }
 
-/** Editor state: like ArticleInput, but the cover image may not be chosen yet. */
-export type ArticleDraft = Omit<ArticleInput, "coverImage"> & {
-  coverImage?: MediaRef;
-};
+/** Editor state (the cover image is optional, so this is just ArticleInput). */
+export type ArticleDraft = ArticleInput;
 
 export function emptyArticle(): ArticleDraft {
   return {
@@ -152,16 +150,6 @@ export const ARTICLE_TEMPLATE: ArticleInput = {
       { type: "paragraph", text: "Body text…" },
       { type: "list", items: ["First point", "Second point"] },
     ],
-  },
-  coverImage: {
-    src: "/media/optimized/bokforing.webp",
-    width: 1024,
-    height: 683,
-    alt: {
-      sv: "Bokföring och kvitton",
-      en: "Bookkeeping and receipts",
-      ar: "محاسبة وإيصالات",
-    },
   },
   faqIds: ["faq-bookkeeping-what"],
   publishedAt: "2026-10-14",

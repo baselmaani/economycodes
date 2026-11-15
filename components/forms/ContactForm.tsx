@@ -22,7 +22,7 @@ import {
   contactFields,
   type ContactField,
 } from "@/lib/validation/contact-fields";
-import type { ServiceOption } from "@/lib/service-lookup";
+import type { ServiceOptionGroup } from "@/lib/service-lookup";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -59,7 +59,7 @@ export function ContactForm({
 }: {
   locale: AppLocale;
   /** From getServiceOptions(); passed in so content/services stays server-side. */
-  serviceOptions: ServiceOption[];
+  serviceOptions: ServiceOptionGroup[];
   /** "card" wraps the form in its own surface, for use on tinted or dark sections. */
   variant?: "default" | "card";
   /** Optional heading shown above the form (card variant only). */
@@ -159,7 +159,7 @@ function ContactFormFields({
   pending,
 }: {
   locale: AppLocale;
-  serviceOptions: ServiceOption[];
+  serviceOptions: ServiceOptionGroup[];
   state: ContactFormState;
   formAction: (formData: FormData) => void;
   pending: boolean;
@@ -341,10 +341,14 @@ function ContactFormFields({
               {...errorProps("service")}
             >
               <option value="">{t("servicePlaceholder")}</option>
-              {serviceOptions.map((service) => (
-                <option key={service.key} value={service.key}>
-                  {service.name}
-                </option>
+              {serviceOptions.map((group) => (
+                <optgroup key={group.label} label={group.label}>
+                  {group.options.map((option) => (
+                    <option key={option.key} value={option.key}>
+                      {option.name}
+                    </option>
+                  ))}
+                </optgroup>
               ))}
             </select>
             <ChevronDown

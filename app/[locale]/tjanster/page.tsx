@@ -1,47 +1,43 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Calculator, LayoutDashboard } from "lucide-react";
 
 import { Link } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
-import {
-  getAbsoluteUrl,
-  getAlternateLinks,
-  getServiceAlternateLinks,
-} from "@/lib/routes";
+import { getAbsoluteUrl, getAlternateLinks } from "@/lib/routes";
+import { getInquiryHref } from "@/lib/contact-links";
 import { getLocalized } from "@/lib/i18n-content";
-import { buildBreadcrumbJsonLd } from "@/lib/structured-data/breadcrumb";
-import { buildServiceCatalogJsonLd } from "@/lib/structured-data/service";
-import { JsonLd } from "@/components/seo/JsonLd";
 import { getPageContent } from "@/lib/cms/content";
 import { buildPageMetadata } from "@/lib/cms/metadata";
 import { getServicesListOgImageUrl } from "@/lib/seo/og-image";
-import { Breadcrumbs } from "@/components/common/Breadcrumbs";
+import { cn } from "@/lib/utils";
+import {
+  ACCOUNTING_HUB_FAQ_IDS,
+  accountingFit,
+  accountingHero,
+  accountingSections,
+} from "@/content/accounting";
+import { faqs } from "@/content/faqs";
+import { processSteps } from "@/content/home";
+import { offerings } from "@/content/offerings";
+import { servicesList } from "@/content/services";
+import { ACCOUNTING_GROUPS, groupServices } from "@/content/service-icons";
 import { Container } from "@/components/layout/Container";
+import { Section } from "@/components/layout/Section";
+import { AbstractDocumentPanel } from "@/components/marketing/decor/AbstractDocumentPanel";
+import { IconTile } from "@/components/marketing/IconTile";
+import { SectionHeading } from "@/components/marketing/SectionHeading";
 import { ServiceCard } from "@/components/marketing/ServiceCard";
 import { Reveal } from "@/components/motion/Reveal";
 import { RevealGroup } from "@/components/motion/RevealGroup";
-import { cn } from "@/lib/utils";
-import { servicesList } from "@/content/services";
-import type { Localized } from "@/content/types";
-import {
-  getServiceGroup,
-  serviceGroups,
-  type ServiceGroup,
-} from "@/content/service-icons";
-
-const CATALOG_SERVICE_TYPE: Localized<string> = {
-  sv: "Redovisning och företagstjänster",
-  en: "Accounting and business services",
-  ar: "خدمات المحاسبة والأعمال",
-};
-
-const GROUP_ORDER: ServiceGroup[] = [
-  "core",
-  "advisory",
-  "specialist",
-  "digital",
-];
+import { CheckList } from "@/components/page/CheckList";
+import { ContactActions } from "@/components/page/ContactActions";
+import { CtaBand } from "@/components/page/CtaBand";
+import { FaqBlock } from "@/components/page/FaqBlock";
+import { PageBreadcrumbs } from "@/components/page/PageBreadcrumbs";
+import { PageHero } from "@/components/page/PageHero";
+import { ProcessSteps } from "@/components/page/ProcessSteps";
+import { ServiceCatalogJsonLd } from "@/components/page/ServiceCatalogJsonLd";
 
 export async function generateMetadata({
   params,
@@ -55,111 +51,174 @@ export async function generateMetadata({
   });
 }
 
-export default async function ServicesPage({
+/**
+ * Redovisning: the accounting offering's landing page. Marketing services
+ * have their own hub (/digital-marknadsforing) and are not listed here.
+ */
+export default async function AccountingHubPage({
   params,
 }: {
   params: Promise<{ locale: AppLocale }>;
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations({ locale, namespace: "common" });
-  const nav = await getTranslations({ locale, namespace: "nav" });
-  const digital = await getTranslations({ locale, namespace: "digital" });
+  const common = await getTranslations({ locale, namespace: "common" });
   const page = await getPageContent("tjanster");
+  const offering = offerings.redovisning;
+  const label = getLocalized(offering.label, locale);
+  const pageUrl = getAbsoluteUrl("/tjanster", locale);
   const intro = getLocalized(page.text.intro, locale);
 
-  const grouped = GROUP_ORDER.map((group) => ({
-    group,
-    label: serviceGroups[group][locale],
-    services: servicesList.filter((s) => getServiceGroup(s.key) === group),
-  })).filter((g) => g.services.length > 0);
-
-  const pageUrl = getAbsoluteUrl("/tjanster", locale);
+  const grouped = groupServices(servicesList, ACCOUNTING_GROUPS, locale);
+  const hubFaqs = ACCOUNTING_HUB_FAQ_IDS.map((id) =>
+    faqs.find((faq) => faq.id === id),
+  ).filter((faq) => faq !== undefined);
+  const consultation = (tone: "light" | "dark", ctaId: string) => (
+    <ContactActions
+      href={getInquiryHref(locale, offering.inquiry)}
+      label={getLocalized(offering.cta, locale)}
+      tone={tone}
+      ctaId={ctaId}
+    />
+  );
 
   return (
-    <Container className="py-12 sm:py-16">
-      <JsonLd
-        data={buildBreadcrumbJsonLd([
-          { name: nav("home"), url: getAbsoluteUrl("/", locale) },
-          { name: nav("services"), url: pageUrl },
-        ])}
+    <>
+      <ServiceCatalogJsonLd
+        locale={locale}
+        name={getLocalized(page.text.heading, locale)}
+        serviceType={label}
+        description={intro}
+        url={pageUrl}
+        services={grouped.flatMap((group) => group.services)}
       />
-      <JsonLd
-        data={buildServiceCatalogJsonLd({
-          name: nav("services"),
-          serviceType: getLocalized(CATALOG_SERVICE_TYPE, locale),
-          description: intro,
-          url: pageUrl,
-          locale,
-          entries: grouped.flatMap(({ services }) =>
-            services.map((service) => ({
-              name: getLocalized(service.name, locale),
-              description: getLocalized(service.summary, locale),
-              url: getServiceAlternateLinks(service)[locale],
-            })),
-          ),
-        })}
-      />
-      <Breadcrumbs
-        items={[
-          { label: nav("home"), routeKey: "/" },
-          { label: nav("services") },
-        ]}
-      />
-      <Reveal>
-        <h1 className="text-page-h1 mt-4 font-semibold text-balance">
-          {getLocalized(page.text.heading, locale)}
-        </h1>
-        <p className="text-muted-foreground text-body mt-3 max-w-2xl">
-          {intro}
-        </p>
-      </Reveal>
 
-      <div className="mt-12 flex flex-col gap-14">
-        {grouped.map(({ group, label, services }) => {
-          const isCore = group === "core";
-          return (
-            <div key={group}>
-              <div className="mb-5 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-                <h2 className="text-muted-foreground text-sm font-semibold tracking-wide uppercase">
-                  {label}
-                </h2>
-                {group === "digital" && (
-                  <Link
-                    href="/digital-marknadsforing"
-                    className="text-primary inline-flex items-center gap-1 text-sm font-semibold hover:underline"
-                  >
-                    {digital("seeAll")}
-                    <ArrowRight
-                      size={14}
-                      aria-hidden="true"
-                      className="rtl:rotate-180"
-                    />
-                  </Link>
-                )}
+      <PageHero
+        breadcrumbs={
+          <PageBreadcrumbs
+            locale={locale}
+            items={[{ label }]}
+            currentUrl={pageUrl}
+          />
+        }
+        eyebrow={getLocalized(accountingHero.eyebrow, locale)}
+        eyebrowIcon={Calculator}
+        title={getLocalized(page.text.heading, locale)}
+        lead={<p>{intro}</p>}
+        actions={consultation("light", "accounting-hero")}
+        visual={<AbstractDocumentPanel icon={Calculator} tone="light" />}
+        hideVisualOnMobile
+      />
+
+      {/* Who it's for, and the difference from doing it yourself in the software */}
+      <Section tone="base">
+        <Container>
+          <Reveal>
+            <SectionHeading
+              title={getLocalized(accountingFit.title, locale)}
+              lead={getLocalized(accountingFit.lead, locale)}
+            />
+          </Reveal>
+          <RevealGroup step={100} className="mt-10 grid gap-6 md:grid-cols-2">
+            <div className="border-primary/40 bg-card ring-primary/10 flex h-full flex-col gap-5 rounded-2xl border p-6 shadow-sm ring-4 sm:p-8">
+              <div className="flex items-center gap-3">
+                <IconTile icon={Calculator} />
+                <h3 className="text-xl font-semibold">
+                  {getLocalized(accountingFit.firm.title, locale)}
+                </h3>
               </div>
-              <RevealGroup
-                step={60}
-                className={cn(
-                  "grid gap-4",
-                  isCore ? "sm:grid-cols-2" : "sm:grid-cols-2 lg:grid-cols-3",
-                )}
-              >
-                {services.map((service) => (
-                  <ServiceCard
-                    key={service.key}
-                    service={service}
-                    locale={locale}
-                    readMoreLabel={t("readMore")}
-                    featured={isCore}
-                    size={isCore ? "lg" : "default"}
-                  />
-                ))}
-              </RevealGroup>
+              <CheckList
+                items={getLocalized(accountingFit.firm.points, locale)}
+              />
             </div>
-          );
-        })}
-      </div>
-    </Container>
+            <div className="border-border bg-card flex h-full flex-col gap-5 rounded-2xl border p-6 shadow-sm sm:p-8">
+              <div className="flex items-center gap-3">
+                <IconTile icon={LayoutDashboard} />
+                <h3 className="text-xl font-semibold">
+                  {getLocalized(accountingFit.software.title, locale)}
+                </h3>
+              </div>
+              <CheckList
+                items={getLocalized(accountingFit.software.points, locale)}
+              />
+              <Link
+                href="/bokforingsprogram"
+                className="text-primary focus-visible:ring-ring/50 mt-auto inline-flex min-h-11 items-center gap-1.5 self-start rounded-sm text-sm font-semibold hover:underline focus-visible:ring-3 focus-visible:outline-none"
+              >
+                {getLocalized(accountingFit.software.link, locale)}
+                <ArrowRight
+                  size={16}
+                  aria-hidden="true"
+                  className="rtl:rotate-180"
+                />
+              </Link>
+            </div>
+          </RevealGroup>
+        </Container>
+      </Section>
+
+      {/* What's included: every accounting service, grouped */}
+      <Section tone="tint" id="tjanster" className="scroll-mt-20">
+        <Container>
+          <Reveal>
+            <SectionHeading
+              title={getLocalized(accountingSections.servicesTitle, locale)}
+              lead={getLocalized(accountingSections.servicesLead, locale)}
+            />
+          </Reveal>
+          <div className="mt-12 flex flex-col gap-12">
+            {grouped.map(({ group, label: groupLabel, services }) => {
+              const isCore = group === "core";
+              return (
+                <div key={group}>
+                  <h3 className="text-muted-foreground mb-5 text-sm font-semibold tracking-wide uppercase">
+                    {groupLabel}
+                  </h3>
+                  <RevealGroup
+                    step={60}
+                    className={cn(
+                      "grid gap-4",
+                      isCore
+                        ? "sm:grid-cols-2"
+                        : "sm:grid-cols-2 lg:grid-cols-3",
+                    )}
+                  >
+                    {services.map((service) => (
+                      <ServiceCard
+                        key={service.key}
+                        service={service}
+                        locale={locale}
+                        readMoreLabel={common("readMore")}
+                        featured={isCore}
+                        size={isCore ? "lg" : "default"}
+                      />
+                    ))}
+                  </RevealGroup>
+                </div>
+              );
+            })}
+          </div>
+        </Container>
+      </Section>
+
+      <ProcessSteps
+        locale={locale}
+        title={getLocalized(accountingSections.processTitle, locale)}
+        steps={processSteps}
+      />
+
+      <FaqBlock
+        faqs={hubFaqs}
+        locale={locale}
+        title={common("faqTitle")}
+        tone="tint"
+      />
+
+      <CtaBand
+        title={getLocalized(accountingSections.ctaTitle, locale)}
+        body={getLocalized(accountingSections.ctaBody, locale)}
+        actions={consultation("dark", "accounting-cta-band")}
+      />
+    </>
   );
 }

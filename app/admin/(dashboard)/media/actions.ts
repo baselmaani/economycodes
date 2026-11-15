@@ -11,12 +11,13 @@ import {
   findMediaUsage,
   getMedia,
   listMedia,
+  removeMediaReferences,
   updateMediaAlt,
 } from "@/lib/cms/admin";
 import { CMS_TAGS } from "@/lib/cms/content";
 import {
+  altTextSchema,
   formatIssues,
-  localizedString,
   mediaInputSchema,
 } from "@/lib/cms/schemas";
 import type { Localized } from "@/content/types";
@@ -65,7 +66,7 @@ export async function updateMediaAltAction(
   alt: unknown,
 ): Promise<ActionResult> {
   await requireAdmin();
-  const parsed = localizedString.safeParse(alt);
+  const parsed = altTextSchema.safeParse(alt);
   if (!parsed.success) {
     return { ok: false, errors: formatIssues(parsed.error) };
   }
@@ -74,17 +75,47 @@ export async function updateMediaAltAction(
   return { ok: true };
 }
 
-export async function deleteMediaAction(id: string): Promise<ActionResult> {
+/** A failed delete carries `usage` when the image is still referenced somewhere. */
+export type DeleteMediaResult =
+  | ActionResult
+  | { ok: false; errors: string[]; usage: string[] };
+
+/**
+ * Deletes an image. With `force`, first clears it from page image slots and
+ * OG images (they fall back to their defaults); article cover images still
+ * block the delete because an article must have one.
+ */
+export async function deleteMediaAction(
+  id: string,
+  { force = false }: { force?: boolean } = {},
+): Promise<DeleteMediaResult> {
   await requireAdmin();
   const media = await getMedia(id);
   if (!media) return { ok: false, errors: ["Image not found"] };
 
-  const usage = await findMediaUsage(media.url);
-  if (usage.length > 0) {
-    return {
-      ok: false,
-      errors: [`Still used by ${usage.join(", ")}. Replace it there first.`],
-    };
+  if (force) {
+    const removed = await removeMediaReferences(media.url);
+    for (const key of removed.pageKeys) updateTag(CMS_TAGS.page(key));
+    if (removed.articles) updateTag(CMS_TAGS.articles);
+
+    const remaining = await findMediaUsage(media.url);
+    if (remaining.length > 0) {
+      return {
+        ok: false,
+        errors: [
+          `Still used by ${remaining.join(", ")} (e.g. as an article cover image). Choose another image there first.`,
+        ],
+      };
+    }
+  } else {
+    const usage = await findMediaUsage(media.url);
+    if (usage.length > 0) {
+      return {
+        ok: false,
+        errors: [`Still used by ${usage.join(", ")}.`],
+        usage,
+      };
+    }
   }
 
   await del(media.url);

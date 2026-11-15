@@ -64,7 +64,7 @@ export async function upsertArticle(input: ArticleInput): Promise<void> {
     title: input.title,
     excerpt: input.excerpt,
     body: input.body,
-    coverImage: input.coverImage,
+    coverImage: input.coverImage ?? null,
     faqIds: input.faqIds,
     seo: input.seo,
     publishedAt: input.publishedAt,
@@ -184,6 +184,70 @@ export async function findMediaUsage(url: string): Promise<string[]> {
     ...articles.map((row) => `article "${row.id}"`),
     ...pages.map((row) => `page "${row.key}"`),
   ];
+}
+
+/**
+ * Clears an image URL from every optional slot that holds it: page image
+ * overrides and page/article OG images, so those fall back to their defaults.
+ * Article cover images are required and are left alone; callers re-run
+ * findMediaUsage() to see what is still referenced.
+ */
+export async function removeMediaReferences(
+  url: string,
+): Promise<{ pageKeys: string[]; articles: boolean }> {
+  const pattern = `%${url}%`;
+  const db = getDb();
+  const [articles, pages] = await Promise.all([
+    db
+      .select({ id: articlesTable.id, seo: articlesTable.seo })
+      .from(articlesTable)
+      .where(sql`${articlesTable.seo}::text like ${pattern}`),
+    db
+      .select({ key: pageOverridesTable.key, data: pageOverridesTable.data })
+      .from(pageOverridesTable)
+      .where(sql`${pageOverridesTable.data}::text like ${pattern}`),
+  ]);
+
+  const pageKeys: string[] = [];
+  for (const { key, data } of pages) {
+    const next: PageOverrideData = { ...data };
+    let changed = false;
+
+    const images = Object.entries(data.images ?? {});
+    const kept = images.filter(([, ref]) => ref.src !== url);
+    if (kept.length < images.length) {
+      changed = true;
+      if (kept.length > 0) next.images = Object.fromEntries(kept);
+      else delete next.images;
+    }
+
+    if (data.seo?.ogImage?.src === url) {
+      changed = true;
+      const seo = { ...data.seo };
+      delete seo.ogImage;
+      if (Object.keys(seo).length > 0) next.seo = seo;
+      else delete next.seo;
+    }
+
+    if (!changed) continue;
+    if (Object.keys(next).length === 0) await deletePageOverride(key);
+    else await savePageOverride(key, next);
+    pageKeys.push(key);
+  }
+
+  let articlesChanged = false;
+  for (const { id, seo } of articles) {
+    if (seo.ogImage?.src !== url) continue;
+    const next = { ...seo };
+    delete next.ogImage;
+    await db
+      .update(articlesTable)
+      .set({ seo: next, modifiedAt: new Date() })
+      .where(eq(articlesTable.id, id));
+    articlesChanged = true;
+  }
+
+  return { pageKeys, articles: articlesChanged };
 }
 
 export async function getOverview() {

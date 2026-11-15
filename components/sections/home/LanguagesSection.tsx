@@ -3,7 +3,7 @@ import { Languages } from "lucide-react";
 
 import { Link } from "@/i18n/navigation";
 import { getLocalized } from "@/lib/i18n-content";
-import { getServiceSlug } from "@/lib/routes";
+import { getServiceHref } from "@/lib/routes";
 import { services } from "@/content/services";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
@@ -52,13 +52,12 @@ export async function LanguagesSection({ locale, content }: SectionProps) {
         </div>
         <Reveal delay={460}>
           <Link
-            href={{
-              pathname: "/tjanster/[slug]",
-              params: { slug: getServiceSlug(locale, arabicService) },
-            }}
+            href={getServiceHref(locale, arabicService)}
             className="mt-6 inline-block text-sm font-medium text-white underline underline-offset-4 hover:text-white/80"
           >
-            {common("learnMore")}
+            {common("readMoreAbout", {
+              topic: getLocalized(arabicService.name, locale).toLowerCase(),
+            })}
           </Link>
         </Reveal>
       </Container>

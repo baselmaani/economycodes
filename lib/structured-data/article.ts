@@ -22,7 +22,9 @@ export function buildArticleJsonLd(
     inLanguage: locale,
     url,
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
-    image: new URL(article.coverImage.src, siteUrl).toString(),
+    ...(article.coverImage && {
+      image: new URL(article.coverImage.src, siteUrl).toString(),
+    }),
     author: {
       "@type": "Person",
       "@id": PERSON_ID,

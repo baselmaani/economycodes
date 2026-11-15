@@ -35,6 +35,13 @@ export type PartialLocalized = z.infer<typeof partialLocalizedString>;
 
 export const localizedString = localized(nonEmpty);
 
+/** Image alt text: optional, an empty `sv` renders as a decorative image (alt=""). */
+export const altTextSchema = z.object({
+  sv: z.string().trim(),
+  en: optionalText,
+  ar: optionalText,
+});
+
 /** Lowercase words joined by hyphens; any script, so the existing Arabic slugs validate. */
 export const slugSchema = z
   .string()
@@ -56,7 +63,7 @@ export const mediaRefSchema = z.object({
   src: imageSrcSchema,
   width: z.number().int().positive(),
   height: z.number().int().positive(),
-  alt: localizedString,
+  alt: altTextSchema,
 }) satisfies z.ZodType<MediaRef>;
 
 export const contentBlockSchema = z.discriminatedUnion("type", [
@@ -106,7 +113,7 @@ export const articleInputSchema = z.object({
   title: localizedString,
   excerpt: localizedString,
   body: localized(blocksSchema),
-  coverImage: mediaRefSchema,
+  coverImage: mediaRefSchema.optional(),
   faqIds: z.array(z.string()).default([]),
   publishedAt: dateSchema,
   updatedAt: dateSchema.optional(),
@@ -178,7 +185,7 @@ export const mediaInputSchema = z.object({
   pathname: z.string().min(1),
   width: z.number().int().positive(),
   height: z.number().int().positive(),
-  alt: localizedString,
+  alt: altTextSchema,
   contentType: z.string().regex(/^image\//, "Images only"),
   size: z.number().int().nonnegative(),
 });

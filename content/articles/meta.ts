@@ -28,16 +28,6 @@ export const articles: ArticleMeta[] = [
       "faq-annual-closing-difference",
       "faq-global-what-is-authorized-firm",
     ],
-    coverImage: {
-      src: "/media/optimized/bokforing.webp",
-      width: 1024,
-      height: 683,
-      alt: {
-        sv: "Redovisning och bokföring för ett företag i Sverige",
-        en: "Accounting and bookkeeping for a business in Sweden",
-        ar: "محاسبة ومسك دفاتر لشركة في السويد",
-      },
-    },
   },
   {
     id: "choose-marketing-agency-sweden",
@@ -64,16 +54,6 @@ export const articles: ArticleMeta[] = [
       "faq-geo-what",
       "faq-digital-why-accounting-firm",
     ],
-    coverImage: {
-      src: "/media/optimized/home-benefits.webp",
-      width: 1600,
-      height: 1067,
-      alt: {
-        sv: "Företagare som planerar digital marknadsföring",
-        en: "Business owner planning digital marketing",
-        ar: "صاحب عمل يخطط للتسويق الرقمي",
-      },
-    },
   },
   {
     id: "payroll-sweden-employers",
@@ -95,16 +75,6 @@ export const articles: ArticleMeta[] = [
     publishedAt: GUIDES_PUBLISHED_AT,
     authorId: "hadi-almaani",
     faqIds: ["faq-payroll-what", "faq-payroll-frequency"],
-    coverImage: {
-      src: "/media/optimized/hero.webp",
-      width: 1600,
-      height: 1068,
-      alt: {
-        sv: "Arbetsgivare som går igenom lönerna",
-        en: "Employer reviewing payroll",
-        ar: "صاحب عمل يراجع الرواتب",
-      },
-    },
   },
   {
     id: "bookkeeping-records-sweden",
@@ -130,16 +100,6 @@ export const articles: ArticleMeta[] = [
       "faq-bookkeeping-software",
       "faq-global-digital-bookkeeping",
     ],
-    coverImage: {
-      src: "/media/optimized/bokforing.webp",
-      width: 1024,
-      height: 683,
-      alt: {
-        sv: "Bokföring och sparade kvitton för ett litet företag",
-        en: "Bookkeeping and saved receipts for a small business",
-        ar: "محاسبة وإيصالات محفوظة لشركة صغيرة",
-      },
-    },
   },
   {
     id: "register-aktiebolag-sweden-foreigner",
@@ -165,16 +125,6 @@ export const articles: ArticleMeta[] = [
       "faq-registration-form",
       "faq-investment-guarantee",
     ],
-    coverImage: {
-      src: "/media/optimized/foretagsregistrering.webp",
-      width: 370,
-      height: 245,
-      alt: {
-        sv: "Registrering av aktiebolag i Sverige",
-        en: "Registering a limited company in Sweden",
-        ar: "تسجيل شركة محدودة في السويد",
-      },
-    },
   },
   {
     id: "sweden-business-tax-deadlines",
@@ -196,16 +146,6 @@ export const articles: ArticleMeta[] = [
     publishedAt: PUBLISHED_AT,
     authorId: "hadi-almaani",
     faqIds: ["faq-tax-deadlines", "faq-tax-general"],
-    coverImage: {
-      src: "/media/optimized/hero.webp",
-      width: 1600,
-      height: 1068,
-      alt: {
-        sv: "Företagare som planerar inför en skattedeadline",
-        en: "Business owner planning ahead of a tax deadline",
-        ar: "صاحب عمل يخطط قبل موعد ضريبي",
-      },
-    },
   },
   {
     id: "start-business-sweden-without-residence-permit",
@@ -227,16 +167,6 @@ export const articles: ArticleMeta[] = [
     publishedAt: PUBLISHED_AT,
     authorId: "hadi-almaani",
     faqIds: ["faq-investment-guarantee", "faq-investment-scope"],
-    coverImage: {
-      src: "/media/optimized/investeringar-i-sverige.webp",
-      width: 1024,
-      height: 512,
-      alt: {
-        sv: "Etablera företag och investera i Sverige",
-        en: "Establishing a business and investing in Sweden",
-        ar: "تأسيس شركة والاستثمار في السويد",
-      },
-    },
   },
   {
     id: "arabic-speaking-accountant-sweden-why",
@@ -262,15 +192,5 @@ export const articles: ArticleMeta[] = [
       "faq-global-arabic-support",
       "faq-global-nationwide",
     ],
-    coverImage: {
-      src: "/media/optimized/hero.webp",
-      width: 1600,
-      height: 1068,
-      alt: {
-        sv: "Rådgivning på arabiska för företagare i Sverige",
-        en: "Advisory in Arabic for business owners in Sweden",
-        ar: "استشارات باللغة العربية لأصحاب الأعمال في السويد",
-      },
-    },
   },
 ];

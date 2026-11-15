@@ -14,7 +14,7 @@ export function FaqAccordion({
   faqs,
   locale,
 }: {
-  faqs: Faq[];
+  faqs: Pick<Faq, "id" | "question" | "answer">[];
   locale: AppLocale;
 }) {
   if (faqs.length === 0) return null;

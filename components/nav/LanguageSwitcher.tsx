@@ -42,7 +42,8 @@ export function LanguageSwitcher() {
           <Button
             variant="outline"
             size="sm"
-            aria-label={t("languageLabel")}
+            // Starts with the visible text so voice-control users can say it.
+            aria-label={`${localeNames[locale as AppLocale]} – ${t("languageLabel")}`}
             className="gap-1.5"
           />
         }

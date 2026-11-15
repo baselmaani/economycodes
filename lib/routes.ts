@@ -5,13 +5,24 @@ import {
   type StaticAppPathname,
 } from "@/i18n/routing";
 import { siteUrl } from "@/lib/site";
-import { getServiceSlug, resolveServiceBySlug } from "@/lib/service-lookup";
+import {
+  getServiceHref,
+  getServiceRoute,
+  getServiceSlug,
+  resolveServiceBySlug,
+  type ServiceRoute,
+} from "@/lib/service-lookup";
 import { services, servicesList } from "@/content/services";
 import type { ArticleMeta } from "@/content/articles/types";
 import { locationPages, type LocationPage } from "@/content/location-pages";
 import type { Service } from "@/content/types";
 
-export { resolveServiceBySlug, getServiceSlug };
+export {
+  resolveServiceBySlug,
+  getServiceSlug,
+  getServiceHref,
+  getServiceRoute,
+};
 
 /** Absolute, locale-correct URL for a static (non-dynamic) pathname. */
 export function getAbsoluteUrl(
@@ -40,8 +51,7 @@ export function getAlternateLinks(
 
 /** hreflang alternates for a dynamic [slug] page, given a function that resolves the slug per locale. */
 function getDynamicAlternateLinks(
-  pathname:
-    "/tjanster/[slug]" | "/artiklar/[slug]" | "/redovisningsbyra/[slug]",
+  pathname: ServiceRoute | "/artiklar/[slug]" | "/redovisningsbyra/[slug]",
   slugForLocale: (locale: AppLocale) => string,
 ): Record<AppLocale | "x-default", string> {
   const entries = routing.locales.map((locale) => {
@@ -58,11 +68,11 @@ function getDynamicAlternateLinks(
   } as Record<AppLocale | "x-default", string>;
 }
 
-/** hreflang alternates for a service detail page, keyed off the service's own per-locale slug. */
+/** hreflang alternates for a service detail page, under its offering's route and keyed off its own per-locale slug. */
 export function getServiceAlternateLinks(
   service: Service,
 ): Record<AppLocale | "x-default", string> {
-  return getDynamicAlternateLinks("/tjanster/[slug]", (locale) =>
+  return getDynamicAlternateLinks(getServiceRoute(service), (locale) =>
     getServiceSlug(locale, service),
   );
 }
@@ -110,6 +120,14 @@ export function resolveLocationBySlug(
   return locationPages.find(
     (page) => getLocationSlug(locale, page) === decoded,
   );
+}
+
+/** Absolute, locale-correct URL of a service's detail page. */
+export function getServiceUrl(locale: AppLocale, service: Service): string {
+  return new URL(
+    getPathname({ locale, href: getServiceHref(locale, service) }),
+    siteUrl,
+  ).toString();
 }
 
 export { services, servicesList, locationPages };

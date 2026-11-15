@@ -5,7 +5,7 @@ import { Link } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
 import { getLocalized } from "@/lib/i18n-content";
 import { getServiceContent } from "@/lib/cms/content";
-import { getServiceSlug } from "@/lib/routes";
+import { getServiceHref } from "@/lib/routes";
 import { getServiceIcon } from "@/content/service-icons";
 import type { Service } from "@/content/types";
 import { IconTile } from "@/components/marketing/IconTile";
@@ -33,12 +33,15 @@ export async function ServiceCard({
   readMoreLabel,
   featured = false,
   size = "default",
+  showImage = true,
 }: {
   service: Service;
   locale: AppLocale;
   readMoreLabel: string;
   featured?: boolean;
   size?: "default" | "lg";
+  /** Set false to always render the icon-only card, even if an image exists. */
+  showImage?: boolean;
 }) {
   const { teaser, heroImage: image } = await getServiceContent(service);
   const Icon = getServiceIcon(service.key);
@@ -46,10 +49,7 @@ export async function ServiceCard({
 
   return (
     <Link
-      href={{
-        pathname: "/tjanster/[slug]",
-        params: { slug: getServiceSlug(locale, service) },
-      }}
+      href={getServiceHref(locale, service)}
       className="group focus-visible:ring-ring block h-full rounded-2xl focus-visible:ring-2 focus-visible:outline-none"
     >
       <Card
@@ -59,7 +59,7 @@ export async function ServiceCard({
           featured && "bg-secondary/40",
         )}
       >
-        {image ? (
+        {showImage && image ? (
           <div
             className={cn(
               "relative mb-1 aspect-[3/2] overflow-hidden",

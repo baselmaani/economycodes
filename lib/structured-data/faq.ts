@@ -3,7 +3,10 @@ import type { Faq } from "@/content/types";
 import { getLocalized } from "@/lib/i18n-content";
 
 /** Only call this for FAQs that are actually visibly rendered on the page, per Google's FAQPage guidance. */
-export function buildFaqJsonLd(faqs: Faq[], locale: AppLocale) {
+export function buildFaqJsonLd(
+  faqs: Pick<Faq, "question" | "answer">[],
+  locale: AppLocale,
+) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
