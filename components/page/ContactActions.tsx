@@ -38,6 +38,7 @@ export function ContactActions({
 
   return (
     <div
+      data-track-location="cta"
       className={cn(
         "flex flex-wrap items-center gap-x-5 gap-y-2",
         dark && "justify-center",

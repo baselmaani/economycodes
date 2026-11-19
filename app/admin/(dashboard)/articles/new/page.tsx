@@ -9,7 +9,7 @@ import { NewArticleTabs } from "./NewArticleTabs";
 
 export const metadata: Metadata = { title: "New article" };
 
-export default function NewArticlePage() {
+export default async function NewArticlePage() {
   return (
     <NewArticleTabs
       importView={<JsonImport />}
@@ -17,7 +17,7 @@ export default function NewArticlePage() {
         <ArticleEditor
           mode="create"
           initial={emptyArticle()}
-          faqOptions={getFaqOptions()}
+          faqOptions={await getFaqOptions()}
           siteUrl={siteUrl}
         />
       }

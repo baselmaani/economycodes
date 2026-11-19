@@ -13,6 +13,7 @@ import {
 
 import type { AppLocale } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
+import { pushDataLayer } from "@/lib/analytics";
 import {
   submitContactForm,
   type ContactFieldErrors,
@@ -72,6 +73,21 @@ export function ContactForm({
     submitContactForm,
     initialState,
   );
+  // The success state doesn't echo the form, so remember the chosen topic
+  // here for the lead event. Only the topic goes to analytics, never the
+  // visitor's name, email or message.
+  const topicRef = useRef("");
+  const trackedAction = (formData: FormData) => {
+    topicRef.current = String(formData.get("service") ?? "");
+    formAction(formData);
+  };
+  useEffect(() => {
+    if (state.status !== "success") return;
+    pushDataLayer("generate_lead", {
+      form_name: "contact",
+      inquiry_topic: topicRef.current || "unspecified",
+    });
+  }, [state.status, state.submission]);
   // useActionState can't be reset from the client, so "send another" just
   // remembers which successful submission the visitor has moved past.
   const [dismissedSubmission, setDismissedSubmission] = useState<number>();
@@ -91,7 +107,7 @@ export function ContactForm({
       locale={locale}
       serviceOptions={serviceOptions}
       state={state}
-      formAction={formAction}
+      formAction={trackedAction}
       pending={pending}
     />
   );

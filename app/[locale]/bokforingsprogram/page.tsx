@@ -8,17 +8,12 @@ import { getPathname, Link } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
 import { getLocalized } from "@/lib/i18n-content";
 import { getAbsoluteUrl } from "@/lib/routes";
-import { getPageContent } from "@/lib/cms/content";
+import { getPageContent, getSoftwareOverviewContent } from "@/lib/cms/content";
 import { buildSoftwareMetadata } from "@/lib/software-page";
 import { siteUrl } from "@/lib/site";
 import { buildSoftwareApplicationJsonLd } from "@/lib/structured-data/software";
 import { softwarePages } from "@/content/software";
-import {
-  softwareCommon,
-  softwareIntegrations,
-  softwareOrAccounting,
-  softwareOverview,
-} from "@/content/software-pages";
+import { softwareCommon } from "@/content/software-pages";
 import { getSoftwareShot } from "@/content/software-screenshots";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Container } from "@/components/layout/Container";
@@ -56,8 +51,12 @@ export default async function SoftwareOverviewPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const entry = softwarePages.overview;
-  const cms = await getPageContent(entry.cmsKey);
-  const content = softwareOverview;
+  const [cms, content] = await Promise.all([
+    getPageContent(entry.cmsKey),
+    getSoftwareOverviewContent(),
+  ]);
+  const softwareIntegrations = content.integrations;
+  const softwareOrAccounting = content.orAccounting;
   const pageUrl = getAbsoluteUrl(entry.route, locale);
   const label = getLocalized(entry.navLabel, locale);
 
@@ -91,9 +90,9 @@ export default async function SoftwareOverviewPage({
             currentUrl={pageUrl}
           />
         }
-        eyebrow={getLocalized(softwareCommon.eyebrow, locale)}
-        title={getLocalized(cms.text.heroTitle, locale)}
-        lead={getLocalized(cms.text.heroLead, locale)}
+        eyebrow={getLocalized(content.hero.eyebrow, locale)}
+        title={getLocalized(content.hero.title, locale)}
+        lead={getLocalized(content.hero.lead, locale)}
         shot="dashboard"
         featuresAnchor={FEATURES_ID}
       />
@@ -142,7 +141,7 @@ export default async function SoftwareOverviewPage({
               const target = softwarePages[feature.page];
               return (
                 <article
-                  key={feature.title.sv}
+                  key={`${feature.page}-${feature.title.sv}`}
                   className="border-border bg-card flex h-full flex-col overflow-hidden rounded-2xl border shadow-sm"
                 >
                   <div className="bg-secondary/40 p-4 pb-0">
@@ -210,7 +209,7 @@ export default async function SoftwareOverviewPage({
                     {getLocalized(item.who, locale)}
                   </p>
                   <NextLink
-                    href={`${getPathname({ locale, href: target.route })}#${item.anchor}`}
+                    href={`${getPathname({ locale, href: target.route })}${item.anchor ? `#${item.anchor}` : ""}`}
                     className="text-primary focus-visible:ring-ring/50 mt-auto inline-flex min-h-11 items-center gap-1 self-start rounded-sm text-sm font-semibold hover:underline focus-visible:ring-3 focus-visible:outline-none"
                   >
                     {getLocalized(softwareCommon.readMore, locale)}:{" "}

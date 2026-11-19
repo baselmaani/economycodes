@@ -35,7 +35,10 @@ export async function ContactMethods({
   ].filter((method) => method.href);
 
   return (
-    <ul className={cn("flex flex-col gap-3", className)}>
+    <ul
+      data-track-location="contact_methods"
+      className={cn("flex flex-col gap-3", className)}
+    >
       {methods.map(({ href, icon: Icon, label }) => (
         <li key={href}>
           <a

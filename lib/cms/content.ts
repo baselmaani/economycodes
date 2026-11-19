@@ -23,6 +23,16 @@ import type {
   PageOverrideData,
   SeoFields,
 } from "@/lib/cms/schemas";
+import {
+  overviewContent,
+  subpageContent,
+  type SoftwareOverviewContent,
+} from "@/lib/cms/software-content";
+import { softwarePages } from "@/content/software";
+import {
+  softwareSubpages,
+  type SoftwareSubpageContent,
+} from "@/content/software-pages";
 
 /** Cache tags invalidated by the admin server actions (see app/admin). */
 export const CMS_TAGS = {
@@ -154,4 +164,17 @@ export async function getServiceContent(service: Service): Promise<CmsService> {
     body: blocks.body,
     heroImage: images.heroImage,
   };
+}
+
+/** A /bokforingsprogram subpage's copy with dashboard edits applied. */
+export async function getSoftwareSubpageContent(
+  key: keyof typeof softwareSubpages,
+): Promise<SoftwareSubpageContent> {
+  const cms = await getPageContent(softwarePages[key].cmsKey);
+  return subpageContent(softwareSubpages[key], cms);
+}
+
+/** The /bokforingsprogram overview copy with dashboard edits applied. */
+export async function getSoftwareOverviewContent(): Promise<SoftwareOverviewContent> {
+  return overviewContent(await getPageContent(softwarePages.overview.cmsKey));
 }

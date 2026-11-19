@@ -1,6 +1,6 @@
 import type { Localized } from "./types";
 
-const LAST_UPDATED = "2026-11-01";
+const LAST_UPDATED = "2026-11-18";
 
 export const privacyPolicy = {
   lastUpdated: LAST_UPDATED,
@@ -80,9 +80,9 @@ export const privacyPolicy = {
     ar: "مع من نشارك البيانات",
   } satisfies Localized<string>,
   sharingBody: {
-    sv: "Vi delar bara uppgifter med leverantörer som hjälper oss att driva verksamheten och som behandlar dem för vår räkning: Meta (WhatsApp) för meddelanden, Resend för e-post som skickas från webbplatsen, Vercel för drift av webbplatsen samt leverantören av vår e-posttjänst. Vi kan också lämna ut uppgifter till myndigheter, till exempel Skatteverket, när det krävs enligt lag eller ingår i uppdraget. Vi säljer aldrig personuppgifter.",
-    en: "We only share data with providers that help us run the business and process it on our behalf: Meta (WhatsApp) for messaging, Resend for email sent from the website, Vercel for hosting the website, and the provider of our email service. We may also disclose data to public authorities, such as the Swedish Tax Agency, where required by law or as part of an engagement. We never sell personal data.",
-    ar: "لا نشارك البيانات إلا مع مزودي خدمات يساعدوننا في تشغيل أعمالنا ويعالجونها نيابةً عنا: Meta (واتساب) للمراسلة، وResend للبريد الإلكتروني المرسل من الموقع، وVercel لاستضافة الموقع، ومزود خدمة البريد الإلكتروني الخاصة بنا. وقد نفصح عن البيانات أيضًا للجهات الحكومية، مثل مصلحة الضرائب السويدية، عندما يقتضي القانون ذلك أو يكون جزءًا من التكليف. لا نبيع البيانات الشخصية أبدًا.",
+    sv: "Vi delar bara uppgifter med leverantörer som hjälper oss att driva verksamheten och som behandlar dem för vår räkning: Meta (WhatsApp) för meddelanden, Resend för e-post som skickas från webbplatsen, Vercel för drift av webbplatsen, Neon för webbplatsens databas (där meddelanden från kontaktformuläret sparas), Google för besöksstatistik (endast med ditt samtycke) samt leverantören av vår e-posttjänst. Vi kan också lämna ut uppgifter till myndigheter, till exempel Skatteverket, när det krävs enligt lag eller ingår i uppdraget. Vi säljer aldrig personuppgifter.",
+    en: "We only share data with providers that help us run the business and process it on our behalf: Meta (WhatsApp) for messaging, Resend for email sent from the website, Vercel for hosting the website, Neon for the website's database (where contact-form messages are stored), Google for visitor statistics (only with your consent), and the provider of our email service. We may also disclose data to public authorities, such as the Swedish Tax Agency, where required by law or as part of an engagement. We never sell personal data.",
+    ar: "لا نشارك البيانات إلا مع مزودي خدمات يساعدوننا في تشغيل أعمالنا ويعالجونها نيابةً عنا: Meta (واتساب) للمراسلة، وResend للبريد الإلكتروني المرسل من الموقع، وVercel لاستضافة الموقع، وNeon لقاعدة بيانات الموقع (حيث تُحفظ رسائل نموذج التواصل)، وGoogle لإحصاءات الزيارات (بموافقتك فقط)، ومزود خدمة البريد الإلكتروني الخاصة بنا. وقد نفصح عن البيانات أيضًا للجهات الحكومية، مثل مصلحة الضرائب السويدية، عندما يقتضي القانون ذلك أو يكون جزءًا من التكليف. لا نبيع البيانات الشخصية أبدًا.",
   } satisfies Localized<string>,
   transfersHeading: {
     sv: "Överföring utanför EU/EES",
@@ -90,9 +90,9 @@ export const privacyPolicy = {
     ar: "نقل البيانات خارج الاتحاد الأوروبي والمنطقة الاقتصادية الأوروبية",
   } satisfies Localized<string>,
   transfersBody: {
-    sv: "Vissa av våra leverantörer, däribland Meta, kan behandla uppgifter i länder utanför EU/EES, till exempel i USA. I de fallen sker överföringen med stöd av EU-kommissionens beslut om EU–US Data Privacy Framework eller EU-kommissionens standardavtalsklausuler.",
-    en: "Some of our providers, including Meta, may process data in countries outside the EU/EEA, such as the United States. In those cases the transfer is based on the European Commission's adequacy decision for the EU–US Data Privacy Framework or on the European Commission's Standard Contractual Clauses.",
-    ar: "قد يعالج بعض مزودي الخدمات لدينا، ومنهم Meta، البيانات في دول خارج الاتحاد الأوروبي والمنطقة الاقتصادية الأوروبية، مثل الولايات المتحدة. وفي هذه الحالات يتم النقل استنادًا إلى قرار المفوضية الأوروبية بشأن إطار خصوصية البيانات بين الاتحاد الأوروبي والولايات المتحدة، أو إلى البنود التعاقدية القياسية الصادرة عن المفوضية الأوروبية.",
+    sv: "Vissa av våra leverantörer, däribland Meta och Google, kan behandla uppgifter i länder utanför EU/EES, till exempel i USA. I de fallen sker överföringen med stöd av EU-kommissionens beslut om EU–US Data Privacy Framework eller EU-kommissionens standardavtalsklausuler.",
+    en: "Some of our providers, including Meta and Google, may process data in countries outside the EU/EEA, such as the United States. In those cases the transfer is based on the European Commission's adequacy decision for the EU–US Data Privacy Framework or on the European Commission's Standard Contractual Clauses.",
+    ar: "قد يعالج بعض مزودي الخدمات لدينا، ومنهم Meta وGoogle، البيانات في دول خارج الاتحاد الأوروبي والمنطقة الاقتصادية الأوروبية، مثل الولايات المتحدة. وفي هذه الحالات يتم النقل استنادًا إلى قرار المفوضية الأوروبية بشأن إطار خصوصية البيانات بين الاتحاد الأوروبي والولايات المتحدة، أو إلى البنود التعاقدية القياسية الصادرة عن المفوضية الأوروبية.",
   } satisfies Localized<string>,
   retentionHeading: {
     sv: "Hur länge vi sparar uppgifter",
@@ -150,9 +150,9 @@ export const privacyPolicy = {
     ar: "التحليلات والتتبع",
   } satisfies Localized<string>,
   analyticsBody: {
-    sv: "Webbplatsen använder för närvarande inga tredjepartsverktyg för analys, statistik eller spårning, och vi använder inte dina uppgifter för riktad annonsering. Om det ändras uppdateras den här sidan i förväg.",
-    en: "This website does not currently use any third-party analytics, statistics, or tracking tools, and we do not use your data for targeted advertising. If that changes, this page will be updated in advance.",
-    ar: "لا يستخدم الموقع حاليًا أي أدوات تحليل أو إحصاءات أو تتبع من جهات خارجية، ولا نستخدم بياناتك للإعلانات الموجّهة. وفي حال تغيّر ذلك، سيتم تحديث هذه الصفحة مسبقًا.",
+    sv: "Om du godkänner det i vår cookie-ruta använder vi Google Analytics 4, via Google Tag Manager, för att föra statistik över hur webbplatsen används: vilka sidor som besöks, ungefär varifrån besökare kommer, vilken typ av enhet som används och hur många som klickar på knapparna för att ringa, skicka WhatsApp eller e-post eller som skickar kontaktformuläret. Inga namn, telefonnummer, e-postadresser eller meddelanden skickas till Google. Rättslig grund är ditt samtycke (artikel 6.1 a GDPR), som du när som helst kan återkalla under ”Cookie-inställningar” längst ned på sidan. Google Ireland Ltd behandlar uppgifterna för vår räkning; de kan överföras till USA med stöd av EU–US Data Privacy Framework. Statistiken sparas i högst 14 månader. Om du avböjer sätts inga statistikcookies. Vi använder inte dina uppgifter för riktad annonsering.",
+    en: "If you accept in our cookie banner, we use Google Analytics 4, via Google Tag Manager, to keep statistics on how the website is used: which pages are visited, roughly where visitors come from, what type of device is used, and how many people click the buttons to call, send a WhatsApp message or email us, or submit the contact form. No names, phone numbers, email addresses or messages are sent to Google. The legal basis is your consent (Article 6(1)(a) GDPR), which you can withdraw at any time under “Cookie settings” at the bottom of the page. Google Ireland Ltd processes the data on our behalf; it may be transferred to the United States under the EU–US Data Privacy Framework. Statistics are kept for no more than 14 months. If you decline, no statistics cookies are set. We do not use your data for targeted advertising.",
+    ar: "إذا وافقت في نافذة ملفات تعريف الارتباط، فإننا نستخدم Google Analytics 4 عبر Google Tag Manager لجمع إحصاءات حول كيفية استخدام الموقع: الصفحات التي تتم زيارتها، والمكان التقريبي الذي يأتي منه الزوار، ونوع الجهاز المستخدم، وعدد من ينقرون على أزرار الاتصال أو إرسال رسالة واتساب أو بريد إلكتروني أو يرسلون نموذج التواصل. لا تُرسل إلى Google أي أسماء أو أرقام هواتف أو عناوين بريد إلكتروني أو رسائل. الأساس القانوني هو موافقتك (المادة 6(1)(أ) من GDPR)، ويمكنك سحبها في أي وقت من خلال «إعدادات ملفات تعريف الارتباط» أسفل الصفحة. تعالج شركة Google Ireland Ltd البيانات نيابةً عنا، وقد تُنقل إلى الولايات المتحدة استنادًا إلى إطار خصوصية البيانات بين الاتحاد الأوروبي والولايات المتحدة. تُحفظ الإحصاءات لمدة أقصاها 14 شهرًا. وإذا رفضت، فلن يتم تعيين أي ملفات تعريف ارتباط للإحصاءات. لا نستخدم بياناتك للإعلانات الموجّهة.",
   } satisfies Localized<string>,
   changesHeading: {
     sv: "Ändringar i policyn",
@@ -194,9 +194,9 @@ export const cookiePolicy = {
     ar: "التحليلات والإحصاءات",
   } satisfies Localized<string>,
   analyticsBody: {
-    sv: "Webbplatsen använder för närvarande inga verktyg för webbanalys eller statistik. Om det ändras uppdateras den här sidan i förväg.",
-    en: "This website does not currently use any web analytics or statistics tools. If that changes, this page will be updated in advance.",
-    ar: "لا يستخدم الموقع حاليًا أي أدوات لتحليلات الموقع أو الإحصاءات. وفي حال تغيّر ذلك، سيتم تحديث هذه الصفحة مسبقًا.",
+    sv: "Med ditt samtycke använder vi Google Analytics 4 (via Google Tag Manager) för att se hur webbplatsen används och hur många som ringer, skriver på WhatsApp eller skickar kontaktformuläret. Då sätts cookies som _ga och _ga_<id>, som lagras i upp till 2 år. Innan du har gjort ett val, och om du avböjer, sätts inga statistikcookies. Ditt val sparas i webbläsarens lokala lagring (ec-consent) så att frågan inte visas igen. Du kan ändra eller återkalla ditt samtycke när som helst under ”Cookie-inställningar” längst ned på sidan. Läs mer i vår integritetspolicy.",
+    en: "With your consent, we use Google Analytics 4 (via Google Tag Manager) to see how the website is used and how many people call, message us on WhatsApp, or submit the contact form. This sets cookies such as _ga and _ga_<id>, which are stored for up to 2 years. Before you make a choice, and if you decline, no statistics cookies are set. Your choice is saved in your browser's local storage (ec-consent) so you are not asked again. You can change or withdraw your consent at any time under “Cookie settings” at the bottom of the page. Read more in our privacy policy.",
+    ar: "بموافقتك، نستخدم Google Analytics 4 (عبر Google Tag Manager) لمعرفة كيفية استخدام الموقع وعدد من يتصلون بنا أو يراسلوننا عبر واتساب أو يرسلون نموذج التواصل. ويؤدي ذلك إلى تعيين ملفات تعريف ارتباط مثل _ga و_ga_<id>، تُخزَّن لمدة تصل إلى سنتين. قبل أن تختار، وإذا رفضت، لا يتم تعيين أي ملفات تعريف ارتباط للإحصاءات. يُحفظ اختيارك في التخزين المحلي لمتصفحك (ec-consent) حتى لا يُطرح عليك السؤال مرة أخرى. يمكنك تغيير موافقتك أو سحبها في أي وقت من خلال «إعدادات ملفات تعريف الارتباط» أسفل الصفحة. اقرأ المزيد في سياسة الخصوصية الخاصة بنا.",
   } satisfies Localized<string>,
   manageHeading: {
     sv: "Hantera cookies i din webbläsare",

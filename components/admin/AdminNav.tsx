@@ -7,6 +7,7 @@ import {
   Image as ImageIcon,
   LayoutDashboard,
   Layers,
+  Mail,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -16,6 +17,7 @@ const ITEMS = [
   { href: "/admin/pages", label: "Pages & SEO", icon: Layers },
   { href: "/admin/articles", label: "Articles", icon: FileText },
   { href: "/admin/media", label: "Media", icon: ImageIcon },
+  { href: "/admin/messages", label: "Messages", icon: Mail },
 ];
 
 export function AdminNav() {

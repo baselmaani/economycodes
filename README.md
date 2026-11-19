@@ -49,7 +49,37 @@ Password-protected dashboard for editing page SEO/text/images, managing articles
 
 - **Env:** `DATABASE_URL` (Neon), `BLOB_READ_WRITE_TOKEN` (Vercel Blob), `ADMIN_PASSWORD`, `ADMIN_SESSION_SECRET` (32+ chars). Without `DATABASE_URL` the site renders the static `content/` data and the dashboard shows a setup notice.
 - **Setup:** `npm run db:migrate` (tables in `drizzle/`), then `npm run cms:seed` to copy `content/articles/*` into the database (`-- --force` overwrites existing rows). After schema changes in `lib/db/schema.ts`, run `npm run db:generate`.
-- **Code:** `lib/cms/pages/` is the registry of editable page fields (add a field there, then read it via `getPageContent()` in the page); `lib/cms/content.ts` holds the cached public reads, invalidated by the dashboard's server actions via `updateTag()`; `lib/cms/schemas.ts` defines the article JSON format (download a template from the import page).
+- **Code:** `lib/cms/pages/` is the registry of editable page fields (add a field there, then read it via `getPageContent()` in the page); `lib/cms/content.ts` holds the cached public reads; `lib/cms/service/` holds every write (validation, DB, cache invalidation), shared by the dashboard's server actions (which invalidate via `updateTag()`) and the AI connector (`revalidateTag(tag, { expire: 0 })`); `lib/cms/schemas.ts` defines the article JSON format (download a template from the import page).
+- **Messages:** contact-form submissions are stored in `contact_submissions` (best effort, alongside the email) and listed under Dashboard → Messages.
+
+## AI connector (MCP, `/api/mcp`)
+
+A remote [MCP](https://modelcontextprotocol.io) server that lets ChatGPT, Claude or any MCP client manage the site's content: pages and SEO (including services, offices, legal and accounting-software pages), home section order, business details, FAQs, articles, images and contact messages. It calls the same services as the dashboard, so the same validation applies and changes go live immediately.
+
+- **Env:** `MCP_OAUTH_SECRET` (32+ chars) turns on OAuth; `ADMIN_PASSWORD` is what you type on the consent screen. Requires `DATABASE_URL` (and `BLOB_READ_WRITE_TOKEN` for image uploads). Run `npm run db:migrate` once for the messages table.
+- **ChatGPT:** Settings → Apps & Connectors → Advanced settings → enable Developer mode, then Create: name "Economy Codes website", URL `https://www.economycodes.com/api/mcp`, authentication OAuth. ChatGPT registers itself, opens the consent page (`/admin/oauth/authorize`) and asks for the dashboard password. In a chat, enable the connector under the + menu → Developer mode.
+- **Claude:** claude.ai → Settings → Connectors → Add custom connector with the same URL (OAuth). Claude Code: `claude mcp add --transport http economycodes https://www.economycodes.com/api/mcp` (OAuth in the browser), or with `--header "Authorization: Bearer $MCP_API_TOKEN"` if `MCP_API_TOKEN` is set.
+- **Test locally:** `npm run dev`, then `npx @modelcontextprotocol/inspector` → Streamable HTTP, `http://localhost:3000/api/mcp`, with the `MCP_API_TOKEN` as Bearer token (or use its OAuth flow).
+- **Security:** OAuth 2.1 with PKCE and dynamic client registration, all stateless JWTs (`lib/mcp/oauth.ts`): access tokens last 1 hour, refresh tokens 30 days. Rotating `MCP_OAUTH_SECRET` revokes every connected app. Destructive tools are annotated so clients ask before running them.
+- **Code:** `app/api/mcp/route.ts` (endpoint), `lib/mcp/server.ts` + `lib/mcp/tools/*` (tools), `app/api/oauth/*`, `app/.well-known/*` and `app/admin/oauth/authorize` (OAuth). Add a tool by calling a `lib/cms/service/*` function, never the DB directly.
+
+## Analytics (Google Tag Manager + GA4)
+
+Set `NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX` in Vercel (Production) and redeploy. Without it, no tracking script, consent banner or "Cookie settings" link is rendered. Code: `lib/analytics.ts`, `components/analytics/`.
+
+- **Consent:** Google Consent Mode v2. Everything starts denied; the banner (`CookieConsent`) grants `analytics_storage` only after "Accept" and stores the choice in localStorage (`ec-consent`). Ad storage stays denied. The Footer's "Cookie settings" reopens the banner.
+- **dataLayer events:** `phone_click`, `whatsapp_click`, `email_click` (param `link_location`: `sticky_bar`, `floating`, `hero`, `cta`, `contact_methods`, `menu`, `footer`, `about_hero`, `about_cta`, or `content`), `generate_lead` (params `form_name`, `inquiry_topic`) and `consent_update`. Clicks are caught by one delegated listener (`ContactClickTracker`); mark a new button area with `data-track-location="…"`.
+
+GTM / GA4 setup:
+
+1. In GA4, create a property for `www.economycodes.com` and copy the Measurement ID (`G-…`). Under Data settings → Data retention, choose 14 months.
+2. In GTM, create a Web container, copy its `GTM-…` ID and set it as `NEXT_PUBLIC_GTM_ID`.
+3. Add a **Google tag** with the `G-…` ID, triggered on _Initialization – All Pages_.
+4. Variables → New → _Data Layer Variable_: `link_location`, `inquiry_topic`.
+5. Triggers → New → _Custom Event_, event name `phone_click|whatsapp_click|email_click|generate_lead` with "Use regex matching" on.
+6. Tags → New → _Google Analytics: GA4 Event_, Measurement ID `G-…`, event name `{{Event}}`, parameters `link_location` = `{{link_location}}` and `inquiry_topic` = `{{inquiry_topic}}`, fired by the trigger from step 5.
+7. Preview with Tag Assistant, accept the banner, click Call/WhatsApp and send the form, then Submit/Publish the container.
+8. In GA4 Admin → Events (after the events have arrived), mark `phone_click`, `whatsapp_click` and `generate_lead` as **key events**. Under Custom definitions, register `link_location` and `inquiry_topic` as event-scoped custom dimensions. To import them into Google Ads later, link GA4 to Google Ads and import the key events.
 
 ## SEO & deployment
 

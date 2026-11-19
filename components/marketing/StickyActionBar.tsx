@@ -13,7 +13,10 @@ export async function StickyActionBar({
   const t = await getTranslations("common");
 
   return (
-    <div className="border-border bg-background/95 fixed inset-x-0 bottom-0 z-40 flex border-t pb-[env(safe-area-inset-bottom)] backdrop-blur-sm lg:hidden">
+    <div
+      data-track-location="sticky_bar"
+      className="border-border bg-background/95 fixed inset-x-0 bottom-0 z-40 flex border-t pb-[env(safe-area-inset-bottom)] backdrop-blur-sm lg:hidden"
+    >
       <a
         href={business.phoneHref}
         className="text-foreground active:bg-muted flex flex-1 flex-col items-center gap-0.5 py-2.5 text-xs font-medium"

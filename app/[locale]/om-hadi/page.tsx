@@ -156,7 +156,10 @@ export default async function AboutHadiPage({
                 </div>
               </Reveal>
               <Reveal delay={320}>
-                <div className="flex flex-wrap items-center gap-3 pt-1">
+                <div
+                  data-track-location="about_hero"
+                  className="flex flex-wrap items-center gap-3 pt-1"
+                >
                   <Button
                     render={<Link href="/kontakt" />}
                     variant="shine"
@@ -447,7 +450,10 @@ export default async function AboutHadiPage({
             </p>
           </Reveal>
           <Reveal delay={220}>
-            <div className="flex flex-wrap items-center justify-center gap-3">
+            <div
+              data-track-location="about_cta"
+              className="flex flex-wrap items-center justify-center gap-3"
+            >
               <Button
                 render={<Link href="/kontakt" />}
                 size="xl"

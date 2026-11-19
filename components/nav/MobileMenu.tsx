@@ -368,7 +368,10 @@ export function MobileMenu({
               </NavLink>
             ))}
         </nav>
-        <div className="border-border mt-auto flex flex-col gap-3 border-t p-4">
+        <div
+          data-track-location="menu"
+          className="border-border mt-auto flex flex-col gap-3 border-t p-4"
+        >
           <div className="flex gap-2">
             <Button
               render={<a href={business.phoneHref} />}

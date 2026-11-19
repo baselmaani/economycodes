@@ -9,6 +9,7 @@ import {
   type ContactFieldError,
 } from "@/lib/validation/contact";
 import { getEmailProvider } from "@/lib/email";
+import { markSubmissionEmailed, recordSubmission } from "@/lib/cms/leads";
 import { isRateLimited } from "@/lib/rate-limit";
 
 export type ContactFormError = "invalid" | "rate-limited" | "send-failed";
@@ -102,10 +103,13 @@ export async function submitContactForm(
     return fail("rate-limited");
   }
 
+  // Stored first so the message survives an email outage (dashboard → Messages).
+  const submissionId = await recordSubmission(parsed.data);
   const result = await getEmailProvider().send(parsed.data);
   if (!result.ok) {
     return fail("send-failed");
   }
+  if (submissionId) await markSubmissionEmailed(submissionId);
 
   return { status: "success", submission };
 }

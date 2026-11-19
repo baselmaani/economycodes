@@ -9,6 +9,8 @@ import {
 import {
   getPublishedArticles,
   getServiceContent,
+  getSoftwareOverviewContent,
+  getSoftwareSubpageContent,
   type CmsArticle,
   type CmsService,
 } from "@/lib/cms/content";
@@ -16,11 +18,9 @@ import { getFaqs } from "@/lib/cms/site";
 import { llmsIntro } from "@/lib/llms";
 import { getAbsoluteUrl } from "@/lib/routes";
 import { liveSoftwarePages, softwarePages } from "@/content/software";
-import {
-  softwareIntegrations,
-  softwareOverview,
-  softwareSubpages,
-} from "@/content/software-pages";
+import { softwareSubpages } from "@/content/software-pages";
+import type { SoftwareFaq } from "@/content/software-pages";
+import type { SoftwareOverviewContent } from "@/lib/cms/software-content";
 
 // Same cadence as /llms.txt, so dashboard edits show up without a rebuild.
 export const revalidate = 3600;
@@ -108,13 +108,32 @@ function articleSection(
 }
 
 /** The accounting software: overview, features, integrations and the live pages' FAQs. */
-function softwareSection(locale: AppLocale): string {
-  const live = liveSoftwarePages();
-  const subpageFaqs = live.flatMap((page) =>
-    page.key in softwareSubpages
-      ? softwareSubpages[page.key as keyof typeof softwareSubpages].faqs
-      : [],
+async function loadSoftware(): Promise<{
+  overview: SoftwareOverviewContent;
+  subpageFaqs: SoftwareFaq[];
+}> {
+  const live = liveSoftwarePages().filter(
+    (page) => page.key in softwareSubpages,
   );
+  const [overview, subpages] = await Promise.all([
+    getSoftwareOverviewContent(),
+    Promise.all(
+      live.map((page) =>
+        getSoftwareSubpageContent(page.key as keyof typeof softwareSubpages),
+      ),
+    ),
+  ]);
+  return { overview, subpageFaqs: subpages.flatMap((page) => page.faqs) };
+}
+
+function softwareSection(
+  locale: AppLocale,
+  {
+    overview: softwareOverview,
+    subpageFaqs,
+  }: Awaited<ReturnType<typeof loadSoftware>>,
+): string {
+  const softwareIntegrations = softwareOverview.integrations;
   return [
     `### ${getLocalized(softwareOverview.hero.title, locale)}`,
     `URL: ${getAbsoluteUrl(softwarePages.overview.route, locale)}`,
@@ -145,10 +164,11 @@ function softwareSection(locale: AppLocale): string {
  * per language, so answer engines can quote the site without crawling it.
  */
 export async function GET() {
-  const [services, articles, faqs] = await Promise.all([
+  const [services, articles, faqs, software] = await Promise.all([
     Promise.all(servicesList.map((service) => getServiceContent(service))),
     getPublishedArticles(),
     getFaqs(),
+    loadSoftware(),
   ]);
   const indexedArticles = articles.filter((article) => !article.seo.noindex);
   const generalFaqs = faqs.filter(
@@ -160,7 +180,7 @@ export async function GET() {
       `## ${LANGUAGE_NAMES[locale]}`,
       ...faqsToMarkdown(generalFaqs, locale),
       ...services.map((service) => serviceSection(service, faqs, locale)),
-      softwareSection(locale),
+      softwareSection(locale, software),
       ...indexedArticles.map((article) =>
         articleSection(article, faqs, locale),
       ),

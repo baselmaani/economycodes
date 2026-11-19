@@ -1,4 +1,6 @@
 import {
+  boolean,
+  index,
   integer,
   jsonb,
   pgTable,
@@ -55,5 +57,30 @@ export const mediaTable = pgTable("media", {
     .defaultNow(),
 });
 
+/** Contact-form messages, stored alongside the email so none are lost if sending fails. */
+export const contactSubmissionsTable = pgTable(
+  "contact_submissions",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    status: text("status", { enum: ["new", "read", "archived"] })
+      .notNull()
+      .default("new"),
+    locale: text("locale").notNull(),
+    name: text("name").notNull(),
+    email: text("email").notNull(),
+    phone: text("phone"),
+    preferredContact: text("preferred_contact").notNull(),
+    /** Inquiry topic or service key picked in the form, if any. */
+    service: text("service"),
+    message: text("message").notNull(),
+    emailSent: boolean("email_sent").notNull().default(false),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (table) => [index("contact_submissions_created_at_idx").on(table.createdAt)],
+);
+
 export type ArticleRow = typeof articlesTable.$inferSelect;
 export type MediaRow = typeof mediaTable.$inferSelect;
+export type ContactSubmissionRow = typeof contactSubmissionsTable.$inferSelect;

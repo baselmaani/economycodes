@@ -1,7 +1,7 @@
 import type { AppLocale } from "@/i18n/routing";
 import { getLocalized } from "@/lib/i18n-content";
 import { getAbsoluteUrl } from "@/lib/routes";
-import { getPageContent } from "@/lib/cms/content";
+import { getSoftwareSubpageContent } from "@/lib/cms/content";
 import {
   isSoftwarePagePublic,
   softwarePages,
@@ -33,12 +33,11 @@ export async function SoftwareSubpage({
 }) {
   const entry = softwarePages[pageKey];
   const overview = softwarePages.overview;
-  const content = softwareSubpages[pageKey];
-  const cms = await getPageContent(entry.cmsKey);
+  const content = await getSoftwareSubpageContent(pageKey);
   const pending = entry.status !== "live";
 
-  const title = getLocalized(cms.text.heroTitle, locale);
-  const lead = getLocalized(cms.text.heroLead, locale);
+  const title = getLocalized(content.hero.title, locale);
+  const lead = getLocalized(content.hero.lead, locale);
   const overviewLabel = getLocalized(overview.navLabel, locale);
   const pageLabel = getLocalized(entry.navLabel, locale);
   const related = [overview, ...visibleSoftwareSubpages()].filter(

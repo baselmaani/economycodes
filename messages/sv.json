@@ -103,7 +103,8 @@
     "contactTitle": "Kontakt",
     "legalTitle": "Juridiskt",
     "followTitle": "Följ oss",
-    "rightsReserved": "Alla rättigheter förbehållna."
+    "rightsReserved": "Alla rättigheter förbehållna.",
+    "cookieSettings": "Cookie-inställningar"
   },
   "form": {
     "nameLabel": "Namn",
@@ -154,5 +155,12 @@
     "servicesTitle": "Våra tjänster i {city}",
     "otherOfficeTitle": "Vårt andra kontor",
     "officesTitle": "Våra kontor"
+  },
+  "consent": {
+    "title": "Cookies och statistik",
+    "body": "Vi vill använda Google Analytics för att se hur webbplatsen används och hur många som ringer eller skriver till oss. Cookies för statistik sätts bara om du godkänner. Du kan ändra ditt val när som helst under ”Cookie-inställningar” längst ned på sidan.",
+    "readMore": "Läs mer om cookies",
+    "accept": "Godkänn",
+    "decline": "Avböj"
   }
 }

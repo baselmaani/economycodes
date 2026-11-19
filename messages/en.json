@@ -103,7 +103,8 @@
     "contactTitle": "Contact",
     "legalTitle": "Legal",
     "followTitle": "Follow us",
-    "rightsReserved": "All rights reserved."
+    "rightsReserved": "All rights reserved.",
+    "cookieSettings": "Cookie settings"
   },
   "form": {
     "nameLabel": "Name",
@@ -154,5 +155,12 @@
     "servicesTitle": "Our services in {city}",
     "otherOfficeTitle": "Our other office",
     "officesTitle": "Our offices"
+  },
+  "consent": {
+    "title": "Cookies and statistics",
+    "body": "We'd like to use Google Analytics to see how the website is used and how many people call or message us. Statistics cookies are only set if you accept. You can change your choice at any time under “Cookie settings” at the bottom of the page.",
+    "readMore": "Read more about cookies",
+    "accept": "Accept",
+    "decline": "Decline"
   }
 }

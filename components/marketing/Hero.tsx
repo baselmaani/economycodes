@@ -125,7 +125,10 @@ export async function Hero({
               </ul>
             </nav>
 
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-1 border-t border-white/20 pt-4">
+            <div
+              data-track-location="hero"
+              className="flex flex-wrap items-center gap-x-6 gap-y-1 border-t border-white/20 pt-4"
+            >
               {/* The homepage ends with the contact form (#kontakt). */}
               <a
                 href="#kontakt"

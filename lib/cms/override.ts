@@ -99,6 +99,95 @@ export function compactOverride(
   };
 }
 
+type Loose = Record<string, unknown>;
+
+function isRecord(value: unknown): value is Loose {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function isEmpty(value: unknown): boolean {
+  return (
+    value === null ||
+    value === "" ||
+    (Array.isArray(value) && value.length === 0)
+  );
+}
+
+/** Per-locale merge: a locale set to null, "" or [] is cleared (falls back to the default). */
+function mergeLocales(base: unknown, patch: unknown): unknown {
+  if (!isRecord(patch)) return patch;
+  const out: Loose = isRecord(base) ? { ...base } : {};
+  for (const [locale, value] of Object.entries(patch)) {
+    if (isEmpty(value)) delete out[locale];
+    else out[locale] = value;
+  }
+  return Object.keys(out).length > 0 ? out : undefined;
+}
+
+/** Merges `patch` key by key into `base`; a key set to null is removed. */
+function mergeKeyed(
+  base: unknown,
+  patch: unknown,
+  mergeValue: (key: string, base: unknown, patch: unknown) => unknown,
+): unknown {
+  if (!isRecord(patch)) return patch;
+  const out: Loose = isRecord(base) ? { ...base } : {};
+  for (const [key, value] of Object.entries(patch)) {
+    const merged =
+      value === null ? undefined : mergeValue(key, out[key], value);
+    if (merged === undefined) delete out[key];
+    else out[key] = merged;
+  }
+  return Object.keys(out).length > 0 ? out : undefined;
+}
+
+const replace = (_key: string, _base: unknown, patch: unknown) => patch;
+
+/**
+ * Applies a partial edit to a stored override (saves replace the whole
+ * override, so callers that change one field merge first):
+ * - text / lists / blocks: per field, per locale; null, "" or [] clears a locale.
+ * - collections / images: per key, the value replaces the whole list or image.
+ * - seo: title and description per locale; ogImage and noindex replaced.
+ * - layout: order and hidden replaced.
+ * Any key (or whole group) set to null goes back to the page default. The
+ * result is unvalidated: run it through pageOverrideSchema as for a save.
+ */
+export function mergeOverridePatch(
+  current: PageOverrideData | null | undefined,
+  patch: unknown,
+): unknown {
+  if (!isRecord(patch)) return patch;
+  const out: Loose = { ...(current ?? {}) };
+  for (const [group, value] of Object.entries(patch)) {
+    let merged: unknown;
+    if (value === null) {
+      merged = undefined;
+    } else if (group === "text" || group === "lists" || group === "blocks") {
+      merged = mergeKeyed(out[group], value, (_key, base, next) =>
+        mergeLocales(base, next),
+      );
+    } else if (group === "seo") {
+      merged = mergeKeyed(out.seo, value, (key, base, next) =>
+        key === "title" || key === "description"
+          ? mergeLocales(base, next)
+          : next,
+      );
+    } else if (
+      group === "collections" ||
+      group === "images" ||
+      group === "layout"
+    ) {
+      merged = mergeKeyed(out[group], value, replace);
+    } else {
+      merged = value;
+    }
+    if (merged === undefined) delete out[group];
+    else out[group] = merged;
+  }
+  return out;
+}
+
 /**
  * Required item fields need Swedish text. Fixed-length collections are
  * exempt: an empty field there falls back to the original item.

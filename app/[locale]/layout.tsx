@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { Manrope, Noto_Sans_Arabic } from "next/font/google";
+import Script from "next/script";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { DirectionProvider } from "@base-ui/react/direction-provider";
@@ -13,6 +14,9 @@ import { Footer } from "@/components/layout/Footer";
 import { StickyActionBar } from "@/components/marketing/StickyActionBar";
 import { FloatingContactButtons } from "@/components/marketing/FloatingContactButtons";
 import { SkipLink } from "@/components/common/SkipLink";
+import { ContactClickTracker } from "@/components/analytics/ContactClickTracker";
+import { CookieConsent } from "@/components/analytics/CookieConsent";
+import { GTM_ID, consentDefaultScript, gtmLoaderScript } from "@/lib/analytics";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildSiteGraphJsonLd } from "@/lib/structured-data/organization";
 import { getLocalized } from "@/lib/i18n-content";
@@ -109,6 +113,17 @@ export default async function RootLayout({
         className={`flex min-h-full flex-col pb-[calc(3.5rem+env(safe-area-inset-bottom))] lg:pb-0 ${isArabic ? "font-arabic" : "font-sans"}`}
       >
         <link rel="llms.txt" href={`${siteUrl}/llms.txt`} />
+        {GTM_ID ? (
+          <>
+            {/* Consent Mode defaults must be queued before GTM loads. */}
+            <Script id="consent-default" strategy="beforeInteractive">
+              {consentDefaultScript}
+            </Script>
+            <Script id="gtm" strategy="afterInteractive">
+              {gtmLoaderScript(GTM_ID)}
+            </Script>
+          </>
+        ) : null}
         {/* Organization + WebSite on every page, so each page's Service,
             Article, Person and Breadcrumb nodes resolve to the same entity. */}
         <JsonLd
@@ -140,6 +155,12 @@ export default async function RootLayout({
             <Footer locale={locale as AppLocale} />
             <StickyActionBar business={business} />
             <FloatingContactButtons business={business} />
+            {GTM_ID ? (
+              <>
+                <ContactClickTracker />
+                <CookieConsent />
+              </>
+            ) : null}
           </DirectionProvider>
         </NextIntlClientProvider>
       </body>

@@ -27,7 +27,7 @@ export default async function EditArticlePage({ params }: { params: Params }) {
       key={article.id}
       mode="update"
       initial={toArticleInput(article)}
-      faqOptions={getFaqOptions()}
+      faqOptions={await getFaqOptions()}
       siteUrl={siteUrl}
     />
   );

@@ -11,6 +11,8 @@ import { locationPages } from "@/content/location-pages";
 import { getLocationSlug } from "@/lib/routes";
 import { footerLegalNav, footerNav } from "@/content/nav";
 import { Container } from "@/components/layout/Container";
+import { CookieSettingsButton } from "@/components/analytics/CookieSettingsButton";
+import { GTM_ID } from "@/lib/analytics";
 
 export async function Footer({ locale }: { locale: AppLocale }) {
   const [business, locations] = await Promise.all([
@@ -22,7 +24,10 @@ export async function Footer({ locale }: { locale: AppLocale }) {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-brand-navy relative text-white">
+    <footer
+      data-track-location="footer"
+      className="bg-brand-navy relative text-white"
+    >
       <div
         aria-hidden="true"
         className="via-brand-bright absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent to-transparent"
@@ -142,6 +147,14 @@ export async function Footer({ locale }: { locale: AppLocale }) {
                   </Link>
                 </li>
               ))}
+              {GTM_ID ? (
+                <li>
+                  <CookieSettingsButton
+                    label={t("cookieSettings")}
+                    className="text-start text-sm text-white/70 transition-colors hover:text-white"
+                  />
+                </li>
+              ) : null}
             </ul>
             <h3 className="mt-6 mb-3 text-sm font-semibold text-white/90">
               {t("followTitle")}

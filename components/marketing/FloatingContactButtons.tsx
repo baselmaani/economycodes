@@ -17,7 +17,10 @@ export async function FloatingContactButtons({
   const t = await getTranslations("common");
 
   return (
-    <div className="fixed end-6 bottom-6 z-40 hidden flex-col gap-3 lg:flex">
+    <div
+      data-track-location="floating"
+      className="fixed end-6 bottom-6 z-40 hidden flex-col gap-3 lg:flex"
+    >
       <a
         href={business.phoneHref}
         title={t("callUs")}
