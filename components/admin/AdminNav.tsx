@@ -8,6 +8,7 @@ import {
   LayoutDashboard,
   Layers,
   Mail,
+  Plug,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -18,6 +19,7 @@ const ITEMS = [
   { href: "/admin/articles", label: "Articles", icon: FileText },
   { href: "/admin/media", label: "Media", icon: ImageIcon },
   { href: "/admin/messages", label: "Messages", icon: Mail },
+  { href: "/admin/connector", label: "AI connector", icon: Plug },
 ];
 
 export function AdminNav() {

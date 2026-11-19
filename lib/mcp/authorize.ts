@@ -1,7 +1,7 @@
 import "server-only";
 
 import { getOauthSecret, resourceUrl } from "@/lib/mcp/config";
-import { verifyClientId, type RegisteredClient } from "@/lib/mcp/oauth";
+import { resolveClient, type ResolvedClient } from "@/lib/mcp/oauth";
 
 /**
  * Validation of an /authorize request, shared by the consent page (GET) and
@@ -10,7 +10,7 @@ import { verifyClientId, type RegisteredClient } from "@/lib/mcp/oauth";
 
 export interface AuthorizeRequest {
   clientId: string;
-  client: RegisteredClient;
+  client: ResolvedClient;
   redirectUri: string;
   codeChallenge: string;
   state: string | null;
@@ -56,7 +56,7 @@ export async function parseAuthorizeRequest(
   origin: string,
 ): Promise<AuthorizeParseResult> {
   const clientId = params.get("client_id");
-  const client = await verifyClientId(clientId, getOauthSecret());
+  const client = await resolveClient(clientId, getOauthSecret());
   if (!clientId || !client) {
     return {
       ok: false,
@@ -64,7 +64,7 @@ export async function parseAuthorizeRequest(
     };
   }
   const redirectUri = params.get("redirect_uri");
-  if (!redirectUri || !client.redirectUris.includes(redirectUri)) {
+  if (!redirectUri || !client.allowsRedirect(redirectUri)) {
     return { ok: false, fatal: "The app's redirect address doesn't match." };
   }
 

@@ -1,3 +1,4 @@
+import { passwordMatches } from "@/lib/admin/token";
 import {
   getOauthSecret,
   isOauthConfigured,
@@ -9,8 +10,9 @@ import {
 import {
   issueTokens,
   pkceMatches,
+  resolveClient,
+  staticClientSecret,
   verifyAuthCode,
-  verifyClientId,
   verifyRefreshToken,
 } from "@/lib/mcp/oauth";
 
@@ -27,10 +29,24 @@ export async function POST(request: Request) {
   if (!params) return oauthError("invalid_request", "Unreadable request body");
 
   const secret = getOauthSecret();
-  const clientId = params.get("client_id");
-  const client = await verifyClientId(clientId, secret);
+  const credentials = clientCredentials(request, params);
+  const clientId = credentials.clientId;
+  const client = await resolveClient(clientId, secret);
   if (!clientId || !client) {
     return oauthError("invalid_client", "Unknown client_id", 401);
+  }
+  // The fixed client (dashboard → AI connector) must prove it has the secret.
+  if (
+    client.isStatic &&
+    !(
+      credentials.clientSecret &&
+      (await passwordMatches(
+        credentials.clientSecret,
+        await staticClientSecret(secret),
+      ))
+    )
+  ) {
+    return oauthError("invalid_client", "Invalid client credentials", 401);
   }
   const resource = resourceUrl(originOf(request));
 
@@ -72,6 +88,33 @@ export async function POST(request: Request) {
         "Use authorization_code or refresh_token",
       );
   }
+}
+
+/** client_secret_basic (Authorization header) or client_secret_post / none (body). */
+function clientCredentials(
+  request: Request,
+  params: URLSearchParams,
+): { clientId: string | null; clientSecret: string | null } {
+  const header = request.headers.get("authorization") ?? "";
+  const match = header.match(/^Basic\s+(.+)$/i);
+  if (match) {
+    try {
+      const decoded = Buffer.from(match[1].trim(), "base64").toString("utf8");
+      const colon = decoded.indexOf(":");
+      if (colon > 0) {
+        return {
+          clientId: decodeURIComponent(decoded.slice(0, colon)),
+          clientSecret: decodeURIComponent(decoded.slice(colon + 1)),
+        };
+      }
+    } catch {
+      // Fall through to the body.
+    }
+  }
+  return {
+    clientId: params.get("client_id"),
+    clientSecret: params.get("client_secret"),
+  };
 }
 
 /** Form-encoded per the spec; JSON accepted too. */

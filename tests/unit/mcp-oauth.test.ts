@@ -4,10 +4,14 @@ import { describe, expect, it } from "vitest";
 import { signSessionToken, verifySessionToken } from "@/lib/admin/token";
 import {
   isAllowedRedirectUri,
+  isStaticClientRedirectUri,
   issueTokens,
   pkceMatches,
+  resolveClient,
   signAuthCode,
   signClientId,
+  STATIC_CLIENT_ID,
+  staticClientSecret,
   verifyAccessToken,
   verifyAuthCode,
   verifyClientId,
@@ -138,5 +142,62 @@ describe("MCP OAuth tokens", () => {
     await expect(
       signClientId("short", { redirectUris: [], clientName: "" }),
     ).rejects.toThrow();
+  });
+});
+
+describe("MCP fixed client (dashboard credentials)", () => {
+  it("derives a stable secret that changes with MCP_OAUTH_SECRET", async () => {
+    const first = await staticClientSecret(SECRET);
+    expect(first).toMatch(/^[A-Za-z0-9_-]{43}$/);
+    expect(await staticClientSecret(SECRET)).toBe(first);
+    expect(await staticClientSecret(OTHER)).not.toBe(first);
+  });
+
+  it("resolves the fixed client and registered clients", async () => {
+    const fixed = await resolveClient(STATIC_CLIENT_ID, SECRET);
+    expect(fixed?.isStatic).toBe(true);
+    expect(
+      fixed?.allowsRedirect("https://claude.ai/api/mcp/auth_callback"),
+    ).toBe(true);
+    expect(fixed?.allowsRedirect("https://evil.com/callback")).toBe(false);
+
+    const clientId = await signClientId(SECRET, {
+      redirectUris: ["https://app.example/cb"],
+      clientName: "Test",
+    });
+    const registered = await resolveClient(clientId, SECRET);
+    expect(registered?.isStatic).toBe(false);
+    expect(registered?.allowsRedirect("https://app.example/cb")).toBe(true);
+    expect(
+      registered?.allowsRedirect("https://claude.ai/api/mcp/auth_callback"),
+    ).toBe(false);
+
+    expect(await resolveClient("unknown", SECRET)).toBeNull();
+    expect(await resolveClient(null, SECRET)).toBeNull();
+  });
+
+  it("only lets the fixed client redirect to Claude, ChatGPT or loopback", () => {
+    expect(
+      isStaticClientRedirectUri("https://claude.ai/api/mcp/auth_callback"),
+    ).toBe(true);
+    expect(
+      isStaticClientRedirectUri("https://claude.com/api/mcp/auth_callback"),
+    ).toBe(true);
+    expect(
+      isStaticClientRedirectUri(
+        "https://chatgpt.com/connector_platform_oauth_redirect",
+      ),
+    ).toBe(true);
+    expect(
+      isStaticClientRedirectUri("http://localhost:6274/oauth/callback"),
+    ).toBe(true);
+    expect(
+      isStaticClientRedirectUri("http://claude.ai/api/mcp/auth_callback"),
+    ).toBe(false);
+    expect(isStaticClientRedirectUri("https://evil.com/callback")).toBe(false);
+    expect(isStaticClientRedirectUri("https://claude.ai.evil.com/cb")).toBe(
+      false,
+    );
+    expect(isStaticClientRedirectUri("not a url")).toBe(false);
   });
 });

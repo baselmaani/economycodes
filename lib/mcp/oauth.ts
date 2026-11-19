@@ -107,6 +107,70 @@ export async function verifyClientId(
 }
 
 // ---------------------------------------------------------------------------
+// Fixed client: a Client ID + Client Secret shown on the dashboard's
+// "AI connector" page, for connectors set up with explicit credentials
+// (Claude / ChatGPT "Advanced settings") instead of dynamic registration.
+
+export const STATIC_CLIENT_ID = "economycodes-connector";
+export const STATIC_CLIENT_NAME = "Economy Codes connector";
+
+/** Hosts the fixed client may redirect to (https only). */
+const STATIC_CLIENT_REDIRECT_HOSTS = ["claude.ai", "claude.com", "chatgpt.com"];
+
+/** Derived from MCP_OAUTH_SECRET, so rotating that secret rotates this one. */
+export async function staticClientSecret(secret: string): Promise<string> {
+  const hmacKey = await crypto.subtle.importKey(
+    "raw",
+    new Uint8Array(key(secret)),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"],
+  );
+  const mac = await crypto.subtle.sign(
+    "HMAC",
+    hmacKey,
+    new TextEncoder().encode("static-client-secret:v1"),
+  );
+  return base64Url(mac);
+}
+
+/** https on Claude / ChatGPT hosts, or http loopback (MCP Inspector). */
+export function isStaticClientRedirectUri(value: string): boolean {
+  if (!isAllowedRedirectUri(value)) return false;
+  const url = new URL(value);
+  if (url.protocol === "http:") return true;
+  return STATIC_CLIENT_REDIRECT_HOSTS.includes(url.hostname);
+}
+
+export interface ResolvedClient {
+  clientName: string;
+  /** True for the fixed client, which must authenticate with its secret. */
+  isStatic: boolean;
+  allowsRedirect: (uri: string) => boolean;
+}
+
+/** Either the fixed client or a dynamically registered one; null if unknown. */
+export async function resolveClient(
+  clientId: string | undefined | null,
+  secret: string,
+): Promise<ResolvedClient | null> {
+  if (clientId === STATIC_CLIENT_ID) {
+    return {
+      clientName: STATIC_CLIENT_NAME,
+      isStatic: true,
+      allowsRedirect: isStaticClientRedirectUri,
+    };
+  }
+  const client = await verifyClientId(clientId, secret);
+  if (!client) return null;
+  return {
+    clientName: client.clientName,
+    isStatic: false,
+    allowsRedirect: (uri) => client.redirectUris.includes(uri),
+  };
+}
+
+// ---------------------------------------------------------------------------
 // Authorization codes (PKCE S256 only)
 
 export interface AuthCode {
