@@ -35,8 +35,9 @@ export function CookieConsent() {
   if (!open) return null;
 
   function choose(choice: ConsentChoice) {
+    const previous = readConsent();
     storeConsent(choice);
-    updateConsent(choice);
+    updateConsent(choice, previous);
     setOpen(false);
   }
 

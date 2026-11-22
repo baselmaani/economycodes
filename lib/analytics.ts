@@ -62,8 +62,16 @@ export function pushDataLayer(
   window.dataLayer.push({ event, ...params });
 }
 
-/** Consent Mode v2 update for analytics; ad storage always stays denied. */
-export function updateConsent(choice: ConsentChoice) {
+/**
+ * Consent Mode v2 update for analytics; ad storage always stays denied.
+ * `previous` is the stored choice before this one: on a first "Accept" the
+ * landing page's page_view already went out as a cookieless ping, so it is
+ * sent again with consent, or GA never counts the page the visitor came in on.
+ */
+export function updateConsent(
+  choice: ConsentChoice,
+  previous: ConsentChoice | null = null,
+) {
   if (typeof window === "undefined") return;
   window.dataLayer = window.dataLayer || [];
   const dataLayer = window.dataLayer;
@@ -80,6 +88,9 @@ export function updateConsent(choice: ConsentChoice) {
     ad_personalization: "denied",
   });
   pushDataLayer("consent_update", { analytics_consent: choice });
+  if (choice === "granted" && previous !== "granted") {
+    gtag("event", "page_view");
+  }
 }
 
 export function readConsent(): ConsentChoice | null {
