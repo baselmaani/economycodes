@@ -5,7 +5,7 @@
  * "Analytics".
  */
 
-const DEFAULT_GTM_ID = "GTM-W2PS87CG";
+const DEFAULT_GTM_ID = "GTM-P4CWFGX8";
 
 const rawGtmId = (process.env.NEXT_PUBLIC_GTM_ID ?? DEFAULT_GTM_ID).trim();
 
