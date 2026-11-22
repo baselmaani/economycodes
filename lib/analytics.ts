@@ -1,10 +1,13 @@
 /**
- * Google Tag Manager + GA4 wiring. Nothing loads until NEXT_PUBLIC_GTM_ID is
- * set (Vercel env), so local dev and previews stay tracking-free by default.
- * GTM itself decides which events reach GA4 -- see README "Analytics".
+ * Google Tag Manager + GA4 wiring. The production container is built in;
+ * NEXT_PUBLIC_GTM_ID overrides it, and setting it to "" turns tracking off
+ * (e.g. local dev). GTM itself decides which events reach GA4 -- see README
+ * "Analytics".
  */
 
-const rawGtmId = process.env.NEXT_PUBLIC_GTM_ID?.trim();
+const DEFAULT_GTM_ID = "GTM-W2PS87CG";
+
+const rawGtmId = (process.env.NEXT_PUBLIC_GTM_ID ?? DEFAULT_GTM_ID).trim();
 
 /** The container ID, or undefined when unset or malformed. */
 export const GTM_ID =

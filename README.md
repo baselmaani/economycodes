@@ -66,7 +66,7 @@ A remote [MCP](https://modelcontextprotocol.io) server that lets ChatGPT, Claude
 
 ## Analytics (Google Tag Manager + GA4)
 
-Set `NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX` in Vercel (Production) and redeploy. Without it, no tracking script, consent banner or "Cookie settings" link is rendered. Code: `lib/analytics.ts`, `components/analytics/`.
+The GTM container `GTM-W2PS87CG` is built in (`lib/analytics.ts`), so every deploy, including previews, loads it. `NEXT_PUBLIC_GTM_ID` overrides it; set it to an empty value (e.g. `NEXT_PUBLIC_GTM_ID=` in your local `.env`) to render no tracking script, consent banner or "Cookie settings" link. Code: `lib/analytics.ts`, `components/analytics/`.
 
 - **Consent:** Google Consent Mode v2. Everything starts denied; the banner (`CookieConsent`) grants `analytics_storage` only after "Accept" and stores the choice in localStorage (`ec-consent`). Ad storage stays denied. The Footer's "Cookie settings" reopens the banner.
 - **dataLayer events:** `phone_click`, `whatsapp_click`, `email_click` (param `link_location`: `sticky_bar`, `floating`, `hero`, `cta`, `contact_methods`, `menu`, `footer`, `about_hero`, `about_cta`, or `content`), `generate_lead` (params `form_name`, `inquiry_topic`) and `consent_update`. Clicks are caught by one delegated listener (`ContactClickTracker`); mark a new button area with `data-track-location="…"`.
@@ -74,7 +74,7 @@ Set `NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX` in Vercel (Production) and redeploy. Withou
 GTM / GA4 setup:
 
 1. In GA4, create a property for `www.economycodes.com` and copy the Measurement ID (`G-…`). Under Data settings → Data retention, choose 14 months.
-2. In GTM, create a Web container, copy its `GTM-…` ID and set it as `NEXT_PUBLIC_GTM_ID`.
+2. In GTM, use the Web container `GTM-W2PS87CG` (or set another container's ID as `NEXT_PUBLIC_GTM_ID`).
 3. Add a **Google tag** with the `G-…` ID, triggered on _Initialization – All Pages_.
 4. Variables → New → _Data Layer Variable_: `link_location`, `inquiry_topic`.
 5. Triggers → New → _Custom Event_, event name `phone_click|whatsapp_click|email_click|generate_lead` with "Use regex matching" on.
